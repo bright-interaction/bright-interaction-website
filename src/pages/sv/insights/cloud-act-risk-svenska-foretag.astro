@@ -1,0 +1,542 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-02-10';
+const title = 'Cloud Act vs GDPR: Varför ditt amerikanska moln är en compliance-risk';
+const description = 'CLOUD Act ger USA rätt att kräva data från amerikanska molntjänster, även i EU. Så skyddar svenska företag sin kunddata och GDPR-compliance.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/cloud-act-risk-svenska-foretag"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Gäller Cloud Act för data som lagras i EU?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ja, om leverantören är amerikanskt. CLOUD Act ger amerikanska myndigheter rätt att kräva ut data från amerikanska företag oavsett var servern står. Att lagra data i ett EU-datacenter hos AWS, Google eller Azure skyddar inte mot amerikanska myndigheters begäran." }
+    },
+    {
+      "@type": "Question",
+      "name": "Är Google Workspace GDPR-kompatibelt?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Juridiskt osäkert. Flera EU-myndigheter, inklusive danska och franska dataskyddsmyndigheter, har dömt emot eller ifrågesatt användningen av Google Workspace i offentlig sektor. För privata företag är risken densamma: dataöverföringar till USA saknar fullständig rättslig grund efter Schrems II." }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilka europeiska alternativ finns till amerikanska molntjänster?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Det finns flera starka europeiska alternativ. För infrastruktur: Hetzner (Tyskland), OVHcloud (Frankrike) och Scaleway (Frankrike). För samarbetsverktyg: Nextcloud, Proton och Open-Xchange. Självhosting på EU-baserade servrar är också ett alternativ som ger full kontroll." }
+    },
+    {
+      "@type": "Question",
+      "name": "Kan jag fortfarande använda AWS om jag behöver följa GDPR?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Tekniskt ja, med rätt avtal (DPA), kryptering och tekniska skyddsåtgärder. Men den juridiska risken kvarstår så länge CLOUD Act gäller. IMY och andra EU-tillsynsmyndigheter kan bedöma att överföringen saknar tillräckligt skydd. Företag som hanterar känslig persondata bör allvarligt överväga europeiska alternativ." }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Compliance
+          </span>
+          <span class="text-text-muted text-sm">9 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Den amerikanska CLOUD Act (Clarifying Lawful Overseas Use of Data Act) antogs 2018 och ger amerikanska myndigheter rätt att kräva data från amerikanska företag, oavsett var i världen datan lagras. För svenska företag som använder AWS, Google Cloud, Microsoft Azure eller något annat USA-baserat SaaS-verktyg innebär det här en sak: er kunddata kan köras av amerikanska myndigheter utan er vetskap.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Det står i direkt konflikt med GDPR. Och konflikten är inte teoretisk. Den är praktisk, juridisk och påtaglig för varje företag som hanterar persondata i molnet.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vad är CLOUD Act och varför spelar den roll?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Före CLOUD Act var rättslagen oklar. Amerikanska myndigheter hade svårt att kräva ut data som lagrades på servrar utanför USA. Den nya lagen ändrade det fundamentalt.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Global räckvidd:</strong> Amerikanska myndigheter kan kräva data från amerikanska företag oavsett var servern står. Fysisk placering i EU skyddar inte.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Ingen notifiering krävs:</strong> Företaget som lämnar ut data behöver inte informera dataägaren. Ni kanske aldrig får veta att era kunders data har begärts ut.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Brett tillämpningsområde:</strong> Lagen gäller alla amerikanska företag och deras dotterbolag. Det inkluderar Amazon, Google, Microsoft, Salesforce, Slack, Dropbox och hundratals andra.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Konsekvensen:</strong> Om ert företag lagrar kunddata hos en amerikansk molnleverantör, även på en server i Frankfurt eller Stockholm, kan den datan överlämnas till amerikanska myndigheter. Och ni kanske aldrig får reda på det.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Schrems II och den juridiska osäkerheten
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            I juli 2020 ogiltigförklarade EU-domstolen Privacy Shield-avtalet genom den så kallade Schrems II-domen. Domstolen slog fast att USA inte erbjuder tillräckligt dataskydd för EU-medborgares persondata, framför allt på grund av just den typ av myndighetsåtkomst som CLOUD Act legaliserar.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Det satte många företag i en omöjlig sits: de var beroende av amerikanska molntjänster men hade plötsligt ingen giltig rättslig grund för dataöverföringen.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-2">EU-US Data Privacy Framework (2023)</h4>
+              <p class="text-text-secondary text-sm">
+                EU-kommissionen antog ett nytt ramverk i juli 2023 för att ersätta Privacy Shield. Företag som certifierar sig under ramverket får åteligen överföra data till USA. Men många jurister varnar för att ramverket inte löser grundproblemet. CLOUD Act gäller fortfarande. Max Schrems har redan signalerat att han avser att utmana även detta avtal. En "Schrems III"-dom är inte otänkbar.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-2">IMY:s tillsyn i Sverige</h4>
+              <p class="text-text-secondary text-sm">
+                Integritetsskyddsmyndigheten (IMY) har aktivt granskat svenska företag och myndigheters användning av amerikanska molntjänster. Flera beslut har resulterat i böter och förelägganden, särskilt kring Google Analytics och liknande verktyg. Trenden är tydlig: IMY tar GDPR-överföringar till USA på allvar.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Reella risker för svenska företag
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Det här är inte en abstrakt juridisk fråga. För svenska företag som använder amerikanska molntjänster finns konkreta risker:
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">GDPR-sanktioner</h4>
+              <p class="text-text-secondary text-sm">
+                Böter upp till 20 miljoner euro eller 4% av global årsomsättning. IMY har visat att de agerar. Flertalet svenska organisationer har redan fått beslut om sanktionsavgifter kopplat till tredjelandsöverföringar.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Kundförlust</h4>
+              <p class="text-text-secondary text-sm">
+                Allt fler B2B-kunder, särskilt inom finans, hälso- och sjukvård samt offentlig sektor, kräver att leverantörer kan visa var data lagras och att den inte lämnar EU. Att inte kunna svara på det blir en dealbreaker.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Upphandlingshinder</h4>
+              <p class="text-text-secondary text-sm">
+                Offentliga upphandlingar i Sverige och EU ställer allt oftare krav på datasuveränitet. Företag som förlitar sig på amerikanska molntjänster kan uteslutas från upphandlingar inom säkerhetskänsliga sektorer.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Okontrollerad exponering</h4>
+              <p class="text-text-secondary text-sm">
+                Eftersom CLOUD Act inte kräver att dataägaren informeras kan ert företag exponera kunddata utan att någonsin få vetskap om det. Det gör det omöjligt att uppfylla GDPR:s transparenskrav.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Praktiska alternativ: Europeiska molntjänster
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Det finns mogna europeiska alternativ för de flesta amerikanska molntjänster. Att byta är inte längre den stora insatsen det en gång var.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-4">Infrastruktur och hosting</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Hetzner (Tyskland):</strong> Prisvärd, pålitlig IaaS med datacenter i Tyskland och Finland. Populärt val för europeiska startups och SME:er.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">OVHcloud (Frankrike):</strong> Europas största molnleverantör med datacenter i flera EU-länder. Erbjuder allt från bare metal till managed Kubernetes.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Scaleway (Frankrike):</strong> Utvecklarfokuserad plattform med starkt EU-fokus. Bra alternativ för team som värderar enkelhet och transparens.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-4">Samarbete och produktivitet</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Nextcloud:</strong> Självhostat alternativ till Google Workspace och Microsoft 365. Fildelning, kalender, kontakter och samarbetsverktyg under er kontroll.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Proton (Schweiz):</strong> End-to-end-krypterad e-post, kalender, lagring och VPN. Schweizisk jurisdiktion med starkt integritetsskydd.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Open-Xchange:</strong> Europeisk e-post- och samarbetsplattform som driver många europeiska operatörers e-posttjänster.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Viktig princip:</strong> Det handlar inte om att byta allt på en gång. Börja med er mest känsliga data. Kundregister, hälsovårdsdata, ekonomisk information och juridiska dokument bör prioriteras. Mindre känslig data kan migreras stegvis.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Fem steg för att minska er CLOUD Act-risk
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Kartlägg era tredjelandsöverföringar</h4>
+                <p class="text-text-secondary">
+                  Gör en fullständig inventering av alla tjänster som hanterar persondata. För varje tjänst: var finns leverantören registrerad? Var står servrarna? Finns det underleverantörer i USA? Många företag blir förvånade över hur många USA-kopplingar de har.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Klassificera er data</h4>
+                <p class="text-text-secondary">
+                  Inte all data har samma riskprofil. Identifiera vilken data som är mest känslig: personuppgifter, hälsovårdsdata, finansiell information, advokatkorrespondens. Prioritera migreringsinsatsen baserat på risk.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Utvärdera europeiska alternativ</h4>
+                <p class="text-text-secondary">
+                  För varje USA-baserad tjänst, identifiera minst ett europeiskt alternativ. Testa dem. Många europeiska tjänster har mognat avsevärt de senaste åren och erbjuder funktionsparitet med amerikanska motsvarigheter.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Implementera tekniska skyddsåtgärder</h4>
+                <p class="text-text-secondary">
+                  Där ni måste använda amerikanska tjänster: implementera end-to-end-kryptering där det är möjligt, minimera datainsamlingen, se till att ni har robusta DPA:er (Data Processing Agreements) på plats och dokumentera era skyddsåtgärder noggrant.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Dokumentera och följ upp</h4>
+                <p class="text-text-secondary">
+                  GDPR kräver att ni kan visa hur ni skyddar persondata. Dokumentera era Transfer Impact Assessments (TIA), era tekniska åtgärder och er migreringsplan. Granska kvartalsvis. Lagstiftningen utvecklas snabbt.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Bright Interactions Border Tracer
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Vi har utvecklat Border Tracer specifikt för att hjälpa företag att identifiera tredjelandsöverföringar i sin digitala infrastruktur. Verktyget skannar er webbplats och era tjänster för att kartlägga var data skickas, vilka leverantörer som är inblandade och vilka jurisdiktioner som gäller.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-gold/30 p-6">
+            <h4 class="font-semibold text-text-primary mb-3">Border Tracer visar er:</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span>Vilka tredjepartstjänster er webbplats laddar och var deras servrar finns</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span>Om cookies eller trackers skickar data till USA eller andra tredjeländer</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span>Vilka dataöverföringar som saknar giltig rättslig grund</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span>Konkreta rekommendationer för att minska er exponering</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga frågor
+          </h2>
+
+          <div class="space-y-4">
+            <details class="bg-dark-surface rounded-xl border border-dark-elevated p-6 group">
+              <summary class="font-semibold text-text-primary cursor-pointer list-none flex justify-between items-center">
+                Gäller Cloud Act för data som lagras i EU?
+                <svg class="w-5 h-5 text-gold transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <p class="text-text-secondary mt-4">
+                Ja, om leverantören är amerikanskt. CLOUD Act ger amerikanska myndigheter rätt att kräva ut data från amerikanska företag oavsett var servern står. Att lagra data i ett EU-datacenter hos AWS, Google eller Azure skyddar inte mot amerikanska myndigheters begäran.
+              </p>
+            </details>
+
+            <details class="bg-dark-surface rounded-xl border border-dark-elevated p-6 group">
+              <summary class="font-semibold text-text-primary cursor-pointer list-none flex justify-between items-center">
+                Är Google Workspace GDPR-kompatibelt?
+                <svg class="w-5 h-5 text-gold transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <p class="text-text-secondary mt-4">
+                Juridiskt osäkert. Flera EU-myndigheter, inklusive danska och franska dataskyddsmyndigheter, har dömt emot eller ifrågesatt användningen av Google Workspace i offentlig sektor. För privata företag är risken densamma: dataöverföringar till USA saknar fullständig rättslig grund efter Schrems II.
+              </p>
+            </details>
+
+            <details class="bg-dark-surface rounded-xl border border-dark-elevated p-6 group">
+              <summary class="font-semibold text-text-primary cursor-pointer list-none flex justify-between items-center">
+                Vilka europeiska alternativ finns till amerikanska molntjänster?
+                <svg class="w-5 h-5 text-gold transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <p class="text-text-secondary mt-4">
+                Det finns flera starka alternativ. För infrastruktur: Hetzner (Tyskland), OVHcloud (Frankrike) och Scaleway (Frankrike). För samarbetsverktyg: Nextcloud, Proton och Open-Xchange. Självhosting på EU-baserade servrar är också ett alternativ som ger full kontroll över var data lagras.
+              </p>
+            </details>
+
+            <details class="bg-dark-surface rounded-xl border border-dark-elevated p-6 group">
+              <summary class="font-semibold text-text-primary cursor-pointer list-none flex justify-between items-center">
+                Kan jag fortfarande använda AWS om jag behöver följa GDPR?
+                <svg class="w-5 h-5 text-gold transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <p class="text-text-secondary mt-4">
+                Tekniskt ja, med rätt avtal (DPA), kryptering och tekniska skyddsåtgärder. Men den juridiska risken kvarstår så länge CLOUD Act gäller. IMY och andra EU-tillsynsmyndigheter kan bedöma att överföringen saknar tillräckligt skydd. Företag som hanterar känslig persondata bör allvarligt överväga europeiska alternativ.
+              </p>
+            </details>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Sammanfattning
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            CLOUD Act och GDPR är i grunden oförenliga. Så länge amerikanska myndigheter har laglig rätt att kräva ut data från amerikanska molnleverantörer, oavsett var datan lagras, kan inget svenskt företag vara helt säkert på att deras kunddata är skyddad hos en amerikansk leverantör.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Det betyder inte att ni måste byta allt imorgon. Men det betyder att ni bör ha en plan, att ni bör prioritera känslig data och att ni bör börja utvärdera europeiska alternativ. Ju längre ni väntar, desto större blir både den juridiska risken och migreringskostnaden.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Vill ni veta var er data hamnar?</strong> Bright Interactions Border Tracer kartlägger era tredjelandsöverföringar och visar exakt vilka tjänster som skickar data utanför EU. Resultaten är klara på minuter.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Boka en genomgång →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/cloud-act-risk-svenska-foretag`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveranitet i molnets tid</a></li>
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR och NIS2: Praktisk guide</a></li>
+            <li><a href="/sv/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">Vi granskade var GDPR-compliance</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

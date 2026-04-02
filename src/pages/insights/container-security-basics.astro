@@ -1,0 +1,592 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Container Security Basics: Protecting Your Docker Infrastructure';
+const description = 'Containers make deployment easy, but they also introduce new security considerations. Learn the essential practices for securing your Docker and containerized applications.';
+
+// Article structured data
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/container-security-basics"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Are Docker containers secure by default?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, containers don't automatically mean secure. Containers share the host operating system's kernel, so a compromised container can potentially affect others on the same host. You need to actively implement security practices like running as non-root, scanning images for vulnerabilities, dropping unnecessary capabilities, and isolating networks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I secure Docker containers in production?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Key practices include: use official minimal base images, scan images regularly with tools like Trivy, run containers as non-root users, drop all Linux capabilities and add back only what's needed, use read-only filesystems, set CPU and memory limits, create isolated Docker networks, and never hardcode secrets in Dockerfiles."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How should I manage secrets in Docker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never hardcode secrets in Dockerfiles or pass them via command line arguments. Instead, use Docker Secrets (for Swarm mode), external secret managers like HashiCorp Vault, or load environment files from encrypted storage at runtime. Use multi-stage builds to ensure build secrets don't end up in the final image."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use the latest tag for Docker images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never use the :latest tag in production. Pin to specific image digests or version tags to ensure reproducible builds and prevent unexpected changes from breaking your security posture. This also makes it easier to audit which exact image versions are running in your environment."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Infrastructure
+          </span>
+          <span class="text-text-muted text-sm">9 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Docker and containers have revolutionized how we deploy and manage applications. Package your app once, run it anywhere—sounds perfect. But here's what many teams discover too late: containers don't automatically mean secure.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            The convenience that makes containers attractive can also create security blind spots. Let's walk through the essential security practices every team should implement.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Understanding Container Security
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Containers share the host operating system's kernel. Unlike virtual machines, they don't provide complete isolation. This architectural choice is what makes them lightweight and fast—but it also means a compromised container can potentially affect others on the same host.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">The Shared Kernel Reality</h3>
+            <p class="text-text-secondary mb-4">
+              Think of containers as apartments in a building. They have separate spaces (namespaces) and resource limits (cgroups), but they share the building's foundation and utilities. A problem with the foundation affects everyone.
+            </p>
+            <p class="text-text-secondary">
+              This doesn't mean containers are insecure—it means you need to understand what you're protecting and from whom.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Image Security: Start Clean
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Your container is only as secure as the image it's built from. This is where most security issues originate.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Use Official Base Images</h4>
+                <p class="text-text-secondary">
+                  Start with official images from Docker Hub or your platform's registry. Images like <code class="text-gold bg-dark-surface px-2 py-1 rounded">python:3.12-slim</code> or <code class="text-gold bg-dark-surface px-2 py-1 rounded">node:20-alpine</code> are maintained by the community and receive regular security updates.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Prefer Minimal Images</h4>
+                <p class="text-text-secondary">
+                  Alpine-based and slim images contain fewer packages, which means fewer potential vulnerabilities. A smaller attack surface is easier to defend. Choose <code class="text-gold bg-dark-surface px-2 py-1 rounded">alpine</code> or <code class="text-gold bg-dark-surface px-2 py-1 rounded">distroless</code> variants when possible.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Scan Images Regularly</h4>
+                <p class="text-text-secondary">
+                  Use tools like Trivy, Grype, or Docker Scout to scan images for known vulnerabilities. Integrate scanning into your CI/CD pipeline so issues are caught before deployment. Don't just scan once—vulnerabilities are discovered continuously.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Pin Specific Versions</h4>
+                <p class="text-text-secondary">
+                  Never use <code class="text-gold bg-dark-surface px-2 py-1 rounded">:latest</code> in production. Pin to specific image digests or version tags. This ensures reproducible builds and prevents unexpected changes from breaking your security posture.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Runtime Security: Principle of Least Privilege
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            How you run containers matters as much as what's in them. Apply the principle of least privilege at every level.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Don't Run as Root</h4>
+              <p class="text-text-secondary text-sm">
+                Create a non-root user in your Dockerfile and use the <code class="text-gold">USER</code> directive. If an attacker gains access, they won't have root privileges on your container.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Drop Capabilities</h4>
+              <p class="text-text-secondary text-sm">
+                Linux capabilities let you grant specific powers without full root. Drop all capabilities with <code class="text-gold">--cap-drop=ALL</code> and add back only what you need.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Read-Only Filesystem</h4>
+              <p class="text-text-secondary text-sm">
+                Use <code class="text-gold">--read-only</code> flag to make the container filesystem immutable. Mount specific writable volumes only where needed for logs or temp files.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Resource Limits</h4>
+              <p class="text-text-secondary text-sm">
+                Set CPU and memory limits to prevent a single container from consuming all host resources. This mitigates denial-of-service risks from runaway processes.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <h4 class="font-semibold text-gold mb-3">Example: Secure Docker Run</h4>
+            <pre class="text-text-secondary text-sm overflow-x-auto"><code>docker run -d \
+  --name myapp \
+  --user 1000:1000 \
+  --read-only \
+  --cap-drop=ALL \
+  --security-opt=no-new-privileges \
+  --memory=512m \
+  --cpus=0.5 \
+  -v /app/data:/data:rw \
+  myapp:1.2.3</code></pre>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Network Security: Isolate and Control
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            By default, Docker creates a bridge network where all containers can communicate. In production, you want explicit control over what can talk to what.
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Create Isolated Networks</h3>
+              <p class="text-text-secondary mb-4">
+                Create separate Docker networks for different application tiers. Your database container shouldn't be on the same network as your public-facing web server unless necessary.
+              </p>
+              <pre class="text-text-secondary text-sm bg-dark-bg p-4 rounded-lg overflow-x-auto"><code>docker network create --driver bridge frontend
+docker network create --driver bridge backend
+docker network create --driver bridge database</code></pre>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Don't Expose Unnecessary Ports</h3>
+              <p class="text-text-secondary mb-4">
+                Only expose ports that need external access. Internal services should communicate through Docker networks, not published ports. Use <code class="text-gold">expose</code> for documentation, <code class="text-gold">-p</code> only when needed.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Use a Reverse Proxy</h3>
+              <p class="text-text-secondary">
+                Place a reverse proxy like Traefik or nginx in front of your containers. It handles TLS termination, provides a single entry point, and lets you control routing centrally. This also keeps your application containers from binding to host ports directly.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Secrets Management: Never Hardcode
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Credentials in Dockerfiles or environment variables are one of the most common container security mistakes.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-red-900/30 p-6 mb-6">
+            <h4 class="font-semibold text-red-400 mb-3">What NOT to Do</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span>Hardcoding secrets in Dockerfile: <code class="text-red-400">ENV DB_PASSWORD=secret123</code></span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span>Passing secrets via command line: <code class="text-red-400">docker run -e API_KEY=xxx</code></span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span>Committing .env files to version control</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span>Storing secrets in image layers (they persist even if deleted)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-green-900/30 p-6">
+            <h4 class="font-semibold text-green-400 mb-3">Better Approaches</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-green-400 font-bold">✓</span>
+                <span><strong class="text-text-primary">Docker Secrets:</strong> Built-in for Swarm mode, mounts secrets as files in /run/secrets/</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-400 font-bold">✓</span>
+                <span><strong class="text-text-primary">External secret managers:</strong> HashiCorp Vault, AWS Secrets Manager, or Bitwarden Secrets Manager</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-400 font-bold">✓</span>
+                <span><strong class="text-text-primary">Environment files at runtime:</strong> Load from encrypted storage, not version control</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-green-400 font-bold">✓</span>
+                <span><strong class="text-text-primary">Multi-stage builds:</strong> Build in one stage, copy only artifacts to final image (no build secrets)</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Host Security: The Foundation
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Your containers are only as secure as the host they run on. Don't neglect the underlying infrastructure.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span class="text-text-secondary">Keep the host OS and Docker engine updated</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span class="text-text-secondary">Use a minimal host OS (Alpine, Flatcar, Bottlerocket)</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span class="text-text-secondary">Run Docker in rootless mode when possible</span>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span class="text-text-secondary">Enable audit logging for Docker daemon</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span class="text-text-secondary">Restrict access to Docker socket (it's root-equivalent)</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span class="text-text-secondary">Use AppArmor or SELinux profiles for additional isolation</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Monitoring and Response
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Security isn't set-and-forget. You need visibility into what's happening inside your containers.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-text-primary mb-4">Key Monitoring Practices</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span><strong class="text-text-primary">Centralized logging:</strong> Ship container logs to a central system. Stdout/stderr should capture enough for debugging and security analysis.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span><strong class="text-text-primary">Runtime security tools:</strong> Tools like Falco can detect unexpected behavior—processes spawning shells, unexpected network connections, file modifications.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span><strong class="text-text-primary">Resource monitoring:</strong> Unusual CPU or memory spikes can indicate cryptomining or other compromise.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">→</span>
+                <span><strong class="text-text-primary">Registry scanning:</strong> Continuously scan your image registry, not just during builds. New CVEs are discovered daily.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Container Security Checklist
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="grid md:grid-cols-2 gap-x-8 gap-y-3">
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Using official, minimal base images</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Scanning images for vulnerabilities</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Running containers as non-root</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Dropping unnecessary capabilities</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Using read-only filesystems</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Setting resource limits</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Isolating networks appropriately</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Managing secrets securely</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Keeping host and Docker updated</span>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-gold">☐</span>
+                <span class="text-text-secondary">Monitoring container activity</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Getting Started
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Container security isn't about implementing everything at once. Start with the highest-impact items: scan your images, run as non-root, and manage secrets properly. Then layer in additional controls as your infrastructure matures.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            The goal isn't perfect security—it's defense in depth. Multiple layers of protection mean that when (not if) one control fails, others are there to catch the threat.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help securing your container infrastructure?</strong> We specialize in building secure, self-hosted Docker environments with proper isolation, monitoring, and compliance controls.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Get in touch →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/container-security-basics`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+            <li><a href="/insights/self-hosted-alternatives-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted Alternatives to SaaS Tools</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

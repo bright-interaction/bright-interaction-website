@@ -1,0 +1,457 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Security Configuration Essentials: Protecting Your Infrastructure';
+const description = 'Most breaches exploit misconfiguration, not sophisticated attacks. Learn the essential security configurations every business should implement.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/security-configuration-essentials"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Security
+          </span>
+          <span class="text-text-muted text-sm">10 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Here's an uncomfortable truth: most security breaches aren't the result of sophisticated hacking. They're caused by misconfigured systems, default passwords, and skipped security basics. The attackers walk through doors that were left unlocked.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Getting security configuration right doesn't require advanced skills. It requires attention to detail and consistent discipline.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Castle Metaphor
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Think of your infrastructure as a castle. You can build thick walls, but if you leave the side gate open or forget to change the locks when a guard leaves, none of that matters. Security configuration is about making sure every door is locked, every guard knows the protocols, and every potential entry point is monitored.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">The 80/20 rule applies:</strong> Getting the basic configurations right will protect you from 80% of attacks. Advanced threats exist, but most businesses are compromised by basic failures.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Authentication: Your First Line of Defense
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Weak authentication is the most common entry point for attackers. Here's how to get it right:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Enforce multi-factor authentication (MFA)</h4>
+              <p class="text-text-secondary text-sm">
+                MFA should be mandatory for everything. Email, cloud services, admin panels, VPNs. A stolen password shouldn't be enough to access your systems. Prefer authenticator apps over SMS where possible.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Eliminate default credentials</h4>
+              <p class="text-text-secondary text-sm">
+                Every device, service, and application that ships with default passwords must have those changed immediately. Databases, routers, admin interfaces, IoT devices. Create a checklist and audit regularly.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Implement strong password policies</h4>
+              <p class="text-text-secondary text-sm">
+                Minimum 12 characters, complexity requirements, and prohibition of common passwords. Better yet, move toward passwordless authentication where feasible. Passkeys and hardware tokens are more secure than any password.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Use single sign-on (SSO) where possible</h4>
+              <p class="text-text-secondary text-sm">
+                SSO reduces the number of credentials to manage and lets you enforce security policies centrally. When someone leaves, disabling one account disables access to everything.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Network Security Basics
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Your network is the territory attackers traverse. Make it as difficult as possible:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Segment your network</h4>
+                <p class="text-text-secondary">
+                  Don't put everything on one flat network. Separate production from development, internal from external, sensitive from general. If an attacker compromises one segment, they shouldn't automatically access everything else.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Configure firewalls properly</h4>
+                <p class="text-text-secondary">
+                  Default deny, explicit allow. Only open the ports that are actually needed. Review firewall rules quarterly and remove anything that's no longer necessary. Document why each rule exists.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Encrypt traffic</h4>
+                <p class="text-text-secondary">
+                  TLS everywhere. Internal services, external services, database connections. The performance overhead is negligible on modern hardware, and it prevents eavesdropping and man-in-the-middle attacks.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Use VPNs for remote access</h4>
+                <p class="text-text-secondary">
+                  Internal services shouldn't be directly exposed to the internet. Require VPN connections with strong authentication. Consider zero-trust approaches where every access request is verified regardless of network location.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Server and Application Security
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Each server and application is a potential target. Harden them appropriately:
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-3">Patch management</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li>• Establish a regular patching schedule</li>
+                <li>• Prioritize critical security updates</li>
+                <li>• Test patches in staging before production</li>
+                <li>• Automate where possible</li>
+                <li>• Track patch status across all systems</li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-3">Minimize attack surface</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li>• Remove unnecessary services and software</li>
+                <li>• Disable unused features and modules</li>
+                <li>• Close unused ports</li>
+                <li>• Remove default/sample content</li>
+                <li>• Keep installations minimal</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-text-primary mb-3">Application-specific hardening</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Web servers:</strong> Disable directory listing, hide version information, configure secure headers (HSTS, CSP, X-Frame-Options).</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Databases:</strong> Disable remote root access, use encrypted connections, implement least-privilege users for applications.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Containers:</strong> Don't run as root, use read-only filesystems where possible, scan images for vulnerabilities.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Access Control and Permissions
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            The principle of least privilege should guide every access decision:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-gold/30 p-6 mb-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Grant minimum necessary access:</strong> Users should have exactly the permissions they need to do their job, nothing more. Review and revoke permissions regularly.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Separate administrative accounts:</strong> Admins should use regular accounts for daily work and elevated accounts only when necessary. This limits the damage from compromised credentials.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Implement role-based access:</strong> Define roles with specific permissions, assign users to roles. This is easier to audit and maintain than individual permissions.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Audit access regularly:</strong> Review who has access to what at least quarterly. Remove access for people who no longer need it. Pay special attention to privileged access.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Logging and Monitoring
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            You can't protect what you can't see. Comprehensive logging and monitoring help you detect problems early:
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Log everything security-relevant</h4>
+              <p class="text-text-secondary text-sm">
+                Authentication attempts (successful and failed), permission changes, administrative actions, access to sensitive data, network connections. You need this data for incident investigation and compliance.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Centralize your logs</h4>
+              <p class="text-text-secondary text-sm">
+                Logs scattered across systems are hard to correlate and easy for attackers to tamper with. Send logs to a central, secure location where they can be analyzed together.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Set up alerts</h4>
+              <p class="text-text-secondary text-sm">
+                Don't just collect logs. Monitor for suspicious patterns: multiple failed logins, unusual access times, privilege escalation attempts, large data transfers. Alert on anomalies, not just known attacks.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Retain logs appropriately</h4>
+              <p class="text-text-secondary text-sm">
+                Keep logs long enough for incident investigation and compliance (typically 1-2 years). Ensure they're tamper-proof. Attackers often try to delete logs to cover their tracks.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Backup and Recovery
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Security isn't just about preventing attacks. It's about recovering when they happen:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Follow the 3-2-1 rule:</strong> Three copies of data, on two different media types, with one copy off-site.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Encrypt backups:</strong> A stolen backup is a data breach. Protect backups with strong encryption and secure key management.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Test recovery regularly:</strong> A backup you can't restore is worthless. Test the full recovery process quarterly, including restoring to a different environment.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Protect backup access:</strong> Backup systems are high-value targets. Restrict access, use separate credentials, and monitor for unauthorized access.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Keep offline copies:</strong> Ransomware can encrypt network-accessible backups. Maintain air-gapped copies that can't be reached through your network.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Making It Sustainable
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Security configuration isn't a one-time project. It requires ongoing attention:
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Document your configurations. Use infrastructure-as-code where possible. Automate security checks. Schedule regular audits. When configurations drift from your standards, you need to detect and correct it. If you're considering a professional audit, our guide on <a href="/insights/website-security-audit-cost" class="text-gold-dark hover:underline">website security audit costs in 2026</a> breaks down what you get at each price point.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Start with the basics outlined here. Once they're solid, you can add more sophisticated controls. But remember: the best security investment is usually getting the fundamentals right, not buying advanced tools.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need a security review?</strong> We help businesses assess and improve their security configurations. From infrastructure hardening to compliance audits, we can help you identify gaps and implement solutions.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Request an assessment →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/security-configuration-essentials`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/container-security-basics" class="text-gold hover:text-gold-light transition-colors text-sm">Container Security Basics</a></li>
+            <li><a href="/insights/vpn-vs-zero-trust" class="text-gold hover:text-gold-light transition-colors text-sm">VPN vs Zero Trust</a></li>
+            <li><a href="/insights/sso-small-teams" class="text-gold hover:text-gold-light transition-colors text-sm">Setting Up SSO for Small Teams</a></li>
+            <li><a href="/insights/website-security-audit-cost" class="text-gold hover:text-gold-light transition-colors text-sm">How Much Does a Website Security Audit Cost?</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

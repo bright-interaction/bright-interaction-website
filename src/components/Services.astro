@@ -1,0 +1,53 @@
+---
+import { t } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+
+const replacements = [
+  { key: 'proton', span: 'md:col-span-2' },
+  { key: 'coolify', span: '' },
+  { key: 'authentik', span: '' },
+  { key: 'n8n', span: '' },
+  { key: 'outline', span: '' },
+  { key: 'mattermost', span: 'md:col-span-2' },
+];
+---
+
+<section id="services" class="py-20 md:py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mb-12">
+      <p class="text-xs font-mono font-bold text-gold-dark mb-4 tracking-widest uppercase">{t(lang, 'services.light.badge')}</p>
+      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-text-primary tracking-tight mb-4">
+        {t(lang, 'services.light.title')}
+      </h2>
+      <p class="text-lg text-text-secondary">
+        {t(lang, 'services.light.description')}
+      </p>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {replacements.map((item) => (
+        <div class:list={[
+          'service-card group p-6 rounded-2xl border border-border bg-surface hover:border-gold-dark/30 transition-all duration-200',
+          item.span
+        ]}>
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-sm text-text-secondary line-through">{t(lang, `services.replace.${item.key}.from`)}</span>
+            <svg class="w-4 h-4 text-gold-dark shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+            <span class="text-sm font-semibold text-text-primary">{t(lang, `services.replace.${item.key}.to`)}</span>
+          </div>
+          <p class="text-sm text-text-secondary leading-relaxed">{t(lang, `services.replace.${item.key}.desc`)}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 text-center">
+      <p class="text-text-secondary text-sm">
+        {t(lang, 'services.light.cta')} <button data-cal-trigger class="text-gold-dark hover:underline cursor-pointer font-medium">{t(lang, 'services.light.ctaLink')}</button> {t(lang, 'services.light.ctaSuffix')}
+      </p>
+    </div>
+  </div>
+</section>

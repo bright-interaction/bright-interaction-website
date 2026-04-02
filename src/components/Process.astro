@@ -1,0 +1,30 @@
+---
+import { t } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+
+const steps = ['1', '2', '3', '4'];
+---
+
+<section id="process" class="py-20 md:py-28 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="max-w-2xl mb-16">
+      <p class="text-xs font-mono font-bold text-gold-dark mb-4 tracking-widest uppercase">{t(lang, 'process.light.badge')}</p>
+      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-text-primary tracking-tight">
+        {t(lang, 'process.light.title')}
+      </h2>
+    </div>
+
+    <!-- Simple 4-step grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {steps.map((num) => (
+        <div>
+          <div class="text-4xl font-bold text-gold-dark mb-3">{t(lang, `process.light.step${num}.num`)}</div>
+          <h3 class="text-xl font-semibold text-text-primary mb-2">{t(lang, `process.light.step${num}.title`)}</h3>
+          <p class="text-text-secondary text-sm leading-relaxed">{t(lang, `process.light.step${num}.desc`)}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

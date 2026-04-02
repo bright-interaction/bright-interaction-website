@@ -1,0 +1,443 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-03-15';
+const title = 'Free Website Security Scan: 16 Tests in 2 Minutes';
+const description = 'Get a free automated security and compliance scan of your website. We check TLS, GDPR consent, email authentication, data jurisdiction, and 12 more dimensions.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/free-website-security-scan"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a free website security scan check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our SVAR scan checks 16 dimensions across four categories: transport security (TLS, HTTPS, security headers, software versions), email security (SPF, DKIM, DMARC), privacy and compliance (cookie consent, pre-consent tracking, privacy policy, data jurisdiction, third-party requests), and operational security (security.txt, DNS configuration, attack surface, PDF metadata)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a website security scan take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The SVAR scan runs all 16 tests in under two minutes. No software to install, no account required. You enter your domain and receive a detailed report with a letter grade from A+ to F, including prioritized findings and remediation guidance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the website security scan really free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, the scan is completely free with no strings attached. You get a full 16-test security and compliance report including an executive summary, detailed findings with technical evidence, and a remediation guide with step-by-step instructions to fix each issue."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a good website security score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Scores of 90-100 earn an A grade indicating excellent security posture. 75-89 is a B grade meaning good with some gaps. 50-74 is C/D indicating significant risks. Below 50 is an F with critical exposure. For context, the average score across 597 scanned Swedish law firms was just 59.1 out of 100."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Security
+          </span>
+          <span class="text-text-muted text-sm">5 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Most businesses don't know what their website exposes to the internet. Not because they don't care, but because security scanning has traditionally been expensive, slow, and hard to interpret. We built SVAR to change that.
+          </p>
+          <p class="text-text-secondary mb-6">
+            Our free scan checks your website against 16 security and compliance dimensions in under two minutes. No software to install, no account required. Enter your domain and get a detailed report with a letter grade from A+ to F.
+          </p>
+          <p class="text-text-secondary">
+            We've already scanned over 597 Swedish law firms for our industry report. Now the same technology is available to any business that wants to know where they stand.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What We Test: All 16 Dimensions
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Each scan runs 16 independent tests across four categories. Every test produces a pass, warning, or fail result, and contributes to your overall score.
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-semibold text-text-primary mb-4">Transport Security</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">01</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">TLS Configuration</p>
+                    <p class="text-text-muted text-xs">Protocol version, cipher suites, certificate validity</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">02</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">HTTPS Enforcement</p>
+                    <p class="text-text-muted text-xs">Redirect chains, HSTS headers, mixed content</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">03</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Security Headers</p>
+                    <p class="text-text-muted text-xs">CSP, X-Frame-Options, X-Content-Type-Options</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">04</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Software Versions</p>
+                    <p class="text-text-muted text-xs">Exposed server versions, outdated frameworks</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-semibold text-text-primary mb-4">Email Security</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">05</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">SPF Record</p>
+                    <p class="text-text-muted text-xs">Sender Policy Framework configuration</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">06</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">DKIM Signing</p>
+                    <p class="text-text-muted text-xs">DomainKeys Identified Mail verification</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">07</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">DMARC Policy</p>
+                    <p class="text-text-muted text-xs">Domain-based message authentication and reporting</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-semibold text-text-primary mb-4">Privacy and Compliance</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">08</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Cookie Consent</p>
+                    <p class="text-text-muted text-xs">Banner presence, opt-in mechanism, reject option</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">09</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Pre-Consent Tracking</p>
+                    <p class="text-text-muted text-xs">Scripts that fire before user consent is given</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">10</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Privacy Policy</p>
+                    <p class="text-text-muted text-xs">Presence, accessibility, mandatory GDPR elements</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">11</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Data Jurisdiction</p>
+                    <p class="text-text-muted text-xs">Where visitor data is processed and stored</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">12</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Third-Party Requests</p>
+                    <p class="text-text-muted text-xs">External domains contacted on page load</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-semibold text-text-primary mb-4">Operational Security</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">13</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">security.txt</p>
+                    <p class="text-text-muted text-xs">Vulnerability disclosure contact per RFC 9116</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">14</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">DNS Configuration</p>
+                    <p class="text-text-muted text-xs">DNSSEC, CAA records, zone security</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">15</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">Attack Surface</p>
+                    <p class="text-text-muted text-xs">Open ports, exposed services, information leakage</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold font-bold text-sm mt-0.5">16</span>
+                  <div>
+                    <p class="text-text-primary text-sm font-medium">PDF Metadata</p>
+                    <p class="text-text-muted text-xs">Hidden data in publicly available documents</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            How Scoring Works
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Each test is weighted based on its security impact. Critical issues like missing TLS or pre-consent tracking carry more weight than informational findings like missing security.txt. Your total score maps to a letter grade:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center">
+                <p class="text-2xl font-display font-bold text-green-400">A+ / A</p>
+                <p class="text-text-muted text-sm">90-100 points</p>
+                <p class="text-text-muted text-xs mt-1">Excellent posture</p>
+              </div>
+              <div class="text-center">
+                <p class="text-2xl font-display font-bold text-yellow-400">B</p>
+                <p class="text-text-muted text-sm">75-89 points</p>
+                <p class="text-text-muted text-xs mt-1">Good with gaps</p>
+              </div>
+              <div class="text-center">
+                <p class="text-2xl font-display font-bold text-orange-400">C / D</p>
+                <p class="text-text-muted text-sm">50-74 points</p>
+                <p class="text-text-muted text-xs mt-1">Significant risks</p>
+              </div>
+              <div class="text-center">
+                <p class="text-2xl font-display font-bold text-red-400">F</p>
+                <p class="text-text-muted text-sm">Below 50</p>
+                <p class="text-text-muted text-xs mt-1">Critical exposure</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            For context: when we scanned 597 Swedish law firms, the average score was 59.1 out of 100. Not a single firm achieved an A grade. The most common issues were missing DMARC, pre-consent tracking, and deficient privacy policies.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What Your Report Looks Like
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            After your scan completes, you receive a structured report with three sections:
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Executive Summary</h4>
+              <p class="text-text-secondary text-sm">
+                Your overall grade, score breakdown by category, and a prioritized list of the most impactful issues. Designed to be shared with decision-makers who need the conclusion without the technical detail.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Detailed Findings</h4>
+              <p class="text-text-secondary text-sm">
+                Each of the 16 tests with its result, what was found, why it matters, and technical evidence. Includes specific header values, DNS records, and script URLs so your team can verify and act on every finding.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Remediation Guide</h4>
+              <p class="text-text-secondary text-sm">
+                For each failed test, step-by-step instructions to fix the issue. Prioritized by severity and effort, so you know what to tackle first. Most critical issues can be resolved in hours, not weeks.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Why This Scan Is Different
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            There are other free scanners. Most check one thing. SSL Labs checks TLS, SecurityHeaders.com checks headers. Useful, but fragmented. You end up running five different tools and piecing results together yourself.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            SVAR checks all 16 dimensions in a single pass and gives you one score. More importantly, it checks things most scanners ignore entirely: pre-consent tracking, data jurisdiction, privacy policy completeness, and PDF metadata leakage. These are the compliance issues that actually trigger GDPR enforcement. If you need deeper testing beyond what an automated scan covers, read our breakdown of <a href="/insights/website-security-audit-cost" class="text-gold-dark hover:underline">what a website security audit costs in 2026</a>.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Built for Swedish businesses.</strong> Our tests are calibrated against IMY enforcement priorities and Swedish legal requirements. We don't just check generic best practices. We check what Swedish regulators actually look for.
+            </p>
+          </div>
+        </section>
+
+        <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+          <h2 class="font-display text-2xl font-bold text-gold mb-4">
+            Get Your Free Scan
+          </h2>
+          <p class="text-text-secondary mb-6">
+            Enter your domain and get a full 16-test security and compliance report in under two minutes. No account required, no strings attached. If you want help fixing what we find, see our <a href="/#services" class="text-gold-dark hover:underline">full range of services</a> or <a href="/#contact" class="text-gold-dark hover:underline">contact us</a> directly.
+          </p>
+          <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+            Book a Free Scan
+          </button>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">We Scanned Our GDPR Compliance, And a Competitor's</a></li>
+            <li><a href="/insights/swedish-law-firms-gdpr-audit" class="text-gold hover:text-gold-light transition-colors text-sm">597 Law Firms Audited - None Pass</a></li>
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+            <li><a href="/insights/website-security-audit-cost" class="text-gold hover:text-gold-light transition-colors text-sm">How Much Does a Website Security Audit Cost?</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1584">
+<title>LinkedIn Banner — Bright Interaction</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .banner {
+    width: 1584px;
+    height: 396px;
+    background: #121212;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 120px 0 300px; /* extra left padding for profile pic */
+  }
+
+  /* Subtle gradient overlay */
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse 800px 400px at 80% 50%, rgba(212,175,55,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 600px 300px at 45% 50%, rgba(212,175,55,0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Grid lines — subtle infrastructure feel */
+  .grid-lines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0.04;
+  }
+  .grid-lines .h-line {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: #0891B2;
+  }
+  .grid-lines .v-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: #0891B2;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .company-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 56px;
+    color: #E0E0E0;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .company-name .gold {
+    color: #0891B2;
+  }
+
+  .services {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: #A0A0A0;
+    letter-spacing: 0.3px;
+    margin-bottom: 16px;
+  }
+  .services .dot {
+    color: #0891B2;
+    margin: 0 14px;
+    font-size: 18px;
+  }
+
+  .location {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: #707070;
+    letter-spacing: 0.5px;
+  }
+
+  /* Corner accents */
+  .corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+  }
+  .corner-tl { top: 24px; left: 24px; border-top: 1px solid rgba(212,175,55,0.15); border-left: 1px solid rgba(212,175,55,0.15); }
+  .corner-tr { top: 24px; right: 24px; border-top: 1px solid rgba(212,175,55,0.15); border-right: 1px solid rgba(212,175,55,0.15); }
+  .corner-bl { bottom: 24px; left: 24px; border-bottom: 1px solid rgba(212,175,55,0.15); border-left: 1px solid rgba(212,175,55,0.15); }
+  .corner-br { bottom: 24px; right: 24px; border-bottom: 1px solid rgba(212,175,55,0.15); border-right: 1px solid rgba(212,175,55,0.15); }
+
+  /* Right side — subtle node dots */
+  .nodes {
+    position: absolute;
+    right: 140px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: flex-end;
+  }
+  .node-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .node-label {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #505050;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .node-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0891B2;
+    opacity: 0.5;
+  }
+  .node-dot.active {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(212,175,55,0.4);
+  }
+  .node-line {
+    width: 1px;
+    height: 20px;
+    background: rgba(212,175,55,0.12);
+    margin-left: auto;
+    margin-right: 3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <!-- Grid lines -->
+  <div class="grid-lines">
+    <div class="h-line" style="top: 25%"></div>
+    <div class="h-line" style="top: 50%"></div>
+    <div class="h-line" style="top: 75%"></div>
+    <div class="v-line" style="left: 33%"></div>
+    <div class="v-line" style="left: 66%"></div>
+  </div>
+
+  <!-- Corner accents -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="company-name">Bright<span class="gold">Interaction</span></div>
+    <div class="services">
+      Secure hosting<span class="dot">·</span>Workflow automation<span class="dot">·</span>GDPR &amp; NIS2 compliance
+    </div>
+    <div class="location">Malmö, Sweden</div>
+  </div>
+
+  <!-- Right side nodes -->
+  <div class="nodes">
+    <div class="node-row">
+      <span class="node-label">SE</span>
+      <div class="node-dot active"></div>
+    </div>
+    <div class="node-line"></div>
+    <div class="node-row">
+      <span class="node-label">DE</span>
+      <div class="node-dot"></div>
+    </div>
+    <div class="node-line"></div>
+    <div class="node-row">
+      <span class="node-label">GB</span>
+      <div class="node-dot"></div>
+    </div>
+    <div class="node-line"></div>
+    <div class="node-row">
+      <span class="node-label">SG</span>
+      <div class="node-dot"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

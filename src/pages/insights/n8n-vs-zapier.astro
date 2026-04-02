@@ -1,0 +1,516 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'n8n vs Zapier: When Self-Hosted Automation Makes Sense';
+const description = 'A practical comparison of n8n and Zapier for business automation. Learn when self-hosted automation outperforms cloud-based solutions, and when it doesn\'t.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/n8n-vs-zapier"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is n8n better than Zapier?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "n8n is better for complex workflows, high volume automation, data privacy requirements, and long-term cost optimization. Zapier is better for simple linear workflows, teams without technical resources, and when you need niche app integrations from its 6,000+ library. Many businesses use both."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does n8n cost compared to Zapier?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For 50,000 tasks per month, Zapier costs around $250/month while n8n Cloud costs about $50/month and self-hosted n8n runs on a $20/month VPS. The gap widens at scale — at 500,000 tasks/month, Zapier requires enterprise pricing while self-hosted n8n still costs the same $20 VPS."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is n8n good for GDPR compliance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, self-hosted n8n is excellent for GDPR compliance because customer data never leaves your EU infrastructure. There are no data transfer agreements needed and no Schrems II concerns. With Zapier, your data flows through US servers, which creates additional compliance complexity."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I migrate from Zapier to n8n?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Start by building new automations in n8n while keeping existing Zapier workflows running. Then migrate high-volume workflows first, as these deliver the biggest cost savings. Keep simple, low-volume zaps on Zapier if they're working fine — use the right tool for each job."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Comparison
+          </span>
+          <span class="text-text-muted text-sm">8 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Zapier is the default choice for business automation. It's easy to use, well-known, and integrates with thousands of apps. But as your automation needs grow, you might start noticing limitations: pricing that scales faster than your budget, data flowing through third-party servers, and constraints on what you can actually build.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            n8n offers a different approach: open-source, self-hostable, and significantly more flexible. But is it right for your business? Let's break down the real differences.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Quick Comparison
+          </h2>
+
+          <div class="overflow-x-auto mb-8">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-4 px-4 text-text-primary font-semibold">Feature</th>
+                  <th class="text-left py-4 px-4 text-gold font-semibold">n8n</th>
+                  <th class="text-left py-4 px-4 text-text-secondary font-semibold">Zapier</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Hosting</td>
+                  <td class="py-4 px-4">Self-hosted or cloud</td>
+                  <td class="py-4 px-4">Cloud only</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Pricing model</td>
+                  <td class="py-4 px-4">Free (self-hosted) or per-workflow</td>
+                  <td class="py-4 px-4">Per-task pricing</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Data residency</td>
+                  <td class="py-4 px-4">Your choice</td>
+                  <td class="py-4 px-4">US servers</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Custom code</td>
+                  <td class="py-4 px-4">Full JavaScript/Python</td>
+                  <td class="py-4 px-4">Limited (Code by Zapier)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Branching/loops</td>
+                  <td class="py-4 px-4">Native support</td>
+                  <td class="py-4 px-4">Paths (limited)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Error handling</td>
+                  <td class="py-4 px-4">Granular control</td>
+                  <td class="py-4 px-4">Basic retry</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Integrations</td>
+                  <td class="py-4 px-4">400+ (growing)</td>
+                  <td class="py-4 px-4">6,000+</td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-4">Ease of use</td>
+                  <td class="py-4 px-4">Moderate learning curve</td>
+                  <td class="py-4 px-4">Very easy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            When Zapier Is the Better Choice
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Let's be fair: Zapier excels in specific scenarios. If these describe your situation, it might be the right tool:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Simple, linear workflows</h4>
+              <p class="text-text-secondary text-sm">
+                If your automation is "when X happens, do Y," Zapier handles this beautifully. The interface is intuitive, setup takes minutes, and it just works.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">No technical resources</h4>
+              <p class="text-text-secondary text-sm">
+                If nobody on your team can manage servers or troubleshoot technical issues, Zapier's fully managed approach removes that burden entirely.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Niche app integrations</h4>
+              <p class="text-text-secondary text-sm">
+                Zapier's 6,000+ integrations mean obscure apps are often already supported. n8n's smaller library might not include that specific tool you need.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Low volume, getting started</h4>
+              <p class="text-text-secondary text-sm">
+                Zapier's free tier (100 tasks/month) is genuinely useful for testing ideas. If you're just exploring automation, start there.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            When n8n Is the Better Choice
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            n8n becomes compelling when you outgrow Zapier's constraints:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">High volume workflows</h4>
+              <p class="text-text-secondary text-sm">
+                Zapier charges per task. A workflow that runs 10,000 times monthly costs serious money. Self-hosted n8n has no per-execution cost. The savings compound quickly.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Data privacy requirements</h4>
+              <p class="text-text-secondary text-sm">
+                With Zapier, your data flows through their US servers. With self-hosted n8n, data never leaves your infrastructure. For GDPR compliance or sensitive data, this matters.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Complex logic and branching</h4>
+              <p class="text-text-secondary text-sm">
+                n8n handles conditional logic, loops, merges, and parallel execution natively. Building the same in Zapier often requires awkward workarounds or multiple zaps.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Custom code requirements</h4>
+              <p class="text-text-secondary text-sm">
+                n8n lets you write JavaScript or Python anywhere in your workflow. Parse complex data, call APIs directly, implement custom logic. Zapier's code steps are more restricted.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Self-hosted integrations</h4>
+              <p class="text-text-secondary text-sm">
+                Connecting to internal databases, on-premise systems, or services behind firewalls is straightforward with self-hosted n8n. Zapier requires exposing these to the internet.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Cost Reality
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Pricing is often the deciding factor. Let's look at realistic scenarios:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-4">Scenario: 50,000 tasks/month</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Zapier Professional (50K tasks):</span>
+                <span class="text-text-primary font-semibold">~$250/month</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>n8n Cloud (unlimited):</span>
+                <span class="text-text-primary font-semibold">~$50/month</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Self-hosted n8n (VPS):</span>
+                <span class="text-text-primary font-semibold">~$20/month</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary border-t border-dark-elevated pt-3">
+                <span>Annual savings (vs Zapier):</span>
+                <span class="text-gold font-bold">€2,400 - €2,760</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            The gap widens dramatically at scale. At 500,000 tasks/month, Zapier's enterprise pricing kicks in while self-hosted n8n still costs the same $20 VPS.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">The hidden cost:</strong> Self-hosting requires someone to manage it. If you're paying a consultant $100/hour and spending 2 hours monthly on maintenance, that's $200. Factor this into your calculations. Often still cheaper, but not free.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Data Sovereignty Angle
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            For European businesses, this might be the deciding factor regardless of cost:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">GDPR compliance:</strong> With self-hosted n8n, customer data never leaves your EU infrastructure. No data transfer agreements needed, no Schrems II concerns.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">NIS2 requirements:</strong> You have full visibility and control over the system processing your data. Easier to audit, easier to document.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Client requirements:</strong> Enterprise clients increasingly ask where their data is processed. "On our own EU servers" is a stronger answer than "Zapier's US infrastructure."</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Real-World Use Cases
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Here are scenarios where we've seen n8n outperform Zapier:
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-2">Lead processing pipeline</h4>
+              <p class="text-text-secondary text-sm mb-3">
+                Incoming leads need enrichment from multiple APIs, scoring based on custom logic, routing to different CRMs based on territory, and slack notifications. In Zapier, this requires 4-5 separate zaps. In n8n, it's one workflow with branches.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-2">Invoice automation</h4>
+              <p class="text-text-secondary text-sm mb-3">
+                Pulling data from multiple sources, calculating taxes based on jurisdiction, generating PDFs, sending via email, and logging to accounting software. The custom code requirements alone make Zapier struggle.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-2">Data synchronization</h4>
+              <p class="text-text-secondary text-sm">
+                Keeping inventory synced across e-commerce platforms, warehouse systems, and accounting. High volume, bidirectional, needs conflict resolution. n8n's flexibility and cost structure make this viable; Zapier's per-task pricing makes it expensive.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Making the Switch
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            If you're considering moving from Zapier to n8n, here's a practical approach:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Start with new workflows</h4>
+                <p class="text-text-secondary">
+                  Don't migrate everything at once. Build new automations in n8n while keeping existing Zapier workflows running. Learn the platform without pressure.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Migrate high-volume workflows first</h4>
+                <p class="text-text-secondary">
+                  These deliver the biggest cost savings. A workflow running 10,000 times monthly moved from Zapier to self-hosted n8n pays for itself immediately.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Keep simple zaps on Zapier</h4>
+                <p class="text-text-secondary">
+                  If a workflow is simple, low-volume, and working fine, there's no urgency to migrate. Use the right tool for each job.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Bottom Line
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Zapier is excellent for simple automation and getting started quickly. n8n is better for complex workflows, high volume, data privacy requirements, and long-term cost optimization.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            The choice isn't binary. Many businesses use both: Zapier for quick, simple integrations and n8n for complex, high-volume, or data-sensitive workflows.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help deciding?</strong> We implement both Zapier and n8n solutions depending on client needs. If you're evaluating automation platforms or considering a migration, we can help you assess which approach fits your specific requirements.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Let's discuss your automation needs →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/n8n-vs-zapier`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/workflow-automation-best-practices" class="text-gold hover:text-gold-light transition-colors text-sm">Workflow Automation Best Practices</a></li>
+            <li><a href="/insights/hidden-cost-of-manual-processes" class="text-gold hover:text-gold-light transition-colors text-sm">The Hidden Cost of Manual Processes</a></li>
+            <li><a href="/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted vs SaaS: Making the Right Choice</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

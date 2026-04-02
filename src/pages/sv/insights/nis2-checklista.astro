@@ -1,0 +1,485 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+
+const lang = 'sv';
+const title = "NIS2-checklista: 12 steg för svenska företag";
+const description = "En praktisk NIS2-checklista steg för steg för svenska organisationer. Från riskbedömning till incidentrapportering, med konkreta åtgärder för varje krav.";
+const publishDate = '2026-03-05';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/nis2-checklista"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Vilka svenska företag omfattas av NIS2?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 omfattar medelstora och stora företag inom 18 sektorer, inklusive energi, transport, hälso- och sjukvård, digital infrastruktur, IT-tjänster, offentlig förvaltning och tillverkning. Även mindre företag kan omfattas om de levererar kritiska tjänster. I Sverige beräknas uppemot 5 000 organisationer beröras."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilka sanktioner innebär NIS2 i Sverige?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 innebär sanktionsavgifter på upp till 10 miljoner EUR eller 2 % av den globala årsomsättningen för väsentliga entiteter (essential entities). För viktiga entiteter (important entities) gäller upp till 7 miljoner EUR eller 1,4 % av omsättningen. Ledningen kan också hållas personligt ansvarig."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vad är skillnaden mellan NIS2 och GDPR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GDPR fokuserar på skydd av personuppgifter medan NIS2 handlar om cybersäkerhet och skydd av nätverks- och informationssystem. De överlappar i viss mån, exempelvis kring incidenthantering och riskbedömning, men NIS2 ställer mer specifika krav på tekniska säkerhetsåtgärder, leverantörshantering och incidentrapportering inom 24 timmar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "När börjar NIS2 gälla i Sverige?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EU:s NIS2-direktiv trädde i kraft den 16 januari 2023 och skulle vara implementerat i nationell lagstiftning senast den 17 oktober 2024. Sverige har haft viss försening men den svenska lagen om cybersäkerhet, baserad på NIS2, är nu antagen. Tillsynsmyndigheterna förväntas börja aktiv tillsyn under 2026."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={`${title} - Bright Interaction`} description={description} type="article" lang={lang}>
+  <Header lang={lang} />
+  <main class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article>
+        <header class="mb-12">
+          <Breadcrumb lang="sv" title={title} />
+          <div class="flex flex-wrap gap-3 mb-4">
+            <time datetime="2026-03-05" class="text-sm text-text-muted">5 mars 2026</time>
+            <span class="text-sm px-2 py-0.5 bg-gold/20 text-gold rounded">Compliance</span>
+            <span class="text-sm text-text-muted">9 min läsning</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+            {title}
+          </h1>
+          <p class="text-xl text-text-secondary leading-relaxed">
+            NIS2-direktivet ställer nya krav på cybersäkerhet för tusentals svenska
+            organisationer. Den här checklistan ger dig en steg-för-steg-guide med
+            konkreta åtgärder för varje krav, så att du kan ta dig från nuläge till
+            full efterlevnad.
+          </p>
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vad är NIS2 och varför spelar det roll?</h2>
+            <p class="text-text-secondary mb-4">
+              NIS2 (Network and Information Security Directive 2) är EU:s uppdaterade
+              cybersäkerhetsdirektiv som ersätter det ursprungliga NIS-direktivet från 2016.
+              Det utökar omfattningen dramatiskt: från cirka 500 till uppskattningsvis 5 000
+              svenska organisationer.
+            </p>
+            <p class="text-text-secondary mb-4">
+              Till skillnad från GDPR, som fokuserar på personuppgifter, handlar NIS2 om
+              säkerheten i nätverks- och informationssystem. Direktivet kräver konkreta
+              tekniska och organisatoriska åtgärder, incidentrapportering inom 24 timmar
+              och ansvar på ledningsnivå.
+            </p>
+
+            <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-amber-400 mb-2">Ledningsansvar</h4>
+              <p class="text-text-secondary text-sm">
+                NIS2 ställer uttryckliga krav på att ledningen godkänner och övervakar
+                cybersäkerhetsåtgärderna. Styrelseledamöter och VD kan hållas personligt
+                ansvariga vid bristande efterlevnad. Det här är inte bara en IT-fråga.
+              </p>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">De 12 stegen till NIS2-efterlevnad</h2>
+
+            <!-- Steg 1 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">01</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Fastställ om ni omfattas</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    NIS2 gäller medelstora och stora organisationer inom 18 definierade sektorer.
+                    Kontrollera om er verksamhet klassas som "väsentlig" eller "viktig" entitet.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Kartlägg vilka sektorer ni
+                    verkar inom och kontrollera om ni uppfyller storlekskriterierna (50+ anställda
+                    eller 10+ MEUR omsättning). Notera att leverantörer till kritisk infrastruktur
+                    också kan omfattas.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 2 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">02</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Genomför en riskbedömning</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    NIS2 artikel 21 kräver en systematisk riskbedömning av nätverks- och
+                    informationssystem. Identifiera tillgångar, hot, sårbarheter och
+                    konsekvenser.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Använd ett ramverk som
+                    ISO 27005 eller MSB:s riskanalysmetodik. Dokumentera alla kritiska system,
+                    deras beroenden och vilka hot som är mest relevanta för er verksamhet.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 3 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">03</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Upprätta en cybersäkerhetspolicy</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    En dokumenterad cybersäkerhetspolicy som är godkänd av ledningen är
+                    ett grundkrav. Den ska täcka roller, ansvar, riktlinjer och processer.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Skriv eller uppdatera
+                    policyn så att den inkluderar riskhantering, incidenthantering, åtkomstkontroll,
+                    leverantörshantering och kontinuitetsplanering. Säkerställ att styrelsen
+                    formellt godkänner den.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 4 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">04</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Implementera incidenthantering</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    NIS2 kräver rapportering av betydande incidenter inom 24 timmar (tidig varning),
+                    en uppdaterad rapport inom 72 timmar och en slutrapport inom en månad.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Etablera en incidenthanteringsprocess
+                    med tydliga roller, kommunikationsvägar och mallar. Öva processen regelbundet.
+                    Identifiera er nationella CSIRT-kontaktpunkt (CERT-SE i Sverige).
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 5 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">05</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Säkra leverantörskedjan</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    NIS2 lägger stort fokus på supply chain-säkerhet. Ni ansvarar inte bara
+                    för er egen säkerhet utan också för att era leverantörer uppfyller grundläggande krav.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Inventera alla IT-leverantörer
+                    och bedöm deras säkerhetsnivå. Inkludera cybersäkerhetskrav i avtal. Genomför
+                    regelbundna leverantörsgranskningar.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 6 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">06</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Implementera åtkomstkontroll</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    Kontrollera vem som har tillgång till vad. NIS2 kräver principen om
+                    lägsta behörighet och stark autentisering.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Implementera multi-faktorautentisering
+                    (MFA) för alla kritiska system. Granska behörigheter kvartalsvis. Använd
+                    rollbaserad åtkomstkontroll (RBAC) och SSO där det är möjligt.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 7 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">07</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Säkerställ kryptering</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    Data i transit och i vila ska skyddas med adekvat kryptering.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Kontrollera att alla
+                    webbplatser och API:er använder TLS 1.2+. Kryptera databaser och backuper.
+                    Använd starka krypteringsalgoritmer och hantera nycklar säkert. Vår SVAR-skanner
+                    kontrollerar TLS-konfiguration automatiskt.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 8 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">08</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Etablera sårbarhetshantering</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    Regelbunden sårbarhetsskanning och patchhantering är centrala krav i NIS2.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Inför regelbundna
+                    säkerhetsscanningar av webbplatser, servrar och applikationer. Etablera en
+                    process för att prioritera och åtgärda identifierade sårbarheter inom
+                    definierade tidsramar.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 9 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">09</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Planera för verksamhetskontinuitet</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    NIS2 kräver planer för att upprätthålla verksamheten vid cyberincidenter,
+                    inklusive backup- och återställningsrutiner.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Upprätta en
+                    kontinuitetsplan (BCP) och en katastrofåterställningsplan (DRP). Testa
+                    backup-återställning regelbundet. Definiera RPO och RTO för kritiska system.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 10 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">10</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Utbilda personalen</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    Mänskliga faktorn är den vanligaste attackvektorn. NIS2 kräver
+                    regelbunden cybersäkerhetsutbildning.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Genomför cybersäkerhetsutbildning
+                    för alla anställda minst årligen. Inkludera phishing-simuleringar, lösenordshantering
+                    och rutiner vid misstänkta incidenter. Dokumentera genomförda utbildningar.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 11 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">11</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Registrera er hos tillsynsmyndigheten</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    Organisationer som omfattas av NIS2 ska registrera sig hos relevant
+                    nationell tillsynsmyndighet.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Identifiera vilken
+                    tillsynsmyndighet som ansvarar för er sektor. I Sverige kan det vara MSB,
+                    PTS, Energimyndigheten eller annan sektorsspecifik myndighet. Slutför
+                    registreringen och utse en kontaktperson.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steg 12 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex items-start gap-4">
+                <span class="text-2xl font-bold text-gold shrink-0">12</span>
+                <div>
+                  <h3 class="text-lg font-semibold text-text-primary mb-2">Övervaka och förbättra löpande</h3>
+                  <p class="text-text-secondary text-sm mb-3">
+                    NIS2 är inte en engångsinsats. Direktivet kräver kontinuerlig övervakning,
+                    utvärdering och förbättring av säkerhetsåtgärderna.
+                  </p>
+                  <p class="text-text-secondary text-sm">
+                    <strong class="text-text-primary">Åtgärd:</strong> Inför regelbundna
+                    säkerhetsgranskningar (minst årligen). Använd automatiserade verktyg för
+                    löpande övervakning. Uppdatera riskbedömningen vid väsentliga förändringar
+                    i verksamheten eller hotbilden.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Sanktioner vid bristande efterlevnad</h2>
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Kategori</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Maximal sanktionsavgift</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Övrigt</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Väsentlig entitet</td>
+                    <td class="py-3 px-4 text-red-400">10 MEUR eller 2 % av omsättningen</td>
+                    <td class="py-3 px-4">Personligt ledningsansvar</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Viktig entitet</td>
+                    <td class="py-3 px-4 text-amber-400">7 MEUR eller 1,4 % av omsättningen</td>
+                    <td class="py-3 px-4">Personligt ledningsansvar</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- FAQ-sektion -->
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vanliga frågor om NIS2</h2>
+
+            <div class="space-y-6">
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Vilka svenska företag omfattas av NIS2?</h3>
+                <p class="text-text-secondary text-sm">
+                  NIS2 omfattar medelstora och stora företag inom 18 sektorer, inklusive energi,
+                  transport, hälso- och sjukvård, digital infrastruktur, IT-tjänster, offentlig
+                  förvaltning och tillverkning. Även mindre företag kan omfattas om de levererar
+                  kritiska tjänster. I Sverige beräknas uppemot 5 000 organisationer beröras.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Vilka sanktioner innebär NIS2 i Sverige?</h3>
+                <p class="text-text-secondary text-sm">
+                  Sanktionsavgifter på upp till 10 miljoner EUR eller 2 % av den globala
+                  årsomsättningen för väsentliga entiteter. För viktiga entiteter gäller upp
+                  till 7 miljoner EUR eller 1,4 % av omsättningen. Ledningen kan hållas
+                  personligt ansvarig.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Vad är skillnaden mellan NIS2 och GDPR?</h3>
+                <p class="text-text-secondary text-sm">
+                  GDPR fokuserar på skydd av personuppgifter medan NIS2 handlar om cybersäkerhet
+                  och skydd av nätverks- och informationssystem. De överlappar i viss mån, men
+                  NIS2 ställer mer specifika krav på tekniska säkerhetsåtgärder,
+                  leverantörshantering och incidentrapportering inom 24 timmar.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">När börjar NIS2 gälla i Sverige?</h3>
+                <p class="text-text-secondary text-sm">
+                  EU:s NIS2-direktiv trädde i kraft den 16 januari 2023 och skulle vara
+                  implementerat i nationell lagstiftning senast den 17 oktober 2024. Sverige har
+                  haft viss försening men den svenska lagen om cybersäkerhet, baserad på NIS2, är
+                  nu antagen. Tillsynsmyndigheterna förväntas börja aktiv tillsyn under 2026.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Börja med en kostnadsfri scanning</h2>
+            <p class="text-text-secondary mb-6">
+              Steg 7 och 8 i checklistan kräver att ni kontrollerar er TLS-konfiguration
+              och genomför sårbarhetsscanningar. Vår SVAR-skanner gör detta automatiskt
+              och kostnadsfritt. Få en tydlig bild av ert nuläge på 2 minuter.
+            </p>
+            <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+              Begär en kostnadsfri skanning
+            </button>
+          </section>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2-compliance: Praktisk guide</a></li>
+            <li><a href="/sv/insights/cookie-samtycke-krav-sverige-2026" class="text-gold hover:text-gold-light transition-colors text-sm">Krav på cookie-samtycke i Sverige 2026</a></li>
+            <li><a href="/sv/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Grunderna i säkerhetskonfiguration</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Tillbaka till Insikter
+        </a>
+      </div>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+  <Footer lang={lang} />
+</Layout>

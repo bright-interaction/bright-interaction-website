@@ -1,0 +1,585 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Legal Tech Infrastructure: Building Secure Systems for Law Firms';
+const description = 'How law firms can build technology infrastructure that protects client confidentiality, meets professional obligations, and enables efficient practice management.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/legal-tech-infrastructure"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Legal
+          </span>
+          <span class="text-text-muted text-sm">11 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Key Takeaways</h3>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Attorney-client privilege creates unique infrastructure requirements beyond standard data protection</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Document management, communication, and billing systems each require specific security controls</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Self-hosted solutions eliminate third-party access risks that could compromise privilege</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Bar association ethics rules increasingly address technology and cybersecurity obligations</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Unique Position of Legal Technology
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Law firms occupy a unique position in the data protection landscape. Beyond GDPR's general
+            requirements, they must protect attorney-client privilege, a cornerstone of legal practice.
+            A breach doesn't just trigger regulatory penalties. It can waive privilege, harm clients,
+            and end careers.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            This creates infrastructure requirements that go beyond what most businesses face. The question
+            isn't just "is this data protected?" but "can anyone, including the technology vendor,
+            access this privileged communication?"
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Professional Obligations
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Bar Association Ethics Rules</h3>
+            <p class="text-text-secondary mb-4">
+              Most European bar associations have updated their ethics rules to address technology. Common
+              requirements include:
+            </p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Competence:</strong> Lawyers must understand the technology they use and its security implications</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Confidentiality:</strong> Reasonable measures must be taken to prevent unauthorized access to client information</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Supervision:</strong> Lawyers are responsible for ensuring staff and vendors maintain confidentiality</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Communication:</strong> Clients should be informed about how their information is protected</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            The Swedish Bar Association, for example, explicitly addresses cloud services, requiring that
+            lawyers assess vendor security and maintain control over client data. Similar guidance exists
+            from bar associations across Europe.
+          </p>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">GDPR Considerations for Law Firms</h3>
+
+          <p class="text-text-secondary mb-6">
+            Law firms often process sensitive data across multiple categories:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Client personal data:</strong> Names, contact details, identification documents</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Case-related data:</strong> Often includes special categories like health records or criminal history</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Opposing party data:</strong> Information about individuals who haven't consented to processing</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Witness data:</strong> Statements and contact information</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            The legal basis for processing varies by context. Client data might rely on contractual necessity,
+            while opposing party data often falls under legitimate interests. Law firms need clear policies
+            for each scenario.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Core Infrastructure Requirements
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Document Management Systems</h3>
+
+          <p class="text-text-secondary mb-6">
+            Documents are the lifeblood of legal practice. A compliant document management system must provide:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Matter-based access control:</strong> Staff only access documents for matters they're assigned to</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Version history:</strong> Complete audit trail of all changes</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Conflict checking:</strong> Ability to search for potential conflicts before accepting new clients</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Retention management:</strong> Automated handling of retention periods and destruction</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Encryption:</strong> Both at rest and in transit, with firm-controlled keys</span>
+            </li>
+          </ul>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h4 class="font-display text-lg font-bold text-gold mb-4">Self-Hosted Document Solutions</h4>
+            <p class="text-text-secondary mb-4">Consider these open-source alternatives to cloud document management:</p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Nextcloud:</strong> Full-featured with built-in version control and encryption</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Paperless-ngx:</strong> Document scanning and organization with OCR</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">OnlyOffice:</strong> Collaborative document editing (self-hosted)</span>
+              </li>
+            </ul>
+          </div>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Client Communication</h3>
+
+          <p class="text-text-secondary mb-6">
+            Email remains primary, but it's inherently insecure. Law firms should consider:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Email encryption:</strong> S/MIME or PGP for sensitive communications, or secure client portals</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Secure messaging:</strong> For internal communication about client matters</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Client portals:</strong> Secure spaces for document sharing and communication</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Video conferencing:</strong> Self-hosted options like Jitsi for privileged discussions</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            The key principle: privileged communications should never pass through systems where the
+            vendor can access content. This rules out most consumer email and messaging platforms.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Case for Self-Hosting
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Privilege Preservation</h3>
+
+          <p class="text-text-secondary mb-6">
+            The strongest argument for self-hosted legal infrastructure is privilege preservation. When
+            documents reside on third-party servers:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>The vendor's employees could theoretically access them</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Government requests might be directed to the vendor rather than the firm</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Subpoenas might argue that sharing with a third party waives privilege</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Breach notification becomes more complex when vendors are involved</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            Self-hosting eliminates these concerns. If privileged documents never leave your infrastructure,
+            the chain of custody is clear and privilege arguments are stronger.
+          </p>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Regulatory Simplicity</h3>
+
+          <p class="text-text-secondary mb-6">
+            Self-hosting also simplifies GDPR compliance. Instead of managing Data Processing Agreements
+            with multiple vendors and tracking their sub-processors, you control the entire data flow.
+            For firms with international clients, this is particularly valuable. You can guarantee that
+            data remains within the EU without relying on vendor assurances or complex transfer mechanisms.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Implementation Approach
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Assessment and Planning</h4>
+                <p class="text-text-secondary">
+                  Begin with a comprehensive assessment: What client data exists, where is it stored,
+                  who can access it? What technology is currently in use and what are the security gaps?
+                  How do documents and communications actually flow?
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Infrastructure Design</h4>
+                <p class="text-text-secondary">
+                  Design infrastructure that matches legal practice requirements: Nextcloud for document
+                  management with encryption, Mattermost for internal communication, self-hosted email
+                  with S/MIME, Jitsi for video consultations, and Authentik for SSO and access management.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Access Controls</h4>
+                <p class="text-text-secondary">
+                  Implement granular access controls: matter-based permissions where users only access
+                  materials for their assigned matters, role separation for partners, associates, paralegals,
+                  and admin staff, secure external collaboration with clients and co-counsel.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Audit and Logging</h4>
+                <p class="text-text-secondary">
+                  Maintain comprehensive logs: all document access and modifications, login attempts,
+                  permission changes, and external sharing events. These logs serve security monitoring,
+                  privilege documentation, and compliance demonstration.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Practice Area Considerations
+          </h2>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Litigation</h4>
+              <p class="text-text-secondary text-sm">
+                eDiscovery support, legal hold, secure opposing counsel communication, court filing integration.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Corporate/M&A</h4>
+              <p class="text-text-secondary text-sm">
+                Virtual data rooms, watermarking, access expiry, multi-party collaboration across firms.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Criminal Defense</h4>
+              <p class="text-text-secondary text-sm">
+                Maximum encryption, secure mobile for jail visits, evidence chain of custody, prosecution request handling.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Staff Training
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Technology is only as secure as the people using it. Essential training topics:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Phishing awareness:</strong> Law firms are high-value targets for social engineering</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Password hygiene:</strong> Strong, unique passwords and password managers</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Device security:</strong> Protecting laptops, phones, and other devices</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Incident reporting:</strong> What to do if something seems wrong</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Client communication:</strong> Using secure channels appropriately</span>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Incident Response
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Despite best efforts, incidents happen. Law firms need documented procedures for:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Detection:</strong> Monitoring for signs of unauthorized access</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Containment:</strong> Limiting damage once an incident is detected</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Assessment:</strong> Determining what data was affected and whether privilege was compromised</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Notification:</strong> Informing clients, regulators, and potentially opposing counsel</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Remediation:</strong> Preventing recurrence</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            The bar association should typically be consulted for significant incidents, and malpractice
+            carriers should be notified promptly.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help?</strong> We help law firms implement infrastructure that protects
+              client confidentiality while enabling modern, efficient practice.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Get in touch →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/legal-tech-infrastructure`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2 Compliance: A Practical Guide</a></li>
+            <li><a href="/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Data Sovereignty in the Cloud Era</a></li>
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

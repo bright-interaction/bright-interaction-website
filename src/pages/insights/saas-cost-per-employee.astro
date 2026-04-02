@@ -1,0 +1,711 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-30';
+const title = 'What SaaS Really Costs Per Employee in 2026 (And How to Cut It by 70%)';
+const description = 'Average SaaS spend hits $10,800 per employee in 2026. See the real numbers, where the waste hides, and how open source alternatives cut costs by 70%.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/saas-cost-per-employee"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does the average company spend on SaaS per employee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In 2026, the average company spends approximately $10,800 per employee per year on SaaS subscriptions, up from $9,643 in 2025. This figure includes all cloud-based software across departments including productivity, CRM, marketing, HR, finance, and collaboration tools."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What percentage of SaaS spend is wasted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Studies consistently show that 25-30% of SaaS spending goes to waste. The most common causes are unused licenses from former employees, duplicate tools across departments doing the same job, and underutilized premium tiers where teams only use basic features but pay for enterprise plans."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can open source really replace enterprise SaaS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, for the majority of common business tools. Mature open source alternatives exist for project management (Plane, Leantime), CRM (Twenty, SuiteCRM), workflow automation (n8n), team chat (Mattermost, Rocket.Chat), documentation (Outline, BookStack), and many more. These tools are production-ready and used by thousands of companies worldwide."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to migrate from SaaS to self-hosted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A typical migration takes 2-6 weeks per tool, depending on complexity and data volume. Simple tools like team chat or documentation can be migrated in under a week. More complex systems like CRM or project management with years of data and custom integrations may take 4-6 weeks. The key is migrating one tool at a time rather than everything at once."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            &larr; Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Business Strategy
+          </span>
+          <span class="text-text-muted text-sm">8 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Your company is spending more on SaaS than you think. The average sits at $10,800 per employee in 2026. For a 50-person company, that is $540,000 per year going to cloud subscriptions. And roughly a third of it is waste.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            These are not hypothetical numbers. They come from industry benchmarks that have tracked SaaS spending growth year over year. The trend is clear: costs keep climbing, and most companies do not realize how much they are actually paying until they do the math.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Numbers: SaaS Costs in 2026
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SaaS spending per employee has grown steadily. In 2023, the average was around $8,500. By 2025, it had risen to $9,643. For 2026, projections put it above $10,800. That is a 12% year-over-year increase, and it shows no signs of slowing down.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-lg font-bold text-text-primary mb-4">SaaS Spend Per Employee (Annual)</h3>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-text-secondary">2023</span>
+                <div class="flex items-center gap-3">
+                  <div class="w-48 bg-dark-elevated rounded-full h-3">
+                    <div class="bg-gold/60 h-3 rounded-full" style="width: 72%"></div>
+                  </div>
+                  <span class="text-text-primary font-semibold w-20 text-right">$8,500</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-text-secondary">2024</span>
+                <div class="flex items-center gap-3">
+                  <div class="w-48 bg-dark-elevated rounded-full h-3">
+                    <div class="bg-gold/70 h-3 rounded-full" style="width: 80%"></div>
+                  </div>
+                  <span class="text-text-primary font-semibold w-20 text-right">$9,100</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-text-secondary">2025</span>
+                <div class="flex items-center gap-3">
+                  <div class="w-48 bg-dark-elevated rounded-full h-3">
+                    <div class="bg-gold/80 h-3 rounded-full" style="width: 89%"></div>
+                  </div>
+                  <span class="text-text-primary font-semibold w-20 text-right">$9,643</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-text-secondary">2026 (projected)</span>
+                <div class="flex items-center gap-3">
+                  <div class="w-48 bg-dark-elevated rounded-full h-3">
+                    <div class="bg-gold h-3 rounded-full" style="width: 100%"></div>
+                  </div>
+                  <span class="text-gold font-bold w-20 text-right">$10,800+</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Why does it keep going up? Three reasons. First, SaaS vendors raise prices by 8-12% annually, and you absorb those increases because migrating is painful. Second, teams keep adding new tools without retiring old ones. Third, per-seat pricing means every new hire multiplies your costs across every subscription.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Do the math for your company:</strong> Take your headcount and multiply by $10,800. A 20-person team: $216,000/year. A 50-person company: $540,000/year. A 200-person organization: $2,160,000/year. Now ask yourself: do you know where all of that money goes?
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Where the Waste Hides
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            The $10,800 figure would be easier to stomach if companies actually used what they paid for. They do not. Research consistently shows that 25-30% of SaaS spending is wasted. For that 50-person company, that is $135,000 to $162,000 per year going nowhere.
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Ghost licenses</h4>
+              <p class="text-text-secondary text-sm">
+                Employees leave but their subscriptions stay active. IT offboarding misses half the tools because nobody tracks the full list. One study found the average company has licenses active for 15% of former employees.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Duplicate tools</h4>
+              <p class="text-text-secondary text-sm">
+                Marketing uses Asana, engineering uses Jira, sales uses Monday. Three project management tools doing the same job. This pattern repeats across file storage, communication, design, and documentation tools.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Premium tiers nobody uses</h4>
+              <p class="text-text-secondary text-sm">
+                Teams sign up for enterprise plans because they need one specific feature, then only use the basics. You are paying for 100% of the plan and using 20% of its capabilities.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Shadow IT</h4>
+              <p class="text-text-secondary text-sm">
+                Individuals and teams sign up for tools on company credit cards without IT knowledge. The average mid-size company runs over 200 SaaS applications, but IT typically knows about only 60-70% of them.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Annual Price Hike Problem
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SaaS pricing is designed to go up. Vendors raise prices 8-12% annually on average, and they have little incentive not to. Once you have invested time setting up the tool, trained your team, and built workflows around it, the switching cost is high. They know this.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Some recent examples: Salesforce raised prices by 9% across most products in 2024. HubSpot restructured pricing in ways that increased costs 20-40% for many customers. Atlassian ended server licenses entirely, pushing everyone to cloud subscriptions at higher price points. Slack's price increases since 2020 have totaled over 40%.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-lg font-bold text-text-primary mb-4">5-Year Cost Projection (50 employees, 10% annual increase)</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left text-text-muted py-3 pr-4">Year</th>
+                    <th class="text-right text-text-muted py-3 pr-4">Per Employee</th>
+                    <th class="text-right text-text-muted py-3 pr-4">Total (50 people)</th>
+                    <th class="text-right text-text-muted py-3">Cumulative</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Year 1</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$10,800</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$540,000</td>
+                    <td class="text-text-primary text-right py-3">$540,000</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Year 2</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$11,880</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$594,000</td>
+                    <td class="text-text-primary text-right py-3">$1,134,000</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Year 3</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$13,068</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$653,400</td>
+                    <td class="text-text-primary text-right py-3">$1,787,400</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Year 4</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$14,375</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$718,740</td>
+                    <td class="text-text-primary text-right py-3">$2,506,140</td>
+                  </tr>
+                  <tr>
+                    <td class="text-gold font-semibold py-3 pr-4">Year 5</td>
+                    <td class="text-gold font-semibold text-right py-3 pr-4">$15,812</td>
+                    <td class="text-gold font-semibold text-right py-3 pr-4">$790,614</td>
+                    <td class="text-gold font-bold text-right py-3">$3,296,754</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            Over five years, a 50-person company pays over $3.2 million in SaaS subscriptions. And that assumes no headcount growth. Add 10 people in year three and the number climbs significantly higher.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Open Source Alternative: Real Numbers
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Open source and self-hosted alternatives have matured significantly. These are not hobbyist projects anymore. They are production-ready tools used by thousands of companies. And the cost difference is dramatic.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Here is a side-by-side comparison of 10 common business tools, showing SaaS cost versus self-hosted cost for a 50-person company:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-lg font-bold text-text-primary mb-4">SaaS vs Open Source: Annual Cost for 50 Users</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left text-text-muted py-3 pr-4">Category</th>
+                    <th class="text-left text-text-muted py-3 pr-4">SaaS Tool</th>
+                    <th class="text-right text-text-muted py-3 pr-4">SaaS Cost/yr</th>
+                    <th class="text-left text-text-muted py-3 pr-4">Open Source</th>
+                    <th class="text-right text-text-muted py-3">Self-Hosted/yr</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Project Management</td>
+                    <td class="text-text-primary py-3 pr-4">Jira</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$43,500</td>
+                    <td class="text-gold py-3 pr-4">Plane / Leantime</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Team Chat</td>
+                    <td class="text-text-primary py-3 pr-4">Slack</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$52,200</td>
+                    <td class="text-gold py-3 pr-4">Mattermost</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">CRM</td>
+                    <td class="text-text-primary py-3 pr-4">HubSpot</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$54,000</td>
+                    <td class="text-gold py-3 pr-4">Twenty / SuiteCRM</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Workflow Automation</td>
+                    <td class="text-text-primary py-3 pr-4">Zapier</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$28,800</td>
+                    <td class="text-gold py-3 pr-4">n8n</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Documentation</td>
+                    <td class="text-text-primary py-3 pr-4">Notion</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$48,000</td>
+                    <td class="text-gold py-3 pr-4">Outline</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Email</td>
+                    <td class="text-text-primary py-3 pr-4">Google Workspace</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$43,200</td>
+                    <td class="text-gold py-3 pr-4">Proton Business</td>
+                    <td class="text-gold text-right py-3">$23,880</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Analytics</td>
+                    <td class="text-text-primary py-3 pr-4">Google Analytics 360</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$150,000</td>
+                    <td class="text-gold py-3 pr-4">Umami / Plausible</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Password Manager</td>
+                    <td class="text-text-primary py-3 pr-4">1Password</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$23,760</td>
+                    <td class="text-gold py-3 pr-4">Vaultwarden</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Deployment Platform</td>
+                    <td class="text-text-primary py-3 pr-4">Vercel / Heroku</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$24,000</td>
+                    <td class="text-gold py-3 pr-4">Coolify</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="text-text-secondary py-3 pr-4">Identity / SSO</td>
+                    <td class="text-text-primary py-3 pr-4">Okta</td>
+                    <td class="text-text-primary text-right py-3 pr-4">$36,000</td>
+                    <td class="text-gold py-3 pr-4">Zitadel</td>
+                    <td class="text-gold text-right py-3">$0</td>
+                  </tr>
+                  <tr class="bg-dark-elevated/30">
+                    <td class="text-text-primary font-bold py-3 pr-4" colspan="2">Total</td>
+                    <td class="text-text-primary font-bold text-right py-3 pr-4">$503,460</td>
+                    <td class="py-3 pr-4"></td>
+                    <td class="text-gold font-bold text-right py-3">$23,880</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Total savings: $479,580/year.</strong> That is a 95% reduction on software costs alone. Even when you add infrastructure costs ($50-200/month for a capable VPS) and factor in setup time, the savings remain above 70% in nearly every scenario.
+            </p>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            A few notes on this comparison. The "$0" entries for self-hosted tools mean the software itself is free. You still pay for server infrastructure, which typically runs $600-2,400 per year for a setup that handles all of these tools. Proton Business is listed at its actual per-user cost because self-hosting email is one of the few categories where a managed service is genuinely worth it. Email deliverability is a specialized problem.
+          </p>
+
+          <p class="text-text-secondary">
+            The realistic all-in cost for self-hosting this entire stack, including a capable server, is roughly $26,000-28,000 per year. Compared to $503,460 in SaaS costs, that is a reduction of about 95%. Even with generous time estimates for maintenance (5-10 hours per month), the economics are overwhelming.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Proof: Our Own Stack
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            We do not just write about this. We run our entire business on open source and self-hosted tools. Here is our actual stack at Bright Interaction:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Deployment and Hosting: Coolify</h4>
+              <p class="text-text-secondary text-sm">
+                Replaces Heroku, Vercel, and Railway. We deploy all our applications through Coolify on a single Hetzner server. One-click deploys, automatic SSL, built-in monitoring. Cost: $0 for the software, roughly $40/month for the server.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Workflow Automation: n8n</h4>
+              <p class="text-text-secondary text-sm">
+                Replaces Zapier and Make. We run complex sales automation, CRM integrations, and monitoring workflows. No per-execution limits, no per-workflow pricing. A Zapier plan with equivalent volume would cost us over $2,000/month.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Team Communication: Mattermost</h4>
+              <p class="text-text-secondary text-sm">
+                Replaces Slack. Full chat functionality with channels, threads, file sharing, and integrations. We connect it to n8n for automated notifications. Equivalent Slack plan: $87/user/month for Enterprise.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Email: Proton Business</h4>
+              <p class="text-text-secondary text-sm">
+                We use Proton rather than self-hosting email because deliverability is a real problem to solve on your own. End-to-end encryption, based in Switzerland, GDPR compliant by design. About $40/user/month, but worth it for a critical communication channel.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Documentation: Outline</h4>
+              <p class="text-text-secondary text-sm">
+                Replaces Notion and Confluence. Clean interface, Markdown support, real-time collaboration. Integrates with our Zitadel SSO so there is one login for everything.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Identity and SSO: Zitadel</h4>
+              <p class="text-text-secondary text-sm">
+                Replaces Okta and Auth0. Single sign-on across all our internal tools, SAML and OIDC support, user lifecycle management. Okta would charge us $6-15/user/month for equivalent functionality.
+              </p>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            Our total infrastructure cost for running all of this: under $200/month. The equivalent SaaS stack would cost us thousands per month, even at our small team size. As we grow, our costs stay flat while SaaS costs scale linearly with headcount.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            How to Cut Your SaaS Spend by 70%
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            You do not have to migrate everything overnight. Here is a practical approach that gets results without disrupting your team:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Audit everything (Week 1)</h4>
+                <p class="text-text-secondary">
+                  Pull your credit card and bank statements for the past 12 months. List every SaaS subscription, its cost, how many licenses you pay for, and how many people actually use it. Most companies are shocked by what they find.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Kill the waste immediately (Week 2)</h4>
+                <p class="text-text-secondary">
+                  Cancel unused licenses, remove duplicate tools, downgrade plans where you are paying for features nobody uses. This alone typically saves 20-30% with zero migration effort.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Prioritize migrations by impact (Week 3-4)</h4>
+                <p class="text-text-secondary">
+                  Rank your remaining SaaS tools by annual cost. Start migrating from the most expensive ones with mature open source alternatives. Workflow automation (n8n replacing Zapier) and project management (Plane replacing Jira) often deliver the biggest savings with the least friction.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Migrate one tool at a time (Months 2-6)</h4>
+                <p class="text-text-secondary">
+                  Run the self-hosted version alongside the SaaS tool for two weeks. Let the team test it. Migrate data. Only cut over when you are confident. Each migration takes 2-6 weeks depending on complexity.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Set up centralized management</h4>
+                <p class="text-text-secondary">
+                  Use a platform like Coolify to manage all your self-hosted tools from one dashboard. Add SSO with Zitadel so your team has one login. Set up automated backups. This is easier than it sounds with modern tooling.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Objections (And Why They Are Outdated)
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Every time we discuss this with businesses, the same concerns come up. Here is why most of them no longer hold:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">"We don't have the technical skills"</h4>
+              <p class="text-text-secondary text-sm">
+                Modern self-hosting platforms like Coolify reduce deployment to clicking a button. If you can install an app on your phone, you can deploy a Docker container in 2026. The complexity argument was valid in 2015. It is not anymore.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">"Open source means lower quality"</h4>
+              <p class="text-text-secondary text-sm">
+                Linux runs 90%+ of the world's servers. PostgreSQL powers mission-critical databases at banks and governments. n8n handles more complex workflows than Zapier can. The quality gap has closed, and in many cases reversed.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">"What about support?"</h4>
+              <p class="text-text-secondary text-sm">
+                Most open source projects have active communities, paid support tiers, and extensive documentation. And be honest: when was the last time your SaaS vendor's support actually solved your problem quickly?
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">"What about security?"</h4>
+              <p class="text-text-secondary text-sm">
+                Open source code is auditable. You can see exactly what runs. SaaS is a black box. Self-hosting means your data stays on infrastructure you control, which actually simplifies security and compliance for most organizations.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Frequently Asked Questions
+          </h2>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-semibold text-text-primary mb-3">How much does the average company spend on SaaS per employee?</h3>
+              <p class="text-text-secondary">
+                In 2026, the average company spends approximately $10,800 per employee per year on SaaS subscriptions. This is up from $9,643 in 2025 and $8,500 in 2023. The figure includes all cloud-based software across departments: productivity, CRM, marketing, HR, finance, and collaboration tools. Companies with 200+ employees tend to spend even more per head due to the proliferation of specialized enterprise tools.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-semibold text-text-primary mb-3">What percentage of SaaS spend is wasted?</h3>
+              <p class="text-text-secondary">
+                Studies consistently show that 25-30% of SaaS spending goes to waste. The biggest culprits are unused licenses from employees who have left or changed roles, duplicate tools serving the same function across departments, and overprovisioned tiers where teams pay for enterprise features but only use basic functionality. For a company spending $540,000/year on SaaS, that represents $135,000-$162,000 in avoidable cost.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-semibold text-text-primary mb-3">Can open source really replace enterprise SaaS?</h3>
+              <p class="text-text-secondary">
+                Yes, for the majority of common business tools. Mature open source alternatives exist for project management (Plane, Leantime), CRM (Twenty, SuiteCRM), workflow automation (n8n), team chat (Mattermost, Rocket.Chat), documentation (Outline, BookStack), analytics (Umami, Plausible), deployment (Coolify), and identity management (Zitadel). These tools are production-ready and used by thousands of companies. The exceptions are specialized domains like advanced video conferencing, complex ERP systems, and email hosting where managed services still make sense.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-semibold text-text-primary mb-3">How long does it take to migrate from SaaS to self-hosted?</h3>
+              <p class="text-text-secondary">
+                A typical migration takes 2-6 weeks per tool, depending on complexity and data volume. Simple tools like team chat or documentation can be set up and migrated in under a week. More complex systems like CRM or project management with years of data and custom integrations may take 4-6 weeks. The recommended approach is migrating one tool at a time, running both in parallel during a transition period, and only cutting over when the team is comfortable.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Calculate Your Actual SaaS Cost
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Knowing the industry averages is useful. Knowing your actual number is powerful. We built a free calculator that lets you input your headcount, list your current tools, and see exactly how much you could save by switching to open source alternatives.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary mb-4">
+              <strong class="text-gold">Stop guessing. Start calculating.</strong> Use our free SaaS cost calculator to see your real spending and potential savings. No signup required. No sales pitch. Just math.
+            </p>
+            <a href="/#contact" class="inline-flex items-center gap-2 bg-gold text-dark-bg px-6 py-3 rounded-lg font-semibold hover:bg-gold-light transition-colors">
+              Try the Free Calculator
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/saas-cost-per-employee`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted vs SaaS: Making the Right Choice</a></li>
+            <li><a href="/insights/self-hosted-alternatives-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted Alternatives to Popular SaaS Tools</a></li>
+            <li><a href="/insights/hidden-cost-of-manual-processes" class="text-gold hover:text-gold-light transition-colors text-sm">The Hidden Cost of Manual Processes</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

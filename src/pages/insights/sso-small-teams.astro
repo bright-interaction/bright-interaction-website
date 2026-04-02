@@ -1,0 +1,587 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Setting Up SSO for Small Teams: A Practical Guide';
+const description = 'Single Sign-On isn\'t just for enterprises anymore. Learn how to implement SSO for your small team using self-hosted solutions that won\'t break the bank.';
+
+// Article structured data
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/sso-small-teams"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do small teams need SSO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, SSO solves real security and operational problems for small teams. It enables instant offboarding by disabling one account, enforces consistent MFA and password policies, reduces password reset requests, and provides a centralized audit trail. These benefits become valuable once your team reaches 10-15 people using multiple services."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does SSO cost for a small team?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enterprise SSO providers like Okta charge $2,000-5,000 annually for a 20-person team. Self-hosted alternatives like Authentik, Keycloak, or Authelia are free and run on a small server. You get the same functionality — SAML, OAuth2, OIDC, MFA — for just the cost of hosting."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best self-hosted SSO solution?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Authentik is the best choice for most small teams — it has a clean interface, solid documentation, and supports SAML, OAuth2, OIDC, and LDAP. Keycloak is more powerful but complex, suited for teams with Java expertise. Authelia is the lightest option, focused on protecting web apps behind a reverse proxy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to set up SSO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "With Authentik and Docker Compose, you can have a working SSO setup within a day. Start by deploying Authentik, configuring your domain with TLS, creating users and groups, enabling MFA, and connecting your most-used applications. Roll out in phases — internal tools first, then dev tools, then production systems."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Security
+          </span>
+          <span class="text-text-muted text-sm">10 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Your team has grown to 15 people. Everyone has accounts on Slack, GitHub, your project management tool, the company wiki, email, and half a dozen other services. Each with its own password. Each password either forgotten weekly or written on a sticky note.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Single Sign-On solves this. One login, one password, access to everything. And contrary to what enterprise software vendors want you to believe, you don't need a six-figure budget to implement it.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Why SSO Matters for Small Teams
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SSO isn't just about convenience (though that's nice). It solves real security and operational problems that hit small teams harder than you'd expect.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Offboarding in Minutes</h4>
+              <p class="text-text-secondary text-sm">
+                When someone leaves, disable one account and they lose access to everything. No more hunting through 20 different services hoping you didn't miss one.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Consistent Security Policies</h4>
+              <p class="text-text-secondary text-sm">
+                Enforce password complexity, multi-factor authentication, and session timeouts from one place. No more hoping everyone enabled MFA on each individual service.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Fewer Password Resets</h4>
+              <p class="text-text-secondary text-sm">
+                One password to remember means fewer "forgot password" emails and less time spent on IT support. Your team can actually focus on work.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Audit Trail</h4>
+              <p class="text-text-secondary text-sm">
+                See who accessed what and when, all in one log. Essential for compliance, useful for troubleshooting, and good to have if something goes wrong.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Self-Hosted SSO Options
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Enterprise SSO providers like Okta or Azure AD charge per user per month. For a 20-person team, you're looking at $2,000-5,000 annually before you even start. Self-hosted alternatives give you the same functionality for the cost of a small server.
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Authentik</h3>
+              <p class="text-text-secondary mb-4">
+                Our go-to recommendation for small teams. Authentik is a modern identity provider that supports SAML, OAuth2, OIDC, and LDAP. The interface is clean, documentation is solid, and it runs well on modest hardware.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">SAML 2.0</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">OAuth2/OIDC</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">LDAP</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">SCIM</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">WebAuthn/FIDO2</span>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Keycloak</h3>
+              <p class="text-text-secondary mb-4">
+                The most mature open-source option, backed by Red Hat. More complex to configure than Authentik, but extremely powerful. Better suited if you have Java expertise on your team or need advanced federation features.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Enterprise-grade</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Identity brokering</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">User federation</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Fine-grained auth</span>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Authelia</h3>
+              <p class="text-text-secondary mb-4">
+                Lightweight option focused on protecting web applications behind a reverse proxy. Great for adding SSO to apps that don't natively support it. Less feature-rich but simpler to deploy.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Lightweight</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Proxy-based</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">TOTP/WebAuthn</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Simple setup</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Setting Up Authentik: Step by Step
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Let's walk through setting up Authentik, since it offers the best balance of features and simplicity for small teams.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Deploy with Docker Compose</h4>
+                <p class="text-text-secondary mb-4">
+                  Authentik provides an official Docker Compose file. You'll need a server with at least 2GB RAM and Docker installed.
+                </p>
+                <pre class="text-text-secondary text-sm bg-dark-surface p-4 rounded-lg overflow-x-auto"><code># Download the docker-compose.yml
+wget https://goauthentik.io/docker-compose.yml
+
+# Create a .env file with secrets
+echo "PG_PASS=$(openssl rand -base64 36)" >> .env
+echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 36)" >> .env
+echo "AUTHENTIK_BOOTSTRAP_PASSWORD=changeme" >> .env
+echo "AUTHENTIK_BOOTSTRAP_EMAIL=admin@example.com" >> .env
+
+# Start Authentik
+docker compose up -d</code></pre>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Configure Your Domain</h4>
+                <p class="text-text-secondary">
+                  Point a subdomain like <code class="text-gold bg-dark-surface px-2 py-1 rounded">auth.yourdomain.com</code> to your server. Set up TLS certificates (Let's Encrypt works perfectly). Authentik should only ever be accessed over HTTPS.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Create Users and Groups</h4>
+                <p class="text-text-secondary">
+                  Log in to the admin interface, create your team members as users, and organize them into groups. Groups make permission management easier—you can grant application access to "Engineering" rather than individual users.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Set Up MFA</h4>
+                <p class="text-text-secondary">
+                  Enable multi-factor authentication and require it for all users. Authentik supports TOTP (authenticator apps), WebAuthn (hardware keys), and SMS (not recommended). Push this requirement from day one—retrofitting MFA later is painful.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Connect Your Applications</h4>
+                <p class="text-text-secondary">
+                  For each application, you'll create a "Provider" (how Authentik speaks to the app) and an "Application" (what users see). Most modern apps support OAuth2/OIDC. Legacy apps might need SAML. Some need LDAP integration.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Common Integration Patterns
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Different applications integrate with SSO in different ways. Here's what to expect:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-4">Apps with Native SSO Support</h4>
+            <p class="text-text-secondary mb-4">
+              Services like Grafana, GitLab, Nextcloud, and most modern SaaS apps have built-in OAuth2 or SAML support. Configuration is straightforward: create credentials in Authentik, enter them in the app's SSO settings.
+            </p>
+            <div class="text-text-muted text-sm">
+              Examples: GitLab, Grafana, Nextcloud, Mattermost, Outline, n8n
+            </div>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-4">Apps Behind a Proxy</h4>
+            <p class="text-text-secondary mb-4">
+              Some apps don't support SSO natively but can trust authentication headers from a reverse proxy. Authentik's forward auth feature integrates with Traefik, nginx, and Caddy to protect these apps.
+            </p>
+            <div class="text-text-muted text-sm">
+              Examples: Legacy internal tools, simple web apps, documentation sites
+            </div>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-gold mb-4">Apps Requiring LDAP</h4>
+            <p class="text-text-secondary mb-4">
+              Older enterprise software often only supports LDAP authentication. Authentik provides an LDAP outpost that presents your users and groups in an LDAP-compatible format.
+            </p>
+            <div class="text-text-muted text-sm">
+              Examples: Some VPNs, older wikis, legacy enterprise software
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Security Best Practices
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Your SSO system becomes the keys to your kingdom. Protect it accordingly.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">→</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Require MFA for everyone.</strong> No exceptions. A compromised SSO account with no MFA means every connected application is compromised.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">→</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Separate admin accounts.</strong> Your daily work account shouldn't be an Authentik admin. Use dedicated admin accounts with extra security controls.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">→</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Regular backup testing.</strong> Back up your Authentik database and test restores. If your SSO goes down, nobody can access anything.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">→</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Monitor login attempts.</strong> Set up alerts for failed logins, logins from new locations, and admin actions. Authentik provides audit logs—use them.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">→</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Have a break-glass procedure.</strong> Document how to access critical systems if SSO is unavailable. Store these credentials securely (encrypted, offline, known to multiple people).</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">→</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Keep it updated.</strong> SSO systems are high-value targets. Apply security patches promptly.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Planning Your Rollout
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Don't try to SSO-enable everything at once. A phased approach reduces disruption and lets you learn as you go.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-text-primary mb-4">Suggested Rollout Order</h4>
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">1</div>
+                <div>
+                  <p class="text-text-primary font-medium">Internal tools first</p>
+                  <p class="text-text-secondary text-sm">Wiki, documentation, internal dashboards. Low risk if something breaks, good practice ground.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">2</div>
+                <div>
+                  <p class="text-text-primary font-medium">Development tools</p>
+                  <p class="text-text-secondary text-sm">Git, CI/CD, project management. Your team uses these daily—SSO here shows immediate value.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">3</div>
+                <div>
+                  <p class="text-text-primary font-medium">Communication tools</p>
+                  <p class="text-text-secondary text-sm">Chat, email (if self-hosted). These benefit from centralized access control.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">4</div>
+                <div>
+                  <p class="text-text-primary font-medium">Production systems</p>
+                  <p class="text-text-secondary text-sm">Monitoring, infrastructure access. Do these last, with extra care and testing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What About External SaaS?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Many SaaS applications support SSO—but often only on expensive enterprise plans. This is where you need to make pragmatic choices.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-dark-surface rounded-xl border border-green-900/30 p-6">
+              <h4 class="font-semibold text-green-400 mb-3">Worth the Enterprise Upgrade</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>Services with sensitive data access</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>High user turnover applications</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-400">✓</span>
+                  <span>Compliance-critical systems</span>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-6">
+              <h4 class="font-semibold text-gold mb-3">Alternatives to Consider</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-gold">→</span>
+                  <span>Self-host where possible</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">→</span>
+                  <span>Use password manager for non-SSO apps</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">→</span>
+                  <span>Choose vendors that include SSO</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Getting Started
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SSO is one of those investments that pays dividends immediately. Less password fatigue for your team, better security posture, easier onboarding and offboarding, and a foundation for more sophisticated access controls as you grow.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Start with Authentik, connect your most-used internal applications, and expand from there. Within a day you can have a working SSO setup that rivals what enterprises pay thousands for.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help implementing SSO?</strong> We specialize in setting up self-hosted identity management for small teams. From initial deployment to application integration, we can get your SSO running smoothly.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Get in touch →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/sso-small-teams`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/vpn-vs-zero-trust" class="text-gold hover:text-gold-light transition-colors text-sm">VPN vs Zero Trust</a></li>
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

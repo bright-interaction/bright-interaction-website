@@ -1,0 +1,429 @@
+---
+import { t } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+
+const services = [
+  { key: 'email', priceEur: 22, unit: 'userMonth', selected: true, bundled: true },
+  { key: 'chat', priceEur: 8, unit: 'userMonth', selected: true },
+  { key: 'crm', priceEur: 15, unit: 'userMonth', selected: true },
+  { key: 'docs', priceEur: 8, unit: 'userMonth', selected: true },
+  { key: 'automation', priceEur: 50, unit: 'mo', selected: false },
+  { key: 'auth', priceEur: 20, unit: 'userMonth', selected: false },
+  { key: 'esign', priceEur: 25, unit: 'userMonth', selected: false },
+  { key: 'website', priceEur: 30, unit: 'mo', selected: false },
+  { key: 'projects', priceEur: 11, unit: 'userMonth', selected: false },
+];
+
+const isSv = lang === 'sv';
+const rate = isSv ? 11.5 : 1;
+const curr = isSv ? 'kr' : '€';
+---
+
+<section id="real-cost" class="py-20 md:py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-2xl mb-10">
+      <p class="text-xs font-mono font-bold text-gold-dark mb-4 tracking-widest uppercase">{t(lang, 'realCost.badge')}</p>
+      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-text-primary tracking-tight mb-4">
+        {t(lang, 'realCost.title')}
+      </h2>
+      <p class="text-lg text-text-secondary">
+        {t(lang, 'realCost.description')}
+      </p>
+    </div>
+
+    <div class="rounded-2xl border border-border bg-surface p-6 sm:p-8 mb-8" data-currency={curr} data-rate={rate}>
+
+      <!-- Services: 2 rows x 5 columns -->
+      <label class="block text-sm font-semibold text-text-primary mb-4">
+        {t(lang, 'realCost.stackLabel')}
+      </label>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-8" id="calc-stack-grid">
+        {services.map(s => {
+          const displayPrice = Math.round(s.priceEur * rate);
+          const priceStr = s.unit === 'mo'
+            ? `${curr}${displayPrice}+/${t(lang, 'realCost.mo')}`
+            : `${curr}${displayPrice}/${t(lang, 'realCost.userMonth')}`;
+          return (
+            <button type="button"
+              data-service={s.key}
+              data-selected={String(s.selected)}
+              class:list={[
+                'service-card group relative flex items-center gap-3 p-3 rounded-lg border-2 text-left transition-all cursor-pointer',
+                s.selected
+                  ? 'selected border-gold bg-white hover:bg-gold/5'
+                  : 'border-border bg-white hover:border-gold/30 hover:shadow-sm'
+              ]}>
+              <div class="flex-1 min-w-0">
+                <span class="text-sm font-medium text-text-primary block truncate">{t(lang, `realCost.stack.${s.key}`)}</span>
+                <span class="text-[11px] text-text-secondary block truncate">{t(lang, `realCost.saas.${s.key}`)}</span>
+                <span class="text-[11px] text-gold-dark font-mono">{priceStr}</span>
+                {s.bundled && <span class="text-[10px] text-green-800 block mt-0.5">{t(lang, 'realCost.bundledNote')}</span>}
+              </div>
+              <span class:list={[
+                'check-indicator w-5 h-5 rounded-full bg-gold-dark text-white flex items-center justify-center text-xs font-bold shrink-0 transition-opacity',
+                !s.selected && 'opacity-0'
+              ]}>✓</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <!-- Team size -->
+      <div class="mb-8">
+        <label for="calc-team-size" class="block text-sm font-semibold text-text-primary mb-3">
+          {t(lang, 'realCost.teamSizeLabel')}
+        </label>
+        <div class="flex items-center gap-6">
+          <input
+            type="range"
+            id="calc-team-size"
+            min="1"
+            max="100"
+            value="10"
+            class="flex-1 h-2 bg-white rounded-lg appearance-none cursor-pointer accent-gold"
+          />
+          <div class="flex items-baseline gap-1">
+            <span id="calc-team-display" class="text-4xl font-bold text-text-primary tabular-nums">10</span>
+            <span class="text-sm text-text-secondary">{t(lang, 'realCost.people')}</span>
+          </div>
+        </div>
+        <div class="flex justify-between text-xs text-text-secondary mt-1">
+          <span>1</span>
+          <span>100</span>
+        </div>
+      </div>
+
+      <div class="border-t border-border mb-8"></div>
+
+      <!-- Results: 3 columns -->
+      <div class="grid md:grid-cols-3 gap-4 sm:gap-6">
+
+        <!-- SaaS Cost -->
+        <div class="p-5 rounded-xl border border-red-200 bg-red-50/30">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-red-700 uppercase tracking-wide">{t(lang, 'realCost.col.saasTitle')}</span>
+            <span id="calc-saas-tag" class="text-[10px] px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-medium"></span>
+          </div>
+          <div class="mb-1">
+            <span id="calc-saas-monthly" class="text-3xl sm:text-4xl font-bold text-text-primary"></span>
+            <span class="text-text-secondary text-sm">/{t(lang, 'realCost.mo')}</span>
+          </div>
+          <div class="text-sm text-text-secondary mb-4">
+            <span id="calc-saas-yearly" class="font-semibold text-text-primary"></span> /{t(lang, 'realCost.year')}
+          </div>
+          <div id="calc-saas-breakdown" class="pt-3 border-t border-red-200 space-y-1 text-sm text-text-secondary max-h-40 overflow-y-auto"></div>
+        </div>
+
+        <!-- Hardware Only -->
+        <div class="p-5 rounded-xl border border-border bg-white">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-text-secondary uppercase tracking-wide">{t(lang, 'realCost.col.hardwareTitle')}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-gray-100 text-text-primary font-medium">{t(lang, 'realCost.col.hardwareTag')}</span>
+          </div>
+          <div class="mb-1">
+            <span id="calc-hw-monthly" class="text-3xl sm:text-4xl font-bold text-text-primary"></span>
+            <span class="text-text-secondary text-sm">/{t(lang, 'realCost.mo')}</span>
+          </div>
+          <div class="text-sm text-text-secondary mb-4">
+            <span id="calc-hw-yearly" class="font-semibold text-text-primary"></span> /{t(lang, 'realCost.year')}
+          </div>
+          <div id="calc-hw-breakdown" class="pt-3 border-t border-border space-y-1 text-sm text-text-secondary"></div>
+          <p class="mt-3 text-[10px] text-text-secondary leading-snug">{t(lang, 'realCost.hetznerNote')}</p>
+        </div>
+
+        <!-- Maintenance cost -->
+        <div class="p-5 rounded-xl border-2 border-gold bg-white relative">
+          <div id="calc-savings-badge" class="absolute -top-3 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-sm"></div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-xs font-mono text-gold-dark uppercase tracking-wide">{t(lang, 'realCost.col.biTitle')}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-white text-gold-dark font-medium border border-gold/20">{t(lang, 'realCost.col.biTag')}</span>
+          </div>
+          <div class="mb-1">
+            <span id="calc-bi-monthly" class="text-3xl sm:text-4xl font-bold text-text-primary"></span>
+            <span class="text-text-secondary text-sm">/{t(lang, 'realCost.mo')}</span>
+          </div>
+          <div class="text-sm text-text-secondary mb-4">
+            <span id="calc-bi-yearly" class="font-semibold text-text-primary"></span> /{t(lang, 'realCost.year')}
+          </div>
+          <div id="calc-bi-breakdown" class="pt-3 border-t border-gold/30 space-y-1 text-sm text-text-secondary"></div>
+        </div>
+      </div>
+
+      <!-- Savings bar -->
+      <div class="mt-6 p-4 rounded-xl bg-white border border-border">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
+          <span class="text-sm font-semibold text-text-primary">{t(lang, 'realCost.savings.afterFee')}</span>
+          <span id="calc-net-savings" class="text-2xl font-bold text-green-700 tabular-nums"></span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+          <div id="calc-savings-bar" class="h-full rounded-full bg-gradient-to-r from-gold to-green-500 transition-all duration-500" style="width: 0%"></div>
+        </div>
+        <div class="flex justify-between mt-1 text-xs text-text-secondary">
+          <span>{t(lang, 'realCost.savings.vsLabel')}</span>
+          <span id="calc-savings-pct" class="font-semibold text-green-700">0%</span>
+        </div>
+      </div>
+
+      <!-- Implementation note -->
+      <p class="mt-4 text-xs text-text-secondary leading-relaxed">
+        {t(lang, 'realCost.implNote')}
+      </p>
+    </div>
+
+    <!-- Explainer cards -->
+    <div class="grid sm:grid-cols-3 gap-4 mb-10">
+      <div class="p-5 rounded-xl border border-border bg-surface">
+        <h3 class="text-sm font-bold text-text-primary mb-1">{t(lang, 'realCost.explainer1.title')}</h3>
+        <p class="text-xs text-text-secondary leading-relaxed">{t(lang, 'realCost.explainer1.text')}</p>
+      </div>
+      <div class="p-5 rounded-xl border border-border bg-surface">
+        <h3 class="text-sm font-bold text-text-primary mb-1">{t(lang, 'realCost.explainer2.title')}</h3>
+        <p class="text-xs text-text-secondary leading-relaxed">{t(lang, 'realCost.explainer2.text')}</p>
+      </div>
+      <div class="p-5 rounded-xl border border-border bg-surface">
+        <h3 class="text-sm font-bold text-text-primary mb-1">{t(lang, 'realCost.explainer3.title')}</h3>
+        <p class="text-xs text-text-secondary leading-relaxed">{t(lang, 'realCost.explainer3.text')}</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="flex flex-col sm:flex-row gap-4 max-w-lg">
+      <button
+        type="button"
+        data-cal-trigger
+        class="flex-1 px-6 py-4 bg-text-primary hover:bg-text-secondary text-white font-medium rounded-xl transition-colors cursor-pointer text-center"
+      >
+        {t(lang, 'realCost.cta')}
+      </button>
+      <a
+        href="#services"
+        class="flex-1 px-6 py-4 text-text-primary font-medium rounded-xl border border-border hover:border-text-muted transition-colors text-center"
+      >
+        {t(lang, 'realCost.ctaSecondary')}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const teamSlider = document.getElementById('calc-team-size') as HTMLInputElement;
+  const teamDisplay = document.getElementById('calc-team-display')!;
+  const serviceCards = document.querySelectorAll<HTMLButtonElement>('.service-card');
+  const calcCard = document.querySelector('[data-currency]') as HTMLElement;
+  const CURRENCY = calcCard?.dataset.currency || '€';
+  const RATE = parseFloat(calcCard?.dataset.rate || '1');
+
+  // Prices in EUR, converted at display time
+  // Email bundles Google Workspace (€14) + 1Password (€8) = €22 since Proton replaces both
+  const SAAS_PRICING: Record<string, { perUser: number; base: number; breakdown?: Array<{name: string; perUser: number}> }> = {
+    email:      { perUser: 22, base: 0, breakdown: [
+      { name: 'Google Workspace', perUser: 14 },
+      { name: '1Password', perUser: 8 },
+    ]},
+    chat:       { perUser: 8,  base: 0 },
+    crm:        { perUser: 15, base: 0 },
+    docs:       { perUser: 8,  base: 0 },
+    automation: { perUser: 0,  base: 50 },
+    auth:       { perUser: 20, base: 0 },
+    esign:      { perUser: 25, base: 0 },
+    website:    { perUser: 0,  base: 50 },
+    projects:   { perUser: 11, base: 0 },
+  };
+
+  const SAAS_NAMES: Record<string, string> = {
+    email: 'Google Workspace + 1Password', chat: 'Slack', crm: 'HubSpot',
+    docs: 'Notion', automation: 'Zapier', auth: 'Auth0/Okta',
+    esign: 'DocuSign', website: 'Webflow/Vercel',
+    projects: 'Asana/Monday',
+  };
+
+  function calcHardwareCost(serviceCount: number, teamSize: number): { monthly: number; servers: Array<{name: string; price: number}> } {
+    const servers: Array<{name: string; price: number}> = [];
+    if (serviceCount === 0) return { monthly: 0, servers: [] };
+
+    if (serviceCount <= 4 && teamSize <= 15) {
+      servers.push({ name: 'CPX21 (3 vCPU, 4GB)', price: 8 });
+    } else if (serviceCount <= 7 && teamSize <= 30) {
+      servers.push({ name: 'CPX31 (4 vCPU, 8GB)', price: 15 });
+    } else if (serviceCount <= 10 && teamSize <= 60) {
+      servers.push({ name: 'CPX41 (8 vCPU, 16GB)', price: 28 });
+    } else {
+      servers.push({ name: 'CPX51 (16 vCPU, 32GB)', price: 55 });
+    }
+
+    servers.push({ name: 'Backup (CX22)', price: 6 });
+
+    if (serviceCount > 8 || teamSize > 50) {
+      servers.push({ name: 'App server 2', price: 15 });
+    }
+
+    const needsStorage = ['email', 'docs'];
+    const hasStorageService = Array.from(serviceCards).some(c =>
+      c.dataset.selected === 'true' && needsStorage.includes(c.dataset.service || '')
+    );
+    if (hasStorageService) {
+      servers.push({ name: 'Volume (100GB)', price: 5 });
+    }
+
+    return { monthly: servers.reduce((sum, s) => sum + s.price, 0), servers };
+  }
+
+  const FEE_PERCENTAGE = 0.30;
+
+  function fmt(amountEur: number): string {
+    const converted = Math.round(amountEur * RATE);
+    const formatted = converted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return CURRENCY === 'kr' ? formatted + ' kr' : '€' + formatted;
+  }
+
+  function getSelectedServices(): string[] {
+    const selected: string[] = [];
+    serviceCards.forEach(card => {
+      if (card.dataset.selected === 'true') selected.push(card.dataset.service || '');
+    });
+    return selected;
+  }
+
+  function calculate() {
+    const teamSize = parseInt(teamSlider.value);
+    const selected = getSelectedServices();
+
+    let totalSaasMonthly = 0;
+    const breakdownItems: Array<{ name: string; cost: number }> = [];
+
+    selected.forEach(key => {
+      const pricing = SAAS_PRICING[key];
+      if (!pricing) return;
+      let cost = pricing.base + (pricing.perUser * teamSize);
+      if (key === 'automation') cost = 50 + Math.floor(teamSize / 5) * 20;
+      if (key === 'website') cost = teamSize <= 5 ? 30 : teamSize <= 20 ? 50 : 100;
+      totalSaasMonthly += cost;
+      // Show sub-items for bundled services (email = Google Workspace + 1Password)
+      if (pricing.breakdown) {
+        pricing.breakdown.forEach(sub => {
+          breakdownItems.push({ name: sub.name, cost: sub.perUser * teamSize });
+        });
+      } else {
+        breakdownItems.push({ name: SAAS_NAMES[key] || key, cost });
+      }
+    });
+
+    const totalSaasYearly = totalSaasMonthly * 12;
+    const hw = calcHardwareCost(selected.length, teamSize);
+    const totalHwMonthly = hw.monthly;
+    const totalHwYearly = totalHwMonthly * 12;
+    const grossSavingsMonthly = totalSaasMonthly - totalHwMonthly;
+    const ourFeeMonthly = grossSavingsMonthly > 0 ? Math.round(grossSavingsMonthly * FEE_PERCENTAGE) : 0;
+    const totalBiMonthly = totalHwMonthly + ourFeeMonthly;
+    const totalBiYearly = totalBiMonthly * 12;
+    const netSavingsYearly = totalSaasYearly - totalBiYearly;
+    const savingsPct = totalSaasYearly > 0 ? Math.round((netSavingsYearly / totalSaasYearly) * 100) : 0;
+
+    teamDisplay.textContent = String(teamSize);
+
+    // Update SaaS tag to show team size context
+    const lang = document.documentElement.lang || 'en';
+    const saasTag = document.getElementById('calc-saas-tag')!;
+    const peopleWord = lang === 'sv' ? (teamSize === 1 ? 'person' : 'personer') : (teamSize === 1 ? 'person' : 'people');
+    saasTag.textContent = `${teamSize} ${peopleWord}`;
+
+    document.getElementById('calc-saas-monthly')!.textContent = fmt(totalSaasMonthly);
+    document.getElementById('calc-saas-yearly')!.textContent = fmt(totalSaasYearly);
+
+    const breakdownEl = document.getElementById('calc-saas-breakdown')!;
+    if (breakdownItems.length === 0) {
+      breakdownEl.innerHTML = `<div class="text-center py-2">${lang === 'sv' ? 'Välj verktyg ovan' : 'Select tools above'}</div>`;
+    } else {
+      breakdownEl.innerHTML = breakdownItems.map(item =>
+        `<div class="flex justify-between"><span class="truncate mr-2">${item.name}</span><span class="whitespace-nowrap font-mono text-xs">${fmt(item.cost)}</span></div>`
+      ).join('');
+    }
+
+    document.getElementById('calc-hw-monthly')!.textContent = fmt(totalHwMonthly);
+    document.getElementById('calc-hw-yearly')!.textContent = fmt(totalHwYearly);
+    document.getElementById('calc-hw-breakdown')!.innerHTML = hw.servers.map(s =>
+      `<div class="flex justify-between"><span class="truncate mr-2">${s.name}</span><span class="whitespace-nowrap font-mono text-xs">${fmt(s.price)}</span></div>`
+    ).join('');
+
+    document.getElementById('calc-bi-monthly')!.textContent = fmt(totalBiMonthly);
+    document.getElementById('calc-bi-yearly')!.textContent = fmt(totalBiYearly);
+    const hwLabel = lang === 'sv' ? 'Hårdvara' : 'Hardware';
+    const feeLabel = lang === 'sv' ? 'Underhållsavgift (30%)' : 'Maintenance fee (30%)';
+    document.getElementById('calc-bi-breakdown')!.innerHTML = `
+      <div class="flex justify-between"><span>${hwLabel}</span><span class="font-mono text-xs">${fmt(totalHwMonthly)}</span></div>
+      <div class="flex justify-between"><span>${feeLabel}</span><span class="font-mono text-xs">${fmt(ourFeeMonthly)}</span></div>
+    `;
+
+    const savingsBadge = document.getElementById('calc-savings-badge')!;
+    const saveText = lang === 'sv' ? 'Spara' : 'Save';
+    if (savingsPct > 0) {
+      savingsBadge.textContent = `${saveText} ${savingsPct}%`;
+      savingsBadge.className = 'absolute -top-3 right-4 px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full shadow-sm';
+    } else {
+      savingsBadge.textContent = lang === 'sv' ? 'Välj fler verktyg' : 'Select more tools';
+      savingsBadge.className = 'absolute -top-3 right-4 px-3 py-1 bg-gray-400 text-white text-xs font-bold rounded-full shadow-sm';
+    }
+
+    document.getElementById('calc-net-savings')!.textContent = netSavingsYearly > 0 ? fmt(netSavingsYearly) : (CURRENCY === 'kr' ? '0 kr' : '€0');
+    const barPct = Math.max(0, Math.min(100, savingsPct));
+    (document.getElementById('calc-savings-bar') as HTMLElement).style.width = barPct + '%';
+    document.getElementById('calc-savings-pct')!.textContent = savingsPct > 0 ? savingsPct + '%' : '0%';
+  }
+
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const isSelected = card.dataset.selected === 'true';
+      card.dataset.selected = isSelected ? 'false' : 'true';
+
+      if (card.dataset.selected === 'true') {
+        card.classList.add('selected');
+        card.classList.remove('border-border');
+        card.classList.add('border-gold');
+        const check = card.querySelector('.check-indicator') as HTMLElement;
+        if (check) check.classList.remove('opacity-0');
+      } else {
+        card.classList.remove('selected');
+        card.classList.add('border-border');
+        card.classList.remove('border-gold');
+        const check = card.querySelector('.check-indicator') as HTMLElement;
+        if (check) check.classList.add('opacity-0');
+      }
+
+      calculate();
+    });
+  });
+
+  teamSlider.addEventListener('input', calculate);
+  calculate();
+</script>
+
+<style>
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #0891B2;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: #0891B2;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .service-card {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .service-card:active {
+    transform: scale(0.98);
+  }
+</style>

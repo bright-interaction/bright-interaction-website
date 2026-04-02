@@ -1,0 +1,663 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-03-08';
+const title = 'Auth0 Alternatives for Europe: Self-Hosted Identity That Meets GDPR';
+const description = 'Compare Auth0 alternatives for European businesses. Zitadel, Keycloak, Authentik, and more. Self-hosted identity providers that keep your data in the EU.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/auth0-alternatives-europe"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What's the best self-hosted alternative to Auth0?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zitadel is the best self-hosted Auth0 alternative for modern applications. It supports OIDC, SAML, and built-in multi-tenancy with a Go backend and managed EU cloud option. Keycloak is the stronger choice for large enterprises with Java expertise. Both are open source and GDPR-friendly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Auth0 GDPR compliant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Auth0 offers EU-hosted tenants, but the company is owned by Okta, a US corporation. Under the US CLOUD Act, American authorities can compel Okta to hand over data stored in the EU. This creates a legal grey area for European businesses handling sensitive personal data under GDPR."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does Auth0 cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Auth0's free tier covers up to 7,500 monthly active users. After that, the Essentials plan starts at $35/month for 500 machine-to-machine tokens. Professional and Enterprise tiers scale aggressively based on MAU count, and enterprise pricing is not publicly listed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Zitadel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zitadel is a Swiss open-source identity management platform. It provides OIDC, SAML, built-in multi-tenancy, and a managed EU cloud option. Built in Go, it is lightweight, API-first, and designed for modern cloud-native applications. Zitadel is a CNCF member project."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            &larr; Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Security
+          </span>
+          <span class="text-text-muted text-sm">9 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Auth0 was the default choice for identity management for years. Then Okta acquired it, pricing changed, and suddenly a lot of European businesses started asking uncomfortable questions about where their users' data actually lives.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Here's the problem: Auth0 is a US company. Okta is a US company. Under the CLOUD Act, US authorities can compel American corporations to hand over data regardless of where it's stored. You can host your Auth0 tenant in the EU all you want. The legal exposure remains. For businesses handling sensitive user data under GDPR, this is not a theoretical risk. It's a compliance gap.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Auth0 Pricing Problem
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Even if you're comfortable with the data residency situation, Auth0's pricing deserves scrutiny. The free tier caps at 7,500 monthly active users. That sounds generous until your app grows. After that, you're looking at $35/month for 500 machine-to-machine tokens on the Essentials plan, and costs escalate fast from there. Enterprise pricing is deliberately opaque.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Self-hosted alternatives eliminate per-user pricing entirely. You pay for the server, and that's it. For a growing European SaaS company, the difference over 12 months can be thousands of euros.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Alternatives, Ranked
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            We've tested these in production environments. Here's what actually matters for each one.
+          </p>
+
+          <!-- Zitadel - Featured recommendation -->
+          <div class="bg-gold/5 border-2 border-gold/30 rounded-xl p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+              <h3 class="font-display text-xl font-bold text-gold">1. Zitadel</h3>
+              <span class="px-2 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full">Recommended</span>
+            </div>
+            <p class="text-text-secondary mb-4">
+              Swiss-made, open source, and a CNCF member. Zitadel is what Auth0 should have become. It supports OIDC and SAML out of the box, has built-in multi-tenancy (so you can manage multiple organizations from one instance), and runs on a lightweight Go backend. No JVM, no Python runtime. Just a single binary.
+            </p>
+            <p class="text-text-secondary mb-4">
+              What sets Zitadel apart is the managed EU cloud option. If you don't want to self-host, you can run on their European infrastructure with full data residency guarantees. Swiss data protection law is among the strictest in the world, and Zitadel is headquartered in Switzerland. No CLOUD Act exposure.
+            </p>
+            <p class="text-text-secondary mb-4">
+              We're migrating our own infrastructure to Zitadel at Bright Interaction. After running Authentik for over a year, Zitadel's API-first design, better multi-tenant support, and cleaner deployment model won us over.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Pricing</p>
+                <p class="text-text-secondary text-sm">Free self-hosted. Cloud from $100/mo with EU hosting.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Setup difficulty</p>
+                <p class="text-text-secondary text-sm">Moderate. Docker Compose or single binary. Good docs.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Protocols</p>
+                <p class="text-text-secondary text-sm">OIDC, SAML, JWT, API keys</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Standout feature</p>
+                <p class="text-text-secondary text-sm">Built-in multi-tenancy with delegated admin</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Go backend</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">CNCF member</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Swiss HQ</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Multi-tenancy</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Actions (serverless hooks)</span>
+            </div>
+          </div>
+
+          <!-- Keycloak -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">2. Keycloak</h3>
+            <p class="text-text-secondary mb-4">
+              The enterprise standard for self-hosted IAM. Red Hat backs it, huge community, battle-tested in production at massive scale. If you work in a Java shop or need advanced federation features like identity brokering across multiple external IdPs, Keycloak is hard to beat.
+            </p>
+            <p class="text-text-secondary mb-4">
+              The downside is weight. Keycloak runs on the JVM and needs meaningful resources. Configuration is powerful but complex. Expect to spend time on theming, flow customization, and memory tuning. For smaller teams without Java expertise, this can feel like overkill.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Pricing</p>
+                <p class="text-text-secondary text-sm">Free and open source. Red Hat SSO for paid support.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Setup difficulty</p>
+                <p class="text-text-secondary text-sm">High. Java ecosystem knowledge helps significantly.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Protocols</p>
+                <p class="text-text-secondary text-sm">OIDC, SAML 2.0, LDAP, Kerberos</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Standout feature</p>
+                <p class="text-text-secondary text-sm">Identity brokering and user federation</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Java/Quarkus</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Red Hat backed</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Enterprise-grade</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Fine-grained authz</span>
+            </div>
+          </div>
+
+          <!-- Authentik -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">3. Authentik</h3>
+            <p class="text-text-secondary mb-4">
+              Python-based with a genuinely excellent admin interface. Authentik is the easiest self-hosted IdP to get running and manage day-to-day. If you're a small team or running a homelab, Authentik gives you a polished experience without the complexity of Keycloak.
+            </p>
+            <p class="text-text-secondary mb-4">
+              We ran Authentik for our own SSO for over a year. It works well. The flow-based authentication system is flexible, and the proxy outpost lets you protect apps that don't natively support SSO. Where it falls short is multi-tenancy and API-first workflows, which is why we're moving to Zitadel.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Pricing</p>
+                <p class="text-text-secondary text-sm">Free and open source. Enterprise support available.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Setup difficulty</p>
+                <p class="text-text-secondary text-sm">Low. Docker Compose, works within an hour.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Protocols</p>
+                <p class="text-text-secondary text-sm">OIDC, SAML 2.0, LDAP, SCIM, proxy auth</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Standout feature</p>
+                <p class="text-text-secondary text-sm">Best admin UI of any self-hosted IdP</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Python/Django</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Modern UI</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Proxy outpost</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Flow-based auth</span>
+            </div>
+          </div>
+
+          <!-- Authelia -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">4. Authelia</h3>
+            <p class="text-text-secondary mb-4">
+              Lightweight and focused. Authelia is not a full identity provider. It's an authentication layer that sits in front of your reverse proxy (NGINX, Traefik, Caddy) and protects web applications. If all you need is to add login protection to internal tools, Authelia does this with minimal overhead.
+            </p>
+            <p class="text-text-secondary mb-4">
+              Don't pick Authelia if you need SAML, multi-tenancy, or complex user management. It's a different tool for a different problem. But for what it does, it does well.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Pricing</p>
+                <p class="text-text-secondary text-sm">Free and open source.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Setup difficulty</p>
+                <p class="text-text-secondary text-sm">Low. YAML config, pairs with your existing proxy.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Protocols</p>
+                <p class="text-text-secondary text-sm">OIDC (basic), forward auth headers</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Standout feature</p>
+                <p class="text-text-secondary text-sm">Tiny footprint, reverse proxy native</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Go binary</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Lightweight</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Proxy-native</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">TOTP/WebAuthn</span>
+            </div>
+          </div>
+
+          <!-- Ory -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">5. Ory</h3>
+            <p class="text-text-secondary mb-4">
+              API-first identity infrastructure for developers who want full control. Ory is a suite of Go microservices: Kratos (identity), Hydra (OAuth2/OIDC), Oathkeeper (access proxy), and Keto (permissions). You compose exactly what you need.
+            </p>
+            <p class="text-text-secondary mb-4">
+              This is the most flexible option but also the most demanding. There's no pre-built admin UI. You build your own login pages. The tradeoff is total control over every aspect of your auth flow. Best suited for developer teams building products where identity is a core feature, not just a bolt-on.
+            </p>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Pricing</p>
+                <p class="text-text-secondary text-sm">Free self-hosted. Ory Network cloud from $29/mo.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Setup difficulty</p>
+                <p class="text-text-secondary text-sm">High. Multiple services, developer-oriented.</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Protocols</p>
+                <p class="text-text-secondary text-sm">OAuth2, OIDC, custom auth flows</p>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs uppercase tracking-wide mb-1">Standout feature</p>
+                <p class="text-text-secondary text-sm">Modular microservice architecture</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Go microservices</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">API-first</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Headless</span>
+              <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Zanzibar permissions</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Comparison Table
+          </h2>
+
+          <div class="overflow-x-auto mb-8">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-4 px-4 text-text-primary font-semibold">Feature</th>
+                  <th class="text-left py-4 px-4 text-text-secondary font-semibold">Auth0</th>
+                  <th class="text-left py-4 px-4 text-gold font-semibold">Zitadel</th>
+                  <th class="text-left py-4 px-4 text-text-secondary font-semibold">Keycloak</th>
+                  <th class="text-left py-4 px-4 text-text-secondary font-semibold">Authentik</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">Open source</td>
+                  <td class="py-4 px-4">No</td>
+                  <td class="py-4 px-4 text-gold">Yes (Apache 2.0)</td>
+                  <td class="py-4 px-4">Yes (Apache 2.0)</td>
+                  <td class="py-4 px-4">Yes (custom)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">Self-hosted</td>
+                  <td class="py-4 px-4">No</td>
+                  <td class="py-4 px-4 text-gold">Yes</td>
+                  <td class="py-4 px-4">Yes</td>
+                  <td class="py-4 px-4">Yes</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">EU data residency</td>
+                  <td class="py-4 px-4">EU tenant available</td>
+                  <td class="py-4 px-4 text-gold">Swiss HQ + EU cloud</td>
+                  <td class="py-4 px-4">Self-host in EU</td>
+                  <td class="py-4 px-4">Self-host in EU</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">CLOUD Act exposure</td>
+                  <td class="py-4 px-4">Yes (Okta, US)</td>
+                  <td class="py-4 px-4 text-gold">No (Swiss)</td>
+                  <td class="py-4 px-4">No (self-hosted)</td>
+                  <td class="py-4 px-4">No (self-hosted)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">OIDC</td>
+                  <td class="py-4 px-4">Yes</td>
+                  <td class="py-4 px-4 text-gold">Yes</td>
+                  <td class="py-4 px-4">Yes</td>
+                  <td class="py-4 px-4">Yes</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">SAML</td>
+                  <td class="py-4 px-4">Yes</td>
+                  <td class="py-4 px-4 text-gold">Yes</td>
+                  <td class="py-4 px-4">Yes</td>
+                  <td class="py-4 px-4">Yes</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">LDAP</td>
+                  <td class="py-4 px-4">Via extension</td>
+                  <td class="py-4 px-4 text-gold">No</td>
+                  <td class="py-4 px-4">Yes (native)</td>
+                  <td class="py-4 px-4">Yes (outpost)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">Multi-tenancy</td>
+                  <td class="py-4 px-4">Yes (Organizations)</td>
+                  <td class="py-4 px-4 text-gold">Yes (built-in)</td>
+                  <td class="py-4 px-4">Yes (realms)</td>
+                  <td class="py-4 px-4">Limited (tenants)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4 text-text-primary">Free tier</td>
+                  <td class="py-4 px-4">7,500 MAU</td>
+                  <td class="py-4 px-4 text-gold">Unlimited (self-hosted)</td>
+                  <td class="py-4 px-4">Unlimited (self-hosted)</td>
+                  <td class="py-4 px-4">Unlimited (self-hosted)</td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-4 text-text-primary">Backend</td>
+                  <td class="py-4 px-4">Proprietary</td>
+                  <td class="py-4 px-4 text-gold">Go</td>
+                  <td class="py-4 px-4">Java (Quarkus)</td>
+                  <td class="py-4 px-4">Python (Django)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Why We Chose Zitadel
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            We ran Authentik in production for our own infrastructure and for client projects. It served us well. But as we took on more multi-tenant projects and needed tighter API integration with our other tools, the gaps became clear.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Zitadel solved the specific problems we kept hitting:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Multi-tenancy is a first-class feature.</strong> Creating and managing organizations for different clients is built into the core, not bolted on. Each org gets its own users, policies, and branding.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">The API covers everything.</strong> Every action you can do in the UI, you can do via gRPC or REST API. This makes automation and infrastructure-as-code straightforward.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Go binary, small footprint.</strong> No JVM warmup, no Python dependencies. A single binary that starts in seconds and runs on minimal resources.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Swiss jurisdiction.</strong> For our European clients, being able to say "your identity data is managed by Swiss-governed software on EU servers" is a stronger compliance story than anything involving a US-owned vendor.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Actions (serverless hooks).</strong> Custom logic that runs during authentication flows. Pre-registration checks, post-login enrichment, token customization. All without maintaining a separate service.</span>
+            </div>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Our recommendation:</strong> If you're building a modern application that needs OIDC/SAML with EU data residency, start with Zitadel. If you're in a large Java enterprise needing LDAP and advanced federation, go with Keycloak. If you just need simple SSO for internal tools with minimal setup, Authentik is still excellent.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The GDPR Reality Check
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Let's be direct about what GDPR compliance means for identity providers.
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-2">Auth0's position</h4>
+              <p class="text-text-secondary text-sm">
+                Auth0 offers EU-hosted tenants and has Data Processing Agreements available. They use Standard Contractual Clauses for transatlantic transfers. Legally, they check the boxes. Practically, Okta is a US corporation subject to US law. If a US court or agency issues a subpoena or national security letter, Okta must comply regardless of where the data is physically stored.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-2">Self-hosted position</h4>
+              <p class="text-text-secondary text-sm">
+                When you self-host Zitadel, Keycloak, or Authentik on your own EU infrastructure, the data is yours. No third-party processor. No transatlantic legal complications. Your DPA is with your hosting provider, which can be an EU company on EU soil. This is the cleanest GDPR position possible.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-2">Zitadel Cloud position</h4>
+              <p class="text-text-secondary text-sm">
+                If you use Zitadel's managed cloud, your data is processed by a Swiss company under Swiss data protection law. Switzerland has an adequacy decision from the EU, meaning data transfers are treated as equivalent to intra-EU transfers. No CLOUD Act, no Schrems II headaches.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Migration Path from Auth0
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Switching identity providers is not trivial. Here's a realistic approach:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Run both in parallel</h4>
+                <p class="text-text-secondary">
+                  Deploy your target IdP alongside Auth0. Migrate new applications to the new provider while existing ones continue using Auth0. This removes time pressure.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Export user data</h4>
+                <p class="text-text-secondary">
+                  Auth0's Management API lets you export users. Passwords cannot be migrated directly (hashes are not exportable), so plan for a password reset flow or use Auth0's automatic migration feature during the transition.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Update application configs</h4>
+                <p class="text-text-secondary">
+                  If your apps use OIDC (most modern apps do), migration means changing the issuer URL and client credentials. The protocol is standardized, so the integration code stays largely the same.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Decommission Auth0</h4>
+                <p class="text-text-secondary">
+                  Once all applications and users are migrated, shut down the Auth0 tenant. Keep a backup of your Auth0 configuration for reference.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Make the Switch
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Auth0 built a great product. But for European businesses in 2026, the combination of US legal exposure, aggressive pricing, and vendor lock-in makes it increasingly hard to justify. Open-source alternatives have caught up in features and surpassed Auth0 in areas that matter for EU compliance.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Zitadel is our pick for modern applications. Keycloak for complex enterprise environments. Authentik for teams wanting the simplest path to self-hosted SSO. All three eliminate the CLOUD Act problem entirely.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">We're migrating our own infrastructure to Zitadel.</strong> Need help setting up self-hosted identity? We've done this for ourselves and for clients. From planning to deployment to application integration, we can get you off Auth0 and onto something that actually respects EU data sovereignty.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Book a free call &rarr;</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/auth0-alternatives-europe`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/sso-small-teams" class="text-gold hover:text-gold-light transition-colors text-sm">Setting Up SSO for Small Teams</a></li>
+            <li><a href="/insights/cloud-act-gdpr-conflict" class="text-gold hover:text-gold-light transition-colors text-sm">The CLOUD Act vs GDPR</a></li>
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

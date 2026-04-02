@@ -1,0 +1,99 @@
+<!-- Cal.com popup trigger — any element with data-cal-trigger opens the booking modal -->
+<script>
+  let calReady: Promise<void> | null = null;
+
+  function ensureCal(): Promise<void> {
+    if (calReady) return calReady;
+    calReady = new Promise<void>((resolve, reject) => {
+      (function (C: any, A: string, L: string) {
+        let p = function (a: any, ar: any) { a.q.push(ar); };
+        let d = C.document;
+        C.Cal = C.Cal || function () {
+          let cal = C.Cal;
+          let ar = arguments;
+          if (!cal.loaded) {
+            cal.ns = {};
+            cal.q = cal.q || [];
+            const s = d.head.appendChild(d.createElement("script"));
+            s.src = A;
+            s.onload = () => {
+              const check = () => {
+                if (typeof C.Cal === 'function' && C.Cal.loaded) {
+                  resolve();
+                } else {
+                  setTimeout(check, 100);
+                }
+              };
+              setTimeout(check, 100);
+            };
+            s.onerror = () => reject(new Error('Cal embed failed to load'));
+            cal.loaded = true;
+          }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === "string") {
+              cal.ns[namespace] = cal.ns[namespace] || api;
+              p(cal.ns[namespace], ar);
+              p(cal, ["initNamespace", namespace]);
+            } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, "https://cal.brightinteraction.com/embed/embed.js", "init");
+
+      (window as any).Cal("init", "sales", { origin: "https://cal.brightinteraction.com" });
+      (window as any).Cal.ns.sales("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    });
+    return calReady;
+  }
+
+  // Eagerly load Cal on first user interaction
+  let preloaded = false;
+  function preloadCal() {
+    if (preloaded) return;
+    preloaded = true;
+    ensureCal().catch(() => {});
+  }
+  document.addEventListener('mousemove', preloadCal, { once: true });
+  document.addEventListener('touchstart', preloadCal, { once: true });
+  document.addEventListener('scroll', preloadCal, { once: true });
+
+  // Delegate click handler for all data-cal-trigger buttons
+  document.addEventListener('click', (e) => {
+    const btn = (e.target as Element)?.closest('[data-cal-trigger]') as HTMLElement | null;
+    if (!btn) return;
+    e.preventDefault();
+
+    // Show loading state
+    btn.style.opacity = '0.75';
+    btn.style.pointerEvents = 'none';
+
+    const resetBtn = () => {
+      btn.style.opacity = '';
+      btn.style.pointerEvents = '';
+    };
+
+    ensureCal()
+      .then(() => {
+        // Cal.com modal — call directly, no artificial delay
+        try {
+          (window as any).Cal.ns.sales("modal", {
+            calLink: "team/discovery/sales",
+            config: { layout: "month_view" },
+          });
+        } catch (err) {
+          console.error('[cal] modal error:', err);
+        }
+        resetBtn();
+      })
+      .catch((err) => {
+        console.error('[cal] load error:', err);
+        resetBtn();
+        // Reset calReady so next click retries
+        calReady = null;
+      });
+  });
+</script>

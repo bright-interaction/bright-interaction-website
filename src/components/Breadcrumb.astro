@@ -1,0 +1,39 @@
+---
+interface Props {
+  lang?: string;
+  title: string;
+  category?: string;
+}
+
+const { lang = 'en', title, category } = Astro.props;
+
+const isSwedish = lang === 'sv';
+const homeLabel = isSwedish ? 'Hem' : 'Home';
+const insightsLabel = isSwedish ? 'Insikter' : 'Insights';
+const homePath = isSwedish ? '/sv' : '/';
+const insightsPath = isSwedish ? '/sv/insights' : '/insights';
+
+const truncatedTitle = title.length > 50 ? title.slice(0, 47) + '...' : title;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6">
+  <ol class="flex items-center gap-1.5 text-xs font-mono flex-wrap">
+    <li>
+      <a href={homePath} class="text-gold-dark hover:underline">{homeLabel}</a>
+    </li>
+    <li class="text-text-secondary">/</li>
+    <li>
+      <a href={insightsPath} class="text-gold-dark hover:underline">{insightsLabel}</a>
+    </li>
+    {category && (
+      <>
+        <li class="text-text-secondary">/</li>
+        <li class="text-text-secondary">{category}</li>
+      </>
+    )}
+    <li class="text-text-secondary">/</li>
+    <li>
+      <span class="text-text-primary" aria-current="page">{truncatedTitle}</span>
+    </li>
+  </ol>
+</nav>

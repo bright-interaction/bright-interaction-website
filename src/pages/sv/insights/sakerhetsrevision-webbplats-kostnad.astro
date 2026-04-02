@@ -1,0 +1,381 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+
+const lang = 'sv';
+const title = "Vad kostar en säkerhetsrevision av din webbplats 2026?";
+const description = "Priser för säkerhetsrevisioner av webbplatser varierar från gratis automatiserade scanningar till 50 000+ kr för manuella penetrationstester. Här är vad du får på varje nivå.";
+const publishDate = '2026-02-10';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/sakerhetsrevision-webbplats-kostnad"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout title={`${title} - Bright Interaction`} description={description} type="article" lang={lang}>
+  <Header lang={lang} />
+  <main class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article>
+        <header class="mb-12">
+          <Breadcrumb lang="sv" title={title} />
+          <div class="flex flex-wrap gap-3 mb-4">
+            <time datetime="2026-02-10" class="text-sm text-text-muted">10 februari 2026</time>
+            <span class="text-sm px-2 py-0.5 bg-gold/20 text-gold rounded">Säkerhet</span>
+            <span class="text-sm text-text-muted">6 min läsning</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+            {title}
+          </h1>
+          <p class="text-xl text-text-secondary leading-relaxed">
+            En säkerhetsrevision kan kosta allt från noll kronor till över 100 000 kr.
+            Skillnaden handlar om djup, metod och vad du faktiskt behöver. Här går vi
+            igenom de olika nivåerna så att du kan fatta ett informerat beslut.
+          </p>
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Varför priset varierar så mycket</h2>
+            <p class="text-text-secondary mb-4">
+              "Säkerhetsrevision" kan innebära allt från en automatiserad scanning som tar
+              2 minuter till en veckolång manuell penetrationstest utförd av certifierade
+              säkerhetsexperter. Det avgörande är vad du behöver just nu och vad du vill skydda dig mot.
+            </p>
+            <p class="text-text-secondary">
+              De flesta företag behöver inte den dyraste varianten. Men alla behöver åtminstone
+              veta var de står. Därför erbjuder vi en kostnadsfri automatiserad scanning som
+              första steg.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">De fyra nivåerna av säkerhetsrevision</h2>
+
+            <!-- Nivå 1 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-gold/30 mb-6">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-semibold text-text-primary">Nivå 1: Automatiserad scanning</h3>
+                <span class="text-gold font-bold text-lg">0 kr</span>
+              </div>
+              <p class="text-text-secondary text-sm mb-4">
+                En helautomatiserad kontroll av din webbplats externa säkerhet och compliance.
+                Ingen manuell insats krävs. Ger en övergripande bild av nuläget.
+              </p>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Inkluderar:</h4>
+              <ul class="text-text-secondary text-sm space-y-1 mb-4">
+                <li>TLS/SSL-konfiguration och certifikatvalidering</li>
+                <li>GDPR-compliancekontroll (samtycke, integritetspolicy, spårning)</li>
+                <li>E-postautentisering (SPF, DKIM, DMARC)</li>
+                <li>Serverjurisdiktion och CDN-beroenden</li>
+                <li>Exponerade filer och metadataläckor</li>
+              </ul>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Passar för:</h4>
+              <p class="text-text-secondary text-sm">
+                Alla företag som vill ha en snabb översikt. Perfekt som utgångspunkt
+                innan man investerar i djupare granskning.
+              </p>
+            </div>
+
+            <!-- Nivå 2 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-semibold text-text-primary">Nivå 2: Grundläggande säkerhetsgranskning</h3>
+                <span class="text-text-primary font-bold text-lg">5 000 - 15 000 kr</span>
+              </div>
+              <p class="text-text-secondary text-sm mb-4">
+                En kombination av automatiserad scanning och manuell granskning av de
+                viktigaste säkerhetsområdena. Inkluderar en skriftlig rapport med
+                prioriterade rekommendationer.
+              </p>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Inkluderar (utöver nivå 1):</h4>
+              <ul class="text-text-secondary text-sm space-y-1 mb-4">
+                <li>Manuell granskning av konfiguration och säkerhetsrubriker</li>
+                <li>OWASP Top 10-kontroll mot vanliga sårbarheter</li>
+                <li>DNS-konfigurationsgranskning</li>
+                <li>Prioriterad åtgärdslista med tidsuppskattningar</li>
+                <li>30 minuters genomgång med säkerhetsrådgivare</li>
+              </ul>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Passar för:</h4>
+              <p class="text-text-secondary text-sm">
+                Småföretag och konsultbyråer som vill gå ett steg längre och få
+                konkreta åtgärder att jobba med.
+              </p>
+            </div>
+
+            <!-- Nivå 3 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-semibold text-text-primary">Nivå 3: Fördjupad säkerhetsrevision</h3>
+                <span class="text-text-primary font-bold text-lg">15 000 - 50 000 kr</span>
+              </div>
+              <p class="text-text-secondary text-sm mb-4">
+                En omfattande granskning som inkluderar manuell testning, kodgranskning
+                av publika ytor och compliance-bedömning mot relevanta ramverk.
+              </p>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Inkluderar (utöver nivå 2):</h4>
+              <ul class="text-text-secondary text-sm space-y-1 mb-4">
+                <li>Manuell sårbarhetstestning av webbapplikation</li>
+                <li>Autentiserings- och sessionhanteringsgranskning</li>
+                <li>API-säkerhetsgranskning (om tillämpligt)</li>
+                <li>Compliance-bedömning mot GDPR, NIS2 eller branschstandard</li>
+                <li>Detaljerad rapport med riskbedömning och åtgärdsplan</li>
+                <li>60 minuters genomgång med teknisk rådgivning</li>
+              </ul>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Passar för:</h4>
+              <p class="text-text-secondary text-sm">
+                Medelstora företag, advokatbyråer och organisationer som hanterar
+                känsliga uppgifter eller omfattas av regulatoriska krav.
+              </p>
+            </div>
+
+            <!-- Nivå 4 -->
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-semibold text-text-primary">Nivå 4: Penetrationstest</h3>
+                <span class="text-text-primary font-bold text-lg">50 000 - 150 000+ kr</span>
+              </div>
+              <p class="text-text-secondary text-sm mb-4">
+                En fullskalig simulerad attack utförd av certifierade penetrationstestare.
+                Testar inte bara om sårbarheter finns, utan om de kan utnyttjas i praktiken.
+              </p>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Inkluderar (utöver nivå 3):</h4>
+              <ul class="text-text-secondary text-sm space-y-1 mb-4">
+                <li>Black-box och/eller grey-box penetrationstest</li>
+                <li>Försök till dataexfiltrering och privilegieeskalering</li>
+                <li>Social engineering-tester (valfritt)</li>
+                <li>Nätverks- och infrastrukturtest (valfritt)</li>
+                <li>Fullständig rapport enligt PTES/OWASP-standard</li>
+                <li>Omtest efter åtgärder (ingår ofta)</li>
+              </ul>
+              <h4 class="text-sm font-semibold text-text-primary mb-2">Passar för:</h4>
+              <p class="text-text-secondary text-sm">
+                Organisationer med höga säkerhetskrav, reglerade branscher, och
+                företag som hanterar stora mängder personuppgifter eller finansiell data.
+              </p>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Jämförelse i överblick</h2>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Egenskap</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Automatiserad</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Grundläggande</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Fördjupad</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Pentest</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 font-medium">Pris</td>
+                    <td class="py-3 px-4 text-green-400">0 kr</td>
+                    <td class="py-3 px-4">5-15 000 kr</td>
+                    <td class="py-3 px-4">15-50 000 kr</td>
+                    <td class="py-3 px-4">50-150 000+ kr</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 font-medium">Tidsåtgång</td>
+                    <td class="py-3 px-4">2 minuter</td>
+                    <td class="py-3 px-4">1-3 dagar</td>
+                    <td class="py-3 px-4">1-2 veckor</td>
+                    <td class="py-3 px-4">2-4 veckor</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 font-medium">Manuell granskning</td>
+                    <td class="py-3 px-4 text-red-400">Nej</td>
+                    <td class="py-3 px-4 text-green-400">Delvis</td>
+                    <td class="py-3 px-4 text-green-400">Ja</td>
+                    <td class="py-3 px-4 text-green-400">Ja</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 font-medium">Compliance-bedömning</td>
+                    <td class="py-3 px-4 text-green-400">Grundläggande</td>
+                    <td class="py-3 px-4 text-green-400">Ja</td>
+                    <td class="py-3 px-4 text-green-400">Detaljerad</td>
+                    <td class="py-3 px-4 text-green-400">Fullständig</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 font-medium">Rapport</td>
+                    <td class="py-3 px-4 text-green-400">PDF</td>
+                    <td class="py-3 px-4 text-green-400">PDF + genomgång</td>
+                    <td class="py-3 px-4 text-green-400">Detaljerad + rådgivning</td>
+                    <td class="py-3 px-4 text-green-400">PTES/OWASP-rapport</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4 font-medium">Exploatering testad</td>
+                    <td class="py-3 px-4 text-red-400">Nej</td>
+                    <td class="py-3 px-4 text-red-400">Nej</td>
+                    <td class="py-3 px-4 text-amber-400">Begränsad</td>
+                    <td class="py-3 px-4 text-green-400">Ja</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vilken nivå behöver du?</h2>
+
+            <div class="space-y-4">
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Du driver en vanlig företagswebbplats</h3>
+                <p class="text-text-secondary text-sm">
+                  Börja med en <strong class="text-gold">automatiserad scanning</strong> (gratis).
+                  Om den visar brister, överväg en grundläggande granskning för att få
+                  prioriterade åtgärder.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Du hanterar personuppgifter eller kunddata</h3>
+                <p class="text-text-secondary text-sm">
+                  En <strong class="text-gold">fördjupad säkerhetsrevision</strong> rekommenderas.
+                  GDPR kräver att du vidtar "lämpliga tekniska och organisatoriska åtgärder"
+                  och kan visa att du gjort det.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Du verkar i en reglerad bransch</h3>
+                <p class="text-text-secondary text-sm">
+                  Advokatbyråer, finans, sjukvård och organisationer som omfattas av NIS2
+                  bör överväga en <strong class="text-gold">fördjupad revision eller pentest</strong>.
+                  Tillsynsmyndigheter förväntar sig dokumenterade säkerhetsgranskningar.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Du bygger SaaS eller hanterar betalningar</h3>
+                <p class="text-text-secondary text-sm">
+                  Ett <strong class="text-gold">penetrationstest</strong> är i princip ett krav.
+                  PCI DSS kräver det för betalningshantering, och de flesta
+                  företagskunder kräver det i sin leverantörsgranskning.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Kostnaden för att inte göra något</h2>
+            <p class="text-text-secondary mb-4">
+              En säkerhetsrevision är en investering. Men den verkliga frågan är vad det
+              kostar att inte göra en. Här är några jämförelsepunkter:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Scenario</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Uppskattad kostnad</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">GDPR-böter (IMY, mindre företag)</td>
+                    <td class="py-3 px-4 text-red-400">50 000 - 500 000 kr</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Dataintrång (genomsnittskostnad, Norden)</td>
+                    <td class="py-3 px-4 text-red-400">3-5 miljoner kr</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Produktionsstopp (1 dag)</td>
+                    <td class="py-3 px-4 text-red-400">20 000 - 500 000 kr</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Förlorad kund pga. bristande säkerhet</td>
+                    <td class="py-3 px-4 text-red-400">Varierar, ofta 100 000+ kr/år</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-amber-400 mb-2">En enkel jämförelse</h4>
+              <p class="text-text-secondary text-sm">
+                En grundläggande säkerhetsgranskning kostar mindre än en genomsnittlig
+                advokattimme. En fördjupad revision kostar mindre än de flesta företag
+                lägger på sin julbord. Och den kostar en bråkdel av vad ett enda
+                säkerhetsincident kan kosta.
+              </p>
+            </div>
+          </section>
+
+          <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Börja med en gratis scanning</h2>
+            <p class="text-text-secondary mb-6">
+              Oavsett vilken nivå av säkerhetsrevision du behöver är det smartaste
+              första steget en kostnadsfri automatiserad scanning. På 2 minuter får du
+              en tydlig bild av ditt nuläge och vet exakt var du behöver lägga dina resurser.
+            </p>
+            <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+              Boka en gratis scanning
+            </button>
+          </section>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gratis-sakerhetsscanning-webbplats" class="text-gold hover:text-gold-light transition-colors text-sm">Gratis säkerhetsscanning: 16 tester på 2 minuter</a></li>
+            <li><a href="/sv/insights/nis2-checklista" class="text-gold hover:text-gold-light transition-colors text-sm">NIS2-checklista: 12 steg för svenska företag</a></li>
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2-compliance: Praktisk guide</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Tillbaka till Insikter
+        </a>
+      </div>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+  <Footer lang={lang} />
+</Layout>

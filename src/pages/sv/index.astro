@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import RealCost from '../../components/RealCost.astro';
+import Services from '../../components/Services.astro';
+import Process from '../../components/Process.astro';
+import BorderTracer from '../../components/BorderTracer.astro';
+import About from '../../components/About.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n';
+
+const lang = 'sv';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Hur mycket kostar SaaS per anställd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Det genomsnittliga företaget spenderar cirka 115 000 kr per anställd per år på SaaS-verktyg 2026. Det inkluderar CRM, e-post, chatt, projekthantering, automation och autentisering. Öppna källkodsalternativ kan minska denna kostnad med 60-70% samtidigt som du får full kontroll över din data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilka GDPR-säkra alternativ finns till Google Workspace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Proton (schweiziskt, zero-knowledge-kryptering) är det mest direkta alternativet till Google Workspace. Andra alternativ inkluderar Nextcloud med OnlyOffice för egenhostad dokumentsamverkan, och Infomaniak kSuite för managerad EU-hosting. Alla lagrar data uteslutande i europeiska jurisdiktioner."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Är självhostat billigare än SaaS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "För team på 10 eller fler är självhostat vanligtvis 60-70% billigare än motsvarande SaaS-prenumerationer. En komplett open source-stack (e-post, CRM, chatt, docs, automation, SSO) på en Hetzner-server kostar cirka 14 EUR/månad i hosting. Huvudkostnaden är setup och löpande underhåll, inte mjukvaran i sig."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Påverkar Cloud Act svenska företag som använder amerikanska molntjänster?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja. Den amerikanska Cloud Act (2018) ger amerikanska myndigheter rätt att kräva data från amerikanska företag oavsett var datan fysiskt lagras. Det innebär att AWS, Google Cloud, Azure eller någon annan USA-baserad SaaS-leverantör skapar en compliance-risk under GDPR, även om din data finns i ett EU-datacenter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vad är NIS2 och gäller det mitt företag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 är EU:s uppdaterade cybersäkerhetsdirektiv, infört som svensk lag (Cybersäkerhetslagen) den 15 januari 2026. Det gäller väsentliga och viktiga verksamheter inklusive energi, transport, hälsa, digital infrastruktur och deras leveranskedjor. Sanktioner kan nå 10 miljoner EUR eller 2% av global omsättning."
+      }
+    }
+  ]
+};
+---
+
+<Layout title="Ersätt SaaS med öppen källkod du äger | Bright Interaction" description="Självhostade open source-alternativ till Google Workspace, Slack, Zapier och mer. GDPR-anpassat, hostat i Europa, ingen inlåsning." lang={lang}>
+  <Header lang={lang} />
+  <main id="main-content">
+    <Hero lang={lang} />
+    <RealCost lang={lang} />
+    <Services lang={lang} />
+    <Process lang={lang} />
+    <BorderTracer lang={lang} />
+    <About lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Layout>

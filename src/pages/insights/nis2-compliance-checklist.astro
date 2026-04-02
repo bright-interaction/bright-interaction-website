@@ -1,0 +1,533 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-03-05';
+const title = 'NIS2 Compliance Checklist: 12 Steps for Swedish Businesses';
+const description = 'A practical, step-by-step NIS2 compliance checklist for Swedish organizations. From risk assessment to incident reporting, with concrete actions for each requirement.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/nis2-compliance-checklist"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does NIS2 apply to my Swedish business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 applies to medium and large organizations (50+ employees or 10M+ EUR turnover) in essential and important sectors. In Sweden, this includes energy, transport, banking, health, digital infrastructure, ICT service management, public administration, and many more. Smaller organizations may also be in scope if they provide critical services. Check with MSB (Myndigheten for samhallsskydd och beredskap) for sector-specific guidance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the penalties for NIS2 non-compliance in Sweden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For essential entities, fines can reach up to 10 million EUR or 2% of global annual turnover, whichever is higher. For important entities, the maximum is 7 million EUR or 1.4% of turnover. Beyond fines, NIS2 introduces personal liability for management. Board members and executives can be held individually responsible for compliance failures."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the NIS2 incident reporting timeline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 requires a three-stage reporting process: an early warning within 24 hours of becoming aware of a significant incident, an incident notification within 72 hours with an initial assessment, and a final report within one month with root cause analysis and remediation measures. In Sweden, reports go to MSB and the relevant sectoral authority."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does NIS2 relate to GDPR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 and GDPR are complementary. GDPR protects personal data; NIS2 protects network and information systems. A security incident may trigger reporting obligations under both frameworks simultaneously. Many NIS2 security measures (encryption, access control, incident response) also help satisfy GDPR Article 32 requirements for appropriate technical measures."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Compliance
+          </span>
+          <span class="text-text-muted text-sm">9 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            NIS2 (the Network and Information Security Directive) entered into force across the EU in October 2024, and Sweden's transposition is now in effect. For many Swedish businesses, this is the first time cybersecurity is a legal obligation rather than a best practice.
+          </p>
+          <p class="text-text-secondary mb-6">
+            The directive is broad, but the core requirements are practical. This checklist breaks NIS2 down into 12 concrete steps, each with specific actions you can take. Whether you're just starting or need to verify existing measures, use this as your working document.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Who is in scope?</strong> Medium and large organizations (50+ employees or 10M+ EUR turnover) in essential and important sectors. In Sweden, MSB provides sector-specific classification. When in doubt, assume you're in scope. The penalties for non-compliance far outweigh the cost of compliance.
+            </p>
+          </div>
+        </section>
+
+        <!-- Step 1 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">1</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Conduct a Comprehensive Risk Assessment</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 Article 21 requires "appropriate and proportionate" measures based on risk. You cannot determine what's proportionate without first understanding your risk landscape. This is the foundation everything else builds on.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Inventory all critical systems, data flows, and dependencies</li>
+                <li>Identify threats relevant to your sector (ransomware, supply chain, insider)</li>
+                <li>Assess likelihood and impact for each threat-asset combination</li>
+                <li>Document risk acceptance decisions with management sign-off</li>
+                <li>Schedule reassessment at least annually or after significant changes</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">2</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Establish Management Accountability</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 makes cybersecurity a board-level responsibility. Management bodies must approve security measures and can be held personally liable for non-compliance. This is not something that can be delegated entirely to IT.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Assign a named person responsible for NIS2 compliance (CISO or equivalent)</li>
+                <li>Ensure board members receive cybersecurity training</li>
+                <li>Include cybersecurity as a standing board agenda item</li>
+                <li>Document management approval of security policies and risk acceptance</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">3</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Develop an Incident Response Plan</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 requires a structured incident response capability and strict reporting timelines: early warning within 24 hours, notification within 72 hours, and a final report within one month. You cannot meet these deadlines without a pre-existing plan.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Define incident classification criteria (what constitutes "significant")</li>
+                <li>Create a response playbook with roles, contacts, and escalation paths</li>
+                <li>Establish reporting procedures to MSB and sectoral authorities</li>
+                <li>Run tabletop exercises at least twice per year</li>
+                <li>Maintain an incident log with post-incident reviews</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 4 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">4</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Secure Your Supply Chain</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              Supply chain attacks accounted for 17% of breaches in the EU in 2025. NIS2 explicitly requires organizations to assess and manage risks from suppliers and service providers. Your security posture is only as strong as your weakest vendor.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Inventory all third-party suppliers with access to your systems or data</li>
+                <li>Assess each supplier's security posture (request certifications, audit reports)</li>
+                <li>Include cybersecurity requirements in procurement contracts</li>
+                <li>Monitor supplier security continuously, not just at onboarding</li>
+                <li>Verify data jurisdiction: where do your suppliers process your data?</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 5 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">5</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Implement Access Control</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              The principle of least privilege is a NIS2 baseline requirement. Every user should have only the access necessary for their role, and privileged accounts must have additional protections.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Enforce multi-factor authentication on all external-facing systems</li>
+                <li>Implement role-based access control (RBAC) with documented roles</li>
+                <li>Review access rights quarterly and on employee role changes</li>
+                <li>Separate admin accounts from daily-use accounts</li>
+                <li>Log all privileged access and review logs regularly</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 6 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">6</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Deploy Encryption Appropriately</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 requires the use of cryptography where appropriate. This means encrypting data in transit and at rest, and having policies for key management. "Appropriate" is determined by your risk assessment.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Enforce TLS 1.2+ on all web-facing services (our scan checks this)</li>
+                <li>Encrypt sensitive data at rest in databases and file storage</li>
+                <li>Implement end-to-end encryption for email containing sensitive data</li>
+                <li>Establish a key management policy with rotation schedules</li>
+                <li>Disable deprecated protocols (SSLv3, TLS 1.0, TLS 1.1)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 7 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">7</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Establish Continuous Monitoring</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              You cannot protect what you cannot see. NIS2 requires organizations to detect incidents in a timely manner, which demands monitoring of networks, systems, and user activity.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Deploy centralized logging for all critical systems</li>
+                <li>Set up alerting for anomalous activity (failed logins, privilege escalation)</li>
+                <li>Monitor external attack surface continuously (automated scanning)</li>
+                <li>Review security logs at least weekly</li>
+                <li>Consider a managed SOC if internal capacity is limited</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 8 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">8</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Manage Vulnerabilities Systematically</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              Unpatched vulnerabilities remain the most common attack vector. NIS2 requires vulnerability handling and disclosure practices. This means both finding vulnerabilities and fixing them within defined timeframes.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Run automated vulnerability scans at least monthly</li>
+                <li>Define patching SLAs: critical within 48 hours, high within 7 days</li>
+                <li>Maintain an inventory of all software and versions in use</li>
+                <li>Publish a security.txt file for responsible disclosure (RFC 9116)</li>
+                <li>Subscribe to vendor security advisories for all critical software</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 9 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">9</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Build Business Continuity Plans</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 requires business continuity management, including backup strategies, disaster recovery, and crisis management. The goal is to maintain essential functions during and after a cyber incident.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Identify essential business functions and their maximum tolerable downtime</li>
+                <li>Implement backup strategy with tested restoration procedures (3-2-1 rule)</li>
+                <li>Create a disaster recovery plan with defined RTO and RPO</li>
+                <li>Test backups and recovery procedures at least quarterly</li>
+                <li>Maintain offline backups to protect against ransomware</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 10 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">10</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Train Your People</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 explicitly requires cybersecurity training for management and staff. Human error remains the primary attack vector, and no technical measure can fully compensate for untrained users.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Conduct security awareness training for all employees annually</li>
+                <li>Provide role-specific training for IT staff and administrators</li>
+                <li>Run phishing simulations at least quarterly</li>
+                <li>Include cybersecurity in onboarding for new employees</li>
+                <li>Train management on their NIS2 responsibilities and liability</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 11 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">11</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Establish Reporting Procedures</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              Meeting NIS2 reporting deadlines requires pre-established procedures. When a significant incident occurs, you have 24 hours for the early warning. There's no time to figure out who to contact and how.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Identify your competent authority (MSB and sectoral regulator)</li>
+                <li>Register as a NIS2 entity with relevant authorities</li>
+                <li>Create reporting templates for 24h, 72h, and 30-day reports</li>
+                <li>Designate and train staff responsible for regulatory reporting</li>
+                <li>Document internal escalation paths from detection to reporting</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 12 -->
+        <section class="mb-8">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center">
+                <span class="text-gold font-display font-bold">12</span>
+              </span>
+              <h2 class="font-display text-xl font-bold text-text-primary">Document Everything and Audit Regularly</h2>
+            </div>
+            <p class="text-text-secondary text-sm mb-3">
+              NIS2 compliance is not a one-time project. Authorities can request evidence of your security measures at any time, and you must be able to demonstrate that measures are implemented, maintained, and reviewed. Documentation is your proof.
+            </p>
+            <div class="bg-dark-bg rounded-lg p-4">
+              <p class="text-text-muted text-xs font-semibold mb-2">ACTIONS:</p>
+              <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                <li>Maintain a central repository of all security policies and procedures</li>
+                <li>Document all risk assessments, decisions, and management approvals</li>
+                <li>Keep records of training, exercises, and incident responses</li>
+                <li>Conduct internal audits at least annually against NIS2 requirements</li>
+                <li>Consider external audits or ISO 27001 certification as evidence</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Where to Start
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Twelve steps is a lot. If you're starting from scratch, prioritize in this order:
+          </p>
+
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded flex-shrink-0">WEEK 1</span>
+              <p class="text-text-secondary text-sm">Steps 1-2: Risk assessment and management accountability. You need to know what you're protecting and who owns it.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs font-bold rounded flex-shrink-0">MONTH 1</span>
+              <p class="text-text-secondary text-sm">Steps 3, 5, 6: Incident response, access control, and encryption. These are the measures that prevent and contain incidents.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded flex-shrink-0">MONTH 2-3</span>
+              <p class="text-text-secondary text-sm">Steps 4, 7, 8, 9: Supply chain, monitoring, vulnerability management, and business continuity. These build resilience.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded flex-shrink-0">ONGOING</span>
+              <p class="text-text-secondary text-sm">Steps 10, 11, 12: Training, reporting procedures, and documentation. These sustain compliance over time.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+          <h2 class="font-display text-2xl font-bold text-gold mb-4">
+            Start With a Baseline Assessment
+          </h2>
+          <p class="text-text-secondary mb-6">
+            Our free SVAR scan covers several NIS2-relevant areas automatically: TLS configuration, email authentication, vulnerability disclosure, software versions, and security headers. It's not a full NIS2 audit, but it gives you a concrete starting point for steps 6, 7, and 8 in about two minutes. For help with the full checklist, explore our <a href="/#services" class="text-gold-dark hover:underline">compliance and infrastructure services</a>.
+          </p>
+          <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+            Book a Free Scan
+          </button>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2 Compliance: A Practical Guide for SMBs</a></li>
+            <li><a href="/insights/financial-services-security" class="text-gold hover:text-gold-light transition-colors text-sm">Financial Services Security</a></li>
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

@@ -1,0 +1,432 @@
+---
+import '../styles/fonts.css';
+import type { Lang } from '../i18n';
+import CalTrigger from '../components/CalTrigger.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: string;
+  robots?: string;
+  lang?: Lang;
+}
+
+const {
+  title,
+  description = "Move off US cloud providers to infrastructure you control. Self-hosted CRM, chat, automation and European alternatives. No vendor lock-in.",
+  image = "/og-image.png",
+  type = "website",
+  robots = "index, follow",
+  lang = 'en',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://brightinteraction.com');
+
+// Build hreflang alternate URLs
+const pathWithoutLang = Astro.url.pathname.replace(/^\/sv/, '') || '/';
+const enURL = new URL(pathWithoutLang, 'https://brightinteraction.com');
+const svURL = new URL(`/sv${pathWithoutLang === '/' ? '' : pathWithoutLang}`, 'https://brightinteraction.com');
+
+const ogLocale = lang === 'sv' ? 'sv_SE' : 'en_US';
+
+const umamiWebsiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID || '';
+const umamiUrl = import.meta.env.PUBLIC_UMAMI_URL || '';
+const ga4MeasurementId = import.meta.env.PUBLIC_GA4_MEASUREMENT_ID || '';
+
+// Compute SRI hashes at build time for third-party scripts
+async function computeSri(url: string): Promise<string> {
+  try {
+    const res = await fetch(url);
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    const hashBuffer = await crypto.subtle.digest('SHA-384', bytes);
+    const hashBase64 = btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
+    return `sha384-${hashBase64}`;
+  } catch { return ''; }
+}
+
+const [cookieproofSri, umamiSri] = await Promise.all([
+  computeSri('https://consent.brightinteraction.com/loader.js'),
+  umamiUrl ? computeSri(`${umamiUrl}/script.js`) : Promise.resolve(''),
+]);
+
+// JSON-LD Structured Data - Organization
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://brightinteraction.com/#organization",
+  "name": "Bright Interaction",
+  "alternateName": "Tom Isgren / Bright Interaction",
+  "description": "Replace your SaaS stack with open source alternatives you actually own. Self-hosted on servers in your jurisdiction. No per-seat pricing, no vendor lock-in.",
+  "url": "https://brightinteraction.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://brightinteraction.com/logo.png",
+    "width": 512,
+    "height": 512
+  },
+  "image": "https://brightinteraction.com/og-image.png",
+  "foundingDate": "2025",
+  "founder": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "jobTitle": "CEO & Founder",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/tom-isgren/",
+    "https://www.instagram.com/brightinteractioninc"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "contact@brightinteraction.com",
+    "telephone": "+46762978035",
+    "contactType": "sales",
+    "availableLanguage": ["English", "Swedish"]
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Nobelvägen 3c",
+    "addressLocality": "Malmö",
+    "postalCode": "212 14",
+    "addressCountry": "SE"
+  },
+  "areaServed": [
+    { "@type": "Continent", "name": "Europe" },
+    { "@type": "Country", "name": "United States" }
+  ],
+  "knowsAbout": [
+    "Open Source Software",
+    "Self-hosted Infrastructure",
+    "SaaS Replacement",
+    "GDPR Compliance",
+    "Workflow Automation",
+    "Server Administration",
+    "Data Sovereignty",
+    "Linux Systems"
+  ]
+};
+
+// JSON-LD Structured Data - Professional Service
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://brightinteraction.com/#service",
+  "name": "Bright Interaction IT Services",
+  "provider": { "@id": "https://brightinteraction.com/#organization" },
+  "serviceType": "Open Source Infrastructure & SaaS Replacement",
+  "areaServed": ["Europe", "United States"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Bright Interaction Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "SaaS Stack Replacement",
+          "description": "Replace Google Workspace, Slack, HubSpot, and other per-seat SaaS tools with open source alternatives you own. Self-hosted on servers in your jurisdiction."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Self-Hosted Infrastructure",
+          "description": "Private servers running open source tools — email, CRM, chat, docs, automation, SSO. No per-seat pricing, no vendor lock-in, GDPR compliant by design."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Migration & Implementation",
+          "description": "Full migration from cloud SaaS to self-hosted open source. We handle setup, data migration, configuration, and training."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Ongoing Maintenance",
+          "description": "Updates, monitoring, backups, security patches. We keep your self-hosted stack running so you can focus on your business."
+        }
+      }
+    ]
+  }
+};
+
+// JSON-LD Structured Data - WebSite (for sitelinks search box)
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://brightinteraction.com/#website",
+  "url": "https://brightinteraction.com",
+  "name": "Bright Interaction",
+  "description": description,
+  "publisher": { "@id": "https://brightinteraction.com/#organization" },
+  "inLanguage": lang
+};
+
+// Combined JSON-LD graph
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [organizationSchema, serviceSchema, websiteSchema]
+};
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="open source SaaS alternative, self-hosted infrastructure, replace Google Workspace, replace Slack, self-hosted CRM, GDPR compliant hosting, no vendor lock-in, n8n vs Zapier, Coolify vs Vercel, data sovereignty Europe, NIS2 compliance, Zitadel, Mattermost, Coolify, Proton" />
+    <meta name="author" content="Bright Interaction" />
+    <meta name="robots" content={robots} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Hreflang for international SEO -->
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="sv" href={svURL} />
+    <link rel="alternate" hreflang="x-default" href={enURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, 'https://brightinteraction.com')} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Bright Interaction" />
+    <meta property="og:locale" content={ogLocale} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, 'https://brightinteraction.com')} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- DNS prefetch for Border Tracer API -->
+    <link rel="dns-prefetch" href="https://borders.brightinteraction.com" />
+    <link rel="preconnect" href="https://borders.brightinteraction.com" crossorigin />
+
+    <!-- Font Preloads - Variable fonts (single file for all weights) -->
+    <link rel="preload" href="/fonts/SpaceGrotesk-Variable.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" href="/fonts/SpaceMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Umami Analytics (Self-hosted) -->
+    {umamiWebsiteId && umamiUrl && (
+      <script defer src={`${umamiUrl}/script.js`} data-website-id={umamiWebsiteId} integrity={umamiSri} crossorigin="anonymous"></script>
+    )}
+
+    <!-- CookieProof (dynamic config, managed at consent.brightinteraction.com) -->
+    <script is:inline async src="https://consent.brightinteraction.com/loader.js" data-domain="brightinteraction.com" integrity={cookieproofSri} crossorigin="anonymous"></script>
+
+    <!-- GA4 Analytics (injected dynamically after CookieProof consent, never in HTML as static script) -->
+    {ga4MeasurementId && (
+      <script is:inline data-ga4-id={ga4MeasurementId}
+        set:html={`
+          (function(){
+            var id = document.querySelector('[data-ga4-id]').getAttribute('data-ga4-id');
+            function loadGA4() {
+              if (window._ga4Loaded) return;
+              window._ga4Loaded = true;
+              var s = document.createElement('script');
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+              s.async = true;
+              document.head.appendChild(s);
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', id, { anonymize_ip: true, send_page_view: true });
+            }
+            document.addEventListener('consent:init', function(e) {
+              if (e.detail && e.detail.consent && e.detail.consent.categories && e.detail.consent.categories.analytics) loadGA4();
+            });
+          })();
+        `}
+      />
+    )}
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#fafaf9" />
+    <meta name="msapplication-TileColor" content="#fafaf9" />
+
+    <!-- Critical CSS - Inlined for immediate first paint (eliminates render-blocking) -->
+    <style is:inline>
+      @font-face{font-family:'Space Grotesk';font-style:normal;font-weight:300 700;font-display:swap;src:url(/fonts/SpaceGrotesk-Variable.woff2) format('woff2-variations')}
+      @font-face{font-family:'Space Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/SpaceMono-Regular.woff2) format('woff2')}
+      *{box-sizing:border-box}
+      html{font-family:Inter,'Space Grotesk',system-ui,-apple-system,sans-serif;scroll-behavior:smooth}
+      body{margin:0;min-height:100vh;background:#fafaf9;color:#18181b;-webkit-font-smoothing:antialiased}
+    </style>
+  </head>
+  <body class="bg-surface text-text-primary antialiased">
+    <!-- Skip to main content (Accessibility) -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-gold focus:text-dark-bg focus:rounded-lg">
+      Skip to main content
+    </a>
+
+    <slot />
+
+    <CalTrigger />
+
+    <script>
+      // Count-up animation for numbers (50+, 99.9%, 24/7)
+      function animateCount(el: HTMLElement) {
+        const target = parseFloat(el.dataset.count!);
+        const suffix = el.dataset.suffix || '';
+        const decimals = parseInt(el.dataset.decimals || '0');
+        const useComma = document.documentElement.lang === 'sv';
+        const duration = 2800;
+        const start = performance.now();
+
+        function format(n: number): string {
+          if (decimals > 0) {
+            const s = n.toFixed(decimals);
+            return useComma ? s.replace('.', ',') : s;
+          }
+          return Math.round(n).toString();
+        }
+
+        function step(now: number) {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          el.textContent = format(target * ease) + suffix;
+          if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      const countObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            animateCount(e.target as HTMLElement);
+            countObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll<HTMLElement>('[data-count]').forEach(el => {
+        // If element is already in viewport on page load, animate immediately
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          animateCount(el);
+        } else {
+          countObs.observe(el);
+        }
+      });
+
+      // Scroll reveal for cards and sections
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            (e.target as HTMLElement).classList.add('visible');
+            revealObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      const parentCounts = new Map<Element, number>();
+      document.querySelectorAll<HTMLElement>(
+        '#services .grid > div, #process .grid > div, .service-card, #real-cost .grid > div'
+      ).forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight) return;
+        el.classList.add('reveal-item');
+        const p = el.parentElement!;
+        const i = parentCounts.get(p) || 0;
+        parentCounts.set(p, i + 1);
+        el.style.transitionDelay = `${i * 0.04}s`;
+        revealObs.observe(el);
+      });
+    </script>
+
+    <!-- Cookie consent element and config are dynamically loaded by the loader script above -->
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Inter', 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  /* Screen reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Scroll reveal animation */
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  .reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: auto;
+  }
+
+  /* Card hover lift */
+  .service-card {
+    transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+    will-change: transform;
+  }
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Button press feedback */
+  button, [data-cal-trigger], a[href^="#"] {
+    transition: transform 150ms ease-out, opacity 150ms ease-out, background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
+  }
+  button:active, [data-cal-trigger]:active {
+    transform: scale(0.97);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-item { opacity: 1; transform: none; transition: none; }
+    .service-card:hover { transform: none; }
+    button:active, [data-cal-trigger]:active { transform: none; }
+  }
+</style>

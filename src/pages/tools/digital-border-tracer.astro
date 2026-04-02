@@ -1,0 +1,706 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const title = "Digital Border Tracer - Where Is Your Data Sleeping Tonight?";
+const description = "Scan your domain's infrastructure and see exactly where your data lives. Visualize your digital borders on a 3D globe and get a sovereignty scorecard.";
+---
+
+<Layout title={title} description={description} robots="noindex, nofollow">
+  <Header />
+  <main class="bg-dark-bg min-h-screen pt-20 pb-20 overflow-hidden">
+
+    <section class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="hero" class="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 min-h-[calc(100vh-10rem)]">
+
+        <!-- Globe column (left, bigger) -->
+        <div id="globe-col" class="w-full lg:flex-[3] order-2 lg:order-1 relative">
+          <div id="globe-container" class="relative mx-auto max-w-[340px] sm:max-w-[460px] lg:max-w-[720px]">
+            <div id="globe-el" class="w-full" style="aspect-ratio: 1;"></div>
+
+            <!-- Floating particles -->
+            <div class="particle" style="top:10%;left:15%;animation-delay:0s;" aria-hidden="true"></div>
+            <div class="particle" style="top:22%;right:10%;animation-delay:1.5s;" aria-hidden="true"></div>
+            <div class="particle" style="bottom:25%;left:8%;animation-delay:3s;" aria-hidden="true"></div>
+            <div class="particle" style="bottom:12%;right:18%;animation-delay:4.5s;" aria-hidden="true"></div>
+            <div class="particle" style="top:50%;left:3%;animation-delay:2s;" aria-hidden="true"></div>
+            <div class="particle" style="top:38%;right:4%;animation-delay:5s;" aria-hidden="true"></div>
+
+            <!-- Status overlay (visible during scan) -->
+            <div id="status-overlay" class="hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-10">
+              <div class="px-6 py-3 bg-dark-surface/90 backdrop-blur-sm border border-dark-elevated rounded-xl">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-gold rounded-full animate-pulse"></div>
+                  <p id="status-text" class="text-sm text-text-secondary font-mono"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right panel: cycles between Entry → Scanning → Results -->
+        <div id="right-panel" class="w-full lg:flex-[2] order-1 lg:order-2">
+
+          <!-- STATE 1: Entry form -->
+          <div id="panel-entry" class="transition-all duration-500 ease-out">
+            <div class="max-w-lg mx-auto lg:mx-0">
+              <div class="inline-flex items-center gap-2 px-4 py-2 bg-dark-elevated border border-gold/30 text-gold rounded-full text-sm font-medium mb-6">
+                Free Infrastructure Audit
+              </div>
+              <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-4 leading-tight">
+                Where Is Your Data<br class="hidden lg:block" />
+                <span class="text-gold">Sleeping Tonight?</span>
+              </h1>
+              <p class="text-lg text-text-secondary mb-8 leading-relaxed">
+                Enter your domain to trace where your data actually lives.
+                See every server, every service, every jurisdiction mapped on a 3D globe.
+              </p>
+
+              <div class="space-y-4">
+                <input
+                  type="text"
+                  id="domain-input"
+                  placeholder="acme-corp.com"
+                  class="w-full px-5 py-4 rounded-xl bg-dark-surface border-2 border-dark-elevated text-text-primary placeholder-text-muted focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-lg"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button
+                  id="scan-btn"
+                  class="w-full py-4 bg-gradient-to-r from-gold to-gold-light text-dark-bg font-bold rounded-xl shadow-lg shadow-gold/25 hover:shadow-xl hover:shadow-gold/40 hover:-translate-y-0.5 transition-all text-lg cursor-pointer"
+                >
+                  Scan My Borders
+                </button>
+              </div>
+              <p class="text-xs text-text-muted mt-3">
+                Public-record infrastructure lookup. Not a penetration test.
+              </p>
+            </div>
+          </div>
+
+          <!-- STATE 2: Scanning -->
+          <div id="panel-scanning" class="hidden">
+            <div class="flex flex-col items-center lg:items-start gap-6 py-8">
+              <span id="scanning-domain" class="inline-flex items-center gap-2 px-5 py-2.5 bg-dark-elevated border border-gold/30 text-gold rounded-full text-sm font-medium">
+                Scanning...
+              </span>
+              <div class="space-y-3 w-full max-w-sm">
+                <div id="scan-step-list" class="space-y-2"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STATE 3: Results scorecard -->
+          <div id="panel-results" class="hidden lg:max-h-[calc(100vh-10rem)] lg:overflow-y-auto scrollbar-thin">
+            <div class="bg-dark-surface rounded-2xl border border-dark-elevated overflow-hidden">
+              <div class="px-5 py-4 bg-gold/10 border-b border-gold/20 flex items-center justify-between">
+                <h2 class="font-display text-lg font-bold text-gold">Sovereignty Scorecard</h2>
+                <span id="result-domain-badge" class="text-sm text-text-muted font-mono"></span>
+              </div>
+
+              <div class="p-5">
+                <!-- Score + Headline -->
+                <div class="flex items-center gap-5 mb-6">
+                  <div class="relative w-24 h-24 shrink-0">
+                    <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                      <circle cx="60" cy="60" r="52" fill="none" stroke="#2A2A2A" stroke-width="8"></circle>
+                      <circle id="score-ring" cx="60" cy="60" r="52" fill="none" stroke="#0891B2" stroke-width="8"
+                        stroke-dasharray="326.73" stroke-dashoffset="326.73" stroke-linecap="round"
+                        class="transition-all duration-1000 ease-out"></circle>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                      <span id="score-number" class="text-2xl font-bold text-text-primary">0</span>
+                      <span id="score-grade" class="text-[10px] font-bold text-text-muted">—</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p id="score-headline" class="text-base font-bold text-text-primary mb-2 leading-snug"></p>
+                    <div class="flex flex-wrap gap-2">
+                      <span id="badge-risk" class="px-2.5 py-1 rounded-full text-xs font-bold"></span>
+                      <span id="badge-lockin" class="px-2.5 py-1 rounded-full text-xs font-bold bg-dark-elevated text-text-secondary"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Jurisdiction bar -->
+                <div class="mb-6">
+                  <div class="flex justify-between text-xs text-text-muted mb-1.5">
+                    <span>EU <span id="bar-eu-pct" class="text-green-400 font-bold"></span></span>
+                    <span>US <span id="bar-us-pct" class="text-red-400 font-bold"></span></span>
+                    <span>Other <span id="bar-other-pct" class="text-amber-400 font-bold"></span></span>
+                  </div>
+                  <div class="h-2.5 rounded-full bg-dark-elevated overflow-hidden flex">
+                    <div id="bar-eu" class="h-full bg-green-500 transition-all duration-700"></div>
+                    <div id="bar-us" class="h-full bg-red-500 transition-all duration-700"></div>
+                    <div id="bar-other" class="h-full bg-amber-500 transition-all duration-700"></div>
+                  </div>
+                </div>
+
+                <!-- Breakdown sections -->
+                <div class="space-y-3">
+                  <div id="section-hosting" class="hidden p-3 bg-dark-bg rounded-lg border border-dark-elevated">
+                    <div class="flex items-center gap-2 mb-1">
+                      <div class="w-2 h-2 rounded-full" id="hosting-dot"></div>
+                      <h3 class="text-xs font-bold text-text-primary uppercase tracking-wide">Web Hosting</h3>
+                    </div>
+                    <div id="hosting-details" class="text-sm text-text-secondary"></div>
+                  </div>
+
+                  <div id="section-email" class="hidden p-3 bg-dark-bg rounded-lg border border-dark-elevated">
+                    <div class="flex items-center gap-2 mb-1">
+                      <div class="w-2 h-2 rounded-full" id="email-dot"></div>
+                      <h3 class="text-xs font-bold text-text-primary uppercase tracking-wide">Email Servers</h3>
+                    </div>
+                    <div id="email-details" class="text-sm text-text-secondary space-y-1"></div>
+                  </div>
+
+                  <div id="section-cdn" class="hidden p-3 bg-dark-bg rounded-lg border border-dark-elevated">
+                    <div class="flex items-center gap-2 mb-1">
+                      <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                      <h3 class="text-xs font-bold text-text-primary uppercase tracking-wide">CDN / Proxy</h3>
+                    </div>
+                    <div id="cdn-details" class="text-sm text-text-secondary"></div>
+                  </div>
+
+                  <div id="section-thirdparty" class="hidden p-3 bg-dark-bg rounded-lg border border-dark-elevated">
+                    <div class="flex items-center gap-2 mb-1">
+                      <svg class="w-3.5 h-3.5 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                      </svg>
+                      <h3 class="text-xs font-bold text-text-primary uppercase tracking-wide">Third-Party Services</h3>
+                    </div>
+                    <div id="thirdparty-list" class="flex flex-wrap gap-1.5 mt-1"></div>
+                  </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="mt-6 pt-5 border-t border-dark-elevated text-center">
+                  <p class="text-sm text-text-secondary mb-3">
+                    Want a sovereign, EU-compliant stack?
+                  </p>
+                  <button data-cal-trigger
+                     class="inline-block w-full px-6 py-3.5 bg-gold hover:bg-gold-light text-dark-bg font-semibold rounded-xl shadow-lg shadow-gold/25 hover:shadow-xl hover:shadow-gold/30 transition-all text-sm cursor-pointer">
+                    Get Your Free Assessment
+                  </button>
+                </div>
+
+                <!-- Scan again -->
+                <div class="text-center mt-4">
+                  <button id="scan-again-btn" class="text-sm text-gold hover:underline cursor-pointer">
+                    Scan another domain
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #0891B2;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    animation: float-particle 6s ease-in-out infinite;
+  }
+  @keyframes float-particle {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+    20% { opacity: 0.5; transform: translateY(-18px) scale(1); }
+    50% { opacity: 0.25; transform: translateY(-35px) scale(0.7); }
+    80% { opacity: 0.4; transform: translateY(-22px) scale(1.1); }
+  }
+  .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: #0891B2; border-radius: 4px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #06B6D4; }
+
+  .scan-step {
+    transition: opacity 0.3s, color 0.3s;
+  }
+</style>
+
+<!-- Globe.gl + TopoJSON loaded externally -->
+<script is:inline src="https://unpkg.com/globe.gl@2.33.0/dist/globe.gl.min.js"></script>
+<script is:inline src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // Config & DOM
+  // ---------------------------------------------------------------------------
+  const API_URL = 'https://borders.brightinteraction.com';
+
+  const panelEntry = document.getElementById('panel-entry')!;
+  const panelScanning = document.getElementById('panel-scanning')!;
+  const panelResults = document.getElementById('panel-results')!;
+  const scanningDomain = document.getElementById('scanning-domain')!;
+  const scanStepList = document.getElementById('scan-step-list')!;
+  const domainInput = document.getElementById('domain-input') as HTMLInputElement;
+  const scanBtn = document.getElementById('scan-btn') as HTMLButtonElement;
+  const scanAgainBtn = document.getElementById('scan-again-btn')!;
+  const statusText = document.getElementById('status-text')!;
+  const statusOverlay = document.getElementById('status-overlay')!;
+  const globeContainer = document.getElementById('globe-el')!;
+
+  let globe: any = null;
+  let statusInterval: number | null = null;
+
+  // ---------------------------------------------------------------------------
+  // Colors
+  // ---------------------------------------------------------------------------
+  const COLORS = {
+    high: '#FF4444',
+    medium: '#F59E0B',
+    low: '#22C55E',
+    gold: '#0891B2',
+  };
+
+  // Decorative arcs (entry state)
+  const DECORATIVE_ARCS = [
+    { startLat: 51.5, startLng: -0.1, endLat: 40.7, endLng: -74.0, color: ['rgba(8,145,178,0.15)', 'rgba(8,145,178,0.06)'] },
+    { startLat: 48.9, startLng: 2.3, endLat: 35.7, endLng: 139.7, color: ['rgba(8,145,178,0.10)', 'rgba(8,145,178,0.04)'] },
+    { startLat: 1.4, startLng: 103.8, endLat: 55.8, endLng: 37.6, color: ['rgba(8,145,178,0.12)', 'rgba(8,145,178,0.05)'] },
+    { startLat: 37.8, startLng: -122.4, endLat: -33.9, endLng: 151.2, color: ['rgba(8,145,178,0.08)', 'rgba(8,145,178,0.08)'] },
+    { startLat: 52.5, startLng: 13.4, endLat: -23.5, endLng: -46.6, color: ['rgba(8,145,178,0.10)', 'rgba(8,145,178,0.06)'] },
+    { startLat: 59.3, startLng: 18.1, endLat: 22.3, endLng: 114.2, color: ['rgba(8,145,178,0.07)', 'rgba(8,145,178,0.10)'] },
+  ];
+
+  // Decorative rings (entry state)
+  const DECORATIVE_RINGS = [
+    { lat: 51.5, lng: -0.1, maxR: 3, propagationSpeed: 2, repeatPeriod: 2000, color: () => 'rgba(8,145,178,0.20)' },
+    { lat: 35.7, lng: 139.7, maxR: 2.5, propagationSpeed: 3, repeatPeriod: 2500, color: () => 'rgba(8,145,178,0.16)' },
+    { lat: 40.7, lng: -74.0, maxR: 2, propagationSpeed: 2.5, repeatPeriod: 1800, color: () => 'rgba(8,145,178,0.14)' },
+    { lat: -33.9, lng: 151.2, maxR: 2, propagationSpeed: 2, repeatPeriod: 2200, color: () => 'rgba(8,145,178,0.12)' },
+  ];
+
+  // ---------------------------------------------------------------------------
+  // Globe setup — silhouette style with polygon landmasses
+  // ---------------------------------------------------------------------------
+  let landFeatures: any[] = [];
+
+  function initGlobe() {
+    if (globe) return;
+
+    const w = globeContainer.clientWidth;
+    const h = globeContainer.clientHeight || w;
+
+    // Tiny dark globe texture (no external image needed)
+    const c = document.createElement('canvas');
+    c.width = 4; c.height = 2;
+    const cx = c.getContext('2d')!;
+    cx.fillStyle = '#121212';
+    cx.fillRect(0, 0, 4, 2);
+    const darkGlobe = c.toDataURL();
+
+    // @ts-ignore
+    globe = Globe()
+      .globeImageUrl(darkGlobe)
+      .bumpImageUrl('')
+      .backgroundColor('rgba(0,0,0,0)')
+      .atmosphereColor('rgba(8,145,178,0.15)')
+      .atmosphereAltitude(0.06)
+      .showAtmosphere(true)
+      .showGraticules(true)
+      .width(w)
+      .height(h)
+      // Land polygons
+      .polygonsData([])
+      .polygonCapColor(() => 'rgba(8,145,178,0.18)')
+      .polygonSideColor(() => 'rgba(8,145,178,0.05)')
+      .polygonStrokeColor(() => 'rgba(8,145,178,0.35)')
+      .polygonAltitude(0.005)
+      // Arcs
+      .arcsData(DECORATIVE_ARCS)
+      .arcColor('color')
+      .arcDashLength(0.6)
+      .arcDashGap(0.3)
+      .arcDashAnimateTime(2500)
+      .arcStroke(0.4)
+      // Points
+      .pointsData([])
+      .pointColor('color')
+      .pointAltitude(0.01)
+      .pointRadius(0.4)
+      .pointsMerge(true)
+      // Rings
+      .ringsData(DECORATIVE_RINGS)
+      .ringColor('color')
+      .ringMaxRadius('maxR')
+      .ringPropagationSpeed('propagationSpeed')
+      .ringRepeatPeriod('repeatPeriod')
+      (globeContainer);
+
+    globe.controls().autoRotate = true;
+    globe.controls().autoRotateSpeed = 0.5;
+    globe.controls().enableZoom = false;
+
+    // Dark globe material — slight emissive so edges are visible
+    const mat = globe.globeMaterial();
+    mat.color.set(0x121212);
+    mat.emissive.set(0x121212);
+    mat.emissiveIntensity = 0.6;
+
+    // Style graticule lines (lat/long grid)
+    const scene = globe.scene();
+    scene.traverse((obj: any) => {
+      if (obj.type === 'Line' || obj.type === 'LineSegments') {
+        if (obj.material) {
+          obj.material.color.set(0xD4AF37);
+          obj.material.opacity = 0.06;
+          obj.material.transparent = true;
+        }
+      }
+    });
+
+    // Load world land geometry
+    fetch('https://unpkg.com/world-atlas@2/land-110m.json')
+      .then(r => r.json())
+      .then(world => {
+        // @ts-ignore
+        const land = topojson.feature(world, world.objects.land);
+        landFeatures = land.type === 'FeatureCollection' ? land.features : [land];
+        globe.polygonsData(landFeatures);
+      })
+      .catch(() => {}); // Graceful fallback — globe still works without land polygons
+  }
+
+  // Init immediately
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGlobe);
+  } else {
+    setTimeout(initGlobe, 100);
+  }
+
+  // Responsive resize
+  const resizeObserver = new ResizeObserver(() => {
+    if (globe) {
+      const w = globeContainer.clientWidth;
+      const h = globeContainer.clientHeight || w;
+      globe.width(w).height(h);
+    }
+  });
+  resizeObserver.observe(globeContainer);
+
+  // ---------------------------------------------------------------------------
+  // Panel state management
+  // ---------------------------------------------------------------------------
+  function showPanel(panel: 'entry' | 'scanning' | 'results') {
+    // Fade out all panels
+    panelEntry.classList.add('hidden');
+    panelScanning.classList.add('hidden');
+    panelResults.classList.add('hidden');
+
+    if (panel === 'entry') {
+      panelEntry.classList.remove('hidden');
+      panelEntry.style.opacity = '1';
+      panelEntry.style.transform = 'translateX(0)';
+    } else if (panel === 'scanning') {
+      panelScanning.classList.remove('hidden');
+    } else {
+      panelResults.classList.remove('hidden');
+      panelResults.scrollTop = 0;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Status animation (with step list in right panel)
+  // ---------------------------------------------------------------------------
+  const SCAN_STEPS = [
+    'Resolving DNS records',
+    'Tracing mail servers',
+    'Inspecting nameservers',
+    'Checking CDN headers',
+    'Scanning for third-party scripts',
+    'Analyzing jurisdiction',
+    'Calculating sovereignty score',
+  ];
+
+  function startStatusAnimation() {
+    // Build step list in scanning panel
+    scanStepList.innerHTML = SCAN_STEPS.map((step, i) =>
+      `<div class="scan-step flex items-center gap-3 text-sm ${i === 0 ? 'text-gold' : 'text-text-muted opacity-40'}" data-step="${i}">
+        <div class="w-1.5 h-1.5 rounded-full ${i === 0 ? 'bg-gold' : 'bg-text-muted'} shrink-0"></div>
+        <span>${step}</span>
+      </div>`
+    ).join('');
+
+    // Also show on globe
+    statusText.textContent = SCAN_STEPS[0] + '...';
+    statusOverlay.classList.remove('hidden');
+
+    let step = 0;
+    statusInterval = window.setInterval(() => {
+      step++;
+      if (step < SCAN_STEPS.length) {
+        statusText.textContent = SCAN_STEPS[step] + '...';
+        // Update step list
+        const steps = scanStepList.querySelectorAll('.scan-step');
+        steps.forEach((el, i) => {
+          const dot = el.querySelector('div')!;
+          if (i < step) {
+            el.className = 'scan-step flex items-center gap-3 text-sm text-green-400 opacity-70';
+            dot.className = 'w-1.5 h-1.5 rounded-full bg-green-400 shrink-0';
+          } else if (i === step) {
+            el.className = 'scan-step flex items-center gap-3 text-sm text-gold';
+            dot.className = 'w-1.5 h-1.5 rounded-full bg-gold shrink-0';
+          }
+        });
+      }
+    }, 800);
+  }
+
+  function stopStatusAnimation() {
+    if (statusInterval) {
+      clearInterval(statusInterval);
+      statusInterval = null;
+    }
+    // Mark all steps as done
+    const steps = scanStepList.querySelectorAll('.scan-step');
+    steps.forEach((el) => {
+      const dot = el.querySelector('div')!;
+      el.className = 'scan-step flex items-center gap-3 text-sm text-green-400 opacity-70';
+      dot.className = 'w-1.5 h-1.5 rounded-full bg-green-400 shrink-0';
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Render arcs + points on globe
+  // ---------------------------------------------------------------------------
+  function renderGlobeData(locations: any[]) {
+    if (!globe || !locations.length) return;
+
+    const center = locations.find((l: any) => l.type === 'hosting') || locations[0];
+
+    const arcs = locations
+      .filter((loc: any) => loc.lat !== center.lat || loc.lng !== center.lng)
+      .map((loc: any, i: number) => ({
+        startLat: center.lat,
+        startLng: center.lng,
+        endLat: loc.lat,
+        endLng: loc.lng,
+        color: COLORS[loc.risk as keyof typeof COLORS] || COLORS.medium,
+        label: loc.details,
+        _delay: i,
+      }));
+
+    const points = locations.map((loc: any) => ({
+      lat: loc.lat,
+      lng: loc.lng,
+      color: COLORS[loc.risk as keyof typeof COLORS] || COLORS.medium,
+      label: `${loc.details}\n${loc.label}`,
+    }));
+
+    globe.ringsData([]);
+    globe.controls().autoRotate = false;
+    globe.pointOfView({ lat: center.lat, lng: center.lng, altitude: 2.2 }, 1500);
+    globe.pointsData(points);
+
+    let currentArcs: any[] = [];
+    arcs.forEach((arc: any, i: number) => {
+      setTimeout(() => {
+        currentArcs = [...currentArcs, arc];
+        globe.arcsData(currentArcs);
+      }, 500 + i * 300);
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Render scorecard
+  // ---------------------------------------------------------------------------
+  function renderScorecard(data: any) {
+    (document.getElementById('result-domain-badge') as HTMLElement).textContent = data.domain;
+
+    const score = data.sovereignty.score;
+    const circumference = 326.73;
+    const offset = circumference - (score / 100) * circumference;
+    const ring = document.getElementById('score-ring') as SVGCircleElement;
+    const scoreColor = score >= 70 ? '#22C55E' : score >= 40 ? '#F59E0B' : '#FF4444';
+    ring.style.stroke = scoreColor;
+    setTimeout(() => { ring.style.strokeDashoffset = String(offset); }, 100);
+
+    (document.getElementById('score-number') as HTMLElement).textContent = String(score);
+    (document.getElementById('score-grade') as HTMLElement).textContent = `Grade ${data.sovereignty.grade}`;
+    (document.getElementById('score-headline') as HTMLElement).textContent = data.sovereignty.headline;
+
+    const riskBadge = document.getElementById('badge-risk')!;
+    const riskLevel = data.sovereignty.riskLevel;
+    riskBadge.textContent = `Risk: ${riskLevel}`;
+    riskBadge.className = `px-2.5 py-1 rounded-full text-xs font-bold ${
+      riskLevel === 'HIGH' ? 'bg-red-500/20 text-red-400' :
+      riskLevel === 'MEDIUM' ? 'bg-amber-500/20 text-amber-400' :
+      'bg-green-500/20 text-green-400'
+    }`;
+
+    document.getElementById('badge-lockin')!.textContent = `Vendor Lock-in: ${data.sovereignty.vendorLockIn}`;
+
+    (document.getElementById('bar-eu-pct') as HTMLElement).textContent = `${data.sovereignty.euPercent}%`;
+    (document.getElementById('bar-us-pct') as HTMLElement).textContent = `${data.sovereignty.usPercent}%`;
+    (document.getElementById('bar-other-pct') as HTMLElement).textContent = `${data.sovereignty.otherPercent}%`;
+    (document.getElementById('bar-eu') as HTMLElement).style.width = `${data.sovereignty.euPercent}%`;
+    (document.getElementById('bar-us') as HTMLElement).style.width = `${data.sovereignty.usPercent}%`;
+    (document.getElementById('bar-other') as HTMLElement).style.width = `${data.sovereignty.otherPercent}%`;
+
+    if (data.hosting) {
+      const section = document.getElementById('section-hosting')!;
+      section.classList.remove('hidden');
+      document.getElementById('hosting-dot')!.className =
+        `w-2 h-2 rounded-full ${data.hosting.risk === 'high' ? 'bg-red-400' : data.hosting.risk === 'low' ? 'bg-green-400' : 'bg-amber-400'}`;
+      (document.getElementById('hosting-details') as HTMLElement).innerHTML =
+        `<span class="font-medium text-text-primary">${data.hosting.provider || 'Unknown'}</span> — ` +
+        `${data.hosting.location ? `${data.hosting.location.city}, ${data.hosting.location.country}` : 'Unknown'} ` +
+        `<span class="text-xs ${data.hosting.risk === 'high' ? 'text-red-400' : data.hosting.risk === 'low' ? 'text-green-400' : 'text-amber-400'}">(${data.hosting.location?.countryCode || '?'})</span>`;
+    }
+
+    if (data.email?.length > 0) {
+      const section = document.getElementById('section-email')!;
+      section.classList.remove('hidden');
+      // Deduplicate by provider + country
+      const emailMap = new Map<string, { entry: any; count: number }>();
+      data.email.forEach((e: any) => {
+        const key = `${e.provider || e.host}|${e.location?.countryCode || '?'}`;
+        if (emailMap.has(key)) { emailMap.get(key)!.count++; }
+        else { emailMap.set(key, { entry: e, count: 1 }); }
+      });
+      const uniqueEmails = Array.from(emailMap.values());
+      const worstRisk = uniqueEmails.some(u => u.entry.risk === 'high') ? 'high' : uniqueEmails.some(u => u.entry.risk === 'medium') ? 'medium' : 'low';
+      document.getElementById('email-dot')!.className =
+        `w-2 h-2 rounded-full ${worstRisk === 'high' ? 'bg-red-400' : worstRisk === 'low' ? 'bg-green-400' : 'bg-amber-400'}`;
+      (document.getElementById('email-details') as HTMLElement).innerHTML = uniqueEmails.map(({ entry: e, count }) =>
+        `<div><span class="font-medium text-text-primary">${e.provider || e.host}</span> — ` +
+        `${e.location ? `${e.location.city}, ${e.location.country}` : 'Unknown'} ` +
+        `<span class="text-xs ${e.risk === 'high' ? 'text-red-400' : e.risk === 'low' ? 'text-green-400' : 'text-amber-400'}">(${e.location?.countryCode || '?'})</span>` +
+        `${count > 1 ? ` <span class="text-text-muted">${count} servers</span>` : ''}</div>`
+      ).join('');
+    }
+
+    if (data.cdn?.detected) {
+      document.getElementById('section-cdn')!.classList.remove('hidden');
+      (document.getElementById('cdn-details') as HTMLElement).innerHTML =
+        `<span class="font-medium text-text-primary">${data.cdn.provider}</span> — ${data.cdn.note}`;
+    }
+
+    if (data.thirdParty?.length > 0) {
+      document.getElementById('section-thirdparty')!.classList.remove('hidden');
+      (document.getElementById('thirdparty-list') as HTMLElement).innerHTML = data.thirdParty.map((tp: any) =>
+        `<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium ${
+          tp.risk === 'high' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+          tp.risk === 'low' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+          'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+        }">` +
+        `<span class="w-1.5 h-1.5 rounded-full ${tp.risk === 'high' ? 'bg-red-400' : tp.risk === 'low' ? 'bg-green-400' : 'bg-amber-400'}"></span>` +
+        `${tp.name}</span>`
+      ).join('');
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Scan flow
+  // ---------------------------------------------------------------------------
+  async function runScan(domain: string) {
+    showPanel('scanning');
+    scanningDomain.textContent = `Scanning ${domain}`;
+
+    initGlobe();
+    startStatusAnimation();
+
+    if (globe) {
+      globe.arcsData([]);
+      globe.pointsData([]);
+      globe.ringsData([]);
+      globe.controls().autoRotate = true;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/api/scan`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domain }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: 'Scan failed' }));
+        throw new Error(err.error || 'Scan failed');
+      }
+
+      const data = await res.json();
+
+      stopStatusAnimation();
+      statusText.textContent = 'Scan complete';
+
+      renderGlobeData(data.locations || []);
+
+      const arcDelay = (data.locations?.length || 1) * 300 + 1000;
+      setTimeout(() => {
+        statusOverlay.classList.add('hidden');
+        showPanel('results');
+        renderScorecard(data);
+      }, arcDelay);
+
+    } catch (err: any) {
+      stopStatusAnimation();
+      statusText.textContent = `Error: ${err.message}`;
+      setTimeout(() => {
+        statusOverlay.classList.add('hidden');
+        showPanel('entry');
+        if (globe) {
+          globe.arcsData(DECORATIVE_ARCS);
+          globe.ringsData(DECORATIVE_RINGS);
+          globe.controls().autoRotate = true;
+        }
+        alert(`Scan failed: ${err.message}. Please check the domain and try again.`);
+      }, 2000);
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Event handlers
+  // ---------------------------------------------------------------------------
+  function handleScan() {
+    let domain = domainInput.value.trim().toLowerCase();
+    domain = domain.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/^www\./, '');
+    if (!domain || !domain.includes('.')) {
+      domainInput.focus();
+      return;
+    }
+    runScan(domain);
+  }
+
+  scanBtn.addEventListener('click', handleScan);
+  domainInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); handleScan(); }
+  });
+
+  scanAgainBtn.addEventListener('click', () => {
+    statusOverlay.classList.add('hidden');
+    showPanel('entry');
+    domainInput.value = '';
+    domainInput.focus();
+
+    if (globe) {
+      globe.arcsData(DECORATIVE_ARCS);
+      globe.pointsData([]);
+      globe.ringsData(DECORATIVE_RINGS);
+      globe.controls().autoRotate = true;
+      globe.pointOfView({ lat: 20, lng: 0, altitude: 2.5 }, 1500);
+    }
+
+    // Reset result sections
+    ['section-hosting', 'section-email', 'section-cdn', 'section-thirdparty'].forEach(id => {
+      document.getElementById(id)?.classList.add('hidden');
+    });
+    const ring = document.getElementById('score-ring') as SVGCircleElement;
+    if (ring) ring.style.strokeDashoffset = '326.73';
+  });
+
+  domainInput.focus();
+</script>

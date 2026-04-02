@@ -1,0 +1,741 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-02-14';
+const title = 'Google Workspace Alternatives for GDPR: What European Businesses Should Use Instead';
+const description = 'EU regulators have ruled against Google Workspace repeatedly. Here are the GDPR-compliant alternatives that actually work, with pricing, migration guides, and honest trade-offs.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/google-workspace-alternative-gdpr"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Google Workspace GDPR compliant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Multiple EU data protection authorities have ruled against Google Workspace. The Danish DPA banned it in schools. The Austrian and French DPAs found Google Analytics transfers illegal under Schrems II. The legal basis for transferring data to US servers remains contested, and the EU-US Data Privacy Framework may face legal challenges similar to its predecessors."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the best GDPR-compliant alternative to Google Workspace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Proton is the best direct replacement for most businesses, offering email, calendar, and drive with end-to-end encryption from Switzerland. For businesses that need full control over their data and document collaboration, Nextcloud combined with OnlyOffice provides a self-hosted solution with no third-party data access."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How hard is it to migrate from Google Workspace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Email and calendar migration typically takes 1-2 weeks including DNS changes and mailbox imports. Full drive migration with shared folders and permissions takes 2-4 weeks. The main challenge is retraining staff on new interfaces, not the technical migration itself. Most alternatives offer import tools for Google Takeout data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Proton a good replacement for Google Workspace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, for email, calendar, and file storage. Proton Mail, Proton Calendar, and Proton Drive cover the core workflow. Where Proton falls short is real-time document collaboration: there is no equivalent to Google Docs or Sheets with multi-user editing at Google's scale. Businesses that rely heavily on collaborative spreadsheets may need to supplement with Nextcloud and OnlyOffice."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            &larr; Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Infrastructure
+          </span>
+          <span class="text-text-muted text-sm">10 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+
+        <!-- Introduction -->
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Google Workspace is the default productivity suite for millions of businesses. Gmail, Google Drive, Docs, Sheets, Calendar. It works. The problem is not functionality. The problem is where your data goes and who can access it.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            If your business operates in the EU or handles European customer data, Google Workspace puts you in a difficult legal position. Multiple data protection authorities across Europe have ruled against Google services. The legal basis for transatlantic data transfers remains unstable. And the US CLOUD Act means Google can be compelled to hand over data stored anywhere in the world, regardless of local laws.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            This is not theoretical risk. It is regulatory reality. Here is what is happening, why it matters, and what you should use instead.
+          </p>
+        </section>
+
+        <!-- Why Google Workspace is problematic -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Why Google Workspace Is Problematic for GDPR
+          </h2>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="font-display text-xl font-semibold text-text-primary mb-3">The CLOUD Act conflict</h3>
+              <p class="text-text-secondary mb-3">
+                The US Clarifying Lawful Overseas Use of Data (CLOUD) Act, passed in 2018, gives US law enforcement the authority to demand data from American companies regardless of where that data is physically stored. Google is a US company. Even if your data sits in a Google data center in Finland, a US court order can compel Google to hand it over.
+              </p>
+              <p class="text-text-secondary">
+                This directly conflicts with GDPR Article 48, which prohibits transferring personal data to third-country authorities without a mutual legal assistance treaty or similar agreement. You cannot comply with both laws simultaneously.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-display text-xl font-semibold text-text-primary mb-3">Schrems II and the transfer problem</h3>
+              <p class="text-text-secondary mb-3">
+                The 2020 Schrems II ruling by the Court of Justice of the EU invalidated the Privacy Shield framework, finding that US surveillance laws do not provide adequate protection for EU data. The ruling established that Standard Contractual Clauses (SCCs) alone are not sufficient when the destination country's laws undermine their protections.
+              </p>
+              <p class="text-text-secondary">
+                The EU-US Data Privacy Framework (DPF), adopted in 2023, attempts to fix this. But it faces the same structural problem as its predecessors: US surveillance law has not fundamentally changed. Legal challenges are already underway, and many privacy experts expect this framework to fall just as Privacy Shield and Safe Harbor did before it.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-display text-xl font-semibold text-text-primary mb-3">DPA rulings across Europe</h3>
+              <p class="text-text-secondary mb-3">
+                This is not abstract legal theory. Data protection authorities have taken concrete action:
+              </p>
+              <ul class="list-disc list-inside text-text-secondary space-y-2 ml-4">
+                <li><strong class="text-text-primary">Denmark (Datatilsynet):</strong> Banned Google Workspace in schools, finding that data transfers to the US did not meet GDPR requirements.</li>
+                <li><strong class="text-text-primary">Austria (DSB):</strong> Ruled that Google Analytics use violated GDPR due to US data transfers. The same logic applies to all Google services.</li>
+                <li><strong class="text-text-primary">France (CNIL):</strong> Issued similar rulings against Google Analytics and ordered French organizations to stop using it.</li>
+                <li><strong class="text-text-primary">Italy (Garante):</strong> Found Google Analytics non-compliant and gave organizations 90 days to switch.</li>
+                <li><strong class="text-text-primary">Netherlands:</strong> Government conducted a DPIA on Google Workspace and identified high privacy risks, requiring extensive mitigations.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-display text-xl font-semibold text-text-primary mb-3">The practical risk</h3>
+              <p class="text-text-secondary">
+                Even if enforcement has been slow, the legal direction is clear. Businesses using Google Workspace for EU personal data face increasing regulatory exposure. Fines under GDPR can reach 4% of global annual revenue. But the real risk is reputational: being the company that had client data accessed by US authorities because you chose convenience over compliance.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Alternatives -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Alternatives: What Actually Works
+          </h2>
+
+          <!-- Proton -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">1. Proton (Mail + Calendar + Drive)</h3>
+                <p class="text-text-muted text-sm">Swiss jurisdiction. End-to-end encrypted. Zero-knowledge architecture.</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              Proton is the closest thing to a drop-in replacement for Google Workspace. Built in Switzerland (not EU, but covered by an adequacy decision and strong domestic privacy law), Proton encrypts everything end-to-end. Even Proton cannot read your emails or files. This is not a marketing claim; it is an architectural constraint of their zero-knowledge encryption.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you get</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>+ Proton Mail with custom domains</li>
+                  <li>+ Proton Calendar with sharing</li>
+                  <li>+ Proton Drive with 500GB-3TB storage</li>
+                  <li>+ Proton VPN included</li>
+                  <li>+ End-to-end encryption on everything</li>
+                  <li>+ Swiss privacy law protection</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you lose</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>- No real-time document collaboration (no Docs/Sheets equivalent)</li>
+                  <li>- Smaller app ecosystem</li>
+                  <li>- Calendar sharing less flexible than Google</li>
+                  <li>- Search in encrypted mail is slower</li>
+                  <li>- No equivalent to Google Meet (use Jitsi or similar)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">3.99-12.99</p>
+                <p class="text-text-muted text-xs">EUR/user/month</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-green-400 font-bold text-lg">Very High</p>
+                <p class="text-text-muted text-xs">GDPR compliance</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">2/5</p>
+                <p class="text-text-muted text-xs">Migration difficulty</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Best for:</strong> Businesses wanting a direct 1:1 replacement for Gmail, Calendar, and Drive without self-hosting. Law firms, healthcare, finance, and any business where email confidentiality is critical.
+              </p>
+            </div>
+          </div>
+
+          <!-- Nextcloud + OnlyOffice -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">2. Nextcloud + OnlyOffice</h3>
+                <p class="text-text-muted text-sm">Self-hosted. Full data control. Open source.</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              Nextcloud is the most mature self-hosted productivity platform available. Combined with OnlyOffice (or Collabora Online), it provides file storage, document editing, calendar, contacts, video calls, and dozens of additional apps. Your data never leaves your servers. No third party has access. Period.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you get</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>+ Full Google Docs/Sheets/Slides replacement via OnlyOffice</li>
+                  <li>+ Real-time collaborative editing</li>
+                  <li>+ File sync with desktop and mobile clients</li>
+                  <li>+ Calendar, contacts, tasks</li>
+                  <li>+ Video calls via Nextcloud Talk</li>
+                  <li>+ 100% data sovereignty on your own servers</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you lose</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>- Requires server administration (or managed hosting)</li>
+                  <li>- Document editing not as polished as Google Docs</li>
+                  <li>- No built-in email (pair with Proton or self-hosted mail)</li>
+                  <li>- Performance depends on your hosting</li>
+                  <li>- Updates and maintenance are your responsibility</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">0-9.50</p>
+                <p class="text-text-muted text-xs">EUR/user/month + hosting</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-green-400 font-bold text-lg">Maximum</p>
+                <p class="text-text-muted text-xs">GDPR compliance</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">4/5</p>
+                <p class="text-text-muted text-xs">Migration difficulty</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Best for:</strong> Businesses that need real-time document collaboration on their own infrastructure. Organizations with IT staff or a managed hosting partner. Companies in regulated industries where data location must be provably controlled.
+              </p>
+            </div>
+          </div>
+
+          <!-- Infomaniak -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">3. Infomaniak (kSuite)</h3>
+                <p class="text-text-muted text-sm">Swiss managed hosting. Email, drive, meet, and more.</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              Infomaniak is a Swiss hosting company that has built kSuite as a direct Google Workspace competitor. It includes kMail (email), kDrive (file storage and sync), kMeet (video conferencing), and kChat (team messaging). All data stays in Swiss data centers. Unlike Nextcloud, you do not need to manage servers. Unlike Proton, you get document collaboration.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you get</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>+ Full suite: email, drive, docs, meet, chat</li>
+                  <li>+ Managed hosting (no server maintenance)</li>
+                  <li>+ OnlyOffice integration for document editing</li>
+                  <li>+ Swiss data centers exclusively</li>
+                  <li>+ Competitive pricing for the feature set</li>
+                  <li>+ Free kMeet (Jitsi-based) with no account required</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you lose</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>- Less polished UX than Google</li>
+                  <li>- Smaller ecosystem of third-party integrations</li>
+                  <li>- Less name recognition (harder to convince stakeholders)</li>
+                  <li>- Mobile apps functional but not as refined</li>
+                  <li>- Limited AI features compared to Google</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">5.54-7.09</p>
+                <p class="text-text-muted text-xs">EUR/user/month</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-green-400 font-bold text-lg">Very High</p>
+                <p class="text-text-muted text-xs">GDPR compliance</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">2/5</p>
+                <p class="text-text-muted text-xs">Migration difficulty</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Best for:</strong> Businesses that want a managed, hosted solution without the complexity of self-hosting. Good middle ground between Proton (limited collaboration) and Nextcloud (requires server management).
+              </p>
+            </div>
+          </div>
+
+          <!-- Tuta -->
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">4. Tuta (formerly Tutanota)</h3>
+                <p class="text-text-muted text-sm">German jurisdiction. Encrypted email. Privacy-first.</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              Tuta is a German encrypted email provider, the main European alternative to Proton for secure email. All data is stored in German data centers, encrypted end-to-end. Tuta has been vocal about fighting government surveillance and has won court cases defending user privacy. Their focus is narrower than Proton: email and calendar, with contacts. No drive product yet.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you get</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>+ End-to-end encrypted email and calendar</li>
+                  <li>+ German data centers (EU jurisdiction)</li>
+                  <li>+ Custom domains for business</li>
+                  <li>+ Post-quantum encryption (forward-looking security)</li>
+                  <li>+ Very affordable pricing</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2 text-sm">What you lose</h4>
+                <ul class="text-text-secondary text-sm space-y-1">
+                  <li>- No cloud drive or document editing</li>
+                  <li>- No IMAP/POP3 support (Tuta clients only)</li>
+                  <li>- Smaller feature set than Proton</li>
+                  <li>- No VPN or additional services</li>
+                  <li>- Search limited due to encryption</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">3.00-8.00</p>
+                <p class="text-text-muted text-xs">EUR/user/month</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-green-400 font-bold text-lg">Very High</p>
+                <p class="text-text-muted text-xs">GDPR compliance</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-3 text-center">
+                <p class="text-gold font-bold text-lg">3/5</p>
+                <p class="text-text-muted text-xs">Migration difficulty</p>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Best for:</strong> Businesses that primarily need secure email and want EU (German) jurisdiction specifically. Good for organizations that do not need drive or document collaboration and prefer the lowest-cost encrypted option.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Feature Comparison Table
+          </h2>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-3 px-4 text-text-primary font-semibold">Feature</th>
+                  <th class="text-left py-3 px-4 text-text-secondary font-semibold">Google Workspace</th>
+                  <th class="text-left py-3 px-4 text-gold font-semibold">Proton</th>
+                  <th class="text-left py-3 px-4 text-gold font-semibold">Nextcloud</th>
+                  <th class="text-left py-3 px-4 text-gold font-semibold">Infomaniak</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Email</td>
+                  <td class="py-3 px-4">Gmail</td>
+                  <td class="py-3 px-4">Proton Mail (E2EE)</td>
+                  <td class="py-3 px-4">Not included</td>
+                  <td class="py-3 px-4">kMail</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Calendar</td>
+                  <td class="py-3 px-4">Google Calendar</td>
+                  <td class="py-3 px-4">Proton Calendar (E2EE)</td>
+                  <td class="py-3 px-4">Nextcloud Calendar</td>
+                  <td class="py-3 px-4">Infomaniak Calendar</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">File Storage</td>
+                  <td class="py-3 px-4">Google Drive (15GB-5TB)</td>
+                  <td class="py-3 px-4">Proton Drive (500GB-3TB)</td>
+                  <td class="py-3 px-4">Unlimited (self-hosted)</td>
+                  <td class="py-3 px-4">kDrive (6TB pooled)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Document Editing</td>
+                  <td class="py-3 px-4">Google Docs/Sheets/Slides</td>
+                  <td class="py-3 px-4">None</td>
+                  <td class="py-3 px-4">OnlyOffice / Collabora</td>
+                  <td class="py-3 px-4">OnlyOffice integration</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Video Calls</td>
+                  <td class="py-3 px-4">Google Meet</td>
+                  <td class="py-3 px-4">None (use Jitsi)</td>
+                  <td class="py-3 px-4">Nextcloud Talk</td>
+                  <td class="py-3 px-4">kMeet (Jitsi-based)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Encryption</td>
+                  <td class="py-3 px-4">At rest + in transit</td>
+                  <td class="py-3 px-4">End-to-end (zero-knowledge)</td>
+                  <td class="py-3 px-4">Server-side + optional E2EE</td>
+                  <td class="py-3 px-4">At rest + in transit</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Data Location</td>
+                  <td class="py-3 px-4">Global (US company)</td>
+                  <td class="py-3 px-4">Switzerland</td>
+                  <td class="py-3 px-4">Your servers</td>
+                  <td class="py-3 px-4">Switzerland</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">CLOUD Act Exposure</td>
+                  <td class="py-3 px-4 text-red-400">Yes</td>
+                  <td class="py-3 px-4 text-green-400">No</td>
+                  <td class="py-3 px-4 text-green-400">No</td>
+                  <td class="py-3 px-4 text-green-400">No</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4 font-medium text-text-primary">Pricing (per user/month)</td>
+                  <td class="py-3 px-4">$7-25 USD</td>
+                  <td class="py-3 px-4">3.99-12.99 EUR</td>
+                  <td class="py-3 px-4">Free + hosting costs</td>
+                  <td class="py-3 px-4">5.54-7.09 EUR</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4 font-medium text-text-primary">Migration Difficulty</td>
+                  <td class="py-3 px-4">N/A</td>
+                  <td class="py-3 px-4">2/5</td>
+                  <td class="py-3 px-4">4/5</td>
+                  <td class="py-3 px-4">2/5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Migration guidance -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            How to Migrate: A Practical Timeline
+          </h2>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Week 1-2: Email and Calendar</h4>
+              <p class="text-text-secondary text-sm">
+                Set up your new email provider. Import existing mailboxes using IMAP migration tools (Proton and Infomaniak both offer these). Update MX records. Redirect old addresses. Migrate calendar events. This is the most critical step and the one users feel immediately.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Week 2-3: File Storage</h4>
+              <p class="text-text-secondary text-sm">
+                Export data via Google Takeout. Upload to your new drive solution. Recreate shared folder structures and permissions. Install desktop sync clients on all machines. Test that file sharing works correctly with external partners.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Week 3-4: Document Collaboration and Training</h4>
+              <p class="text-text-secondary text-sm">
+                Convert Google Docs/Sheets to standard formats (DOCX, XLSX). Set up OnlyOffice or Collabora if using Nextcloud/Infomaniak. Train your team on the new tools. Run both systems in parallel for at least a week before cutting over completely.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Week 4+: Cleanup and Verification</h4>
+              <p class="text-text-secondary text-sm">
+                Verify all data has been migrated. Check that no Google dependencies remain in your workflows. Update integrations and API connections. Document the new setup. Cancel your Google Workspace subscription once everything is confirmed working.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Which should you choose -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Which Alternative Should You Choose?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            The right choice depends on what you actually use Google Workspace for:
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">You mainly use Gmail and Calendar</h4>
+              <p class="text-text-secondary text-sm">
+                Go with <strong class="text-text-primary">Proton</strong>. The migration is straightforward, the encryption is best-in-class, and you get VPN as a bonus. The lack of document collaboration will not matter.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">You rely heavily on Google Docs and Sheets collaboration</h4>
+              <p class="text-text-secondary text-sm">
+                Go with <strong class="text-text-primary">Nextcloud + OnlyOffice</strong> if you have IT capacity, or <strong class="text-text-primary">Infomaniak kSuite</strong> if you want managed hosting. Both provide real-time collaborative editing that Proton lacks.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">You need everything managed with zero server work</h4>
+              <p class="text-text-secondary text-sm">
+                Go with <strong class="text-text-primary">Infomaniak kSuite</strong>. It is the closest to the Google Workspace experience with Swiss data residency and no infrastructure to manage.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">You just need encrypted email on a budget</h4>
+              <p class="text-text-secondary text-sm">
+                Go with <strong class="text-text-primary">Tuta</strong>. Cheapest option, strong encryption, German jurisdiction. Supplement with Nextcloud for file storage if needed.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTAs -->
+        <section class="mb-12">
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Want to see where your Google data actually goes?</strong> Our Border Tracer maps every third-party connection your tools make, showing exactly which jurisdictions your data crosses. Try it free.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Run a free Border Tracer scan &rarr;</a>
+            </p>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help migrating?</strong> We have helped businesses move from Google Workspace to GDPR-compliant alternatives without downtime or data loss. From planning to execution, we handle the technical migration so your team can keep working.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Book a free call &rarr;</a>
+            </p>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Frequently Asked Questions
+          </h2>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Is Google Workspace GDPR compliant?</h3>
+              <p class="text-text-secondary text-sm">
+                Multiple EU data protection authorities have ruled against Google services. The Danish DPA banned Google Workspace in schools. Austrian, French, and Italian DPAs found Google Analytics transfers illegal. The legal basis for sending EU personal data to US servers is contested, and the current EU-US Data Privacy Framework faces the same structural vulnerabilities as its predecessors. Using Google Workspace for EU personal data carries increasing regulatory risk.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">What is the best GDPR-compliant alternative to Google Workspace?</h3>
+              <p class="text-text-secondary text-sm">
+                For a direct replacement of Gmail, Calendar, and Drive: Proton. Swiss jurisdiction, end-to-end encrypted, zero-knowledge architecture. For businesses that need full document collaboration and total data control: Nextcloud with OnlyOffice, self-hosted or on managed European hosting. For a managed all-in-one suite: Infomaniak kSuite.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">How hard is it to migrate from Google Workspace?</h3>
+              <p class="text-text-secondary text-sm">
+                Email and calendar migration typically takes 1-2 weeks, including DNS changes and mailbox imports. Full drive migration with shared folders and permission structures takes 2-4 weeks. The main difficulty is not technical (most providers offer import tools) but organizational: retraining staff on new interfaces and updating integrated workflows. Running both systems in parallel during the transition period reduces risk.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Is Proton a good replacement for Google Workspace?</h3>
+              <p class="text-text-secondary text-sm">
+                Yes, for email, calendar, and file storage. Proton Mail, Proton Calendar, and Proton Drive cover the core productivity workflow with better privacy than Google. Where Proton falls short is real-time document collaboration. There is no equivalent to Google Docs or Sheets with multi-user editing. Businesses that rely heavily on collaborative spreadsheets or document co-authoring will need to supplement Proton with Nextcloud and OnlyOffice or use Infomaniak kSuite instead.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bottom line -->
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Bottom Line
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Google Workspace is a great product. Nobody disputes that. But for European businesses handling personal data, the legal foundation it sits on is unstable. The CLOUD Act, Schrems II, and a growing list of DPA rulings all point in the same direction: relying on US cloud providers for EU data is a liability, not just a risk.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            The alternatives are mature enough. Proton handles email and calendar better than most businesses need. Nextcloud provides document collaboration that rivals Google Docs. Infomaniak wraps it all in a managed package. None of them are perfect. All of them keep your data in jurisdictions that actually protect it.
+          </p>
+
+          <p class="text-text-secondary">
+            The question is not whether to migrate. It is when. And the businesses that move early will avoid the scramble when the next adequacy decision falls.
+          </p>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/google-workspace-alternative-gdpr`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Data Sovereignty in the Cloud Era</a></li>
+            <li><a href="/insights/self-hosted-alternatives-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted Alternatives to Popular SaaS Tools</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

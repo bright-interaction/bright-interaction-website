@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page Not Found - Bright Interaction" robots="noindex, nofollow">
+  <main class="min-h-screen flex items-center justify-center bg-dark-bg px-4 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gold/3 rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="text-center max-w-2xl relative z-10">
+      <!-- 404 Number with gradient -->
+      <div class="mb-6 relative">
+        <span class="text-[12rem] sm:text-[16rem] font-display font-bold leading-none bg-gradient-to-b from-gold via-gold/60 to-gold/20 bg-clip-text text-transparent select-none">
+          404
+        </span>
+      </div>
+
+      <!-- Divider -->
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-8"></div>
+
+      <!-- Message (English default, swapped by JS for Swedish visitors) -->
+      <h1 id="nf-title" class="font-display text-3xl sm:text-4xl font-bold text-text-primary mb-4">
+        Lost in the Digital Void
+      </h1>
+      <p id="nf-desc" class="text-lg text-text-secondary mb-10 max-w-md mx-auto">
+        The page you're looking for seems to have wandered off into the ether. Let's get you back on track.
+      </p>
+
+      <!-- Actions -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          id="nf-home"
+          href="/"
+          class="group px-8 py-4 bg-gold hover:bg-gold-light text-dark-bg font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-gold/20"
+        >
+          <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          <span>Back to Home</span>
+        </a>
+        <a
+          id="nf-contact"
+          href="/#contact"
+          class="group px-8 py-4 bg-dark-surface hover:bg-dark-elevated text-text-primary font-semibold rounded-xl border border-dark-elevated hover:border-gold/50 transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <span>Get in Touch</span>
+          <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <p id="nf-explore" class="text-sm text-text-muted mb-4">Or explore these sections:</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a id="nf-link-services" href="/#services" class="text-sm text-text-secondary hover:text-gold transition-colors">Services</a>
+          <span class="text-dark-elevated">&bull;</span>
+          <a id="nf-link-about" href="/#about" class="text-sm text-text-secondary hover:text-gold transition-colors">About Us</a>
+          <span class="text-dark-elevated">&bull;</span>
+          <a id="nf-link-privacy" href="/privacy" class="text-sm text-text-secondary hover:text-gold transition-colors">Privacy Policy</a>
+          <span class="text-dark-elevated">&bull;</span>
+          <a id="nf-link-terms" href="/terms" class="text-sm text-text-secondary hover:text-gold transition-colors">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Auto-detect Swedish visitors from URL path or browser language
+  const isSv = location.pathname.startsWith('/sv') ||
+    (navigator.language?.startsWith('sv') && !location.pathname.startsWith('/en'));
+
+  if (isSv) {
+    const el = (id: string) => document.getElementById(id);
+    const title = el('nf-title');
+    const desc = el('nf-desc');
+    const home = el('nf-home');
+    const contact = el('nf-contact');
+    const explore = el('nf-explore');
+
+    if (title) title.textContent = 'Vilse i det digitala tomrummet';
+    if (desc) desc.textContent = 'Sidan du letar efter verkar ha vandrat iväg i etern. Låt oss få dig på rätt spår igen.';
+    if (home) {
+      home.setAttribute('href', '/sv');
+      const span = home.querySelector('span');
+      if (span) span.textContent = 'Tillbaka till startsidan';
+    }
+    if (contact) {
+      contact.setAttribute('href', '/sv/#contact');
+      const span = contact.querySelector('span');
+      if (span) span.textContent = 'Kontakta oss';
+    }
+    if (explore) explore.textContent = 'Eller utforska dessa sektioner:';
+
+    const links: Record<string, [string, string]> = {
+      'nf-link-services': ['/sv/#services', 'Tjänster'],
+      'nf-link-about': ['/sv/#about', 'Om oss'],
+      'nf-link-privacy': ['/sv/privacy', 'Integritetspolicy'],
+      'nf-link-terms': ['/sv/terms', 'Användarvillkor'],
+    };
+    for (const [id, [href, text]] of Object.entries(links)) {
+      const a = el(id);
+      if (a) { a.setAttribute('href', href); a.textContent = text; }
+    }
+  }
+</script>

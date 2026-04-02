@@ -1,0 +1,110 @@
+# Bright Interaction - LLM Context File
+# https://brightinteraction.com
+
+## About
+Bright Interaction is The Infrastructure Firm, providing digital sovereignty solutions with secure, self-hosted infrastructure, workflow automation, and multi-layered security for businesses in Europe and North America.
+
+## Company Information
+- Name: Bright Interaction
+- Location: Malmö, Sweden
+- Contact: contact@brightinteraction.com
+- Phone: +46 76 297 80 35
+
+## Key Pages
+
+### Homepage
+URL: https://brightinteraction.com/
+Description: Main landing page showcasing our services including workflow automation, secure cloud infrastructure, API development, and compliance audits for GDPR/NIS2.
+
+### Privacy Policy
+URL: https://brightinteraction.com/privacy
+Description: Our GDPR-compliant privacy policy detailing how we handle personal data, your rights, and our data protection practices.
+
+### Terms of Service
+URL: https://brightinteraction.com/terms
+Description: Legal terms and conditions for using our services.
+
+### Data Processing Agreement (DPA)
+URL: https://brightinteraction.com/dpa
+Description: Standard contractual clauses and data processing terms for clients under GDPR Article 28.
+
+### Insights
+URL: https://brightinteraction.com/insights
+Description: Expert insights on digital infrastructure, security compliance, and workflow automation.
+
+### GDPR & NIS2 Compliance Guide
+URL: https://brightinteraction.com/insights/gdpr-nis2-compliance-guide
+Description: A practical guide for SMBs on understanding and implementing GDPR and NIS2 compliance strategies.
+
+### Self-Hosted vs SaaS
+URL: https://brightinteraction.com/insights/self-hosted-vs-saas
+Description: A practical framework for evaluating when to self-host vs use SaaS, covering control, cost, and compliance trade-offs.
+
+### Workflow Automation Best Practices
+URL: https://brightinteraction.com/insights/workflow-automation-best-practices
+Description: Best practices for designing automated workflows that are reliable, maintainable, and secure.
+
+### Data Sovereignty in the Cloud Era
+URL: https://brightinteraction.com/insights/data-sovereignty-cloud-era
+Description: Why data sovereignty matters, how cloud dependencies create risks, and strategies for regaining control of your digital assets.
+
+### Security Configuration Essentials
+URL: https://brightinteraction.com/insights/security-configuration-essentials
+Description: Essential security configurations every business should implement to protect their infrastructure from common threats.
+
+### The Hidden Cost of Manual Processes
+URL: https://brightinteraction.com/insights/hidden-cost-of-manual-processes
+Description: Calculate the true cost of manual processes and discover how much revenue you're leaving on the table. Includes interactive calculator.
+
+### n8n vs Zapier Comparison
+URL: https://brightinteraction.com/insights/n8n-vs-zapier
+Description: A detailed comparison of n8n and Zapier covering pricing, features, self-hosting capabilities, and data privacy considerations for 2026.
+
+### Self-Hosted Alternatives to SaaS
+URL: https://brightinteraction.com/insights/self-hosted-alternatives-saas
+Description: Complete guide to self-hosted alternatives for Notion, Slack, Airtable, Asana, Salesforce, and Google Drive with deployment recommendations.
+
+### Healthcare Data Compliance
+URL: https://brightinteraction.com/insights/healthcare-data-compliance
+Description: Comprehensive guide to healthcare data protection in the EU covering GDPR special category data, NIS2 requirements for health sector, and practical implementation strategies.
+
+### Legal Tech Infrastructure
+URL: https://brightinteraction.com/insights/legal-tech-infrastructure
+Description: How law firms can build technology infrastructure that protects client confidentiality, meets bar association obligations, and enables efficient practice management.
+
+### Financial Services Security
+URL: https://brightinteraction.com/insights/financial-services-security
+Description: Practical guide to cybersecurity requirements for financial services firms covering DORA, NIS2, and PSD2 obligations with implementation strategies.
+
+### Container Security Basics
+URL: https://brightinteraction.com/insights/container-security-basics
+Description: Essential practices for securing Docker and containerized applications, covering image security, runtime hardening, network isolation, and secrets management.
+
+### SSO for Small Teams
+URL: https://brightinteraction.com/insights/sso-small-teams
+Description: A practical guide to implementing Single Sign-On for small teams using self-hosted solutions like Authentik, including setup steps and security best practices.
+
+### VPN vs Zero Trust
+URL: https://brightinteraction.com/insights/vpn-vs-zero-trust
+Description: How to choose between traditional VPN and Zero Trust Network Access for remote access, with comparison of security models and implementation options.
+
+## Services Offered
+1. Smart Workflow Automation - Secure systems with automatic error recovery
+2. Private & Secure Cloud Infrastructure - NIS2 & GDPR compliant hosting
+3. Secure System Connections & API Development - Encrypted integrations
+4. Compliance & Security Audits - Automated vulnerability scanning
+5. Secure Data Management - Encrypted database systems
+6. Secure Business Applications - Web apps with security at the core
+
+## Technical Stack
+- Self-hosted infrastructure (no US cloud dependencies for EU clients)
+- EU data residency options (Sweden, Germany)
+- Docker/Kubernetes orchestration
+- n8n workflow automation
+- End-to-end encryption
+
+## Target Audience
+- SMBs seeking GDPR/NIS2 compliance
+- Companies requiring data sovereignty
+- Businesses looking to automate workflows securely
+- Organizations needing self-hosted alternatives to SaaS

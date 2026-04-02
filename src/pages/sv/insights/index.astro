@@ -1,0 +1,415 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { t } from '../../../i18n';
+
+const lang = 'sv';
+
+const insights = [
+  // NOTE: advokatbranschen-gdpr-granskning hidden from listing until press release (noindex on page)
+  {
+    slug: 'minska-saas-kostnader',
+    title: 'Minska SaaS-kostnader med öppen källkod: En guide för svenska företag',
+    excerpt: 'Svenska företag betalar i genomsnitt över 115 000 kr per anställd per år i SaaS-kostnader. Öppna källkodsalternativ kan minska dessa kostnader med upp till 70%.',
+    date: '2026-02-18',
+    readTime: '8 min läsning',
+    category: 'Affärsstrategi',
+    featured: false
+  },
+  {
+    slug: 'cloud-act-risk-svenska-foretag',
+    title: 'Cloud Act vs GDPR: Varför ditt amerikanska moln är en compliance-risk',
+    excerpt: 'Den amerikanska Cloud Act ger myndigheter rätt att kräva data från amerikanska företag, oavsett var datan lagras. Här är vad det innebär för svenska företag.',
+    date: '2026-02-10',
+    readTime: '9 min läsning',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'cybersecurity-industry-benchmark',
+    title: 'Jag granskade 17 cybersäkerhetsbolag - snittet var 73/100',
+    excerpt: 'En analys av hur svenska cybersäkerhetsbolag presterar på sina egna webbplatser. Resultatet visar en bransch i förändring där fler börjar ta sitt eget råd på allvar.',
+    date: '2026-03-27',
+    readTime: '8 min läsning',
+    category: 'Analys',
+    featured: true
+  },
+  {
+    slug: 'gratis-sakerhetsscanning-webbplats',
+    title: 'Gratis säkerhetsscanning av din webbplats: 16 tester på 2 minuter',
+    excerpt: 'Få en kostnadsfri automatiserad säkerhets- och compliancescanning av din webbplats. Vi kontrollerar TLS, GDPR-samtycke, e-postautentisering och 12 fler dimensioner.',
+    date: '2026-03-15',
+    readTime: '5 min läsning',
+    category: 'Säkerhet',
+    featured: false
+  },
+  {
+    slug: 'nis2-checklista',
+    title: 'NIS2-checklista: 12 steg för svenska företag',
+    excerpt: 'En praktisk NIS2-checklista steg för steg för svenska organisationer. Från riskbedömning till incidentrapportering.',
+    date: '2026-03-05',
+    readTime: '9 min läsning',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'cookie-samtycke-krav-sverige-2026',
+    title: 'Krav på cookie-samtycke i Sverige 2026: Vad IMY förväntar sig',
+    excerpt: 'Integritetsskyddsmyndigheten har skärpt tillsynen av cookie-samtycke. Här är exakt vad din webbplats behöver.',
+    date: '2026-02-20',
+    readTime: '7 min läsning',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'sakerhetsrevision-webbplats-kostnad',
+    title: 'Vad kostar en säkerhetsrevision av din webbplats 2026?',
+    excerpt: 'Priser varierar från gratis automatiserade scanningar till 50 000+ kr för manuella penetrationstester. Här är vad du får på varje nivå.',
+    date: '2026-02-10',
+    readTime: '6 min läsning',
+    category: 'Säkerhet',
+    featured: false
+  },
+  {
+    slug: 'gdpr-compliance-case-study',
+    title: 'Vi skannade vår GDPR-compliance, och en konkurrents',
+    excerpt: 'Vi körde vår complianceskanner på oss själva och en konkurrent. Skillnaden på 38 poäng visar varför infrastrukturbeslut väger tyngre än integritetspolicyer.',
+    date: '2026-02-02',
+    readTime: '8 min läsning',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'gdpr-nis2-compliance-guide',
+    title: 'GDPR & NIS2-compliance: Praktisk guide för SMF',
+    excerpt: 'EU:s dataskydds- och cybersäkerhetsregler behöver inte vara krångliga. En guide med konkreta steg för GDPR och NIS2.',
+    date: '2025-12-10',
+    readTime: '8 min läsning',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'self-hosted-vs-saas',
+    title: 'Egenhostat vs SaaS: Rätt val för ditt företag',
+    excerpt: 'När bör du egenhosta och när passar SaaS bättre? En enkel modell för att jämföra kontroll, kostnad och compliance.',
+    date: '2025-12-30',
+    readTime: '7 min läsning',
+    category: 'Infrastruktur',
+    featured: false
+  },
+  {
+    slug: 'workflow-automation-best-practices',
+    title: 'Arbetsflödesautomation: Bygg system som skalar',
+    excerpt: 'Så bygger du automatiserade arbetsflöden som är pålitliga, underhållbara och säkra. Praktiska mönster från verkliga projekt.',
+    date: '2025-12-14',
+    readTime: '9 min läsning',
+    category: 'Automation',
+    featured: false
+  },
+  {
+    slug: 'data-sovereignty-cloud-era',
+    title: 'Datasuveränitet i molnet: Ta kontroll över din data',
+    excerpt: 'Din data är din verksamhet. Varför datasuveränitet spelar roll, hur molnberoenden skapar risker och hur du tar tillbaka kontrollen.',
+    date: '2025-12-22',
+    readTime: '8 min läsning',
+    category: 'Datastrategi',
+    featured: false
+  },
+  {
+    slug: 'security-configuration-essentials',
+    title: 'Grundläggande säkerhetskonfiguration: Skydda din infrastruktur',
+    excerpt: 'De flesta intrång beror på felkonfigurationer, inte avancerade attacker. Här är säkerhetsinställningarna varje företag bör ha på plats.',
+    date: '2026-01-20',
+    readTime: '10 min läsning',
+    category: 'Säkerhet',
+    featured: false
+  },
+  {
+    slug: 'hidden-cost-of-manual-processes',
+    title: 'Den dolda kostnaden för manuella processer: Vad du egentligen betalar',
+    excerpt: 'Den där kalkylbladsuppdateringen tar bara 10 minuter. Multiplicera det över ditt team och ett år. Den verkliga kostnaden kan överraska dig.',
+    date: '2026-01-28',
+    readTime: '6 min läsning',
+    category: 'Affärsstrategi',
+    featured: false
+  },
+  {
+    slug: 'n8n-vs-zapier',
+    title: 'n8n vs Zapier: Den kompletta jämförelsen för 2026',
+    excerpt: 'Jämförelse av n8n och Zapier: prissättning, funktioner, dataintegritet och vilket som passar ditt företag.',
+    date: '2025-12-18',
+    readTime: '10 min läsning',
+    category: 'Automation',
+    featured: false
+  },
+  {
+    slug: 'self-hosted-alternatives-saas',
+    title: 'Egenhostade alternativ till populära SaaS-verktyg',
+    excerpt: 'Ta kontroll över din data med open source-alternativ till Notion, Slack, Airtable och fler. Komplett guide med driftsättningstips.',
+    date: '2026-01-16',
+    readTime: '12 min läsning',
+    category: 'Infrastruktur',
+    featured: false
+  },
+  {
+    slug: 'healthcare-data-compliance',
+    title: 'Compliance för hälsodata: GDPR, NIS2 och patientsekretess',
+    excerpt: 'Guide till dataskydd inom hälso- och sjukvård i EU. GDPR:s särskilda kategorier, NIS2-krav och hur du uppfyller dem.',
+    date: '2026-01-04',
+    readTime: '12 min läsning',
+    category: 'Hälso- & sjukvård',
+    featured: false
+  },
+  {
+    slug: 'legal-tech-infrastructure',
+    title: 'Legal tech-infrastruktur: Bygga säkra system för advokatbyråer',
+    excerpt: 'Hur advokatbyråer bygger teknik som skyddar klientdata, uppfyller yrkeskrav och effektiviserar verksamheten.',
+    date: '2025-12-26',
+    readTime: '11 min läsning',
+    category: 'Juridik',
+    featured: false
+  },
+  {
+    slug: 'financial-services-security',
+    title: 'Säkerhet för finanssektorn: DORA, NIS2 och stabil infrastruktur',
+    excerpt: 'Praktisk guide till cybersäkerhetskrav för finansföretag i EU. DORA, NIS2 och PSD2 förklarat.',
+    date: '2026-01-08',
+    readTime: '13 min läsning',
+    category: 'Finansiella tjänster',
+    featured: false
+  },
+  {
+    slug: 'container-security-basics',
+    title: 'Grunderna i containersäkerhet: Skydda din Docker-infrastruktur',
+    excerpt: 'Containers gör driftsättning enkelt, men skapar nya säkerhetsrisker. Så säkrar du din Docker-miljö.',
+    date: '2025-12-06',
+    readTime: '9 min läsning',
+    category: 'Infrastruktur',
+    featured: false
+  },
+  {
+    slug: 'sso-small-teams',
+    title: 'Konfigurera SSO för små team: En praktisk guide',
+    excerpt: 'Single Sign-On är inte bara för storföretag. Så sätter du upp SSO för ditt lilla team med egenhostade lösningar.',
+    date: '2026-01-24',
+    readTime: '10 min läsning',
+    category: 'Säkerhet',
+    featured: false
+  },
+  {
+    slug: 'vpn-vs-zero-trust',
+    title: 'VPN vs Zero Trust: Välja rätt modell för fjärråtkomst',
+    excerpt: 'VPN förutsätter tillit efter anslutning. Zero Trust förutsätter ingen. Så väljer du rätt modell för din organisation.',
+    date: '2026-01-12',
+    readTime: '11 min läsning',
+    category: 'Säkerhet',
+    featured: false
+  }
+];
+---
+
+<Layout
+  title={t(lang, 'insights.pageTitle')}
+  description={t(lang, 'insights.pageDescription')}
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative py-16 overflow-hidden">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -z-10"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-dark-surface border border-gold/30 text-gold rounded-full text-sm font-medium mb-6">
+            <span class="w-2 h-2 bg-gold rounded-full animate-pulse"></span>
+            {t(lang, 'insights.badge')}
+          </div>
+          <h1 class="font-display text-4xl sm:text-5xl font-bold text-text-primary mb-6">
+            {t(lang, 'insights.title1')}<span class="text-gold">{t(lang, 'insights.title2')}</span>
+          </h1>
+          <p class="text-xl text-text-secondary mb-6">
+            {t(lang, 'insights.description')}
+          </p>
+          <p class="text-text-secondary">
+            Vi hjälper svenska företag ta kontroll över sin digitala infrastruktur. Från GDPR- och NIS2-compliance
+            till egenhostade alternativ och arbetsflödesautomation. Våra guider bygger på verklig implementationserfarenhet,
+            inklusive scanning av <strong class="text-text-primary">597 svenska advokatbyråer</strong> och granskning av
+            <strong class="text-text-primary">17 cybersäkerhetsbolag</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ämneskluster -->
+    <section class="pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h2 class="text-lg font-bold text-text-primary mb-2">Compliance & GDPR</h2>
+            <p class="text-text-secondary text-sm mb-3">GDPR, NIS2, Cloud Act, cookie-samtycke och datasuveränitet för svenska företag.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="/sv/insights/cloud-act-risk-svenska-foretag" class="text-gold-dark text-xs hover:text-gold transition-colors">Cloud Act vs GDPR</a>
+              <span class="text-dark-elevated">|</span>
+              <a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold-dark text-xs hover:text-gold transition-colors">GDPR & NIS2-guide</a>
+              <span class="text-dark-elevated">|</span>
+              <a href="/sv/insights/nis2-checklista" class="text-gold-dark text-xs hover:text-gold transition-colors">NIS2-checklista</a>
+            </div>
+          </div>
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h2 class="text-lg font-bold text-text-primary mb-2">Kostnader & Alternativ</h2>
+            <p class="text-text-secondary text-sm mb-3">SaaS-kostnader, öppen källkod-alternativ och egenhostade lösningar för svenska företag.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="/sv/insights/minska-saas-kostnader" class="text-gold-dark text-xs hover:text-gold transition-colors">Minska SaaS-kostnader</a>
+              <span class="text-dark-elevated">|</span>
+              <a href="/sv/insights/self-hosted-vs-saas" class="text-gold-dark text-xs hover:text-gold transition-colors">Egenhostat vs SaaS</a>
+              <span class="text-dark-elevated">|</span>
+              <a href="/sv/insights/n8n-vs-zapier" class="text-gold-dark text-xs hover:text-gold transition-colors">n8n vs Zapier</a>
+            </div>
+          </div>
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h2 class="text-lg font-bold text-text-primary mb-2">Branschrapporter</h2>
+            <p class="text-text-secondary text-sm mb-3">Originalforskning och granskningsdata från scanning av riktiga svenska företag.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="/sv/insights/cybersecurity-industry-benchmark" class="text-gold-dark text-xs hover:text-gold transition-colors">17 cybersäkerhetsbolag</a>
+              <span class="text-dark-elevated">|</span>
+              <a href="/sv/insights/sakerhetsrevision-webbplats-kostnad" class="text-gold-dark text-xs hover:text-gold transition-colors">Revisionskostnader</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="pb-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="filter-pills" class="flex flex-wrap gap-2">
+          <button data-filter="all" class="filter-pill active px-4 py-2 rounded-full text-sm font-medium transition-colors">{t(lang, 'insights.filterAll')}</button>
+          {[...new Set(insights.map(a => a.category))].map(cat => (
+            <button data-filter={cat} class="filter-pill px-4 py-2 rounded-full text-sm font-medium transition-colors">{cat}</button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="insights-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {insights.map((article) => (
+            <article data-category={article.category} class="group bg-dark-surface rounded-2xl border border-dark-elevated hover:border-gold/30 transition-all overflow-hidden">
+              <a href={`/sv/insights/${article.slug}`} class="block p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="px-3 py-1 bg-[#e0eff2] text-[#0a5e73] text-sm font-medium rounded-full">
+                    {article.category}
+                  </span>
+                  {article.featured && (
+                    <span class="px-3 py-1 bg-dark-elevated text-text-secondary text-sm rounded-full">
+                      {t(lang, 'insights.featured')}
+                    </span>
+                  )}
+                </div>
+                <h2 class="font-display text-xl font-bold text-text-primary mb-3 group-hover:text-gold transition-colors">
+                  {article.title}
+                </h2>
+                <p class="text-text-secondary mb-4 line-clamp-3">
+                  {article.excerpt}
+                </p>
+                <div class="flex items-center justify-between text-sm text-text-secondary">
+                  <time datetime={article.date}>
+                    {new Date(article.date).toLocaleDateString('sv-SE', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span>{article.readTime}</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        {insights.length === 0 && (
+          <div class="text-center py-16">
+            <p class="text-text-secondary text-lg">{t(lang, 'insights.empty')}</p>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="bg-dark-surface rounded-2xl border border-dark-elevated p-8 md:p-12">
+          <h2 class="font-display text-2xl md:text-3xl font-bold text-text-primary mb-4">
+            {t(lang, 'insights.ctaTitle')}
+          </h2>
+          <p class="text-text-secondary mb-8 max-w-2xl mx-auto">
+            {t(lang, 'insights.ctaDescription')}
+          </p>
+          <button
+            data-cal-trigger
+            class="inline-flex items-center gap-2 px-8 py-4 bg-gold hover:bg-gold-light text-dark-bg font-semibold rounded-xl transition-colors cursor-pointer"
+          >
+            {t(lang, 'insights.ctaButton')}
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/sv" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        {t(lang, 'common.backHome')}
+      </a>
+    </div>
+  </main>
+  <Footer lang={lang} />
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .filter-pill {
+    background: #ffffff;
+    color: #52525b;
+    border: 1px solid #e7e5e4;
+    cursor: pointer;
+  }
+  .filter-pill:hover {
+    border-color: rgba(8, 145, 178, 0.3);
+    color: #0891B2;
+  }
+  .filter-pill.active {
+    background: #0E7490;
+    color: #ffffff;
+    border-color: #0E7490;
+  }
+</style>
+
+<script>
+  const pills = document.querySelectorAll<HTMLButtonElement>('#filter-pills .filter-pill');
+  const cards = document.querySelectorAll<HTMLElement>('#insights-grid [data-category]');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>

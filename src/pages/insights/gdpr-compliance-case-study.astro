@@ -1,0 +1,387 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+
+const title = "How We Score 92.3/100 on GDPR Compliance (And What We Learned Scanning a Competitor)";
+const description = "We ran our own compliance scanner on ourselves and a competitor. The 38-point gap reveals why infrastructure decisions matter more than privacy policies.";
+const publishDate = '2026-02-02';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/gdpr-compliance-case-study"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout title={`${title} - Bright Interaction`} description={description} type="article">
+  <Header />
+  <main class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article>
+        <header class="mb-12">
+          <Breadcrumb title={title} />
+          <div class="flex flex-wrap gap-3 mb-4">
+            <time datetime="2026-02-02" class="text-sm text-text-muted">February 2, 2026</time>
+            <span class="text-sm px-2 py-0.5 bg-gold/20 text-gold rounded">Compliance</span>
+            <span class="text-sm text-text-muted">8 min read</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+            {title}
+          </h1>
+          <p class="text-xl text-text-secondary leading-relaxed">
+            We practice what we preach. So we ran our SVAR compliance scanner on our own website.
+            Then we scanned a competitor in our space. The results? A 38-point gap that comes down
+            to infrastructure decisions most companies never think about.
+          </p>
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Why We Scanned Ourselves</h2>
+            <p class="text-text-secondary mb-4">
+              At Bright Interaction, we help companies achieve data sovereignty and GDPR compliance.
+              But how do we stack up against our own standards? We decided to find out, and to compare
+              ourselves against a similar B2B technology company operating in Europe.
+            </p>
+            <p class="text-text-secondary">
+              Using our automated SVAR scanner, we analyzed both websites across 13 compliance and
+              security dimensions. The results tell a story about how small infrastructure choices
+              create massive differences in legal exposure.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">The Scorecard</h2>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Metric</th>
+                    <th class="text-left py-3 px-4 text-gold font-medium">Bright Interaction</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Competitor</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Overall Score</td>
+                    <td class="py-3 px-4 text-green-400 font-semibold">92.3/100 (A)</td>
+                    <td class="py-3 px-4 text-red-400">53.8/100 (C)</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Tests Passed</td>
+                    <td class="py-3 px-4 text-green-400">12/13</td>
+                    <td class="py-3 px-4 text-red-400">7/13</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Pre-Consent Tracking Violations</td>
+                    <td class="py-3 px-4 text-green-400">0</td>
+                    <td class="py-3 px-4 text-red-400">3</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">US CDN Dependencies</td>
+                    <td class="py-3 px-4 text-green-400">0</td>
+                    <td class="py-3 px-4 text-red-400">3</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Estimated Illegal Transfers/Month</td>
+                    <td class="py-3 px-4 text-green-400">0</td>
+                    <td class="py-3 px-4 text-red-400">~2,700</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Cookie Banner</td>
+                    <td class="py-3 px-4 text-green-400">Yes (CookieProof, consent-gated)</td>
+                    <td class="py-3 px-4 text-red-400">Yes (fires before consent)</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Privacy Policy GDPR Compliance</td>
+                    <td class="py-3 px-4 text-green-400">100%</td>
+                    <td class="py-3 px-4 text-red-400">40%</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">TLS/NIS2 Score</td>
+                    <td class="py-3 px-4 text-green-400">100/100</td>
+                    <td class="py-3 px-4 text-green-400">100/100</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Web Hosting Location</td>
+                    <td class="py-3 px-4 text-green-400">EU (Germany)</td>
+                    <td class="py-3 px-4 text-red-400">US (Cloudflare)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">The Critical Difference: Pre-Consent Tracking</h2>
+            <p class="text-text-secondary mb-4">
+              The biggest gap? Our competitor loads Google Tag Manager and Google Ads tracking scripts
+              that fire <strong class="text-text-primary">before</strong> any consent is given.
+            </p>
+            <p class="text-text-secondary mb-4">
+              When a visitor loads their homepage, three tracking requests are sent to US servers
+              before they've clicked anything. Under GDPR Article 6(1)(a), processing personal data
+              (including IP addresses) requires consent <em>before</em> the processing occurs—not after.
+            </p>
+
+            <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-amber-400 mb-2">The Math of Non-Compliance</h4>
+              <p class="text-text-secondary text-sm">
+                With approximately 900 monthly visitors and 3 tracking violations per visit,
+                our competitor generates roughly <strong class="text-text-primary">2,700 illegal data transfers per month</strong>.
+                Each of these is a potential GDPR violation.
+              </p>
+            </div>
+
+            <p class="text-text-secondary">
+              At Bright Interaction, we use Google Analytics but gate it behind our own consent banner,
+              CookieProof. No tracking scripts fire until the visitor explicitly opts in. The difference
+              is simple: our competitor tracks first and asks later. We ask first and only track after consent.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">The Hidden CDN Problem</h2>
+            <p class="text-text-secondary mb-4">
+              Our competitor loads fonts, JavaScript, and map widgets from Google's CDN servers.
+              These requests broadcast visitor IP addresses to US servers on every page load—even
+              if they removed all tracking scripts.
+            </p>
+            <p class="text-text-secondary mb-4">
+              This is what we call the "backdoor GDPR violation": a compliance gap that most
+              companies miss entirely because they focus on obvious trackers while ignoring
+              infrastructure dependencies.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-6">
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h4 class="font-semibold text-red-400 mb-3">Competitor's CDN Dependencies</h4>
+                <ul class="text-text-secondary text-sm space-y-2">
+                  <li>Google Maps API (googleapis.com)</li>
+                  <li>Google Fonts (fonts.gstatic.com)</li>
+                  <li>Google Tag Manager (googletagmanager.com)</li>
+                </ul>
+              </div>
+              <div class="bg-dark-surface p-6 rounded-xl border border-gold/30">
+                <h4 class="font-semibold text-green-400 mb-3">Our Approach</h4>
+                <ul class="text-text-secondary text-sm space-y-2">
+                  <li>Self-hosted fonts</li>
+                  <li>Google Analytics, consent-gated via CookieProof</li>
+                  <li>Zero scripts fire before explicit opt-in</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">The CLOUD Act Exposure</h2>
+            <p class="text-text-secondary mb-4">
+              Both companies have some US infrastructure exposure, but the nature differs significantly.
+            </p>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">Our Setup</h3>
+            <p class="text-text-secondary mb-4">
+              Our web hosting is on EU servers in Germany (Hetzner). Our only US exposure is email
+              via Google Workspace—meaning internal communications could theoretically be subpoenaed
+              under the CLOUD Act, but customer-facing web traffic stays entirely in Europe.
+            </p>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">Competitor's Setup</h3>
+            <p class="text-text-secondary mb-4">
+              Their web hosting is on Cloudflare (US company). Every visitor interaction, form
+              submission, and page view passes through US-controlled infrastructure. Under the
+              CLOUD Act, US authorities can compel Cloudflare to hand over this data without
+              the company's knowledge.
+            </p>
+
+            <div class="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-red-400 mb-2">Post-Schrems II Reality</h4>
+              <p class="text-text-secondary text-sm">
+                Since the Schrems II ruling invalidated Privacy Shield, companies transferring
+                EU personal data to US infrastructure need "adequate safeguards," which is
+                increasingly difficult to demonstrate when using US cloud providers.
+              </p>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Consent Done Right: CookieProof</h2>
+            <p class="text-text-secondary mb-4">
+              Both companies use a cookie consent banner. The difference is what happens before the
+              visitor makes a choice.
+            </p>
+            <p class="text-text-secondary mb-4">
+              Our competitor loads tracking scripts that fire immediately, then shows a banner asking
+              for consent after the data has already been sent. That sequence violates GDPR Article 6(1)(a).
+            </p>
+            <p class="text-text-secondary mb-4">
+              We built CookieProof, our own consent engine. It blocks Google Analytics and every other
+              tracking script until the visitor explicitly opts in. No scripts, no cookies, no network
+              requests to third parties until consent is given. The banner is not decoration. It is the gate.
+            </p>
+            <p class="text-text-secondary">
+              The result: we get the analytics data we need for business decisions while maintaining
+              zero pre-consent tracking violations. You do not have to choose between useful analytics
+              and GDPR compliance. You just need to get the order right. For a full breakdown of what Swedish law requires, see our guide on <a href="/insights/cookie-consent-requirements-sweden-2026" class="text-gold-dark hover:underline">cookie consent requirements in Sweden 2026</a>.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">What We Both Got Right</h2>
+            <p class="text-text-secondary mb-4">
+              It's not all bad news for our competitor. Both companies demonstrate strong practices in:
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2">
+              <li><strong class="text-text-primary">TLS/SSL Configuration:</strong> Both achieved 100/100 on NIS2 cryptographic requirements</li>
+              <li><strong class="text-text-primary">Email Authentication:</strong> Both have DMARC policies set to "reject"</li>
+              <li><strong class="text-text-primary">No Exposed Secrets:</strong> Neither company leaked sensitive paths or credentials</li>
+              <li><strong class="text-text-primary">No PDF Metadata Leaks:</strong> No personally identifiable information in document metadata</li>
+            </ul>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">The Fine Exposure</h2>
+            <p class="text-text-secondary mb-4">
+              Under GDPR Article 83, violations can result in fines up to 20 million EUR or 4%
+              of global annual turnover. Based on the violations detected:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Company</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Estimated Fine Range</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Primary Violation</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 text-gold">Bright Interaction</td>
+                    <td class="py-3 px-4">10,000 - 500,000 EUR</td>
+                    <td class="py-3 px-4">Email infrastructure on US cloud</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Competitor</td>
+                    <td class="py-3 px-4 text-red-400">100,000 - 10,000,000 EUR</td>
+                    <td class="py-3 px-4">Unlawful data transfers</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="text-text-secondary">
+              The 20x difference in potential exposure comes down to the nature of the violations.
+              Processing without consent falls under Article 83(5)—the higher tier of penalties.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">What We're Working On</h2>
+            <p class="text-text-secondary mb-4">
+              We're not perfect. Our one failed test is:
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2 mb-4">
+              <li><strong class="text-text-primary">Email infrastructure:</strong> We use Google Workspace, which creates CLOUD Act exposure for internal communications. Our 5 MX records point to Google's US servers, meaning client emails could theoretically be subpoenaed under US law.</li>
+            </ul>
+            <p class="text-text-secondary">
+              We're evaluating EU-sovereign email providers like Proton Mail Business and self-hosted Mailcow to eliminate this final US exposure and achieve 100% sovereignty.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Key Takeaways</h2>
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">1.</span>
+                <span><strong class="text-text-primary">Infrastructure choices matter:</strong> Where your servers are located determines your legal exposure.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">2.</span>
+                <span><strong class="text-text-primary">Tracking before consent is illegal:</strong> Every script that fires before consent is a GDPR violation.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">3.</span>
+                <span><strong class="text-text-primary">CDNs are often overlooked:</strong> Loading fonts from Google is a data transfer, even if you don't think of it that way.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">4.</span>
+                <span><strong class="text-text-primary">Consent-first analytics works:</strong> You can use Google Analytics and stay compliant. Block everything until the visitor opts in.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">5.</span>
+                <span><strong class="text-text-primary">The CLOUD Act is real:</strong> US-hosted data is subject to US law, regardless of where your company is located.</span>
+              </li>
+            </ul>
+          </section>
+
+          <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Get Your Free Compliance Scan</h2>
+            <p class="text-text-secondary mb-6">
+              Want to know where your company stands? Our SVAR compliance scanner analyzes
+              13 compliance and security dimensions. See your score, understand your risks,
+              and get actionable recommendations. We also help businesses remediate the issues we find -- see our <a href="/#services" class="text-gold-dark hover:underline">services</a> or <a href="/#contact" class="text-gold-dark hover:underline">get in touch</a>.
+            </p>
+            <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+              Request a Free Scan
+            </button>
+          </section>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2 Compliance: A Practical Guide</a></li>
+            <li><a href="/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Data Sovereignty in the Cloud Era</a></li>
+            <li><a href="/insights/cookie-consent-requirements-sweden-2026" class="text-gold hover:text-gold-light transition-colors text-sm">Cookie Consent Requirements in Sweden 2026</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Back to Insights
+        </a>
+      </div>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+  <Footer />
+</Layout>

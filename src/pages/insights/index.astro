@@ -1,0 +1,449 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const insights = [
+  // NOTE: swedish-law-firms-gdpr-audit hidden from listing until press release (noindex on page)
+  {
+    slug: 'slack-vs-mattermost-gdpr',
+    title: 'Slack vs Mattermost: Which One Is Actually GDPR Compliant?',
+    excerpt: 'Slack is US-owned. Even with EU hosting, CLOUD Act exposure remains. We compare Slack and Mattermost on GDPR compliance, features, and real costs for European teams.',
+    date: '2026-03-20',
+    readTime: '8 min read',
+    category: 'Infrastructure',
+    featured: false
+  },
+  {
+    slug: 'auth0-alternatives-europe',
+    title: 'Auth0 Alternatives for Europe: Self-Hosted Identity That Meets GDPR',
+    excerpt: 'Auth0 is US-based. For European businesses, this creates GDPR risk. We compare Zitadel, Keycloak, Authentik, and more.',
+    date: '2026-03-08',
+    readTime: '9 min read',
+    category: 'Security',
+    featured: false
+  },
+  {
+    slug: 'coolify-vs-vercel',
+    title: 'Coolify vs Vercel: How We Cut Deployment Costs by 98%',
+    excerpt: 'Vercel bills can spiral to $850/mo. We moved to Coolify on Hetzner for $14/mo. Here is the real cost comparison with migration guide.',
+    date: '2026-02-26',
+    readTime: '8 min read',
+    category: 'Infrastructure',
+    featured: false
+  },
+  {
+    slug: 'google-workspace-alternative-gdpr',
+    title: 'Google Workspace Alternatives for GDPR: What European Businesses Should Use Instead',
+    excerpt: 'Multiple EU authorities have ruled against Google Workspace. Here are the GDPR-compliant alternatives with real pricing and migration timelines.',
+    date: '2026-02-14',
+    readTime: '10 min read',
+    category: 'Infrastructure',
+    featured: false
+  },
+  {
+    slug: 'cloud-act-gdpr-conflict',
+    title: 'The CLOUD Act vs GDPR: Why Your US Cloud Provider Is a Compliance Risk',
+    excerpt: 'The US CLOUD Act lets authorities demand data from US companies regardless of where it is stored. This directly conflicts with GDPR. Here is what it means for your business.',
+    date: '2026-02-06',
+    readTime: '9 min read',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'saas-cost-per-employee',
+    title: 'What SaaS Really Costs Per Employee in 2026 (And How to Cut It by 70%)',
+    excerpt: 'The average company spends $10,800 per employee on SaaS in 2026. Open source alternatives can cut that by 70%. Here is the math.',
+    date: '2026-01-30',
+    readTime: '8 min read',
+    category: 'Business Strategy',
+    featured: false
+  },
+  {
+    slug: 'cybersecurity-industry-benchmark',
+    title: 'I Audited 17 Cybersecurity Companies - The Average Score Was 73/100',
+    excerpt: 'An analysis of how Swedish cybersecurity companies perform on their own websites. The results reveal an industry in transition, where more are starting to practice what they preach.',
+    date: '2026-03-27',
+    readTime: '8 min read',
+    category: 'Analysis',
+    featured: true
+  },
+  {
+    slug: 'free-website-security-scan',
+    title: 'Free Website Security Scan: 16 Tests in 2 Minutes',
+    excerpt: 'Get a free automated security and compliance scan of your website. We check TLS, GDPR consent, email authentication, data jurisdiction, and 12 more dimensions.',
+    date: '2026-03-15',
+    readTime: '5 min read',
+    category: 'Security',
+    featured: false
+  },
+  {
+    slug: 'nis2-compliance-checklist',
+    title: 'NIS2 Compliance Checklist: 12 Steps for Swedish Businesses',
+    excerpt: 'A practical, step-by-step NIS2 compliance checklist. From risk assessment to incident reporting, with concrete actions for each requirement.',
+    date: '2026-03-05',
+    readTime: '9 min read',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'cookie-consent-requirements-sweden-2026',
+    title: 'Cookie Consent Requirements in Sweden 2026: What IMY Expects',
+    excerpt: 'Sweden\'s data protection authority has updated cookie consent enforcement. Here\'s exactly what your website needs to comply.',
+    date: '2026-02-20',
+    readTime: '7 min read',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'website-security-audit-cost',
+    title: 'How Much Does a Website Security Audit Cost in 2026?',
+    excerpt: 'Security audit pricing ranges from free automated scans to 50,000+ SEK manual penetration tests. Here\'s what you get at each level.',
+    date: '2026-02-10',
+    readTime: '6 min read',
+    category: 'Security',
+    featured: false
+  },
+  {
+    slug: 'gdpr-compliance-case-study',
+    title: 'We Scanned Our GDPR Compliance, And a Competitor\'s',
+    excerpt: 'We ran our compliance scanner on ourselves and a competitor. The 38-point gap shows why infrastructure decisions matter more than privacy policies.',
+    date: '2026-02-02',
+    readTime: '8 min read',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'gdpr-nis2-compliance-guide',
+    title: 'GDPR & NIS2 Compliance: A Practical Guide for SMBs',
+    excerpt: 'EU data protection and cybersecurity rules don\'t have to be complicated. A guide with concrete steps for GDPR and NIS2.',
+    date: '2025-12-10',
+    readTime: '8 min read',
+    category: 'Compliance',
+    featured: false
+  },
+  {
+    slug: 'self-hosted-vs-saas',
+    title: 'Self-Hosted vs SaaS: Making the Right Choice for Your Business',
+    excerpt: 'When should you self-host and when does SaaS make more sense? A simple model for comparing control, cost, and compliance.',
+    date: '2025-12-30',
+    readTime: '7 min read',
+    category: 'Infrastructure',
+    featured: false
+  },
+  {
+    slug: 'workflow-automation-best-practices',
+    title: 'Workflow Automation: Building Systems That Scale',
+    excerpt: 'How to build automated workflows that are reliable, maintainable, and secure. Practical patterns from real projects.',
+    date: '2025-12-14',
+    readTime: '9 min read',
+    category: 'Automation',
+    featured: false
+  },
+  {
+    slug: 'data-sovereignty-cloud-era',
+    title: 'Data Sovereignty in the Cloud: Taking Control of Your Data',
+    excerpt: 'Your data is your business. Why data sovereignty matters, how cloud dependencies create risks, and how to take back control.',
+    date: '2025-12-22',
+    readTime: '8 min read',
+    category: 'Data Strategy',
+    featured: false
+  },
+  {
+    slug: 'security-configuration-essentials',
+    title: 'Security Configuration Essentials: Protecting Your Infrastructure',
+    excerpt: 'Most breaches come from misconfiguration, not advanced attacks. Here are the security settings every business should have in place.',
+    date: '2026-01-20',
+    readTime: '10 min read',
+    category: 'Security',
+    featured: false
+  },
+  {
+    slug: 'hidden-cost-of-manual-processes',
+    title: 'The Hidden Cost of Manual Processes: What You\'re Really Paying',
+    excerpt: 'That spreadsheet update only takes 10 minutes. Multiply it across your team and a year. The real cost might surprise you.',
+    date: '2026-01-28',
+    readTime: '6 min read',
+    category: 'Business Strategy',
+    featured: false
+  },
+  {
+    slug: 'n8n-vs-zapier',
+    title: 'n8n vs Zapier: The Complete Comparison for 2026',
+    excerpt: 'Comparing n8n and Zapier: pricing, features, data privacy, and which fits your business.',
+    date: '2025-12-18',
+    readTime: '10 min read',
+    category: 'Automation',
+    featured: false
+  },
+  {
+    slug: 'self-hosted-alternatives-saas',
+    title: 'Self-Hosted Alternatives to Popular SaaS Tools',
+    excerpt: 'Take control of your data with open-source alternatives to Notion, Slack, Airtable, and more. Complete guide with deployment tips.',
+    date: '2026-01-16',
+    readTime: '12 min read',
+    category: 'Infrastructure',
+    featured: false
+  },
+  {
+    slug: 'healthcare-data-compliance',
+    title: 'Healthcare Data Compliance: GDPR, NIS2, and Patient Privacy',
+    excerpt: 'Guide to healthcare data protection in the EU. GDPR special category data, NIS2 requirements, and how to meet them.',
+    date: '2026-01-04',
+    readTime: '12 min read',
+    category: 'Healthcare',
+    featured: false
+  },
+  {
+    slug: 'legal-tech-infrastructure',
+    title: 'Legal Tech Infrastructure: Building Secure Systems for Law Firms',
+    excerpt: 'How law firms build tech that protects client data, meets professional requirements, and streamlines operations.',
+    date: '2025-12-26',
+    readTime: '11 min read',
+    category: 'Legal',
+    featured: false
+  },
+  {
+    slug: 'financial-services-security',
+    title: 'Financial Services Security: DORA, NIS2, and Stable Infrastructure',
+    excerpt: 'Practical guide to cybersecurity requirements for financial firms in the EU. DORA, NIS2, and PSD2 explained.',
+    date: '2026-01-08',
+    readTime: '13 min read',
+    category: 'Financial Services',
+    featured: false
+  },
+  {
+    slug: 'container-security-basics',
+    title: 'Container Security Basics: Protecting Your Docker Infrastructure',
+    excerpt: 'Containers make deployment easy, but create new security risks. How to secure your Docker environment.',
+    date: '2025-12-06',
+    readTime: '9 min read',
+    category: 'Infrastructure',
+    featured: false
+  },
+  {
+    slug: 'sso-small-teams',
+    title: 'Setting Up SSO for Small Teams: A Practical Guide',
+    excerpt: 'Single Sign-On isn\'t just for enterprises. How to set up SSO for your small team with self-hosted solutions.',
+    date: '2026-01-24',
+    readTime: '10 min read',
+    category: 'Security',
+    featured: false
+  },
+  {
+    slug: 'vpn-vs-zero-trust',
+    title: 'VPN vs Zero Trust: Choosing the Right Remote Access Model',
+    excerpt: 'VPN assumes trust once connected. Zero Trust assumes none. How to pick the right model for your organization.',
+    date: '2026-01-12',
+    readTime: '11 min read',
+    category: 'Security',
+    featured: false
+  }
+];
+---
+
+<Layout
+  title="Infrastructure & Compliance Insights | Bright Interaction"
+  description="Practical guides on digital infrastructure, security compliance, and workflow automation for businesses navigating GDPR, NIS2, and modern IT."
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-surface min-h-screen">
+    <!-- Hero Section -->
+    <section class="relative py-16 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-mono text-gold-dark mb-4 tracking-wide uppercase">Knowledge Base</p>
+          <h1 class="text-4xl sm:text-5xl font-bold text-text-primary mb-6 tracking-tight">
+            Insights & <span class="text-gold">Guides</span>
+          </h1>
+          <p class="text-xl text-text-secondary mb-6">
+            Practical knowledge for navigating digital infrastructure, compliance regulations, and automation.
+            Complex topics explained in plain language.
+          </p>
+          <p class="text-text-secondary">
+            We help Swedish businesses take control of their digital infrastructure. From GDPR and NIS2 compliance
+            to self-hosted alternatives and workflow automation. Our guides are based on real implementation experience,
+            including scanning <strong class="text-text-primary">597 Swedish law firms</strong> and auditing
+            <strong class="text-text-primary">17 cybersecurity companies</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topic Clusters -->
+    <section class="pb-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-xl border border-border p-6">
+            <h2 class="text-lg font-bold text-text-primary mb-2">Compliance & GDPR</h2>
+            <p class="text-text-secondary text-sm mb-3">GDPR, NIS2, CLOUD Act, cookie consent, and data sovereignty for European businesses.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="/insights/cloud-act-gdpr-conflict" class="text-gold-dark text-xs hover:text-gold transition-colors">CLOUD Act vs GDPR</a>
+              <span class="text-border">|</span>
+              <a href="/insights/gdpr-nis2-compliance-guide" class="text-gold-dark text-xs hover:text-gold transition-colors">GDPR & NIS2 Guide</a>
+              <span class="text-border">|</span>
+              <a href="/insights/nis2-compliance-checklist" class="text-gold-dark text-xs hover:text-gold transition-colors">NIS2 Checklist</a>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl border border-border p-6">
+            <h2 class="text-lg font-bold text-text-primary mb-2">SaaS Comparisons</h2>
+            <p class="text-text-secondary text-sm mb-3">Real cost comparisons and migration guides for replacing SaaS with open source.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="/insights/google-workspace-alternative-gdpr" class="text-gold-dark text-xs hover:text-gold transition-colors">Google Workspace Alt.</a>
+              <span class="text-border">|</span>
+              <a href="/insights/coolify-vs-vercel" class="text-gold-dark text-xs hover:text-gold transition-colors">Coolify vs Vercel</a>
+              <span class="text-border">|</span>
+              <a href="/insights/slack-vs-mattermost-gdpr" class="text-gold-dark text-xs hover:text-gold transition-colors">Slack vs Mattermost</a>
+              <span class="text-border">|</span>
+              <a href="/insights/auth0-alternatives-europe" class="text-gold-dark text-xs hover:text-gold transition-colors">Auth0 Alternatives</a>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl border border-border p-6">
+            <h2 class="text-lg font-bold text-text-primary mb-2">Industry Reports</h2>
+            <p class="text-text-secondary text-sm mb-3">Original research, audit data, and cost analysis from real implementations.</p>
+            <div class="flex flex-wrap gap-2">
+              <a href="/insights/cybersecurity-industry-benchmark" class="text-gold-dark text-xs hover:text-gold transition-colors">17 Cybersec Companies</a>
+              <span class="text-border">|</span>
+              <a href="/insights/saas-cost-per-employee" class="text-gold-dark text-xs hover:text-gold transition-colors">SaaS Cost Analysis</a>
+              <span class="text-border">|</span>
+              <a href="/insights/website-security-audit-cost" class="text-gold-dark text-xs hover:text-gold transition-colors">Audit Costs 2026</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="pb-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="filter-pills" class="flex flex-wrap gap-2">
+          <button data-filter="all" class="filter-pill active px-4 py-2 rounded-full text-sm font-medium transition-colors">All</button>
+          {[...new Set(insights.map(a => a.category))].map(cat => (
+            <button data-filter={cat} class="filter-pill px-4 py-2 rounded-full text-sm font-medium transition-colors">{cat}</button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="insights-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {insights.map((article) => (
+            <article data-category={article.category} class="group bg-white rounded-2xl border border-border hover:border-gold/30 transition-all overflow-hidden">
+              <a href={`/insights/${article.slug}`} class="block p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="px-3 py-1 bg-[#e0eff2] text-[#0a5e73] text-sm font-medium rounded-full">
+                    {article.category}
+                  </span>
+                  {article.featured && (
+                    <span class="px-3 py-1 bg-surface text-text-secondary text-sm rounded-full">
+                      Featured
+                    </span>
+                  )}
+                </div>
+                <h2 class="text-xl font-bold text-text-primary mb-3 group-hover:text-gold transition-colors">
+                  {article.title}
+                </h2>
+                <p class="text-text-secondary mb-4 line-clamp-3">
+                  {article.excerpt}
+                </p>
+                <div class="flex items-center justify-between text-sm text-text-secondary">
+                  <time datetime={article.date}>
+                    {new Date(article.date).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </time>
+                  <span>{article.readTime}</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        {insights.length === 0 && (
+          <div class="text-center py-16">
+            <p class="text-text-secondary text-lg">More insights coming soon.</p>
+          </div>
+        )}
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="bg-white rounded-2xl border border-border p-8 md:p-12">
+          <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-4">
+            Need Help with Compliance?
+          </h2>
+          <p class="text-text-secondary mb-8 max-w-2xl mx-auto">
+            I help businesses achieve GDPR and NIS2 compliance
+            with practical, secure infrastructure solutions.
+          </p>
+          <button
+            data-cal-trigger
+            class="inline-flex items-center gap-2 px-8 py-4 bg-gold hover:bg-gold-light text-text-primary font-semibold rounded-xl transition-colors cursor-pointer"
+          >
+            Book a Free Call
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/" class="inline-flex items-center gap-2 text-gold-dark hover:text-gold transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to Home
+      </a>
+    </div>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .filter-pill {
+    background: #ffffff;
+    color: #52525b;
+    border: 1px solid #e7e5e4;
+    cursor: pointer;
+  }
+  .filter-pill:hover {
+    border-color: rgba(8, 145, 178, 0.3);
+    color: #0891B2;
+  }
+  .filter-pill.active {
+    background: #0E7490;
+    color: #ffffff;
+    border-color: #0E7490;
+  }
+</style>
+
+<script>
+  const pills = document.querySelectorAll<HTMLButtonElement>('#filter-pills .filter-pill');
+  const cards = document.querySelectorAll<HTMLElement>('#insights-grid [data-category]');
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+      cards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>

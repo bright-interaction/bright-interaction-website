@@ -1,0 +1,320 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+
+const lang = 'sv';
+const title = "Krav på cookie-samtycke i Sverige 2026: Vad IMY förväntar sig";
+const description = "Integritetsskyddsmyndigheten har skärpt tillsynen av cookie-samtycke. Här är exakt vad din webbplats behöver för att uppfylla kraven, och hur du kontrollerar om du är i riskzonen.";
+const publishDate = '2026-02-20';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/cookie-samtycke-krav-sverige-2026"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout title={`${title} - Bright Interaction`} description={description} type="article" lang={lang}>
+  <Header lang={lang} />
+  <main class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article>
+        <header class="mb-12">
+          <Breadcrumb lang="sv" title={title} />
+          <div class="flex flex-wrap gap-3 mb-4">
+            <time datetime="2026-02-20" class="text-sm text-text-muted">20 februari 2026</time>
+            <span class="text-sm px-2 py-0.5 bg-gold/20 text-gold rounded">Compliance</span>
+            <span class="text-sm text-text-muted">7 min läsning</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+            {title}
+          </h1>
+          <p class="text-xl text-text-secondary leading-relaxed">
+            Integritetsskyddsmyndigheten (IMY) har under 2025 och 2026 genomfört en rad
+            tillsynsärenden kopplade till cookie-samtycke. Kraven har blivit tydligare, och
+            konsekvenserna för de som inte följer dem har blivit kännbara. Här är vad som gäller.
+          </p>
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Bakgrund: Varför cookie-samtycke är en het fråga</h2>
+            <p class="text-text-secondary mb-4">
+              Sverige var länge ett land där tillsynen av cookie-regler var relativt mild jämfört
+              med exempelvis Frankrike (CNIL) och Österrike (DSB). Det har förändrats. IMY har
+              under de senaste 18 månaderna utfärdat sanktionsavgifter mot flera svenska företag
+              för bristande samtycke vid spårning och analys.
+            </p>
+            <p class="text-text-secondary">
+              Grunden är enkel: enligt GDPR artikel 6(1)(a) och ePrivacy-direktivet krävs
+              informerat, aktivt samtycke innan personuppgifter behandlas för ändamål som analys,
+              marknadsföring och spårning. I praktiken innebär det att inga cookies eller skript
+              som samlar personuppgifter får laddas innan besökaren uttryckligen godkänner.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vad IMY kräver: 7 konkreta punkter</h2>
+
+            <div class="space-y-6">
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">1. Samtycke före laddning</h3>
+                <p class="text-text-secondary text-sm">
+                  Inga analys- eller marknadsföringsskript får köras innan besökaren har gett sitt
+                  samtycke. Det räcker inte att visa en banderoll. Skripten måste vara tekniskt
+                  blockerade tills samtycke registrerats.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">2. Aktivt val, inte förkryssade rutor</h3>
+                <p class="text-text-secondary text-sm">
+                  Samtycke måste bygga på en aktiv handling. Förkryssade kryssrutor eller
+                  "genom att fortsätta surfa godkänner du"-formuleringar uppfyller inte kraven.
+                  Besökaren måste göra ett tydligt val.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">3. Lika enkelt att neka som att godkänna</h3>
+                <p class="text-text-secondary text-sm">
+                  Knappen för att neka samtycke måste vara lika framträdande som knappen för att
+                  godkänna. Designtrick som gör "Acceptera alla" stor och grön medan "Neka"
+                  är dold i grå text räknas som vilseledande.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">4. Granulära val per ändamål</h3>
+                <p class="text-text-secondary text-sm">
+                  Besökaren ska kunna välja samtycke per kategori: nödvändiga cookies, analys,
+                  marknadsföring och tredjepartstjänster. "Allt eller inget" är inte tillräckligt.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">5. Möjlighet att ändra eller återkalla samtycke</h3>
+                <p class="text-text-secondary text-sm">
+                  Det måste vara enkelt för besökaren att ändra sitt val i efterhand. En
+                  tillgänglig länk i sidfoten eller en persistent ikon som öppnar
+                  samtyckeshanteraren uppfyller kravet.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">6. Dokumenterat samtycke</h3>
+                <p class="text-text-secondary text-sm">
+                  Företaget måste kunna visa att samtycke faktiskt gavs. Det innebär att
+                  tidpunkt, omfattning och metod för samtycket behöver loggas och sparas.
+                </p>
+              </div>
+
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">7. Tydlig information om vad samtycket gäller</h3>
+                <p class="text-text-secondary text-sm">
+                  Banderollen måste förklara vilka cookies som sätts, av vem och i vilket syfte,
+                  med länk till en fullständig cookiepolicy.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vanliga överträdelser vi hittar</h2>
+            <p class="text-text-secondary mb-4">
+              När vi skannar svenska webbplatser med SVAR ser vi samma mönster om och om igen:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Överträdelse</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Hur vanligt</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Riskgrad</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Google Analytics laddas före samtycke</td>
+                    <td class="py-3 px-4">~60 % av webbplatser</td>
+                    <td class="py-3 px-4 text-red-400">Hög</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Meta Pixel aktiveras utan samtycke</td>
+                    <td class="py-3 px-4">~35 % av webbplatser</td>
+                    <td class="py-3 px-4 text-red-400">Hög</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Förkryssade samtyckerutor</td>
+                    <td class="py-3 px-4">~25 % av webbplatser</td>
+                    <td class="py-3 px-4 text-amber-400">Medel</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">"Neka"-knapp svår att hitta</td>
+                    <td class="py-3 px-4">~40 % av webbplatser</td>
+                    <td class="py-3 px-4 text-amber-400">Medel</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Ingen möjlighet att återkalla samtycke</td>
+                    <td class="py-3 px-4">~20 % av webbplatser</td>
+                    <td class="py-3 px-4 text-amber-400">Medel</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Hur CookieProof löser problemet</h2>
+            <p class="text-text-secondary mb-4">
+              Vi byggde CookieProof specifikt för att uppfylla IMY:s krav utan att kompromissa
+              med användarupplevelsen. Så här fungerar det:
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2 mb-4">
+              <li><strong class="text-text-primary">Teknisk blockering:</strong> Alla tredjepartsskript blockeras i DOM tills samtycke registreras. Inte bara visuellt dolt, utan tekniskt förhindrat.</li>
+              <li><strong class="text-text-primary">Granulära kategorier:</strong> Besökaren väljer per ändamål: nödvändiga, analys, marknadsföring.</li>
+              <li><strong class="text-text-primary">Likvärdiga knappar:</strong> "Godkänn" och "Neka" har samma visuella vikt.</li>
+              <li><strong class="text-text-primary">Samtyckeslogg:</strong> Varje samtycke loggas med tidsstämpel, IP-hash och omfattning för revisionsspårning.</li>
+              <li><strong class="text-text-primary">Återkallelse:</strong> Besökaren kan ändra sitt val när som helst via en tillgänglig ikon.</li>
+            </ul>
+            <p class="text-text-secondary">
+              CookieProof är egenhostbart, vilket innebär att ingen besökardata lämnar din infrastruktur.
+              Samtyckesdata lagras lokalt, inte hos en tredje part.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Sanktionsavgifter: Vad riskerar du?</h2>
+            <p class="text-text-secondary mb-4">
+              IMY har utfärdat sanktionsavgifter på mellan 12 000 kr och 12 miljoner kr för
+              överträdelser relaterade till cookie-samtycke och spårning. Nivån beror på
+              företagets storlek, överträdelsens allvar och om den var uppsåtlig.
+            </p>
+
+            <div class="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-red-400 mb-2">Europeisk kontext</h4>
+              <p class="text-text-secondary text-sm">
+                CNIL i Frankrike bötfällde Google med 150 miljoner EUR och Facebook med 60
+                miljoner EUR för bristande cookie-samtycke. Skandinaviska tillsynsmyndigheter
+                följer samma tolkningslinje, om än med lägre belopp. Trenden är tydlig:
+                böterna ökar.
+              </p>
+            </div>
+
+            <p class="text-text-secondary">
+              Förutom direkta böter tillkommer risken för krav på rättelse, negativ publicitet
+              och potentiella skadeståndsanspråk från registrerade.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Checklista: Uppfyller din webbplats kraven?</h2>
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+              <ul class="text-text-secondary space-y-3">
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Inga analys- eller marknadsföringsskript körs före samtycke</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Samtycke ges genom aktiv handling (inga förkryssade rutor)</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>"Neka"-knappen är lika framträdande som "Godkänn"</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Besökaren kan välja samtycke per kategori</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Det finns en tydlig möjlighet att ändra eller återkalla samtycke</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Samtycke loggas med tidsstämpel och omfattning</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Cookiepolicyn listar alla cookies med ändamål och varaktighet</span>
+                </li>
+                <li class="flex gap-3">
+                  <span class="text-gold">&#9744;</span>
+                  <span>Inga Google Fonts eller CDN-resurser laddas före samtycke</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Osäker på om din webbplats uppfyller kraven?</h2>
+            <p class="text-text-secondary mb-6">
+              Vår SVAR-skanner kontrollerar automatiskt om din webbplats laddar spårningsskript
+              före samtycke, om banderollen uppfyller kraven och om tredjepartsdata överförs
+              utan rättslig grund. Helt kostnadsfritt.
+            </p>
+            <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+              Begär en kostnadsfri skanning
+            </button>
+          </section>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2-compliance: Praktisk guide</a></li>
+            <li><a href="/sv/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">Vi skannade vår GDPR-compliance och en konkurrents</a></li>
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveränitet i molnet</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Tillbaka till Insikter
+        </a>
+      </div>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+  <Footer lang={lang} />
+</Layout>

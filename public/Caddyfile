@@ -1,0 +1,41 @@
+# Caddyfile for brightinteraction.com
+# Place in Coolify or use as reference for server config
+
+brightinteraction.com, www.brightinteraction.com {
+    # Redirect www to non-www
+    @www host www.brightinteraction.com
+    redir @www https://brightinteraction.com{uri} permanent
+
+    # Old Webflow blog posts -> insights (wildcard)
+    @oldblog_se path_regexp oldblog ^/se/blogg/(.*)$
+    redir @oldblog_se /sv/insights 301
+
+    @oldblog_en path_regexp oldblog ^/en/blogg/(.*)$
+    redir @oldblog_en /insights 301
+
+    @oldblog path_regexp oldblog ^/blogg/(.*)$
+    redir @oldblog /insights 301
+
+    # Old Webflow services -> home (wildcard)
+    @oldservices_se path_regexp oldsvcs ^/se/services/(.*)$
+    redir @oldservices_se /sv 301
+
+    @oldservices_en path_regexp oldsvcs ^/en/services/(.*)$
+    redir @oldservices_en / 301
+
+    @oldservices path_regexp oldsvcs ^/services/(.*)$
+    redir @oldservices / 301
+
+    # Webflow pagination params
+    @pagination query 29268fd0_page=*
+    redir @pagination {path} 301
+
+    # Privacy headers
+    header Tk "N"
+    header DNT "1"
+
+    # Serve static files
+    root * /srv
+    file_server
+    try_files {path} {path}/ /404.html
+}

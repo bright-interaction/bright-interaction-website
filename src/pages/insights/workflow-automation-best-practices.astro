@@ -1,0 +1,423 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Workflow Automation Best Practices: Building Systems That Scale';
+const description = 'Learn how to design automated workflows that are reliable, maintainable, and secure. Practical patterns from real-world implementations.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/workflow-automation-best-practices"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Automation
+          </span>
+          <span class="text-text-muted text-sm">9 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Automation is supposed to save time. But poorly designed workflows can create more problems than they solve: brittle processes that break unexpectedly, debugging nightmares, and systems nobody understands six months later.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            After building hundreds of automated workflows, here are the patterns that separate reliable systems from fragile ones.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Assembly Line Principle
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Think of your workflow like a factory assembly line. Each station does one specific job, passes the result to the next station, and doesn't need to know what happens before or after. If one station breaks, you can identify and fix it without dismantling the entire line.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-3">The Golden Rule</h4>
+            <p class="text-text-secondary">
+              Each step in your workflow should do exactly one thing. If you find yourself describing a step with "and" (fetch data AND transform it AND save it), you've got a step that should be three steps.
+            </p>
+          </div>
+
+          <p class="text-text-secondary">
+            Why does this matter? Single-purpose steps are easier to test, easier to debug, and easier to reuse. When something fails, you know exactly where to look.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Error Handling That Actually Works
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            The difference between amateur and professional automation is error handling. Things will go wrong: APIs time out, data arrives in unexpected formats, external services have outages. Your workflow needs to handle these gracefully.
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Retry with backoff</h4>
+              <p class="text-text-secondary text-sm">
+                Don't just retry immediately. Wait a bit, then wait longer, then longer still. This prevents hammering a struggling service and gives it time to recover. A pattern like 1 second, then 5 seconds, then 30 seconds works well.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Fail fast, recover smart</h4>
+              <p class="text-text-secondary text-sm">
+                If data is malformed, don't try to guess what it should be. Log the problem, alert someone, and move on. Guessing leads to corrupted data and harder debugging later.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Dead letter queues</h4>
+              <p class="text-text-secondary text-sm">
+                When something fails after retries, don't lose the data. Put it somewhere safe (a "dead letter" queue) where you can investigate and reprocess it later.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Circuit breakers</h4>
+              <p class="text-text-secondary text-sm">
+                If an external service fails repeatedly, stop calling it for a while. This prevents cascade failures and gives you time to respond before the problem spreads.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Data Validation at Boundaries
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Never trust data from external sources. Validate everything at the point it enters your system. This includes API responses, webhook payloads, file uploads, and user input.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-red-900/30 p-5">
+              <h4 class="font-semibold text-red-400 mb-3">Don't do this</h4>
+              <p class="text-text-secondary text-sm">
+                Assume the API will always return the fields you expect, in the format you expect, with values that make sense.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-green-900/30 p-5">
+              <h4 class="font-semibold text-green-400 mb-3">Do this instead</h4>
+              <p class="text-text-secondary text-sm">
+                Check that required fields exist, validate data types, verify values are within expected ranges, and handle missing or null values explicitly.
+              </p>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            Catching bad data early means cleaner error messages, easier debugging, and no corrupted downstream data.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Idempotency: Making Retries Safe
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            An idempotent operation produces the same result whether you run it once or ten times. This is crucial for automation because retries happen, network glitches cause duplicate requests, and users sometimes click buttons twice.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-3">The Bank Account Example</h4>
+            <p class="text-text-secondary mb-4">
+              Imagine a workflow that adds €100 to a customer's account. If this runs twice due to a retry, the customer gets €200. That's a problem.
+            </p>
+            <p class="text-text-secondary">
+              Instead, design it as "set balance to €X" or use a unique transaction ID that prevents duplicate processing. Now retries are safe.
+            </p>
+          </div>
+
+          <p class="text-text-secondary">
+            Build idempotency into your workflows from the start. It's much harder to add later.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Logging and Observability
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            When something goes wrong at 3 AM, you need to figure out what happened. Good logging is your investigation tool.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Log at decision points</h4>
+                <p class="text-text-secondary">
+                  Every time your workflow makes a choice (if/else, switch, filter), log what decision was made and why. This creates a trail you can follow.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Include correlation IDs</h4>
+                <p class="text-text-secondary">
+                  Give each workflow execution a unique ID and include it in every log message. When you're looking at logs from multiple runs, you need to know which messages belong together.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Log inputs and outputs</h4>
+                <p class="text-text-secondary">
+                  For each major step, log what went in and what came out. But be careful with sensitive data. Log enough to debug, not enough to create a security risk.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Set up alerts</h4>
+                <p class="text-text-secondary">
+                  Don't wait until someone complains to discover a problem. Alert on failure rates, unusual execution times, and patterns that indicate something's wrong.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Security Considerations
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Automated workflows often have elevated privileges. They access multiple systems, handle sensitive data, and run without human oversight. This makes security critical.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Principle of least privilege:</strong> Give your workflow only the permissions it needs. If it only reads from a database, don't give it write access.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Secure credential storage:</strong> Never hardcode API keys or passwords. Use environment variables or a secrets manager.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Audit trails:</strong> Log who triggered the workflow, what data it accessed, and what changes it made. You may need this for compliance or incident investigation.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Input sanitization:</strong> If your workflow processes user-provided data, sanitize it. SQL injection, command injection, and path traversal attacks can happen in automation too.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Testing and Deployment
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Treat your workflows like code. They deserve the same rigor around testing and deployment.
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Test with realistic data</h4>
+              <p class="text-text-secondary text-sm">
+                Create test cases that mirror production scenarios, including edge cases and error conditions. "Happy path" testing isn't enough.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Use staging environments</h4>
+              <p class="text-text-secondary text-sm">
+                Never test directly in production. Have a staging environment that mirrors production as closely as possible.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Version control everything</h4>
+              <p class="text-text-secondary text-sm">
+                Your workflow configurations belong in Git. This gives you history, rollback capability, and the ability to review changes before deployment.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Deploy gradually</h4>
+              <p class="text-text-secondary text-sm">
+                For critical workflows, consider canary deployments. Route a small percentage of traffic to the new version, monitor for problems, then gradually increase.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Documentation Matters
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Six months from now, you (or someone else) will need to understand why this workflow exists and how it works. Document the intent, not just the implementation.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Write down: What business problem does this solve? What triggers it? What does it do? What systems does it touch? What should you check if it breaks? Who owns it?
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help with automation?</strong> We design and build workflow automation systems that follow these principles. From simple integrations to complex multi-step orchestrations, we can help you automate reliably.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Let's discuss your needs →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/workflow-automation-best-practices`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/hidden-cost-of-manual-processes" class="text-gold hover:text-gold-light transition-colors text-sm">The Hidden Cost of Manual Processes</a></li>
+            <li><a href="/insights/n8n-vs-zapier" class="text-gold hover:text-gold-light transition-colors text-sm">n8n vs Zapier: When Self-Hosted Makes Sense</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

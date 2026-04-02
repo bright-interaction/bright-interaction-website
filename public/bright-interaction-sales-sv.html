@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Bright Interaction - Infrastrukturbolaget</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    @page { size: A4; margin: 0; }
+    @media print { body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #d1d5db;
+        background: #141414;
+    }
+
+    .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 20mm 22mm;
+        position: relative;
+        page-break-after: always;
+        overflow: hidden;
+        background: #141414;
+    }
+    .page:last-child { page-break-after: avoid; }
+
+    /* Header */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        border-bottom: 1.5px solid #0891B2;
+    }
+    .brand { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+    .brand span { color: #0891B2; }
+    .tagline { font-size: 8px; color: #6b7280; letter-spacing: 3px; text-transform: uppercase; }
+
+    /* Section label */
+    .section-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        font-size: 9px;
+        font-weight: 600;
+        color: #0891B2;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+    .section-label::before {
+        content: '';
+        width: 24px;
+        height: 1.5px;
+        background: #0891B2;
+        flex-shrink: 0;
+    }
+
+    /* Typography */
+    h1 { font-size: 32px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 12px; }
+    h1 em { font-style: normal; color: #0891B2; }
+    h2 { font-size: 22px; font-weight: 600; color: #fff; line-height: 1.25; margin-bottom: 10px; }
+    h2 em { font-style: normal; color: #0891B2; }
+    h3 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    h4 { font-size: 12px; font-weight: 600; color: #0891B2; margin-bottom: 4px; }
+    p { color: #9ca3af; line-height: 1.65; }
+    .lead { font-size: 13px; color: #9ca3af; line-height: 1.7; }
+
+    /* Cards */
+    .card {
+        background: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 16px;
+    }
+    .card-accent {
+        background: #1e1e1e;
+        border: 1px solid rgba(212,175,55,0.25);
+        border-left: 3px solid #0891B2;
+        border-radius: 8px;
+        padding: 18px 20px;
+    }
+    .card-gold {
+        background: #1e1e1e;
+        border: 1px solid rgba(212,175,55,0.3);
+        border-radius: 8px;
+        padding: 18px 20px;
+        text-align: center;
+    }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+
+    /* Step badge */
+    .step {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border: 1.5px solid #0891B2;
+        border-radius: 6px;
+        color: #0891B2;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    /* Check item */
+    .check-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        background: #1e1e1e;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        padding: 12px 14px;
+        font-size: 12px;
+        color: #d1d5db;
+    }
+    .check-icon {
+        width: 20px;
+        height: 20px;
+        border: 1.5px solid #0891B2;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #0891B2;
+        font-size: 11px;
+        flex-shrink: 0;
+    }
+
+    /* Stats */
+    .stat-big { font-size: 26px; font-weight: 700; color: #0891B2; }
+    .stat-label { font-size: 10px; color: #6b7280; line-height: 1.4; }
+
+    /* Product icon */
+    .product-icon {
+        width: 40px;
+        height: 40px;
+        border: 1.5px solid rgba(212,175,55,0.4);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #0891B2;
+    }
+
+    /* Footer */
+    .page-footer {
+        position: absolute;
+        bottom: 12mm;
+        left: 22mm;
+        right: 22mm;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 8px;
+        color: #374151;
+    }
+    .badge {
+        display: inline-block;
+        padding: 3px 8px;
+        border: 1px solid #374151;
+        border-radius: 4px;
+        font-size: 8px;
+        color: #6b7280;
+        margin-left: 6px;
+    }
+
+    /* CTA button */
+    .cta-btn {
+        display: inline-block;
+        padding: 10px 24px;
+        background: #0891B2;
+        color: #141414;
+        font-weight: 600;
+        font-size: 12px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+
+    /* Contact card */
+    .contact-card {
+        background: #1e1e1e;
+        border: 1px solid rgba(212,175,55,0.2);
+        border-radius: 10px;
+        padding: 28px;
+        text-align: center;
+    }
+    .contact-card a { color: #0891B2; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- ==================== SIDA 1: HERO ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand">BRIGHT <span>INTERACTION</span></div>
+        <div class="tagline">Infrastrukturbolaget</div>
+    </div>
+
+    <h1 style="margin-top: 8px;">Led din marknad med<br><em>infrastruktur du kontrollerar</em></h1>
+    <p class="lead" style="margin-bottom: 22px;">Medan konkurrenterna jagar mellan SaaS-verktyg och delade molntj&auml;nster, opererar du p&aring; egen infrastruktur&mdash;system du &auml;ger helt, osynliga f&ouml;r omv&auml;rlden, d&auml;r varje del arbetar ihop automatiskt.</p>
+
+    <div class="section-label">Konkurrensf&ouml;rdelen</div>
+    <div class="grid-2" style="margin-bottom: 22px;">
+        <div class="card">
+            <h3>Fullst&auml;ndigt &auml;gande</h3>
+            <p style="font-size: 11px;">Dina servrar, din data. Inga delade resurser. N&auml;r tillsynsmyndigheter eller kunder fr&aring;gar var datan finns&mdash;har du ett tydligt svar.</p>
+        </div>
+        <div class="card">
+            <h3>Noll beroenden</h3>
+            <p style="font-size: 11px;">Ingen leverant&ouml;r kan h&ouml;ja priser, &auml;ndra villkor eller l&auml;gga ner och ta din verksamhet med sig. Du kontrollerar tidslinjen.</p>
+        </div>
+        <div class="card">
+            <h3>Osynlig f&ouml;r hot</h3>
+            <p style="font-size: 11px;">Flerlagersf&ouml;rsvar d&ouml;ljer dina system fr&aring;n det publika internet. Krypterade tunnlar, privata n&auml;tverk, zero attack surface.</p>
+        </div>
+        <div class="card">
+            <h3>Automatiserad drift</h3>
+            <p style="font-size: 11px;">Dina system pratar med varandra. Data fl&ouml;dar automatiskt. Ditt team fokuserar p&aring; beslut, inte datainmatning.</p>
+        </div>
+    </div>
+
+    <div class="section-label">Hur vi bygger det</div>
+    <div class="grid-3">
+        <div class="card" style="text-align: center;">
+            <div class="step">1</div>
+            <h3>Kartl&auml;gg</h3>
+            <p style="font-size: 11px;">Vi kartl&auml;gger era nuvarande verktyg, arbetsfl&ouml;den och smärtpunkter. Identifierar var manuellt arbete skapar flaskhalsar.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <div class="step">2</div>
+            <h3>Designa</h3>
+            <p style="font-size: 11px;">Arkitektera er suver&auml;na infrastruktur. V&auml;lj datalagringsland, definiera integrationer, planera s&auml;kerhetslager.</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <div class="step">3</div>
+            <h3>Drifts&auml;tt</h3>
+            <p style="font-size: 11px;">Bygger och lanserar era system. Utbildar ert team. Tillhandah&aring;ller dokumentation och l&ouml;pande support.</p>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>&copy; 2026 Bright Interaction AB &middot; Malm&ouml;, Sverige &middot; brightinteraction.com</span>
+        <span><span class="badge">GDPR</span><span class="badge">NIS2</span><span class="badge">ISO 27001</span></span>
+    </div>
+</div>
+
+<!-- ==================== SIDA 2: V&Aring;RA PRODUKTER ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand">BRIGHT <span>INTERACTION</span></div>
+    </div>
+
+    <div class="section-label">V&aring;ra produkter</div>
+
+    <!-- SVAR / Deep Pulse -->
+    <div class="card-accent" style="margin-bottom: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="flex: 1;">
+                <h3 style="margin-bottom: 2px;">SVAR <span style="color: #6b7280; font-weight: 400;">&amp;</span> Deep Pulse</h3>
+                <p style="font-size: 10px; color: #0891B2; margin-bottom: 8px;">Compliance-scanning &amp; attack surface-analys</p>
+                <p style="font-size: 11px;">F&aring; fullst&auml;ndig insikt i ert f&ouml;retags s&auml;kerhetsl&auml;ge. SVAR k&ouml;r <strong style="color:#d1d5db;">16 samtidiga compliance-tester</strong> (GDPR, NIS2, DORA) medan Deep Pulse kartl&auml;gger er externa attackyta med <strong style="color:#d1d5db;">11 AI-drivna moduler</strong>. J&auml;mf&ouml;r er mot konkurrenter och leverant&ouml;rskedjan.</p>
+            </div>
+        </div>
+        <div class="grid-4" style="margin-top: 12px;">
+            <div style="text-align: center;">
+                <div class="stat-big">16</div>
+                <div class="stat-label">compliance-tester parallellt</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">0&ndash;100</div>
+                <div class="stat-label">s&auml;kerhetspo&auml;ng per dom&auml;n</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">11</div>
+                <div class="stat-label">attack surface-moduler</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">PDF</div>
+                <div class="stat-label">revisions&shy;f&auml;rdiga rapporter</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CookieProof -->
+    <div class="card-accent" style="margin-bottom: 14px;">
+        <div style="flex: 1;">
+            <h3 style="margin-bottom: 2px;">CookieProof</h3>
+            <p style="font-size: 10px; color: #0891B2; margin-bottom: 8px;">Marknadens snabbaste cookie-banner</p>
+            <p style="font-size: 11px;"><strong style="color:#d1d5db;">7,5 KB gzippad</strong>&mdash;minimal p&aring;verkan p&aring; sidladdning. IMY 2026-f&ouml;rberedd fr&aring;n start, full GDPR-compliance med consent proof-logg, och <strong style="color:#d1d5db;">10+ f&auml;rdiga integrationer</strong> (GA4, Meta, LinkedIn, TikTok m.fl.). Multi-tenant med white-label f&ouml;r byr&aring;er.</p>
+        </div>
+        <div class="grid-4" style="margin-top: 12px;">
+            <div style="text-align: center;">
+                <div class="stat-big">7,5KB</div>
+                <div class="stat-label">gzippad&mdash;snabbast p&aring; marknaden</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">IMY</div>
+                <div class="stat-label">2026-compliant by default</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">10+</div>
+                <div class="stat-label">f&auml;rdiga integrationer</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">GPC</div>
+                <div class="stat-label">Global Privacy Control</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BrightCRM -->
+    <div class="card-accent">
+        <div style="flex: 1;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 2px;">
+                <h3>BrightCRM</h3>
+                <span style="font-size: 9px; padding: 2px 8px; border: 1px solid #0891B2; border-radius: 4px; color: #0891B2;">KOMMER SNART</span>
+            </div>
+            <p style="font-size: 10px; color: #0891B2; margin-bottom: 8px;">Marknadens b&auml;sta on-prem CRM f&ouml;r B2B</p>
+            <p style="font-size: 11px;">Byggt f&ouml;r B2B-f&ouml;retag som vill &auml;ga sin kunddata. Inbyggd <strong style="color:#d1d5db;">VoIP-softphone</strong>, <strong style="color:#d1d5db;">AI-assistent med 44 verktyg</strong>, sales sequences, e-signaturer, dokumentgenerering och moduler som anpassas efter era behov. Noll per-seat-avgifter.</p>
+        </div>
+        <div class="grid-4" style="margin-top: 12px;">
+            <div style="text-align: center;">
+                <div class="stat-big">44</div>
+                <div class="stat-label">AI-verktyg (Neo)</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">VoIP</div>
+                <div class="stat-label">inbyggd softphone</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">0 kr</div>
+                <div class="stat-label">per-seat-avgifter</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-big">50+</div>
+                <div class="stat-label">moduler &amp; tabeller</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>&copy; 2026 Bright Interaction AB &middot; Malm&ouml;, Sverige &middot; brightinteraction.com</span>
+        <span><span class="badge">GDPR</span><span class="badge">NIS2</span><span class="badge">ISO 27001</span></span>
+    </div>
+</div>
+
+<!-- ==================== SIDA 3: INFRASTRUKTUR ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand">BRIGHT <span>INTERACTION</span></div>
+    </div>
+
+    <div class="section-label">Din infrastruktur inkluderar</div>
+    <div class="grid-4" style="margin-bottom: 18px;">
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x1f512;</div>
+            <h4 style="font-size: 11px;">Zero Trust</h4>
+            <p style="font-size: 10px;">VPN-mesh, SSO &amp; MFA p&aring; allt</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x2699;</div>
+            <h4 style="font-size: 11px;">Workflow-motor</h4>
+            <p style="font-size: 10px;">Automatisera alla processer</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x1f4de;</div>
+            <h4 style="font-size: 11px;">F&ouml;retagstelefoni</h4>
+            <p style="font-size: 10px;">Samtal loggade i CRM</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x1f5c4;</div>
+            <h4 style="font-size: 11px;">Krypterad lagring</h4>
+            <p style="font-size: 10px;">Filer bara du &aring;tkommer</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x1f511;</div>
+            <h4 style="font-size: 11px;">L&ouml;senordsvalv</h4>
+            <p style="font-size: 10px;">Teamets inlogg s&auml;krad</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x270d;</div>
+            <h4 style="font-size: 11px;">E-signaturer</h4>
+            <p style="font-size: 10px;">Signera i ert eget system</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x1f4c5;</div>
+            <h4 style="font-size: 11px;">Bokningssystem</h4>
+            <p style="font-size: 10px;">Schemaläggning p&aring; er dom&auml;n</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 14px 10px;">
+            <div class="product-icon" style="margin: 0 auto 8px;">&#x1f4ca;</div>
+            <h4 style="font-size: 11px;">Driftmonitor</h4>
+            <p style="font-size: 10px;">Vet innan kunderna g&ouml;r det</p>
+        </div>
+    </div>
+
+    <!-- Hidden cost -->
+    <div class="card-accent" style="margin-bottom: 18px;">
+        <h2 style="margin-bottom: 6px;">Den dolda kostnaden f&ouml;r <em>manuellt arbete</em></h2>
+        <p style="font-size: 11px; margin-bottom: 14px;">De flesta f&ouml;retag sp&aring;rar inte hur mycket tid anst&auml;llda l&auml;gger p&aring; repetitiva uppgifter&mdash;kopiera data mellan system, jaga uppdateringar, fixa synkfel. S&aring; h&auml;r kostar bara en process:</p>
+        <div class="grid-3" style="text-align: center;">
+            <div class="card-gold">
+                <div class="stat-big">8h</div>
+                <div class="stat-label">per vecka p&aring; manuella uppgifter</div>
+            </div>
+            <div class="card-gold">
+                <div style="font-size: 20px; color: #6b7280; padding: 4px 0;">&times;</div>
+                <div class="stat-label">400 kr/h &times; 52 veckor</div>
+            </div>
+            <div class="card-gold">
+                <div class="stat-big">166 400 kr</div>
+                <div class="stat-label">per &aring;r, per anst&auml;lld</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Built for -->
+    <div class="section-label">Byggt f&ouml;r ledare som</div>
+    <div class="grid-2">
+        <div class="check-item"><div class="check-icon">&check;</div>Driver team p&aring; 5&ndash;50 personer och beh&ouml;ver system som skalar utan per-seat-priser</div>
+        <div class="check-item"><div class="check-icon">&check;</div>Hanterar k&auml;nslig data och vill ha ett tydligt compliance-svar f&ouml;r tillsynsmyndigheter</div>
+        <div class="check-item"><div class="check-icon">&check;</div>Anv&auml;nder flera SaaS-verktyg som inte pratar med varandra och skapar silos</div>
+        <div class="check-item"><div class="check-icon">&check;</div>Vill bygga v&auml;rde i infrastruktur de &auml;ger&mdash;inte hyr f&ouml;r evigt</div>
+    </div>
+
+    <div class="page-footer">
+        <span>&copy; 2026 Bright Interaction AB &middot; Malm&ouml;, Sverige &middot; brightinteraction.com</span>
+        <span><span class="badge">GDPR</span><span class="badge">NIS2</span><span class="badge">ISO 27001</span></span>
+    </div>
+</div>
+
+<!-- ==================== SIDA 4: EUROPEISK DATASUVER&Auml;NITET + ZERO TRUST ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand">BRIGHT <span>INTERACTION</span></div>
+    </div>
+
+    <div class="card-accent" style="margin-bottom: 18px; padding: 22px 24px;">
+        <h2 style="margin-bottom: 8px;">T&auml;nk dig detta: <em>6 m&aring;nader fr&aring;n nu</em></h2>
+        <p style="font-size: 12px; line-height: 1.7; margin-bottom: 10px;">Ditt team loggar in varje morgon p&aring; system som fungerar ihop s&ouml;ml&ouml;st. <strong style="color:#d1d5db;">Samtal loggas automatiskt till kundkort.</strong> Offerter genereras och skickas utan kopiera-klistra. Uppf&ouml;ljningar triggas p&aring; schema.</p>
+        <p style="font-size: 12px; line-height: 1.7; margin-bottom: 10px;">N&auml;r en konkurrent drabbas av intr&aring;ng eller deras SaaS-leverant&ouml;r h&ouml;jer priset 40%&mdash;&auml;r du op&aring;verkad. <strong style="color:#d1d5db;">Din data sitter p&aring; servrar du kontrollerar</strong>, i en jurisdiktion du valde, skyddad av s&auml;kerhetslager som g&ouml;r dig osynlig f&ouml;r angripare.</p>
+        <p style="font-size: 12px; line-height: 1.7;">Kunder m&auml;rker det. De fr&aring;gar hur du r&ouml;r dig s&aring; snabbt, hur du alltid &auml;r compliant, hur inget faller mellan stolarna. <strong style="color:#d1d5db;">Din infrastruktur blev din konkurrensfördel.</strong></p>
+    </div>
+
+    <div class="section-label">&Auml;g din data p&aring; europeisk mark</div>
+    <div class="grid-3" style="margin-bottom: 18px;">
+        <div class="card" style="padding: 14px;">
+            <h4 style="font-size: 11px; margin-bottom: 6px;">Europeiska servrar</h4>
+            <p style="font-size: 10px;">All data lagras p&aring; Hetzner i Tyskland eller Finland. Ingen data l&auml;mnar EU. Du &auml;r compliant by default.</p>
+        </div>
+        <div class="card" style="padding: 14px;">
+            <h4 style="font-size: 11px; margin-bottom: 6px;">Zero Trust-arkitektur</h4>
+            <p style="font-size: 10px;">Tailscale VPN-mesh, SSO med MFA p&aring; alla tj&auml;nster, och h&auml;rdade servrar (UFW, Fail2ban, auditd). NIS2-compliant p&aring; 15 minuter.</p>
+        </div>
+        <div class="card" style="padding: 14px;">
+            <h4 style="font-size: 11px; margin-bottom: 6px;">Oberoende av USA</h4>
+            <p style="font-size: 10px;">Inga beroenden till amerikanska molnj&auml;ttar. Du kan stolt s&auml;ga att du &auml;ger datan sj&auml;lv&mdash;och bevisa det.</p>
+        </div>
+    </div>
+
+    <div class="section-label">SaaS vs. egen infrastruktur</div>
+    <div class="grid-2" style="margin-bottom: 20px;">
+        <div class="card" style="padding: 16px;">
+            <h4 style="font-size: 11px; color: #ef4444; margin-bottom: 10px;">Typisk SaaS-stack</h4>
+            <div style="font-size: 11px; color: #9ca3af; line-height: 1.8;">
+                CRM (Salesforce/HubSpot): 8 000 kr/m&aring;n<br>
+                Telefoni (Telia/Telavox): 3 000 kr/m&aring;n<br>
+                E-signatur (Scrive): 2 000 kr/m&aring;n<br>
+                Analys (GA + verktyg): 1 500 kr/m&aring;n<br>
+                L&ouml;senord (1Password): 800 kr/m&aring;n<br>
+                Automation (Zapier): 1 500 kr/m&aring;n<br>
+                <strong style="color: #ef4444;">Totalt: ~16 800 kr/m&aring;n</strong>
+            </div>
+        </div>
+        <div class="card" style="padding: 16px; border-color: rgba(212,175,55,0.3);">
+            <h4 style="font-size: 11px; color: #22c55e; margin-bottom: 10px;">Bright Interaction-stack</h4>
+            <div style="font-size: 11px; color: #9ca3af; line-height: 1.8;">
+                BrightCRM (on-prem): 0 kr per-seat<br>
+                VoIP (egen PBX): ~250 kr/m&aring;n<br>
+                E-signatur (DocuSeal): inkluderat<br>
+                Analys (Umami): inkluderat<br>
+                L&ouml;senord (Vaultwarden): inkluderat<br>
+                Automation (n8n): inkluderat<br>
+                <strong style="color: #22c55e;">Infrastruktur: ~500 kr/m&aring;n</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <span>&copy; 2026 Bright Interaction AB &middot; Malm&ouml;, Sverige &middot; brightinteraction.com</span>
+        <span><span class="badge">GDPR</span><span class="badge">NIS2</span><span class="badge">ISO 27001</span></span>
+    </div>
+</div>
+
+<!-- ==================== SIDA 5: CTA ==================== -->
+<div class="page">
+    <div class="page-header">
+        <div class="brand">BRIGHT <span>INTERACTION</span></div>
+    </div>
+
+    <div style="text-align: center; margin-top: 10px; margin-bottom: 28px;">
+        <h1 style="font-size: 28px;">Redo att bygga din <em>konkurrensf&ouml;rdel</em>?</h1>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 28px;">
+        <div class="card-gold" style="padding: 22px;">
+            <div style="font-size: 9px; color: #0891B2; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px;">Steg 1</div>
+            <h3 style="margin-bottom: 8px;">Hitta era dolda kostnader</h3>
+            <p style="font-size: 11px; margin-bottom: 14px;">En snabb genomg&aring;ng av var manuellt arbete dr&auml;nerar tid och budget f&ouml;r ert team.</p>
+            <span class="cta-btn">Gratis analys</span>
+        </div>
+        <div class="card-gold" style="padding: 22px;">
+            <div style="font-size: 9px; color: #0891B2; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px;">Steg 2</div>
+            <h3 style="margin-bottom: 8px;">Boka ett discovery-samtal</h3>
+            <p style="font-size: 11px; margin-bottom: 14px;">Vi kartl&auml;gger hur er suver&auml;na infrastruktur ser ut f&ouml;r just er situation.</p>
+            <span class="cta-btn">Boka samtal</span>
+        </div>
+    </div>
+
+    <div class="contact-card" style="margin-bottom: 28px;">
+        <h2 style="font-size: 24px; margin-bottom: 12px;">H&ouml;r av dig</h2>
+        <p style="font-size: 14px; margin-bottom: 6px;">
+            <a href="mailto:contact@brightinteraction.com">contact@brightinteraction.com</a> &middot; <a href="tel:+46762978035">+46 76 297 80 35</a>
+        </p>
+        <p style="font-size: 12px;">Vi svarar inom 24 timmar. Baserade i Malm&ouml;, Sverige. Kunder &ouml;ver hela Europa och Nordamerika.</p>
+    </div>
+
+    <!-- What we use to protect you -->
+    <div class="section-label">Teknologier vi anv&auml;nder</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Go</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">SvelteKit</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">PostgreSQL</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Docker</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Tailscale</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Authentik SSO</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Traefik</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Hetzner EU</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Coolify</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">n8n</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Bun</span>
+        <span class="badge" style="font-size: 9px; padding: 4px 10px;">Redis</span>
+    </div>
+
+    <div class="page-footer">
+        <span>&copy; 2026 Bright Interaction AB &middot; Malm&ouml;, Sverige &middot; brightinteraction.com</span>
+        <span><span class="badge">GDPR</span><span class="badge">NIS2</span><span class="badge">ISO 27001</span></span>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-02-20';
+const title = 'Cookie Consent Requirements in Sweden 2026: What IMY Expects';
+const description = "Sweden's data protection authority IMY has updated cookie consent enforcement. Here's exactly what your website needs to comply, and how to check if you're at risk.";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/cookie-consent-requirements-sweden-2026"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the cookie consent requirements in Sweden in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Swedish cookie consent is governed by the ePrivacy Directive (via LEK) and GDPR. Non-essential cookies must not be placed before explicit consent. Consent must be freely given, specific, and informed. The reject option must be as easy as accept — no dark patterns. Users must be able to withdraw consent at any time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the fines for cookie consent violations in Sweden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In late 2025, IMY issued cookie-related fines ranging from 300,000 to 12 million SEK. IMY's 2026 enforcement priorities include pre-consent tracking, dark patterns in consent interfaces, data transfers to third countries via tracking pixels, and lack of consent documentation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Google Analytics require cookie consent in Sweden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Google Analytics requires explicit prior consent in Sweden. It is a non-essential tracking tool that must not fire before the user gives consent. Nearly 48% of scanned Swedish websites load tracking scripts like Google Analytics before consent is given, which is the highest-risk violation because every page view constitutes a separate GDPR violation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I make my cookie banner compliant with IMY requirements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ensure no non-essential cookies or scripts fire before consent. Offer equally prominent Accept All and Reject All buttons — no burying reject behind settings. Provide granular consent categories. Explain each cookie category with specific purposes and recipients. Include a persistent way to withdraw consent, and store consent records with timestamps."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Compliance
+          </span>
+          <span class="text-text-muted text-sm">7 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Cookie consent is not a solved problem. In 2025, IMY (Integritetsskyddsmyndigheten) issued its largest-ever batch of cookie-related enforcement decisions, signaling that Swedish businesses can no longer treat consent banners as a checkbox exercise. The rules haven't changed dramatically, but enforcement has.
+          </p>
+          <p class="text-text-secondary">
+            This guide covers exactly what IMY requires in 2026, the most common violations we find when scanning Swedish websites, and a practical checklist to make sure your site is compliant.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What the Law Actually Requires
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Cookie consent in Sweden is governed by two overlapping frameworks: the ePrivacy Directive (implemented through LEK, the Swedish Electronic Communications Act) and GDPR. The ePrivacy rules determine when you need consent. GDPR determines what valid consent looks like.
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Prior Consent Required</h4>
+              <p class="text-text-secondary text-sm">
+                Non-essential cookies and tracking technologies must not be placed or read until the user has given explicit consent. This means no Google Analytics, no Facebook Pixel, no Hotjar, no marketing cookies on page load. Strictly necessary cookies (session management, load balancing, user preferences) are exempt.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Freely Given</h4>
+              <p class="text-text-secondary text-sm">
+                Consent cannot be bundled with accepting terms of service. Cookie walls that block content unless the user accepts all cookies are not valid consent under IMY's interpretation. The user must have a genuine choice.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Specific and Informed</h4>
+              <p class="text-text-secondary text-sm">
+                Users must be told what cookies are used, what they do, and who receives the data. Generic statements like "we use cookies to improve your experience" are insufficient. Each category of cookies must be explained, and consent must be granular. Users must be able to accept analytics but reject marketing, for example.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Reject Must Be As Easy As Accept</h4>
+              <p class="text-text-secondary text-sm">
+                This is the requirement most sites get wrong. If "Accept All" is a single click, then "Reject All" or "Only Necessary" must also be a single click. Burying the reject option behind a "Manage Settings" link is a dark pattern that IMY has explicitly called out.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Easy to Withdraw</h4>
+              <p class="text-text-secondary text-sm">
+                Users must be able to change their consent at any time. A persistent link in the footer or a floating icon that re-opens the consent dialog satisfies this requirement. The withdrawal process cannot be harder than giving consent.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Most Common Violations We Find
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            We've scanned hundreds of Swedish websites with SVAR, our automated compliance scanner. These are the cookie consent violations that appear most frequently:
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center">
+                  <span class="text-red-400 font-bold">48%</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">Pre-Consent Tracking</h4>
+                  <p class="text-text-secondary text-sm">
+                    Nearly half of scanned sites load tracking scripts before the user interacts with the consent banner. Google Analytics and Meta Pixel are the most common offenders. Every single page view constitutes a separate GDPR violation. This is by far the highest-risk issue because it generates violations at scale.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-orange-500/20 rounded-full flex items-center justify-center">
+                  <span class="text-orange-400 font-bold">35%</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">Missing Reject Option</h4>
+                  <p class="text-text-secondary text-sm">
+                    One in three sites only shows "Accept" or "Accept All" as the primary action, with reject buried behind "Settings" or "Manage Preferences." IMY considers this a dark pattern. The banner must offer equally prominent accept and reject options.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center">
+                  <span class="text-yellow-400 font-bold">22%</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">No Consent Banner at All</h4>
+                  <p class="text-text-secondary text-sm">
+                    Over a fifth of sites using non-essential cookies have no consent mechanism whatsoever. Some assume they don't need one because they "only use analytics." Under Swedish law, analytics cookies require consent unless they are strictly necessary for the service the user requested.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center">
+                  <span class="text-purple-400 font-bold">18%</span>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-text-primary mb-2">Pre-Ticked Checkboxes</h4>
+                  <p class="text-text-secondary text-sm">
+                    Some consent tools default to all categories being selected, requiring users to actively uncheck boxes. The CJEU ruled in the Planet49 case (C-673/17) that pre-ticked boxes do not constitute valid consent. This has been settled law since 2019, yet it persists.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            IMY Enforcement: What Has Changed
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            IMY has shifted from guidance to enforcement. In late 2025, the authority issued decisions against several Swedish companies for cookie consent violations, with fines ranging from 300,000 to 12 million SEK. The pattern is clear:
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <p class="text-text-secondary mb-3">
+              <strong class="text-gold">IMY's enforcement priorities for 2026:</strong>
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2">
+              <li>Pre-consent tracking (highest priority, as automated detection makes this easy to prove)</li>
+              <li>Dark patterns in consent interfaces (unequal accept/reject prominence)</li>
+              <li>Transfers to third countries via tracking pixels (especially US-based services)</li>
+              <li>Lack of consent documentation (you must be able to prove consent was given)</li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary">
+            IMY has also begun accepting third-party complaints more readily. Privacy advocacy groups like noyb have filed systematic complaints across EU member states, and Sweden is no exception. If your website is non-compliant, it's not a question of whether someone will notice. It's when.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            How CookieProof Handles Compliance
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            We built CookieProof specifically because most consent tools create a false sense of compliance. They show a banner but don't actually block scripts before consent. Or they block scripts on paper but the implementation has gaps that allow tracking to fire anyway.
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded">BLOCKING</span>
+                <h4 class="font-semibold text-text-primary">True Script Blocking</h4>
+              </div>
+              <p class="text-text-secondary text-sm">
+                CookieProof blocks non-essential scripts at the DOM level before they execute. Not after the page loads, not via a tag manager workaround, but before the browser processes them. Our scanner verifies this: zero pre-consent requests on sites running CookieProof.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded">UI</span>
+                <h4 class="font-semibold text-text-primary">Equal Prominence Design</h4>
+              </div>
+              <p class="text-text-secondary text-sm">
+                Accept and reject buttons are always equally prominent. No color tricks, no size differences, no extra clicks to reject. The default configuration satisfies IMY's requirements out of the box.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded">EU</span>
+                <h4 class="font-semibold text-text-primary">EU-Hosted Infrastructure</h4>
+              </div>
+              <p class="text-text-secondary text-sm">
+                CookieProof runs on European infrastructure. Consent records are stored in Sweden. No data leaves the EU, which eliminates the Schrems II transfer risk that plagues US-hosted consent tools.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded">PROOF</span>
+                <h4 class="font-semibold text-text-primary">Consent Documentation</h4>
+              </div>
+              <p class="text-text-secondary text-sm">
+                Every consent action is logged with timestamp, banner version, and user choice. If IMY asks you to prove that a specific visitor consented, you can produce the record. Most consent tools don't store this level of detail.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Cookie Compliance Checklist
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Use this checklist to evaluate your current setup. Every item is something our SVAR scanner checks automatically.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">No non-essential cookies are set before consent is given</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">No tracking scripts (analytics, pixels, heatmaps) fire before consent</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">Consent banner appears on first visit with clear information</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">"Reject All" is as prominent and easy to click as "Accept All"</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">Cookie categories are explained with specific purposes and recipients</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">Granular consent is available (analytics, marketing, functional separately)</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">No checkboxes are pre-ticked</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">Users can withdraw consent easily (footer link or persistent icon)</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">Consent records are stored with timestamps and banner version</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-mono text-sm mt-0.5">[ ]</span>
+                <p class="text-text-secondary text-sm">Consent tool itself does not transfer data outside the EU</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+          <h2 class="font-display text-2xl font-bold text-gold mb-4">
+            Check Your Cookie Compliance
+          </h2>
+          <p class="text-text-secondary mb-6">
+            Our free SVAR scan checks your cookie consent implementation as part of a full 16-test security and compliance audit. You'll know in two minutes whether your site has pre-consent tracking, missing reject options, or other consent issues that put you at risk with IMY. Beyond scanning, we help businesses fix what we find -- explore our <a href="/#services" class="text-gold-dark hover:underline">security and compliance services</a> or <a href="/#contact" class="text-gold-dark hover:underline">get in touch</a> directly.
+          </p>
+          <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+            Book a Free Scan
+          </button>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2 Compliance: A Practical Guide for SMBs</a></li>
+            <li><a href="/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">We Scanned Our GDPR Compliance, And a Competitor's</a></li>
+            <li><a href="/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Data Sovereignty in the Cloud Era</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

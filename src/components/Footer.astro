@@ -1,0 +1,102 @@
+---
+import { t, localePath } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-text-primary text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="py-12 lg:py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+      <!-- Brand -->
+      <div>
+        <a href={localePath(lang, '/')} class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded bg-gold flex items-center justify-center">
+            <span class="text-text-primary font-mono font-bold text-lg">B</span>
+          </div>
+          <span class="font-mono font-bold text-lg text-white tracking-tight">
+            bright<span class="text-gold">interaction</span>
+          </span>
+        </a>
+        <p class="text-gold font-medium mb-3">{t(lang, 'footer.tagline')}</p>
+        <p class="text-white/70 text-sm">
+          {t(lang, 'footer.description')}
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h3 class="font-mono font-bold text-sm text-white mb-4 uppercase tracking-wider">{t(lang, 'footer.solutions')}</h3>
+        <ul class="space-y-3 text-sm text-white/70">
+          <li><a href={localePath(lang, '/#real-cost')} class="hover:text-gold transition-colors">{t(lang, 'nav.calculator')}</a></li>
+          <li><a href={localePath(lang, '/#services')} class="hover:text-gold transition-colors">{t(lang, 'nav.services')}</a></li>
+          <li><a href={localePath(lang, '/#process')} class="hover:text-gold transition-colors">{t(lang, 'nav.process')}</a></li>
+          <li><a href={localePath(lang, '/#about')} class="hover:text-gold transition-colors">{t(lang, 'nav.about')}</a></li>
+          <li><a href={localePath(lang, '/insights')} class="hover:text-gold transition-colors">{t(lang, 'nav.insights')}</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="font-mono font-bold text-sm text-white mb-4 uppercase tracking-wider">{t(lang, 'footer.trustTitle')}</h3>
+        <p class="text-sm text-white/70 mb-4">{t(lang, 'footer.trustDescription')}</p>
+        <ul class="space-y-2 text-sm text-white/70">
+          <li><a href={localePath(lang, '/privacy')} class="hover:text-gold transition-colors">{t(lang, 'footer.privacy')}</a></li>
+          <li><a href={localePath(lang, '/terms')} class="hover:text-gold transition-colors">{t(lang, 'footer.terms')}</a></li>
+          <li><a href={localePath(lang, '/dpa')} class="hover:text-gold transition-colors">{t(lang, 'footer.dpa')}</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="font-mono font-bold text-sm text-white mb-4 uppercase tracking-wider">{t(lang, 'footer.connect')}</h3>
+        <div class="space-y-3 text-sm text-white/70 mb-6">
+          <a data-email class="block hover:text-gold transition-colors cursor-pointer" aria-label="Email us">
+            <span data-email-text></span>
+          </a>
+          <a href="tel:+46762978035" class="block hover:text-gold transition-colors">
+            +46 76 297 80 35
+          </a>
+          <p>Malmö, Sweden</p>
+        </div>
+        <div class="flex gap-3">
+          <a
+            href="https://www.linkedin.com/in/tom-isgren/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-9 h-9 bg-white/10 hover:bg-gold rounded-lg flex items-center justify-center transition-colors"
+            aria-label="LinkedIn"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom -->
+    <div class="py-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-white/50 font-mono">
+        &copy; {currentYear} {t(lang, 'footer.copyright')}
+      </p>
+      <p class="text-xs text-gold font-mono">
+        {t(lang, 'footer.bottomTagline')}
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const u = 'contact';
+  const d = 'brightinteraction.com';
+  const el = document.querySelector('[data-email]');
+  const txt = document.querySelector('[data-email-text]');
+  if (el && txt) {
+    const addr = u + '@' + d;
+    el.setAttribute('href', 'mailto:' + addr);
+    txt.textContent = addr;
+  }
+</script>

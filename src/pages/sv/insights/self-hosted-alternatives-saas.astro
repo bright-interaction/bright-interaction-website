@@ -1,0 +1,555 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'Egenhostade alternativ till populära SaaS-verktyg';
+const description = 'Notion, Slack, Airtable och fler har egenhostade alternativ som ger dig datakontroll utan att offra funktionalitet. Här är vad som faktiskt fungerar.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/self-hosted-alternatives-saas"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Verktyg
+          </span>
+          <span class="text-text-muted text-sm">10 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Verktygen du använder dagligen lever troligen på någon annans servrar: Notion för dokumentation, Slack för kommunikation, Airtable för databaser och dussintals fler. Det fungerar tills du behöver datasuveränitet, drabbas av oväntat höjda priser eller ser en kritisk funktion läggas ner.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            De goda nyheterna: mogna egenhostade alternativ finns för de flesta populära SaaS-verktyg. Här är en ärlig bedömning av vad som fungerar, vad som inte gör det och när det är dags att byta.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Dokumentation och kunskapsbas
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">Notion → Outline eller BookStack</h3>
+                <p class="text-text-muted text-sm">Dokumentation, wikis, kunskapsbaser</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Outline</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Den upplevelse som ligger närmast Notion. Vackert gränssnitt, realtidssamarbete, markdown-stöd och ett rent API. Saknar Notions databasfunktioner men utmärker sig för dokumentation.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Bra UI</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Aktiv utveckling</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Inga databaser</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">BookStack</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Mer strukturerad ansats med böcker, kapitel och sidor. Utmärkt sök, behörigheter och exportalternativ. Mindre flexibel än Notion men mer organiserad för stora dokumentationssamlingar.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Mogen och stabil</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Enkel att driftsatta</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Mindre flexibel</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Bedömning:</strong> Om du främst använder Notion för dokumentation är Outline utmärkt. Behöver du Notions databasfunktioner måste du kombinera verktyg (se Airtable-alternativ nedan).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Teamkommunikation
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">Slack → Mattermost eller Rocket.Chat</h3>
+                <p class="text-text-muted text-sm">Teammeddelanden, kanaler, integrationer</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Mattermost</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Den mest Slack-lika upplevelsen. Kanaler, trådar, reaktioner, fildelning, videosamtal. Starkt integrationsekosystem och bra mobilappar. Används av myndigheter och företag med strikta datakrav.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Slack-lik UX</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Företagsredo</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Bra mobilappar</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Rocket.Chat</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Fler funktioner direkt ur lådan: videokonferens, skärmdelning, white-labeling. Något rörigare gränssnitt men mycket anpassningsbart. Starkt för kundvända användningsfall också.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Funktionsrikt</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Omnikanalsstöd</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Rörigare UI</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Bedömning:</strong> Mattermost för team som är vana vid Slack. Rocket.Chat om du också behöver kundvänd chatt eller vill ha fler inbyggda funktioner.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Databaser och kalkylblad
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">Airtable → NocoDB eller Baserow</h3>
+                <p class="text-text-muted text-sm">Relationsdatabaser med kalkylblads-UI</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">NocoDB</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Omvandlar vilken databas som helst till ett Airtable-liknande gränssnitt. Kan ansluta till befintliga MySQL-, PostgreSQL- eller SQL Server-databaser. Vyer, filter, formulär, API-åtkomst. Mycket nära Airtables funktionalitet.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Databasagnostisk</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Airtable-lik</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Bra API</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Baserow</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Specialbyggt Airtable-alternativ. Rent gränssnitt, bra samarbetsfunktioner och aktiv utveckling. Något färre funktioner än NocoDB men en mer polerad upplevelse.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Polerat UI</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Aktivt community</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Färre integrationer</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Bedömning:</strong> NocoDB om du har befintliga databaser att ansluta. Baserow för en renare, mer fokuserad upplevelse. Båda är produktionsredo.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Projekthantering
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">Asana/Monday → Plane eller Focalboard</h3>
+                <p class="text-text-muted text-sm">Uppgifter, projekt, kanban-tavlor</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Plane</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Modern projekthantering med ärenden, cykler, moduler och vyer. Ren design, bra UX. Utvecklas aktivt med frekventa uppdateringar. Känns som ett premiumverktyg.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Modern design</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Snabb utveckling</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Nyare projekt</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Focalboard</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Från Mattermost-teamet. Kanban-tavlor, tabellvyer, kalendervyer. Integreras med Mattermost om du använder det. Enklare än Plane men mycket pålitlig.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Stabil</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Mattermost-integration</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Färre funktioner</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Bedömning:</strong> Plane för en fullfjädrad modern upplevelse. Focalboard om du vill ha enkelhet eller redan använder Mattermost.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            CRM och försäljning
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">Salesforce/HubSpot → EspoCRM eller Twenty</h3>
+                <p class="text-text-muted text-sm">Kundrelationer, pipelines, kontakter</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">EspoCRM</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Fullfjädrat CRM med försäljnings-, marknadsförings- och supportfunktioner. Anpassningsbara entiteter, arbetsflöden och instrumentpaneler. Moget projekt med lång historik. API för integrationer.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Funktionskomplett</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Mycket anpassningsbart</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Äldre UI-design</span>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Twenty</h4>
+                <p class="text-text-secondary text-sm mb-2">
+                  Nytt open source-CRM med modern design. Siktar på att bli "CRM-världens Notion." Fortfarande tidigt men utvecklas snabbt. Rent gränssnitt och bra vision.
+                </p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Modernt UI</span>
+                  <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Växer snabbt</span>
+                  <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded">Tidigt skede</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Bedömning:</strong> EspoCRM för produktionsanvändning idag. Twenty att bevaka för framtiden. Båda är livskraftiga beroende på din tolerans för mognad kontra modern UX.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Fillagring och synkning
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h3 class="font-display text-xl font-bold text-text-primary">Google Drive/Dropbox → Nextcloud</h3>
+                <p class="text-text-muted text-sm">Fillagring, synkning, delning</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              Nextcloud är den klara vinnaren här. Moget, funktionsrikt och brett använt. Filsynkning, delning, kollaborativ redigering (med Collabora eller OnlyOffice), kalender, kontakter och hundratals appar.
+            </p>
+
+            <div class="flex gap-2 flex-wrap mb-4">
+              <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Mycket moget</span>
+              <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Fullständigt Google-alternativ</span>
+              <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Bra mobilappar</span>
+              <span class="text-xs px-2 py-1 bg-green-900/30 text-green-400 rounded">Företagssupport</span>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-text-primary">Bedömning:</strong> Nextcloud är produktionsredo och kan ersätta Google Workspace för många team. Lägg till Collabora Online för dokumentredigering.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Snabbreferenstabell
+          </h2>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-3 px-4 text-text-primary font-semibold">SaaS-verktyg</th>
+                  <th class="text-left py-3 px-4 text-gold font-semibold">Egenhostat alternativ</th>
+                  <th class="text-left py-3 px-4 text-text-secondary font-semibold">Mognad</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Notion</td>
+                  <td class="py-3 px-4">Outline, BookStack</td>
+                  <td class="py-3 px-4">Hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Slack</td>
+                  <td class="py-3 px-4">Mattermost, Rocket.Chat</td>
+                  <td class="py-3 px-4">Hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Airtable</td>
+                  <td class="py-3 px-4">NocoDB, Baserow</td>
+                  <td class="py-3 px-4">Hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Asana/Monday</td>
+                  <td class="py-3 px-4">Plane, Focalboard</td>
+                  <td class="py-3 px-4">Medel-Hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Salesforce/HubSpot</td>
+                  <td class="py-3 px-4">EspoCRM, Twenty</td>
+                  <td class="py-3 px-4">Medel-Hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Google Drive</td>
+                  <td class="py-3 px-4">Nextcloud</td>
+                  <td class="py-3 px-4">Mycket hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Zapier</td>
+                  <td class="py-3 px-4">n8n</td>
+                  <td class="py-3 px-4">Hög</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Typeform</td>
+                  <td class="py-3 px-4">Formbricks</td>
+                  <td class="py-3 px-4">Medel</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4">Analytics (GA)</td>
+                  <td class="py-3 px-4">Plausible, Umami</td>
+                  <td class="py-3 px-4">Hög</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Att genomföra övergången
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Försök inte byta allt på en gång. En praktisk strategi:
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Börja med lågriskverktyg</h4>
+              <p class="text-text-secondary text-sm">
+                Analys, formulär, dokumentation. Om något går fel är konsekvenserna begränsade. Bygg självförtroende med mindre migrationer först.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Kör parallellt för kritiska system</h4>
+              <p class="text-text-secondary text-sm">
+                Behåll Slack igång medan du testar Mattermost. Migrera gradvis och låt teamen anpassa sig. Stäng av först när alla är bekväma.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Acceptera vissa kompromisser</h4>
+              <p class="text-text-secondary text-sm">
+                Egenhostade verktyg matchar sällan SaaS-finishen exakt. Du byter viss bekvämlighet mot kontroll. Se till att den avvägningen är vettig för varje verktyg.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Slutsatsen
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Livskraftiga egenhostade alternativ finns för de flesta affärsverktyg. Gapet mellan SaaS och egenhostat har minskat dramatiskt. För många användningsfall är egenhostade verktyg nu genuint jämförbara i funktionalitet samtidigt som de erbjuder betydande fördelar i kontroll, integritet och långsiktig kostnad.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Frågan är inte om egenhostade verktyg är tillräckligt bra. Det är huruvida fördelarna med datakontroll, kostnadsförutsägbarhet och oberoende överskrider bekvämligheten med hanterad SaaS för just din situation.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du hjälp med övergången?</strong> Vi driftsätter och förvaltar egenhostade alternativ för företag. Från initial installation till löpande underhåll kan vi hjälpa dig att komma bort från SaaS-beroenden med bibehållen pålitlighet och säkerhet.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Låt oss diskutera din stack →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/self-hosted-alternatives-saas`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Egenhostat vs SaaS: Rätt val för ditt företag</a></li>
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveränitet i molnet</a></li>
+            <li><a href="/sv/insights/container-security-basics" class="text-gold hover:text-gold-light transition-colors text-sm">Grunderna i containersäkerhet</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

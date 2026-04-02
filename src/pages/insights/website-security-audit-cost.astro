@@ -1,0 +1,462 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-02-10';
+const title = 'How Much Does a Website Security Audit Cost in 2026?';
+const description = 'Website security audit pricing ranges from free automated scans to 50,000+ SEK manual penetration tests. Here\'s what you get at each level and what makes sense for your business.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/website-security-audit-cost"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a website security audit cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Website security audit costs range across three tiers: free to 5,000 SEK for automated scans, 5,000-25,000 SEK for security assessments with manual review, and 30,000-150,000+ SEK for full penetration tests. Most small and medium businesses should start with automated scanning and fix the basics before investing in more expensive options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a penetration test for my website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most small and medium businesses don't need a penetration test initially. The most common security failures — missing DMARC, pre-consent tracking, deficient privacy policies — are all detectable by automated scanning. Start with a free scan, fix what it finds, then consider a penetration test if you handle sensitive data or run custom web applications."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does a free website security scan check?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A free automated security scan checks your externally visible attack surface including TLS configuration, security headers, email authentication (SPF, DKIM, DMARC), GDPR compliance checks for cookies and privacy policy, and exposed software versions. Results are delivered in minutes with a letter grade and prioritized findings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I get a security audit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Automated scans should run continuously or at least weekly. Security assessments should be repeated at least annually or after significant infrastructure changes. Penetration tests are typically done annually for organizations with mature security programs. Security is not a one-time expense — budget for ongoing monitoring."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Security
+          </span>
+          <span class="text-text-muted text-sm">6 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            "How much does a security audit cost?" is the wrong first question. The right question is: what do you actually need? A free automated scan, a mid-tier assessment, and a full penetration test answer fundamentally different questions. This guide breaks down the pricing, what you get at each level, and how to decide what makes sense for your situation.
+          </p>
+          <p class="text-text-secondary">
+            Prices are based on the Swedish market in 2026. If you're getting quotes significantly outside these ranges, ask why.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Three Tiers of Security Auditing
+          </h2>
+
+          <!-- Tier 1: Free -->
+          <div class="bg-dark-surface rounded-xl border border-green-500/30 p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded">TIER 1</span>
+                <h3 class="font-display text-xl font-bold text-text-primary mt-2">Automated Security Scan</h3>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl font-display font-bold text-green-400">Free</p>
+                <p class="text-text-muted text-xs">to 5,000 SEK/year</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              Automated scanners check your publicly visible attack surface: TLS configuration, security headers, email authentication, cookie consent, exposed software versions, and more. Results are delivered in minutes, not weeks.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-text-muted text-xs font-semibold mb-2">WHAT YOU GET:</p>
+                <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                  <li>External attack surface assessment</li>
+                  <li>TLS and encryption configuration</li>
+                  <li>Email authentication (SPF, DKIM, DMARC)</li>
+                  <li>GDPR compliance checks (cookies, privacy policy)</li>
+                  <li>Security header analysis</li>
+                  <li>Letter grade with prioritized findings</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs font-semibold mb-2">BEST FOR:</p>
+                <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                  <li>Establishing a baseline</li>
+                  <li>Quick health check before a meeting</li>
+                  <li>Ongoing monitoring (scheduled scans)</li>
+                  <li>Small businesses with limited budgets</li>
+                  <li>Verifying fixes after remediation</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-green-400">Our SVAR scanner fits here.</strong> It runs 16 tests in under two minutes and is free for a single scan. We've used it to scan 597 Swedish law firms for our industry report, and the same technology is available to any business.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tier 2: Mid-tier -->
+          <div class="bg-dark-surface rounded-xl border border-yellow-500/30 p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded">TIER 2</span>
+                <h3 class="font-display text-xl font-bold text-text-primary mt-2">Security Assessment</h3>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl font-display font-bold text-yellow-400">5,000-25,000</p>
+                <p class="text-text-muted text-xs">SEK per assessment</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              A security assessment combines automated scanning with manual review by a security professional. The consultant interprets scanner results, tests for business logic issues that automation misses, and provides a written report with prioritized recommendations.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-text-muted text-xs font-semibold mb-2">WHAT YOU GET:</p>
+                <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                  <li>Everything in Tier 1, plus:</li>
+                  <li>Manual verification of automated findings</li>
+                  <li>Basic authentication and session testing</li>
+                  <li>Configuration review of public services</li>
+                  <li>Written report with executive summary</li>
+                  <li>Remediation guidance with priority ranking</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs font-semibold mb-2">BEST FOR:</p>
+                <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                  <li>Businesses handling sensitive data</li>
+                  <li>Pre-certification preparation (ISO 27001)</li>
+                  <li>Annual security reviews</li>
+                  <li>Meeting NIS2 baseline requirements</li>
+                  <li>Companies without in-house security staff</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-yellow-400">Typical timeline:</strong> 1-2 weeks from engagement to final report. Most of the cost is consultant time for manual testing and report writing.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tier 3: Pentest -->
+          <div class="bg-dark-surface rounded-xl border border-red-500/30 p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded">TIER 3</span>
+                <h3 class="font-display text-xl font-bold text-text-primary mt-2">Penetration Test</h3>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl font-display font-bold text-red-400">30,000-150,000+</p>
+                <p class="text-text-muted text-xs">SEK per engagement</p>
+              </div>
+            </div>
+
+            <p class="text-text-secondary text-sm mb-4">
+              A penetration test is a simulated attack by skilled testers who attempt to break into your systems using the same techniques as real attackers. This is the most thorough assessment, but also the most expensive and time-consuming.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-text-muted text-xs font-semibold mb-2">WHAT YOU GET:</p>
+                <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                  <li>Everything in Tier 2, plus:</li>
+                  <li>Active exploitation attempts</li>
+                  <li>Business logic vulnerability testing</li>
+                  <li>Social engineering (if scoped)</li>
+                  <li>Internal network testing (if scoped)</li>
+                  <li>Detailed technical report with proof of concepts</li>
+                  <li>Re-test after remediation (usually included)</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-text-muted text-xs font-semibold mb-2">BEST FOR:</p>
+                <ul class="list-disc list-inside text-text-secondary text-sm space-y-1">
+                  <li>Regulatory requirements (financial, healthcare)</li>
+                  <li>Custom web applications with user data</li>
+                  <li>Pre-launch security validation</li>
+                  <li>After a security incident</li>
+                  <li>Organizations with mature security programs</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-dark-elevated">
+              <p class="text-text-secondary text-sm">
+                <strong class="text-red-400">Typical timeline:</strong> 2-6 weeks depending on scope. Prices vary significantly based on the number of applications, IP ranges, and testing depth. Always get a scoping call before accepting a quote.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Comparison at a Glance
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left text-text-muted font-semibold p-4"></th>
+                    <th class="text-center text-green-400 font-semibold p-4">Automated Scan</th>
+                    <th class="text-center text-yellow-400 font-semibold p-4">Assessment</th>
+                    <th class="text-center text-red-400 font-semibold p-4">Pentest</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="p-4 font-medium text-text-primary">Cost</td>
+                    <td class="p-4 text-center">Free - 5K SEK</td>
+                    <td class="p-4 text-center">5K - 25K SEK</td>
+                    <td class="p-4 text-center">30K - 150K+ SEK</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="p-4 font-medium text-text-primary">Time to Results</td>
+                    <td class="p-4 text-center">Minutes</td>
+                    <td class="p-4 text-center">1-2 weeks</td>
+                    <td class="p-4 text-center">2-6 weeks</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="p-4 font-medium text-text-primary">Depth</td>
+                    <td class="p-4 text-center">External surface</td>
+                    <td class="p-4 text-center">External + config</td>
+                    <td class="p-4 text-center">Full exploitation</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="p-4 font-medium text-text-primary">Human Review</td>
+                    <td class="p-4 text-center">No</td>
+                    <td class="p-4 text-center">Yes</td>
+                    <td class="p-4 text-center">Yes (extensive)</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="p-4 font-medium text-text-primary">GDPR/Compliance</td>
+                    <td class="p-4 text-center">Yes</td>
+                    <td class="p-4 text-center">Yes</td>
+                    <td class="p-4 text-center">Limited</td>
+                  </tr>
+                  <tr>
+                    <td class="p-4 font-medium text-text-primary">Repeatable</td>
+                    <td class="p-4 text-center">Daily/weekly</td>
+                    <td class="p-4 text-center">Quarterly/annual</td>
+                    <td class="p-4 text-center">Annual</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What Most Businesses Actually Need
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Here's the uncomfortable truth: most small and medium Swedish businesses don't need a penetration test. They need to fix the basics first. When we scan websites, the most common failures are in TLS configuration, missing DMARC, pre-consent tracking, and deficient privacy policies. These are all Tier 1 findings.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">From our data:</strong> The average score across 597 scanned law firms was 59.1 out of 100. None achieved an A grade. The issues holding them back were all detectable by automated scanning. Not a single one required a penetration test to find.
+            </p>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            The smart approach is to start with Tier 1, fix what it finds, then reassess. If you're handling sensitive data (client records, financial information, health data) and have a custom web application, move to Tier 2 or Tier 3. If you're running a standard CMS with plugins, Tier 1 with regular rescanning covers most of your risk.
+          </p>
+
+          <p class="text-text-secondary">
+            Paying 50,000 SEK for a penetration test when you haven't configured DMARC or implemented cookie consent is like hiring a locksmith to audit your vault when the front door is open.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Hidden Costs to Watch For
+          </h2>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Remediation Is Not Included</h4>
+              <p class="text-text-secondary text-sm">
+                Most security audits tell you what's wrong but don't fix anything. Budget for remediation separately. For Tier 1 findings, remediation typically costs 5,000-15,000 SEK if outsourced. For Tier 3 findings, it depends entirely on the vulnerability.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Scope Creep in Pentests</h4>
+              <p class="text-text-secondary text-sm">
+                Penetration test quotes are scoped to specific targets. If your infrastructure is larger than initially assessed, expect the price to increase. Always provide a complete inventory of in-scope assets before getting a quote.
+              </p>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Recurring Costs</h4>
+              <p class="text-text-secondary text-sm">
+                Security is not a one-time expense. Automated scans should run continuously. Assessments should be repeated at least annually. Budget for ongoing monitoring, not just a single engagement.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+          <h2 class="font-display text-2xl font-bold text-gold mb-4">
+            Start With the Free Scan
+          </h2>
+          <p class="text-text-secondary mb-6">
+            Before spending anything, find out where you stand. Our SVAR scan runs 16 tests in under two minutes and gives you a prioritized list of issues. Most businesses discover they have more Tier 1 problems to fix than they expected. Start there, fix the basics, then decide if you need deeper testing. See our <a href="/#services" class="text-gold-dark hover:underline">services</a> for remediation help, or check <a href="/#real-cost" class="text-gold-dark hover:underline">what non-compliance actually costs</a>.
+          </p>
+          <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+            Book a Free Scan
+          </button>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/free-website-security-scan" class="text-gold hover:text-gold-light transition-colors text-sm">Free Website Security Scan: 16 Tests in 2 Minutes</a></li>
+            <li><a href="/insights/cybersecurity-industry-benchmark" class="text-gold hover:text-gold-light transition-colors text-sm">I Audited 17 Cybersecurity Companies - The Average Score Was 73/100</a></li>
+            <li><a href="/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">We Scanned Our GDPR Compliance, And a Competitor's</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

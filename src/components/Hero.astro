@@ -1,0 +1,44 @@
+---
+import { t } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+---
+
+<section class="relative min-h-screen flex items-center bg-surface pt-20 overflow-hidden">
+  <!-- Circuit board background -->
+  <canvas id="hero-circuit" class="absolute inset-0 w-full h-full"></canvas>
+
+  <!-- Content -->
+  <div class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+    <p class="text-xs font-mono font-bold text-gold-dark mb-6 tracking-widest uppercase">{t(lang, 'hero.badge')}</p>
+
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-text-primary leading-[1.08] tracking-tight mb-8">
+      {t(lang, 'hero.lightTitle1')}<br/>
+      {t(lang, 'hero.lightTitle2')}<br/>
+      <span class="text-gold-dark">{t(lang, 'hero.lightTitle3')}</span>
+    </h1>
+
+    <p class="text-lg sm:text-xl text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
+      {t(lang, 'hero.lightDescription')}
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="#real-cost"
+        class="px-8 py-4 bg-text-primary hover:bg-text-secondary text-white font-medium rounded-lg transition-colors cursor-pointer text-center"
+      >
+        {t(lang, 'hero.lightCta1')}
+      </a>
+      <a
+        href="#services"
+        class="px-8 py-4 text-text-primary font-medium rounded-lg border border-border hover:border-text-muted transition-colors text-center"
+      >
+        {t(lang, 'hero.lightCta2')}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/hero-circuit';
+</script>

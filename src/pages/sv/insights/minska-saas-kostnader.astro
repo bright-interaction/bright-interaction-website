@@ -1,0 +1,526 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-02-18';
+const title = 'Minska SaaS-kostnader med öppen källkod: En guide för svenska företag';
+const description = 'Svenska företag betalar i snitt 115 000 kr per anställd i SaaS-kostnader. Lär dig hur öppna källkodsalternativ kan minska dessa kostnader med upp till 70%.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/minska-saas-kostnader"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Hur mycket kostar SaaS per anställd?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Genomsnittet ligger på cirka 115 000 kr per anställd och år (2026). Det inkluderar alla SaaS-prenumerationer ett företag betalar för, från e-post och kommunikation till projekthantering och CRM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Är öppen källkod säkert för företag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, många öppna källkodsprojekt har bättre säkerhet än proprietära alternativ. Koden granskas av tusentals utvecklare, sårbarheter upptäcks snabbare och du har full insyn i vad mjukvaran gör. Verktyg som Vaultwarden, Mattermost och Zitadel används av myndigheter och storföretag världen över."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Hur lång tid tar en migrering från SaaS till självhostat?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vanligtvis 2 till 6 veckor per verktyg, beroende på komplexitet och datamängd. Enklare verktyg som lösenordshanterare eller wiki kan migreras på några dagar. Mer komplexa system som CRM eller e-post kräver längre planering och parallellkörning."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kan små företag använda öppen källkod?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolut. Många öppna källkodsverktyg är enklare att komma igång med än företagsalternativ. Med moderna hostingplattformar som Coolify kan även ett litet team driftsätta och underhålla sina egna verktyg utan dedikerad IT-personal."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            &larr; Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Business Strategy
+          </span>
+          <span class="text-text-muted text-sm">8 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Svenska företag betalar i genomsnitt över 100 000 kr per anställd per år i SaaS-kostnader. Många betalar för licenser som knappt används. Öppna källkodsalternativ kan minska dessa kostnader med upp till 70 %, utan att du behöver ge avkall på funktionalitet eller säkerhet.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            I den här guiden går vi igenom vad SaaS faktiskt kostar, var pengarna försvinner, vilka alternativ som finns och hur du räknar på besparingen för ditt eget företag.
+          </p>
+        </section>
+
+        <!-- Sektion 1: Vad SaaS egentligen kostar -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vad SaaS egentligen kostar
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Enligt aktuella branschrapporter ligger den genomsnittliga SaaS-kostnaden på cirka 10 800 USD per anställd och år. Det motsvarar ungefär 115 000 SEK. För ett företag med 25 anställda innebär det nästan 2,9 miljoner kronor per år i mjukvarukostnader.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+              <div>
+                <p class="text-3xl font-bold text-gold mb-1">115 000 kr</p>
+                <p class="text-text-muted text-sm">Per anställd per år</p>
+              </div>
+              <div>
+                <p class="text-3xl font-bold text-gold mb-1">2,9 mkr</p>
+                <p class="text-text-muted text-sm">25-personersföretag per år</p>
+              </div>
+              <div>
+                <p class="text-3xl font-bold text-gold mb-1">130+</p>
+                <p class="text-text-muted text-sm">SaaS-appar i snitt per företag</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            Och trenden pekar bara uppåt. SaaS-leverantörer höjer sina priser med 10 till 15 % årligen, ofta mitt i en avtalsperiod. Det som verkade rimligt för två år sedan kan ha blivit en rejäl kostnadspost idag.
+          </p>
+        </section>
+
+        <!-- Sektion 2: Dolda kostnader -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga dolda kostnader
+          </h2>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Oanvända licenser</h3>
+              <p class="text-text-secondary text-sm">
+                Studier visar att 25 till 30 % av alla SaaS-licenser aldrig eller sällan används. För ett 25-personersföretag kan det motsvara 700 000 kr per år som går till mjukvara ingen öppnar.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Överförbrukningsavgifter</h3>
+              <p class="text-text-secondary text-sm">
+                Många SaaS-verktyg har gränser för lagring, API-anrop eller antal kontakter. Överskrider du gränsen debiteras du automatiskt, ofta till betydligt högre enhetspris.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Inlåsningseffekter</h3>
+              <p class="text-text-secondary text-sm">
+                Ju mer data du lagrar i ett verktyg, desto svårare blir det att byta. SaaS-leverantörer vet detta och erbjuder sällan enkel export. Kostnaden för att stanna kvar ökar varje år, medan kostnaden för att lämna också gör det.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Dubbletter och överlapp</h3>
+              <p class="text-text-secondary text-sm">
+                Med 130+ SaaS-appar i ett genomsnittligt företag är det vanligt att flera verktyg gör samma sak. Tre olika verktyg för projekthantering, två för fildelning, redundanta kommunikationskanaler.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sektion 3: 10 SaaS-verktyg och alternativ -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            10 SaaS-verktyg och deras öppna källkodsalternativ
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Här är en översikt över vanliga SaaS-verktyg, vad de kostar och vilka öppna källkodsalternativ som finns. Priserna baseras på en plan med 25 användare och aktuella listapriser (2026).
+          </p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-3 px-4 text-text-primary font-semibold">SaaS-verktyg</th>
+                  <th class="text-left py-3 px-4 text-text-primary font-semibold">Kostnad/mån (25 anv.)</th>
+                  <th class="text-left py-3 px-4 text-gold font-semibold">Alternativ (öppen källkod)</th>
+                  <th class="text-left py-3 px-4 text-gold font-semibold">Kostnad/mån</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Google Workspace</td>
+                  <td class="py-3 px-4">~4 500 kr</td>
+                  <td class="py-3 px-4">Proton for Business</td>
+                  <td class="py-3 px-4">~2 500 kr</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Slack Pro</td>
+                  <td class="py-3 px-4">~2 700 kr</td>
+                  <td class="py-3 px-4">Mattermost</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Zapier Team</td>
+                  <td class="py-3 px-4">~5 500 kr</td>
+                  <td class="py-3 px-4">n8n</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Notion Team</td>
+                  <td class="py-3 px-4">~2 500 kr</td>
+                  <td class="py-3 px-4">Outline</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Vercel Pro</td>
+                  <td class="py-3 px-4">~2 000 kr</td>
+                  <td class="py-3 px-4">Coolify</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Auth0 Essentials</td>
+                  <td class="py-3 px-4">~3 000 kr</td>
+                  <td class="py-3 px-4">Zitadel</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">HubSpot Starter</td>
+                  <td class="py-3 px-4">~4 000 kr</td>
+                  <td class="py-3 px-4">Twenty CRM</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Jira Standard</td>
+                  <td class="py-3 px-4">~2 200 kr</td>
+                  <td class="py-3 px-4">Plane</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-3 px-4">Confluence</td>
+                  <td class="py-3 px-4">~1 800 kr</td>
+                  <td class="py-3 px-4">BookStack</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+                <tr>
+                  <td class="py-3 px-4">LastPass Business</td>
+                  <td class="py-3 px-4">~2 100 kr</td>
+                  <td class="py-3 px-4">Vaultwarden</td>
+                  <td class="py-3 px-4">0 kr (självhostat)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5 mt-6">
+            <p class="text-text-secondary text-sm">
+              <strong class="text-text-primary">Observera:</strong> "0 kr" för självhostade alternativ avser licenskostnaden. Du behöver fortfarande en server (typiskt 200 till 800 kr/mån för en VPS) och tid för drift och underhåll. Den totala besparingen är ändå betydande, särskilt när flera verktyg delar samma server.
+            </p>
+          </div>
+        </section>
+
+        <!-- Sektion 4: Så här räknar du -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Så här räknar du: exempelkalkyl för 25 anställda
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Låt oss ta ett konkret exempel. Ett typiskt svenskt företag med 25 anställda som använder de tio verktygen ovan.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center py-2 border-b border-dark-elevated">
+                <span class="text-text-secondary">Total SaaS-kostnad per månad</span>
+                <span class="text-text-primary font-semibold">~30 300 kr</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-dark-elevated">
+                <span class="text-text-secondary">Total SaaS-kostnad per år</span>
+                <span class="text-text-primary font-semibold">~363 600 kr</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-dark-elevated">
+                <span class="text-text-secondary">Öppen källkod + server per månad</span>
+                <span class="text-gold font-semibold">~3 300 kr</span>
+              </div>
+              <div class="flex justify-between items-center py-2 border-b border-dark-elevated">
+                <span class="text-text-secondary">Öppen källkod + server per år</span>
+                <span class="text-gold font-semibold">~39 600 kr</span>
+              </div>
+              <div class="flex justify-between items-center py-2">
+                <span class="text-text-primary font-bold">Årlig besparing</span>
+                <span class="text-green-400 font-bold text-lg">~324 000 kr</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-4">
+            Det är en besparing på nästan 90 % bara på dessa tio verktyg. Även om du räknar in 10 till 15 timmar per månad för drift och underhåll (ungefär 15 000 kr i intern tidskostnad) landar besparingen fortfarande på runt 140 000 kr per år.
+          </p>
+
+          <p class="text-text-secondary">
+            I verkligheten ersätter de flesta företag inte alla verktyg direkt. Men redan att migrera tre till fyra verktyg kan spara 100 000 kr eller mer per år.
+          </p>
+        </section>
+
+        <!-- Sektion 5: Hur en migrering går till -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Hur en migrering går till: 4 steg
+          </h2>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-gold/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span class="text-gold font-bold">1</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-2">Inventera och prioritera</h3>
+                  <p class="text-text-secondary text-sm">
+                    Lista alla SaaS-verktyg ni betalar för idag. Notera kostnad per månad, antal aktiva användare och hur kritiskt varje verktyg är. Börja med de dyraste verktygen som har mogna öppna källkodsalternativ.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-gold/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span class="text-gold font-bold">2</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-2">Testa i liten skala</h3>
+                  <p class="text-text-secondary text-sm">
+                    Sätt upp alternativet på en testserver. Låt ett litet team testa i 2 till 4 veckor. Utvärdera prestanda, användarvänlighet och eventuella funktionsluckor. Det är här du upptäcker om verktyget verkligen passar era behov.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-gold/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span class="text-gold font-bold">3</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-2">Migrera data och kör parallellt</h3>
+                  <p class="text-text-secondary text-sm">
+                    Exportera data från det gamla verktyget och importera till det nya. Kör båda systemen parallellt i minst 2 veckor. Se till att all data finns på plats och att arbetsflöden fungerar innan du stänger av det gamla.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 bg-gold/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <span class="text-gold font-bold">4</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-text-primary mb-2">Avsluta och dokumentera</h3>
+                  <p class="text-text-secondary text-sm">
+                    Säg upp SaaS-prenumerationen (kontrollera uppsägningstiden). Dokumentera hur det nya verktyget driftas: backup-rutiner, uppdateringar och felsökning. Gå vidare till nästa verktyg på listan.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ-sektion -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga frågor
+          </h2>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Hur mycket kostar SaaS per anställd?</h3>
+              <p class="text-text-secondary text-sm">
+                Genomsnittet ligger på cirka 115 000 kr per anställd och år (2026). Det inkluderar alla SaaS-prenumerationer ett företag betalar för, från e-post och kommunikation till projekthantering och CRM.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Är öppen källkod säkert för företag?</h3>
+              <p class="text-text-secondary text-sm">
+                Ja, många öppna källkodsprojekt har bättre säkerhet än proprietära alternativ. Koden granskas av tusentals utvecklare, sårbarheter upptäcks snabbare och du har full insyn i vad mjukvaran gör. Verktyg som Vaultwarden, Mattermost och Zitadel används av myndigheter och storföretag världen över.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Hur lång tid tar en migrering från SaaS till självhostat?</h3>
+              <p class="text-text-secondary text-sm">
+                Vanligtvis 2 till 6 veckor per verktyg, beroende på komplexitet och datamängd. Enklare verktyg som lösenordshanterare eller wiki kan migreras på några dagar. Mer komplexa system som CRM eller e-post kräver längre planering och parallellkörning.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h3 class="font-semibold text-text-primary mb-2">Kan små företag använda öppen källkod?</h3>
+              <p class="text-text-secondary text-sm">
+                Absolut. Många öppna källkodsverktyg är enklare att komma igång med än företagsalternativ. Med moderna hostingplattformar som Coolify kan även ett litet team driftsätta och underhålla sina egna verktyg utan dedikerad IT-personal.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section>
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <h2 class="font-display text-xl font-bold text-gold mb-3">
+              Vill du räkna på din egen besparing?
+            </h2>
+            <p class="text-text-secondary mb-4">
+              Vi hjälper svenska företag att identifiera SaaS-kostnader som kan minskas eller elimineras med öppna källkodsalternativ. Från kalkyl till migrering och löpande drift.
+            </p>
+            <p class="text-text-secondary">
+              <button data-cal-trigger class="text-gold hover:underline cursor-pointer font-semibold">Boka en kostnadsfri genomgång av era SaaS-kostnader &rarr;</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/minska-saas-kostnader`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Självhostat vs SaaS</a></li>
+            <li><a href="/sv/insights/self-hosted-alternatives-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Självhostade alternativ till populära SaaS-verktyg</a></li>
+            <li><a href="/sv/insights/hidden-cost-of-manual-processes" class="text-gold hover:text-gold-light transition-colors text-sm">Den dolda kostnaden av manuella processer</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

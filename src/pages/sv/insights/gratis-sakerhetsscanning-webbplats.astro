@@ -1,0 +1,292 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+
+const lang = 'sv';
+const title = "Gratis säkerhetsscanning av din webbplats: 16 tester på 2 minuter";
+const description = "Få en kostnadsfri automatiserad säkerhets- och compliancescanning av din webbplats. Vi kontrollerar TLS, GDPR-samtycke, e-postautentisering, datajurisdiktion och 12 fler dimensioner.";
+const publishDate = '2026-03-15';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/gratis-sakerhetsscanning-webbplats"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout title={`${title} - Bright Interaction`} description={description} type="article" lang={lang}>
+  <Header lang={lang} />
+  <main class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article>
+        <header class="mb-12">
+          <Breadcrumb lang="sv" title={title} />
+          <div class="flex flex-wrap gap-3 mb-4">
+            <time datetime="2026-03-15" class="text-sm text-text-muted">15 mars 2026</time>
+            <span class="text-sm px-2 py-0.5 bg-gold/20 text-gold rounded">Säkerhet</span>
+            <span class="text-sm text-text-muted">5 min läsning</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+            {title}
+          </h1>
+          <p class="text-xl text-text-secondary leading-relaxed">
+            De flesta företag vet inte hur deras webbplats ser ut ur ett säkerhetsperspektiv.
+            Vår automatiserade SVAR-skanner kontrollerar 16 dimensioner på under två minuter
+            och ger dig en tydlig bild av var du står.
+          </p>
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Varför en säkerhetsscanning?</h2>
+            <p class="text-text-secondary mb-4">
+              Varje dag exponeras svenska företag för risker de inte känner till. En webbplats
+              som ser professionell ut på ytan kan ha allvarliga brister i sin säkerhetskonfiguration,
+              GDPR-compliance eller e-postautentisering. Problemet är att dessa brister sällan
+              syns förrän det är för sent.
+            </p>
+            <p class="text-text-secondary">
+              Vår kostnadsfria scanning ger dig en objektiv bedömning baserad på samma kriterier
+              som tillsynsmyndigheter och säkerhetsexperter använder. Ingen gissning, bara fakta.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">De 16 testerna vi kör</h2>
+            <p class="text-text-secondary mb-6">
+              Varje scanning analyserar din webbplats över 16 dimensioner, grupperade i fyra kategorier.
+            </p>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">Kryptering och transport (4 tester)</h3>
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <ul class="text-text-secondary space-y-3">
+                <li><strong class="text-text-primary">1. TLS-version och chiffersviter:</strong> Kontrollerar att din webbplats använder TLS 1.2 eller 1.3 med starka krypteringsalgoritmer.</li>
+                <li><strong class="text-text-primary">2. Certifikatkedja:</strong> Validerar att SSL-certifikatet är giltigt, korrekt utfärdat och inte snart löper ut.</li>
+                <li><strong class="text-text-primary">3. HSTS-konfiguration:</strong> Kontrollerar om webbplatsen tvingar HTTPS-anslutningar via HTTP Strict Transport Security.</li>
+                <li><strong class="text-text-primary">4. Blandade resurser:</strong> Identifierar om HTTP-resurser laddas på en HTTPS-sida, vilket bryter krypteringskedjan.</li>
+              </ul>
+            </div>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">GDPR och samtycke (4 tester)</h3>
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <ul class="text-text-secondary space-y-3">
+                <li><strong class="text-text-primary">5. Spårning före samtycke:</strong> Upptäcker skript som körs innan besökaren har gett sitt samtycke, en vanlig GDPR-överträdelse.</li>
+                <li><strong class="text-text-primary">6. Cookiebanderoll:</strong> Kontrollerar om en samtyckesbanderoll finns och om den uppfyller kraven (tydliga val, ingen förkryssning).</li>
+                <li><strong class="text-text-primary">7. Integritetspolicy:</strong> Analyserar om integritetspolicyn innehåller de obligatoriska GDPR-delarna (dataskyddsombud, rättslig grund, rättigheter).</li>
+                <li><strong class="text-text-primary">8. Tredjepartscookies:</strong> Identifierar cookies satta av externa domäner som kräver särskilt samtycke.</li>
+              </ul>
+            </div>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">E-post och autentisering (4 tester)</h3>
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <ul class="text-text-secondary space-y-3">
+                <li><strong class="text-text-primary">9. SPF-post:</strong> Kontrollerar att Sender Policy Framework är korrekt konfigurerat för att förhindra e-postförfalskning.</li>
+                <li><strong class="text-text-primary">10. DKIM-signering:</strong> Verifierar att DomainKeys Identified Mail är aktiverat för att autentisera utgående e-post.</li>
+                <li><strong class="text-text-primary">11. DMARC-policy:</strong> Kontrollerar att DMARC finns och är inställt på minst "quarantine", helst "reject".</li>
+                <li><strong class="text-text-primary">12. MX-jurisdiktion:</strong> Identifierar var e-postservrarna finns och om de faller under CLOUD Act eller liknande lagstiftning.</li>
+              </ul>
+            </div>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">Infrastruktur och exponering (4 tester)</h3>
+            <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated mb-6">
+              <ul class="text-text-secondary space-y-3">
+                <li><strong class="text-text-primary">13. Serverjurisdiktion:</strong> Kontrollerar i vilket land webbplatsen hostas och om det innebär juridiska risker.</li>
+                <li><strong class="text-text-primary">14. CDN-beroenden:</strong> Identifierar externa resurser (typsnitt, skript, widgets) som skickar besökardata till tredjepartsservrar.</li>
+                <li><strong class="text-text-primary">15. Exponerade sökvägar:</strong> Söker efter känsliga filer och kataloger som inte borde vara offentligt tillgängliga.</li>
+                <li><strong class="text-text-primary">16. PDF-metadataläckor:</strong> Kontrollerar om publika PDF-filer innehåller personuppgifter i sin metadata.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Hur poängsättningen fungerar</h2>
+            <p class="text-text-secondary mb-4">
+              Varje test ger ett delresultat som vägs samman till en totalpoäng mellan 0 och 100.
+              Baserat på totalpoängen tilldelas ett betyg:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Betyg</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Poängintervall</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Vad det betyder</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 text-green-400 font-semibold">A</td>
+                    <td class="py-3 px-4">90-100</td>
+                    <td class="py-3 px-4">Stark säkerhet och compliance. Redo för tillsyn.</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 text-green-400 font-semibold">B</td>
+                    <td class="py-3 px-4">75-89</td>
+                    <td class="py-3 px-4">Bra grund, men vissa brister som bör åtgärdas.</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 text-amber-400 font-semibold">C</td>
+                    <td class="py-3 px-4">50-74</td>
+                    <td class="py-3 px-4">Märkbara brister. Risk vid tillsyn.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4 text-red-400 font-semibold">D/F</td>
+                    <td class="py-3 px-4">0-49</td>
+                    <td class="py-3 px-4">Allvarliga brister. Omedelbara åtgärder krävs.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="text-text-secondary">
+              Tester med direkt juridisk påverkan, som spårning före samtycke, väger tyngre i
+              poängsättningen. En webbplats kan ha perfekt TLS men ändå få lågt betyg om den
+              bryter mot GDPR.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Exempel på fynd från verkliga scanningar</h2>
+            <p class="text-text-secondary mb-4">
+              Här är några av de vanligaste problemen vi hittar när vi skannar svenska företag:
+            </p>
+
+            <div class="space-y-4">
+              <div class="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-r-lg">
+                <h4 class="font-semibold text-red-400 mb-2">Google Analytics utan samtycke</h4>
+                <p class="text-text-secondary text-sm">
+                  Över 60 % av de webbplatser vi skannar laddar Google Analytics innan besökaren
+                  har gett samtycke. Varje sidvisning genererar en dataöverföring till USA som
+                  strider mot GDPR.
+                </p>
+              </div>
+
+              <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                <h4 class="font-semibold text-amber-400 mb-2">Saknad DMARC-policy</h4>
+                <p class="text-text-secondary text-sm">
+                  Ungefär hälften av alla skannade domäner saknar DMARC helt, vilket gör det
+                  möjligt för angripare att skicka e-post som ser ut att komma från företaget.
+                </p>
+              </div>
+
+              <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                <h4 class="font-semibold text-amber-400 mb-2">Typsnitt från Google CDN</h4>
+                <p class="text-text-secondary text-sm">
+                  Många webbplatser laddar typsnitt direkt från fonts.googleapis.com. Varje
+                  sidladdning skickar då besökarens IP-adress till Googles servrar i USA, vilket
+                  utgör en tredjepartsöverföring.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vad rapporten innehåller</h2>
+            <p class="text-text-secondary mb-4">
+              Efter scanningen får du en detaljerad rapport som innehåller:
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2 mb-4">
+              <li><strong class="text-text-primary">Totalpoäng och betyg:</strong> Din sammanvägda bedömning jämfört med branschsnittet.</li>
+              <li><strong class="text-text-primary">Resultat per test:</strong> Godkänt, varning eller underkänt för var och en av de 16 kontrollerna.</li>
+              <li><strong class="text-text-primary">Riskbedömning:</strong> Uppskattad exponering baserat på identifierade brister.</li>
+              <li><strong class="text-text-primary">Konkreta rekommendationer:</strong> Prioriterade åtgärder med förklaring av varför de behövs.</li>
+              <li><strong class="text-text-primary">Jämförelse med bransch:</strong> Hur ditt resultat förhåller sig till andra företag i samma sektor.</li>
+            </ul>
+            <p class="text-text-secondary">
+              Rapporten levereras som en PDF du kan dela med ditt team eller din IT-avdelning.
+              Den fungerar som ett konkret underlag för att prioritera säkerhetsförbättringar.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Så går det till</h2>
+            <div class="grid md:grid-cols-3 gap-6 my-6">
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated text-center">
+                <div class="text-3xl font-bold text-gold mb-3">1</div>
+                <h4 class="font-semibold text-text-primary mb-2">Boka din scanning</h4>
+                <p class="text-text-secondary text-sm">Skicka din domän till oss. Inga installationer eller lösenord krävs.</p>
+              </div>
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated text-center">
+                <div class="text-3xl font-bold text-gold mb-3">2</div>
+                <h4 class="font-semibold text-text-primary mb-2">Automatisk analys</h4>
+                <p class="text-text-secondary text-sm">Vår SVAR-skanner kör alla 16 tester automatiskt på under 2 minuter.</p>
+              </div>
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated text-center">
+                <div class="text-3xl font-bold text-gold mb-3">3</div>
+                <h4 class="font-semibold text-text-primary mb-2">Rapport och genomgång</h4>
+                <p class="text-text-secondary text-sm">Du får en PDF-rapport och vi går igenom resultaten med dig.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Boka en gratis scanning</h2>
+            <p class="text-text-secondary mb-6">
+              Vill du veta hur din webbplats presterar? Vår kostnadsfria SVAR-scanning
+              kontrollerar 16 säkerhets- och compliancedimensioner och ger dig en tydlig
+              rapport med konkreta åtgärder. Helt utan kostnad eller förpliktelse.
+            </p>
+            <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+              Boka en gratis scanning
+            </button>
+          </section>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/sakerhetsrevision-webbplats-kostnad" class="text-gold hover:text-gold-light transition-colors text-sm">Vad kostar en säkerhetsrevision av din webbplats 2026?</a></li>
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2-compliance: Praktisk guide</a></li>
+            <li><a href="/sv/insights/cookie-samtycke-krav-sverige-2026" class="text-gold hover:text-gold-light transition-colors text-sm">Krav på cookie-samtycke i Sverige 2026</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Tillbaka till Insikter
+        </a>
+      </div>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+  <Footer lang={lang} />
+</Layout>

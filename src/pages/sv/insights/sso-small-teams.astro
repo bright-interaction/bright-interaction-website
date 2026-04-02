@@ -1,0 +1,550 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'Konfigurera SSO för små team: En praktisk guide';
+const description = 'Single Sign-On är inte bara för storföretag längre. Lär dig hur du implementerar SSO för ditt lilla team med egenhostade lösningar som inte spränger budgeten.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/sso-small-teams"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Säkerhet
+          </span>
+          <span class="text-text-muted text-sm">10 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Ditt team har vuxit till 15 personer. Alla har konton på Slack, GitHub, ert projektverktyg, företagets wiki, e-post och ett halvdussin andra tjänster. Var och en med sitt eget lösenord. Varje lösenord antingen bortglömt varje vecka eller nedskrivet på en post-it-lapp.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Single Sign-On löser detta. En inloggning, ett lösenord, åtkomst till allt. Och tvärtemot vad leverantörer av företagsprogramvara vill att du ska tro behöver du inte en sexsiffrig budget för att implementera det.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Varför SSO är viktigt för små team
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SSO handlar inte bara om bekvämlighet (även om det är trevligt). Det löser verkliga säkerhets- och driftsproblem som drabbar små team hårdare än man tror.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Offboarding på minuter</h4>
+              <p class="text-text-secondary text-sm">
+                När någon slutar, inaktivera ett konto och de förlorar åtkomst till allt. Slipp jaga igenom 20 olika tjänster och hoppas att du inte missat någon.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Konsekventa säkerhetspolicyer</h4>
+              <p class="text-text-secondary text-sm">
+                Tvinga fram lösenordskomplexitet, multifaktorautentisering och sessionstidsgränser från ett ställe. Slipp hoppas att alla aktiverat MFA på varje enskild tjänst.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Färre lösenordsåterställningar</h4>
+              <p class="text-text-secondary text-sm">
+                Ett lösenord att komma ihåg innebär färre "glömt lösenord"-mejl och mindre tid på IT-support. Ditt team kan faktiskt fokusera på arbetet.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Granskningsspår</h4>
+              <p class="text-text-secondary text-sm">
+                Se vem som fick åtkomst till vad och när, allt i en logg. Väsentligt för efterlevnad, användbart vid felsökning och bra att ha om något går fel.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Egenhostad SSO-alternativ
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Enterprise SSO-leverantörer som Okta eller Azure AD tar betalt per användare per månad. För ett team på 20 personer handlar det om 20 000-50 000 kr årligen innan du ens börjat. Egenhostade alternativ ger dig samma funktionalitet till kostnaden av en liten server.
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Authentik</h3>
+              <p class="text-text-secondary mb-4">
+                Vår rekommendation för små team. Authentik är en modern identitetsleverantör som stöder SAML, OAuth2, OIDC och LDAP. Gränssnittet är rent, dokumentationen gedigen och den körs bra på blygsam hårdvara.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">SAML 2.0</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">OAuth2/OIDC</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">LDAP</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">SCIM</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">WebAuthn/FIDO2</span>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Keycloak</h3>
+              <p class="text-text-secondary mb-4">
+                Det mest mogna open source-alternativet, backat av Red Hat. Mer komplext att konfigurera än Authentik, men extremt kraftfullt. Bättre lämpat om du har Java-kompetens i teamet eller behöver avancerade federationsfunktioner.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Enterprise-klass</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Identitetsförmedling</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Användarfederation</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Finkornig auktorisering</span>
+              </div>
+            </div>
+
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-xl font-bold text-text-primary mb-4">Authelia</h3>
+              <p class="text-text-secondary mb-4">
+                Lättviktsalternativ fokuserat på att skydda webbapplikationer bakom en reverse proxy. Utmärkt för att lägga till SSO för appar som inte har inbyggt stöd. Färre funktioner men enklare att driftsätta.
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Lättvikt</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Proxy-baserat</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">TOTP/WebAuthn</span>
+                <span class="px-2 py-1 bg-dark-bg text-text-muted text-xs rounded">Enkel konfiguration</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Konfigurera Authentik: Steg för steg
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Låt oss gå igenom hur du sätter upp Authentik, eftersom det erbjuder den bästa balansen mellan funktioner och enkelhet för små team.
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Driftsätt med Docker Compose</h4>
+                <p class="text-text-secondary mb-4">
+                  Authentik tillhandahåller en officiell Docker Compose-fil. Du behöver en server med minst 2 GB RAM och Docker installerat.
+                </p>
+                <pre class="text-text-secondary text-sm bg-dark-surface p-4 rounded-lg overflow-x-auto"><code># Ladda ner docker-compose.yml
+wget https://goauthentik.io/docker-compose.yml
+
+# Skapa en .env-fil med hemligheter
+echo "PG_PASS=$(openssl rand -base64 36)" >> .env
+echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 36)" >> .env
+echo "AUTHENTIK_BOOTSTRAP_PASSWORD=changeme" >> .env
+echo "AUTHENTIK_BOOTSTRAP_EMAIL=admin@example.com" >> .env
+
+# Starta Authentik
+docker compose up -d</code></pre>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Konfigurera din domän</h4>
+                <p class="text-text-secondary">
+                  Peka en subdomän som <code class="text-gold bg-dark-surface px-2 py-1 rounded">auth.dindomän.se</code> till din server. Konfigurera TLS-certifikat (Let's Encrypt fungerar utmärkt). Authentik ska bara nås via HTTPS.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Skapa användare och grupper</h4>
+                <p class="text-text-secondary">
+                  Logga in i administrationsgränssnittet, skapa dina teammedlemmar som användare och organisera dem i grupper. Grupper gör behörighetshantering enklare. Du kan ge applikationsåtkomst till "Utveckling" istället för enskilda användare.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Konfigurera MFA</h4>
+                <p class="text-text-secondary">
+                  Aktivera multifaktorautentisering och kräv det för alla användare. Authentik stöder TOTP (autentiseringsappar), WebAuthn (hårdvarunycklar) och SMS (rekommenderas inte). Inför detta krav från dag ett. Att eftermontera MFA senare är smärtsamt.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Anslut dina applikationer</h4>
+                <p class="text-text-secondary">
+                  För varje applikation skapar du en "Provider" (hur Authentik kommunicerar med appen) och en "Application" (vad användarna ser). De flesta moderna appar stöder OAuth2/OIDC. Äldre appar kan behöva SAML. Vissa behöver LDAP-integration.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga integrationsmönster
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Olika applikationer integrerar med SSO på olika sätt. Här är vad du kan förvänta dig:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-4">Appar med inbyggt SSO-stöd</h4>
+            <p class="text-text-secondary mb-4">
+              Tjänster som Grafana, GitLab, Nextcloud och de flesta moderna SaaS-appar har inbyggt OAuth2- eller SAML-stöd. Konfigurationen är enkel: skapa inloggningsuppgifter i Authentik, ange dem i appens SSO-inställningar.
+            </p>
+            <div class="text-text-muted text-sm">
+              Exempel: GitLab, Grafana, Nextcloud, Mattermost, Outline, n8n
+            </div>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-4">Appar bakom en proxy</h4>
+            <p class="text-text-secondary mb-4">
+              Vissa appar stöder inte SSO inbyggt men kan lita på autentiseringsheaders från en reverse proxy. Authentiks forward auth-funktion integrerar med Traefik, nginx och Caddy för att skydda dessa appar.
+            </p>
+            <div class="text-text-muted text-sm">
+              Exempel: Äldre interna verktyg, enkla webbappar, dokumentationssajter
+            </div>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-gold mb-4">Appar som kräver LDAP</h4>
+            <p class="text-text-secondary mb-4">
+              Äldre företagsprogramvara stöder ofta bara LDAP-autentisering. Authentik tillhandahåller en LDAP-utpost som presenterar dina användare och grupper i ett LDAP-kompatibelt format.
+            </p>
+            <div class="text-text-muted text-sm">
+              Exempel: Vissa VPN:er, äldre wikis, äldre företagsprogramvara
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Bästa praxis för säkerhet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Ditt SSO-system blir nyckeln till hela ditt rike. Skydda det därefter.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Kräv MFA för alla.</strong> Inga undantag. Ett komprometterat SSO-konto utan MFA innebär att varje ansluten applikation är komprometterad.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Separata adminkonton.</strong> Ditt dagliga arbetskonto bör inte vara Authentik-admin. Använd dedikerade adminkonton med extra säkerhetskontroller.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Regelbunden testning av säkerhetskopior.</strong> Säkerhetskopiera din Authentik-databas och testa återställningar. Om din SSO går ner kan ingen komma åt någonting.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Övervaka inloggningsförsök.</strong> Sätt upp varningar för misslyckade inloggningar, inloggningar från nya platser och adminåtgärder. Authentik tillhandahåller granskningsloggar. Använd dem.</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Ha en nödprocedur.</strong> Dokumentera hur du kommer åt kritiska system om SSO är otillgängligt. Förvara dessa inloggningsuppgifter säkert (krypterade, offline, kända av flera personer).</span>
+            </div>
+            <div class="flex gap-3">
+              <span class="text-gold font-bold">&rarr;</span>
+              <span class="text-text-secondary"><strong class="text-text-primary">Håll det uppdaterat.</strong> SSO-system är högt värderade mål. Applicera säkerhetspatchar omgående.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Planera din utrullning
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Försök inte SSO-ansluta allt på en gång. En stegvis approach minskar störningar och låter dig lära dig under vägen.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-text-primary mb-4">Föreslagen utrullningsordning</h4>
+            <div class="space-y-4">
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">1</div>
+                <div>
+                  <p class="text-text-primary font-medium">Interna verktyg först</p>
+                  <p class="text-text-secondary text-sm">Wiki, dokumentation, interna dashboards. Låg risk om något går sönder, bra övningsmark.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">2</div>
+                <div>
+                  <p class="text-text-primary font-medium">Utvecklingsverktyg</p>
+                  <p class="text-text-secondary text-sm">Git, CI/CD, projekthantering. Ditt team använder dessa dagligen. SSO här visar omedelbart värde.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">3</div>
+                <div>
+                  <p class="text-text-primary font-medium">Kommunikationsverktyg</p>
+                  <p class="text-text-secondary text-sm">Chatt, e-post (om egenhostat). Dessa drar nytta av centraliserad åtkomststyrning.</p>
+                </div>
+              </div>
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 w-8 h-8 bg-gold/20 rounded-full flex items-center justify-center text-gold text-sm font-bold">4</div>
+                <div>
+                  <p class="text-text-primary font-medium">Produktionssystem</p>
+                  <p class="text-text-secondary text-sm">Övervakning, infrastrukturåtkomst. Gör dessa sist, med extra omsorg och testning.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vad gäller externa SaaS-tjänster?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Många SaaS-applikationer stöder SSO, men ofta bara på dyra enterprise-planer. Här behöver du göra pragmatiska val.
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-dark-surface rounded-xl border border-green-900/30 p-6">
+              <h4 class="font-semibold text-green-400 mb-3">Värt enterprise-uppgraderingen</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-green-400">&#10003;</span>
+                  <span>Tjänster med åtkomst till känslig data</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-400">&#10003;</span>
+                  <span>Applikationer med hög personalomsättning</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-green-400">&#10003;</span>
+                  <span>System som är kritiska för efterlevnad</span>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-6">
+              <h4 class="font-semibold text-gold mb-3">Alternativ att överväga</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-gold">&rarr;</span>
+                  <span>Egenhosta där det är möjligt</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">&rarr;</span>
+                  <span>Använd lösenordshanterare för icke-SSO-appar</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">&rarr;</span>
+                  <span>Välj leverantörer som inkluderar SSO</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Kom igång
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SSO är en av de investeringar som ger avkastning omedelbart. Mindre lösenordströtthet för ditt team, bättre säkerhetsställning, enklare onboarding och offboarding, och en grund för mer sofistikerad åtkomststyrning i takt med att ni växer.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Börja med Authentik, anslut dina mest använda interna applikationer och utöka därifrån. Inom en dag kan du ha en fungerande SSO-uppsättning som matchar det storföretag betalar tusentals kronor för.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du hjälp med att implementera SSO?</strong> Vi specialiserar oss på att konfigurera egenhostad identitetshantering för små team. Från initial driftsättning till applikationsintegration kan vi få din SSO att fungera smidigt.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Kontakta oss &rarr;</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/sso-small-teams`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/vpn-vs-zero-trust" class="text-gold hover:text-gold-light transition-colors text-sm">VPN vs Zero Trust</a></li>
+            <li><a href="/sv/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Grundläggande säkerhetskonfiguration</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

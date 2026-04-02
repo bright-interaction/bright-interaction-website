@@ -1,0 +1,563 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'Dataskydd inom sjukvården: GDPR, NIS2 och patientintegritet';
+const description = 'En omfattande guide till dataskydd inom sjukvården i EU. Förstå GDPR:s särskilda kategorier av data, NIS2-krav för hälsosektorn och praktiska implementeringsstrategier.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/healthcare-data-compliance"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Varför behandlas hälsodata annorlunda under GDPR?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Hälsodata klassificeras som särskild kategori av personuppgifter enligt GDPR artikel 9, vilket innebär att behandling är förbjuden om du inte kan påvisa en specifik rättslig grund, såsom uttryckligt patientsamtycke eller nödvändighet för sjukvårdsändamål." }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilka är NIS2-kraven för vårdgivare?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sjukvården klassificeras som en väsentlig sektor under NIS2, vilket kräver omfattande riskbedömningar, incidentrapportering inom 24 timmar, kontinuitetsplanering, säkerhetsgranskningar av leverantörskedjan och regelbundna säkerhetstester." }
+    },
+    {
+      "@type": "Question",
+      "name": "Vilka krypteringsstandarder bör sjukvårdssystem använda?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sjukvårdssystem bör implementera AES-256-kryptering i vila och TLS 1.3 för data i transit. Använd hårdvarusäkerhetsmoduler för produktionsnycklar och säkerställ att säkerhetskopiorna är krypterade med separat hanterade nycklar." }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Sjukvård
+          </span>
+          <span class="text-text-muted text-sm">12 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Viktiga slutsatser</h3>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Hälsodata är "särskild kategori" under GDPR och kräver uttryckligt samtycke eller specifik rättslig grund</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>NIS2 klassificerar sjukvården som en väsentlig sektor med strikta krav på incidentrapportering</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Egenhostad infrastruktur kan förenkla compliance och minska tredjepartsrisker</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Patientportaler, journalsystem och telemedicinplattformar har var och en unika krav</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Regelverket för sjukvården
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Sjukvårdsorganisationer står inför en unik regulatorisk börda. Patientdata tillhör den mest känsliga informationen som finns, och tillsynsmyndigheterna har svarat med allt striktare krav. Att förstå samspelet mellan GDPR, NIS2 och sektorspecifika regleringar är väsentligt för alla vårdgivare som verkar i Europa.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">GDPR och särskilda kategorier av data</h3>
+            <p class="text-text-secondary mb-4">
+              Enligt artikel 9 i GDPR klassificeras hälsodata som "särskild kategori" av personuppgifter. Det innebär att behandling är förbjuden om du inte kan påvisa en av de specifika rättsliga grunderna:
+            </p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Uttryckligt samtycke:</strong> Patienten har givit tydligt, specifikt samtycke för behandlingen</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Sjukvårdsändamål:</strong> Behandlingen är nödvändig för medicinsk diagnos, behandling eller förvaltning av hälsosystemet</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Folkhälsa:</strong> Behandlingen tjänar folkhälsoändamål såsom sjukdomsförebyggande</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Rättsliga anspråk:</strong> Behandlingen är nödvändig för rättsliga förfaranden</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Grunden "sjukvårdsändamål" (artikel 9(2)(h)) är den vanligast åberopade, men den kommer med villkor: behandlingen måste vara föremål för tystnadsplikt och lämpliga skyddsåtgärder måste finnas på plats.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">NIS2 och sjukvården som kritisk infrastruktur</h3>
+            <p class="text-text-secondary mb-4">
+              NIS2-direktivet, i kraft från oktober 2024, klassificerar vårdgivare som "väsentliga entiteter." Det medför betydande skyldigheter:
+            </p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Riskhantering:</strong> Implementera omfattande riskbedömningar för cybersäkerhet</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Incidenthantering:</strong> Rapportera betydande incidenter inom 24 timmar (förhandsvarning) och 72 timmar (fullständig anmälan)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Kontinuitetsplanering:</strong> Underhålla backupsystem och katastrofåterhämtningsplaner</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Leverantörskedjesäkerhet:</strong> Bedöm och hantera risker från tredjepartsleverantörer</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Säkerhetstestning:</strong> Regelbundna sårbarhetsbedömningar och penetrationstester</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga datascenarier inom sjukvården
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Elektroniska patientjournaler (EPJ)</h3>
+
+          <p class="text-text-secondary mb-6">
+            EPJ-system är ryggraden i modern sjukvård. Från ett complianceperspektiv inkluderar nyckelöverväganden:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Åtkomstkontroller:</strong> Rollbaserad åtkomst som säkerställer att personal bara ser relevant patientdata</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Granskningsloggar:</strong> Fullständiga spår över vem som har åtkomst till vilken data och när</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Dataminimering:</strong> Samla och behålla bara nödvändig information</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Kryptering:</strong> Både i vila och under överföring, med aktuella standarder (AES-256, TLS 1.3)</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            Många vårdgivare använder molnbaserade EPJ-lösningar från amerikanska leverantörer. Det kan fungera, men det kräver noggrann uppmärksamhet på mekanismer för dataöverföring och väcker frågor om amerikansk myndighetsåtkomst under CLOUD Act.
+          </p>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Patientportaler och kommunikation</h3>
+
+          <p class="text-text-secondary mb-6">
+            Patientvända system som tidsbokning, visning av provresultat och säkra meddelanden har egna krav:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Stark autentisering:</strong> Multifaktorautentisering för patientkonton</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Samtyckeshantering:</strong> Tydliga mekanismer för patienter att ge och återkalla samtycke</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Dataportabilitet:</strong> Möjlighet för patienter att exportera sina hälsojournaler</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Rätten till radering:</strong> Processer för att hantera raderingsbegäran (i balans med lagstadgade bevarandekrav)</span>
+            </li>
+          </ul>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Telemedicinplattformar</h3>
+
+          <p class="text-text-secondary mb-6">
+            Videokonsultationer och fjärrövervakning har exploderat i användning. Dessa plattformar måste adressera:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Ende-till-ände-kryptering:</strong> Videoströmmar måste krypteras utan mellanhandsåtkomst</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Inspelningssamtycke:</strong> Tydliga processer om konsultationer spelas in</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Enhetssäkerhet:</strong> Krav på patientenheter som använder plattformen</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Gränsöverskridande överväganden:</strong> När vårdgivare och patienter befinner sig i olika jurisdiktioner</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Infrastrukturbeslut
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Moln kontra egenhostat: sjukvårdsperspektivet</h3>
+
+          <p class="text-text-secondary mb-6">
+            Debatten om moln kontra egenhostat får särskild betydelse inom sjukvården. Överväg:
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Molnfördelar</h4>
+              <ul class="text-text-secondary text-sm space-y-1">
+                <li>Minskad driftbörda</li>
+                <li>Inbyggd redundans</li>
+                <li>Leverantören hanterar vissa complianceaspekter</li>
+                <li>Skalbarhet för växande organisationer</li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Fördelar med egenhosting</h4>
+              <ul class="text-text-secondary text-sm space-y-1">
+                <li>Fullständig datasuveränitet</li>
+                <li>Ingen oro för tredjepartsåtkomst</li>
+                <li>Förenklad compliancedokumentation</li>
+                <li>Lägre långsiktiga kostnader i skala</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            För många sjukvårdsorganisationer fungerar en hybridstrategi bra: kritisk patientdata på egenhostad infrastruktur inom EU, med molntjänster för icke-känslig verksamhet som personalschemaläggning eller allmän kommunikation.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Praktiska implementeringssteg
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Datakartläggning och klassificering</h4>
+                <p class="text-text-secondary">
+                  Börja med att förstå vilken patientdata ni har, var den flödar och vem som har åtkomst. Identifiera alla system som innehåller patientdata, kartlägg dataflödet mellan system, klassificera data efter känslighet och rättslig grund, och dokumentera bevarandetider.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Ramverk för åtkomstkontroll</h4>
+                <p class="text-text-secondary">
+                  Implementera principen om lägsta behörighet. Definiera roller baserat på arbetsuppgifter, implementera nödåtkomstprocedurer för akutsituationer, genomför regelbundna åtkomstgranskningar och automatisera avetablering när personal slutar.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Krypteringsstrategi</h4>
+                <p class="text-text-secondary">
+                  Implementera omfattande kryptering: full diskkryptering plus databasnivåkryptering för känsliga fält i vila, TLS 1.3 för alla anslutningar under överföring, hårdvarusäkerhetsmoduler för produktionsnycklar, och krypterade säkerhetskopior med separat hanterade nycklar.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Förberedelse för incidenthantering</h4>
+                <p class="text-text-secondary">
+                  NIS2:s strikta rapporteringstidslinjer innebär att du inte kan improvisera under en incident. Förbered förhandsformulerade anmälningsmallar, tydliga eskaleringsled, regelbundna tabletop-övningar och relationer med extern forensik- och juridisk support.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Rekommendationer för teknikstack
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            För sjukvårdsorganisationer som söker kompatibel infrastruktur, överväg:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Rekommenderad egenhostad stack</h3>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Identitet:</strong> Authentik eller Keycloak för SSO med sjukvårdsanpassad autentisering</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Kommunikation:</strong> Mattermost för säkra interna meddelanden (HIPAA-kapabelt)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Fildelning:</strong> Nextcloud med ende-till-ände-kryptering aktiverad</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Automation:</strong> n8n för arbetsflödesautomation med granskningsloggning</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Övervakning:</strong> Uptime Kuma för systemhälsa, plus centraliserad loggning</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga compliancebrister
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            I vårt arbete med sjukvårdsorganisationer stöter vi ofta på dessa problem:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-red-900/30 p-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Skugg-IT:</strong> Personal som använder privat e-post eller meddelanden för patientkommunikation</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Otillräcklig loggning:</strong> System som inte sparar vem som har åtkomst till patientjournaler</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Pappersbrister:</strong> Digitala system är säkra, men pappersjournaler saknar korrekt hantering</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Leverantörsavtal:</strong> Saknade eller bristfälliga personuppgiftsbiträdesavtal</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Utbildningsbrister:</strong> Personal omedveten om sina skyldigheter under GDPR</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Blicken framåt
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Regellandskapet fortsätter att utvecklas. Sjukvårdsorganisationer bör förbereda sig för:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">European Health Data Space (EHDS):</strong> Nytt ramverk för delning av hälsodata över EU</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">AI inom sjukvården:</strong> EU:s AI-förordning kommer att ställa krav på kliniska AI-system</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Interoperabilitetskrav:</strong> Ökande krav på system att utbyta data</span>
+            </li>
+          </ul>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du hjälp?</strong> Vi hjälper sjukvårdsorganisationer att implementera kompatibel infrastruktur som skyddar patientdata och samtidigt möjliggör effektiv vårdleverans.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Kontakta oss →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/healthcare-data-compliance`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR och NIS2 compliance: En praktisk guide</a></li>
+            <li><a href="/sv/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Grundläggande säkerhetskonfiguration</a></li>
+            <li><a href="/sv/insights/financial-services-security" class="text-gold hover:text-gold-light transition-colors text-sm">Säkerhet för finansiella tjänster</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

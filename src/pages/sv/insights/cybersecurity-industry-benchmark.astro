@@ -1,0 +1,396 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-03-27';
+const title = 'Jag granskade 17 cybersäkerhetsbolag - snittet var 73/100';
+const description = 'Hur en self-hosting resa och 60 000 hackningsförsök per dag ledde till att jag byggde en scanner och upptäckte att jag hade bättre säkerhet än experterna.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/cybersecurity-industry-benchmark"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Analys
+          </span>
+          <span class="text-text-muted text-sm">8 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            60 000 hackningsförsök per dag
+          </h2>
+
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            För fyra månader sedan började jag min self-hosting resa. Anledningen var enkel: jag ville dra ner på kostnaderna för verktyg. Men det jag upptäckte ändrade allt.
+          </p>
+
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Jag körde ett kommando i terminalen för att se hur många inloggningsförsök som gjordes mot min server. Siffran gav mig panik: <strong class="text-text-primary">över 60 000 försök per dag</strong>. Automatiserade attacker, konstant, dygnet runt.
+          </p>
+
+          <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-red-400">Verkligheten slog till:</strong> Jag hade ingen aning om hur exponerad jag var. Min server var som ett hus med öppna dörrar. Tusentals försökte ta sig in varje timme.
+            </p>
+          </div>
+
+          <p class="text-text-secondary leading-relaxed">
+            Det startade en djupdykning. Jag började systematiskt gå igenom hur jag kunde försvara min server, maskera det känsliga från omvärlden, och förstå vad som egentligen var fel på min uppsättning.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Scannern som föddes ur nödvändighet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            I jakten på att säkra min egen infrastruktur byggde jag ett verktyg för att testa mig själv. En scanner som kollar 16 olika säkerhetsparametrar: SSL-konfiguration, säkerhetsheaders, e-postautentisering, certifikathantering och mer.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Ju mer jag förbättrade min egen setup, desto mer började jag undra: <em class="text-gold">hur ser det ut för andra?</em>
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Algoritmen på sociala medier hade börjat visa mig cybersäkerhetsbolag, mina "konkurrenter" i branschen. Bolag som höll utbildningar och seminarier om IT-säkerhet och compliance. Jag la in deras domäner i scannern.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-text-primary">Det såg inte bra ut.</strong> De flesta kretsade kring 40-50 poäng. Samma bolag som spiller galla till folkmassan om säkerhet, men som inte fixat sin egen infrastruktur. Expertis bakom en fasad.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Siffrorna talar för sig själva
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Jag utökade granskningen till 17 svenska cybersäkerhetsbolag. Resultatet:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-4">Resultat från granskningen:</h4>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-dark-bg rounded-lg p-4 text-center">
+                <p class="text-3xl font-display font-bold text-gold">73</p>
+                <p class="text-text-muted text-sm">Genomsnitt</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-4 text-center">
+                <p class="text-3xl font-display font-bold text-text-primary">81</p>
+                <p class="text-text-muted text-sm">Högsta poäng</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-4 text-center">
+                <p class="text-3xl font-display font-bold text-text-secondary">59</p>
+                <p class="text-text-muted text-sm">Lägsta poäng</p>
+              </div>
+              <div class="bg-dark-bg rounded-lg p-4 text-center">
+                <p class="text-3xl font-display font-bold text-green-400">100</p>
+                <p class="text-text-muted text-sm">Min egen sajt</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Jag var chockad. Inte för att jag förväntade mig perfektion, utan för att jag, som precis börjat dyka in i den här världen, demonstrerade högre säkerhet och compliance än etablerade aktörer.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Jag kände mig som en inkräktare.</strong> Jag har inte varit inbiten i branschen lika länge som de andra. Visst, jag hade GDPR och deliverability-kompetens från min tid på Efficy och Apsis. Men IT-säkerheten var ny för mig.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Varför kunde jag gå om experterna?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Det visade sig vara förvånansvärt enkelt att förstå koncepten. Och med AI som accelerator kunde jag snabba på processen extremt.
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Vanligaste bristerna jag hittade</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li>• Saknade eller felkonfigurerade säkerhetsheaders</li>
+                <li>• Föråldrad TLS-konfiguration</li>
+                <li>• Inkomplett e-postautentisering (SPF, DKIM, DMARC)</li>
+                <li>• Onödigt exponerade tjänster</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Inget av detta är raketforskning. De flesta konfigurationer tar bara några timmar att genomföra. E-postautentiseringen kanske någon dag om man vill vara säker.
+          </p>
+
+          <p class="text-text-secondary">
+            Min första reaktion? <strong class="text-text-primary">Besvikelse.</strong> Och ärligt talat, lite skrattretande.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            NIS2-effekten: En bransch i förändring
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Här kommer det positiva: sedan jag gjorde den första granskningen har flera bolag förbättrat sina poäng markant. Vissa med över 20 poäng.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-gold/30 p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">NIS2 gick live den 15 januari 2026.</strong> Det märks en tydlig kaskadeffekt av lagen. Bolagen har börjat agera, men det tog sin tid. Vilket säger mig att de tar alldeles för lång tid på kritiska beslut när lösningarna ofta tar bara några timmar.
+            </p>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Jag har inte haft kontakt med någon av de 17 bolagen. Kanske borde jag? Däremot har jag märkt att vissa nu har bot-defence aktiverat, så min IP har blivit blockerad från vidare sökningar. Men för mig är det bara ett hälsosamt tecken på att de utökar sin säkerhet.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Från cloud-träsk till frihet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Min resa började med att köpa en server för att dra ner på kostnader. Men jag upptäckte något större: värdet av open source.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Fullt fungerande verktyg som kan ersätta allt man köper idag. Scannern blev en av produkterna jag byggde, först för att se över mig själv, sedan som något jag vill hjälpa andra med.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-3">Sanningen om cloud vs self-hosted:</h4>
+            <p class="text-text-secondary mb-4">
+              Det är så mycket hype över molnlösningar. Men om du är ett tjänstebaserat företag utan extrema trafikvolymer kan du klara dig på 1-2 större servrar och möjligtvis en mindre för att skapa en private cloud.
+            </p>
+            <p class="text-text-secondary">
+              <strong class="text-gold">Kostnad: 1 000-2 000 kr/månad. Utan användartak.</strong> Den enda faktorn som hindrar är kompetensen och viljan.
+            </p>
+          </div>
+
+          <p class="text-text-secondary">
+            Det roliga? Du är faktiskt <em>mer fri</em> i VPS-världen än i cloud-träsket.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Varför jag sover gott om natten
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            2-4% av din årsomsättning i böter. Det är vad GDPR-överträdelser kan kosta. Brutalt.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Jag sover hellre gott om natten genom att kunna framställa bevis och visa att min rygg är fri. Jag önskar mina kunder detsamma.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-3">Vad jag vill uppnå:</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">1.</span>
+                <span>Bli bättre på vad jag själv gör</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">2.</span>
+                <span>Föregå med gott exempel när jag hör av mig till andra bolag</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">3.</span>
+                <span>Hjälpa andra fixa det som är så enkelt men så viktigt, för att undvika attacker och onödiga böter</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vad detta betyder för dig
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Om du är IT-chef eller företagare finns det några saker att ta med sig:
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Granska dina leverantörer</h4>
+              <p class="text-text-secondary text-sm">
+                Innan du köper säkerhetstjänster, kolla hur leverantörens egen webbplats presterar. Det säger något om deras kultur.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Du behöver inte cloud</h4>
+              <p class="text-text-secondary text-sm">
+                För de flesta tjänsteföretag är self-hosted billigare, säkrare, och ger dig mer kontroll. Den enda kostnaden är kompetens.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Börja med grunderna</h4>
+              <p class="text-text-secondary text-sm">
+                Säkerhetsheaders, SSL-konfiguration och e-postautentisering. De tre områdena ger störst effekt för minst ansträngning.
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mt-8">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Vill du veta var din sajt står?</strong> Jag erbjuder kostnadsfria SVAR-skanningar för företag som vill förstå sitt nuläge.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Boka en genomgång →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/cybersecurity-industry-benchmark`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Grunderna i säkerhetskonfiguration</a></li>
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR och NIS2: En praktisk guide</a></li>
+            <li><a href="/sv/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Självhostat vs SaaS</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

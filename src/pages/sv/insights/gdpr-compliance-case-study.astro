@@ -1,0 +1,390 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+
+const lang = 'sv';
+const title = "Vi skannade vår GDPR-compliance och en konkurrents";
+const description = "Vi körde vår egen complianceskanner på oss själva och en konkurrent. Skillnaden på 38 poäng visar varför infrastrukturbeslut väger tyngre än integritetspolicyer.";
+const publishDate = '2026-02-02';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/gdpr-compliance-case-study"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout title={`${title} - Bright Interaction`} description={description} type="article" lang={lang}>
+  <Header lang={lang} />
+  <main class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article>
+        <header class="mb-12">
+          <Breadcrumb lang="sv" title={title} />
+          <div class="flex flex-wrap gap-3 mb-4">
+            <time datetime="2026-02-02" class="text-sm text-text-muted">2 februari 2026</time>
+            <span class="text-sm px-2 py-0.5 bg-gold/20 text-gold rounded">Compliance</span>
+            <span class="text-sm text-text-muted">8 min läsning</span>
+          </div>
+          <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+            {title}
+          </h1>
+          <p class="text-xl text-text-secondary leading-relaxed">
+            Vi lever som vi lär. Därför körde vi vår SVAR-complianceskanner på vår egen webbplats.
+            Sedan skannade vi en konkurrent i samma bransch. Resultatet? En skillnad på 38 poäng som
+            beror på infrastrukturbeslut de flesta företag aldrig tänker på.
+          </p>
+        </header>
+
+        <div class="prose prose-invert max-w-none">
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Varför vi skannade oss själva</h2>
+            <p class="text-text-secondary mb-4">
+              På Bright Interaction hjälper vi företag att uppnå datasuveränitet och GDPR-compliance.
+              Men hur klarar vi oss mot våra egna krav? Vi bestämde oss för att ta reda på det, och
+              jämförde oss mot ett liknande B2B-teknikföretag i Europa.
+            </p>
+            <p class="text-text-secondary">
+              Med vår automatiserade SVAR-skanner analyserade vi båda webbplatserna över 13 compliance-
+              och säkerhetsdimensioner. Resultaten berättar en historia om hur små infrastrukturbeslut
+              skapar enorma skillnader i juridisk exponering.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Resultattavlan</h2>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Mätpunkt</th>
+                    <th class="text-left py-3 px-4 text-gold font-medium">Bright Interaction</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Konkurrent</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Totalpoäng</td>
+                    <td class="py-3 px-4 text-green-400 font-semibold">92,3/100 (A)</td>
+                    <td class="py-3 px-4 text-red-400">53,8/100 (C)</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Godkända tester</td>
+                    <td class="py-3 px-4 text-green-400">12/13</td>
+                    <td class="py-3 px-4 text-red-400">7/13</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Spårning före samtycke</td>
+                    <td class="py-3 px-4 text-green-400">0</td>
+                    <td class="py-3 px-4 text-red-400">3</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">CDN-beroenden i USA</td>
+                    <td class="py-3 px-4 text-green-400">0</td>
+                    <td class="py-3 px-4 text-red-400">3</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Uppskattade olagliga överföringar/månad</td>
+                    <td class="py-3 px-4 text-green-400">0</td>
+                    <td class="py-3 px-4 text-red-400">~2 700</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">Cookiebanner</td>
+                    <td class="py-3 px-4 text-green-400">Ja (CookieProof, samtyckesstyrd)</td>
+                    <td class="py-3 px-4 text-red-400">Ja (aktiveras före samtycke)</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">GDPR-compliance i integritetspolicy</td>
+                    <td class="py-3 px-4 text-green-400">100 %</td>
+                    <td class="py-3 px-4 text-red-400">40 %</td>
+                  </tr>
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4">TLS/NIS2-poäng</td>
+                    <td class="py-3 px-4 text-green-400">100/100</td>
+                    <td class="py-3 px-4 text-green-400">100/100</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Webbhosting</td>
+                    <td class="py-3 px-4 text-green-400">EU (Tyskland)</td>
+                    <td class="py-3 px-4 text-red-400">USA (Cloudflare)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Den avgörande skillnaden: spårning före samtycke</h2>
+            <p class="text-text-secondary mb-4">
+              Det största gapet? Vår konkurrent laddar Google Tag Manager och Google Ads-skript som
+              körs <strong class="text-text-primary">innan</strong> något samtycke har getts.
+            </p>
+            <p class="text-text-secondary mb-4">
+              När en besökare laddar deras startsida skickas tre spårningsförfrågningar till amerikanska
+              servrar innan de har klickat på någonting. Enligt GDPR artikel 6(1)(a) krävs samtycke
+              <em>innan</em> personuppgifter (inklusive IP-adresser) behandlas, inte efter.
+            </p>
+
+            <div class="bg-amber-500/10 border-l-4 border-amber-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-amber-400 mb-2">Matematiken bakom bristande compliance</h4>
+              <p class="text-text-secondary text-sm">
+                Med ungefär 900 besökare per månad och 3 spårningsöverträdelser per besök genererar
+                vår konkurrent ungefär <strong class="text-text-primary">2 700 olagliga dataöverföringar per månad</strong>.
+                Var och en av dessa är en potentiell GDPR-överträdelse.
+              </p>
+            </div>
+
+            <p class="text-text-secondary">
+              På Bright Interaction använder vi Google Analytics men styr det via vår egen
+              samtyckesbanderoll, CookieProof. Inga spårningsskript körs förrän besökaren
+              uttryckligen väljer att godkänna. Skillnaden är enkel: vår konkurrent spårar
+              först och frågar sedan. Vi frågar först och spårar bara efter samtycke.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Det dolda CDN-problemet</h2>
+            <p class="text-text-secondary mb-4">
+              Vår konkurrent laddar typsnitt, JavaScript och kartwidgetar från Googles CDN-servrar.
+              Dessa förfrågningar skickar besökarens IP-adress till amerikanska servrar vid varje
+              sidladdning, även om de skulle ta bort alla spårningsskript.
+            </p>
+            <p class="text-text-secondary mb-4">
+              Det här är vad vi kallar "bakdörrs-GDPR-överträdelsen": ett compliancegap som de
+              flesta företag missar helt eftersom de fokuserar på uppenbara trackers medan de
+              ignorerar infrastrukturberoenden.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-6">
+              <div class="bg-dark-surface p-6 rounded-xl border border-dark-elevated">
+                <h4 class="font-semibold text-red-400 mb-3">Konkurrentens CDN-beroenden</h4>
+                <ul class="text-text-secondary text-sm space-y-2">
+                  <li>Google Maps API (googleapis.com)</li>
+                  <li>Google Fonts (fonts.gstatic.com)</li>
+                  <li>Google Tag Manager (googletagmanager.com)</li>
+                </ul>
+              </div>
+              <div class="bg-dark-surface p-6 rounded-xl border border-gold/30">
+                <h4 class="font-semibold text-green-400 mb-3">Vår approach</h4>
+                <ul class="text-text-secondary text-sm space-y-2">
+                  <li>Egenhostade typsnitt</li>
+                  <li>Google Analytics, samtyckesstyrt via CookieProof</li>
+                  <li>Inga skript körs före uttryckligt samtycke</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">CLOUD Act-exponeringen</h2>
+            <p class="text-text-secondary mb-4">
+              Båda företagen har viss exponering mot amerikansk infrastruktur, men karaktären skiljer sig markant.
+            </p>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">Vår setup</h3>
+            <p class="text-text-secondary mb-4">
+              Vår webbhosting ligger på EU-servrar i Tyskland (Hetzner). Vår enda amerikanska exponering
+              är e-post via Google Workspace. Det innebär att intern kommunikation i teorin kan begäras
+              ut enligt CLOUD Act, men kundnära webbtrafik stannar helt inom Europa.
+            </p>
+
+            <h3 class="text-xl font-semibold text-text-primary mt-6 mb-3">Konkurrentens setup</h3>
+            <p class="text-text-secondary mb-4">
+              Deras webbhosting ligger på Cloudflare (amerikanskt företag). Varje besökarinteraktion,
+              formulärinskickning och sidvisning passerar genom USA-kontrollerad infrastruktur. Enligt
+              CLOUD Act kan amerikanska myndigheter tvinga Cloudflare att lämna ut denna data utan
+              företagets vetskap.
+            </p>
+
+            <div class="bg-red-500/10 border-l-4 border-red-500 p-4 rounded-r-lg my-6">
+              <h4 class="font-semibold text-red-400 mb-2">Verkligheten efter Schrems II</h4>
+              <p class="text-text-secondary text-sm">
+                Sedan Schrems II-domen ogiltigförklarade Privacy Shield behöver företag som överför
+                EU-personuppgifter till amerikansk infrastruktur "adekvata skyddsåtgärder", vilket
+                blir allt svårare att visa när man använder amerikanska molnleverantörer.
+              </p>
+            </div>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Samtycke rätt gjort: CookieProof</h2>
+            <p class="text-text-secondary mb-4">
+              Båda företagen visar en cookiebanderoll. Skillnaden är vad som händer innan besökaren
+              gör sitt val.
+            </p>
+            <p class="text-text-secondary mb-4">
+              Vår konkurrent laddar spårningsskript som körs direkt, och visar sedan en banderoll som
+              ber om samtycke efter att datan redan har skickats. Den ordningen strider mot GDPR artikel 6(1)(a).
+            </p>
+            <p class="text-text-secondary mb-4">
+              Vi byggde CookieProof, vår egen samtyckesmotor. Den blockerar Google Analytics och alla
+              andra spårningsskript tills besökaren uttryckligen godkänner. Inga skript, inga cookies,
+              inga nätverksförfrågningar till tredje part förrän samtycke har getts. Banderollen är inte
+              dekoration. Den är grinden.
+            </p>
+            <p class="text-text-secondary">
+              Resultatet: vi får den analysdata vi behöver för affärsbeslut och har samtidigt noll
+              spårningsöverträdelser före samtycke. Du behöver inte välja mellan användbar analys
+              och GDPR-compliance. Du behöver bara få ordningen rätt.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vad båda företagen gör rätt</h2>
+            <p class="text-text-secondary mb-4">
+              Det är inte bara dåliga nyheter för vår konkurrent. Båda företagen visar starka rutiner inom:
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2">
+              <li><strong class="text-text-primary">TLS/SSL-konfiguration:</strong> Båda uppnådde 100/100 på NIS2:s kryptografiska krav</li>
+              <li><strong class="text-text-primary">E-postautentisering:</strong> Båda har DMARC-policyer inställda på "reject"</li>
+              <li><strong class="text-text-primary">Inga exponerade hemligheter:</strong> Inget av företagen läckte känsliga sökvägar eller uppgifter</li>
+              <li><strong class="text-text-primary">Inga PDF-metadataläckor:</strong> Ingen personligt identifierbar information i dokumentmetadata</li>
+            </ul>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Böterisken</h2>
+            <p class="text-text-secondary mb-4">
+              Enligt GDPR artikel 83 kan överträdelser leda till böter upp till 20 miljoner EUR eller
+              4 % av den globala årsomsättningen. Baserat på upptäckta överträdelser:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-dark-elevated">
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Företag</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Uppskattat bötesintervall</th>
+                    <th class="text-left py-3 px-4 text-text-muted font-medium">Primär överträdelse</th>
+                  </tr>
+                </thead>
+                <tbody class="text-text-secondary">
+                  <tr class="border-b border-dark-elevated/50">
+                    <td class="py-3 px-4 text-gold">Bright Interaction</td>
+                    <td class="py-3 px-4">10 000 - 500 000 EUR</td>
+                    <td class="py-3 px-4">E-postinfrastruktur på amerikanskt moln</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-4">Konkurrent</td>
+                    <td class="py-3 px-4 text-red-400">100 000 - 10 000 000 EUR</td>
+                    <td class="py-3 px-4">Olagliga dataöverföringar</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="text-text-secondary">
+              Skillnaden på 20 gånger i potentiell exponering beror på överträdelsernas karaktär.
+              Behandling utan samtycke faller under artikel 83(5), den högre bötesnivån.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Vad vi jobbar på</h2>
+            <p class="text-text-secondary mb-4">
+              Vi är inte perfekta. Vårt enda underkända test är:
+            </p>
+            <ul class="list-disc list-inside text-text-secondary space-y-2 mb-4">
+              <li><strong class="text-text-primary">E-postinfrastruktur:</strong> Vi använder Google Workspace, vilket skapar CLOUD Act-exponering för intern kommunikation. Våra 5 MX-poster pekar mot Googles amerikanska servrar, vilket innebär att klientmejl i teorin kan begäras ut enligt amerikansk lag.</li>
+            </ul>
+            <p class="text-text-secondary">
+              Vi utvärderar EU-suveräna e-postleverantörer som Proton Mail Business och egenhostad Mailcow för att eliminera denna sista amerikanska exponering och uppnå 100 % suveränitet.
+            </p>
+          </section>
+
+          <section class="mb-12">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Viktiga lärdomar</h2>
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">1.</span>
+                <span><strong class="text-text-primary">Infrastrukturbeslut spelar roll:</strong> Var dina servrar står avgör din juridiska exponering.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">2.</span>
+                <span><strong class="text-text-primary">Spårning före samtycke är olagligt:</strong> Varje skript som körs före samtycke är en GDPR-överträdelse.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">3.</span>
+                <span><strong class="text-text-primary">CDN:er förbises ofta:</strong> Att ladda typsnitt från Google är en dataöverföring, även om man inte tänker på det så.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">4.</span>
+                <span><strong class="text-text-primary">Samtycke först fungerar:</strong> Du kan använda Google Analytics och vara compliant. Blockera allt tills besökaren godkänner.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">5.</span>
+                <span><strong class="text-text-primary">CLOUD Act är verklig:</strong> Data som lagras i USA omfattas av amerikansk lag, oavsett var ditt företag finns.</span>
+              </li>
+            </ul>
+          </section>
+
+          <section class="bg-dark-surface p-8 rounded-2xl border border-dark-elevated">
+            <h2 class="font-display text-2xl font-bold text-gold mb-4">Få din kostnadsfria complianceskanning</h2>
+            <p class="text-text-secondary mb-6">
+              Vill du veta var ditt företag står? Vår SVAR-complianceskanner analyserar
+              13 compliance- och säkerhetsdimensioner. Se din poäng, förstå dina risker
+              och få konkreta rekommendationer.
+            </p>
+            <button data-cal-trigger class="inline-block bg-gold hover:bg-gold-light text-dark-bg font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+              Begär en kostnadsfri skanning
+            </button>
+          </section>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2-compliance: Praktisk guide</a></li>
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveränitet i molnet</a></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="mt-12 pt-8 border-t border-dark-elevated">
+        <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          Tillbaka till Insikter
+        </a>
+      </div>
+    </div>
+  </main>
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+  <Footer lang={lang} />
+</Layout>

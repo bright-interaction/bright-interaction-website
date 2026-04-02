@@ -1,0 +1,459 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'Grunderna i säkerhetskonfiguration: Skydda din infrastruktur';
+const description = 'De flesta intrång utnyttjar felkonfigurationer, inte sofistikerade attacker. Lär dig de viktigaste säkerhetskonfigurationerna som alla företag bör implementera.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/security-configuration-essentials"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Säkerhet
+          </span>
+          <span class="text-text-muted text-sm">10 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Här kommer en obekväm sanning: de flesta säkerhetsintrång beror inte på sofistikerad hacking. De orsakas av felkonfigurerade system, standardlösenord och överhoppade säkerhetsgrunder. Angriparna går genom dörrar som lämnats olåsta.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Att få säkerhetskonfigurationen rätt kräver inte avancerade kunskaper. Det kräver noggrannhet och konsekvent disciplin.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Borgsmetaforen
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Tänk på din infrastruktur som en borg. Du kan bygga tjocka murar, men om du lämnar sidoporten öppen eller glömmer att byta lås när en vakt slutar spelar inget av det någon roll. Säkerhetskonfiguration handlar om att se till att varje dörr är låst, varje vakt kan rutinerna och varje potentiell ingångspunkt övervakas.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">80/20-regeln gäller:</strong> Att få grundkonfigurationerna rätt skyddar dig från 80 % av attackerna. Avancerade hot existerar, men de flesta företag komprometteras av grundläggande brister.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Autentisering: Din första försvarslinje
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Svag autentisering är den vanligaste ingångspunkten för angripare. Så här gör du rätt:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Kräv multifaktorautentisering (MFA)</h4>
+              <p class="text-text-secondary text-sm">
+                MFA bör vara obligatoriskt för allt. E-post, molntjänster, adminpaneler, VPN. Ett stulet lösenord ska inte räcka för att komma åt dina system. Föredra autentiseringsappar framför SMS där det är möjligt.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Eliminera standardinloggningar</h4>
+              <p class="text-text-secondary text-sm">
+                Varje enhet, tjänst och applikation som levereras med standardlösenord måste få dessa ändrade omedelbart. Databaser, routrar, admingränssnitt, IoT-enheter. Skapa en checklista och granska regelbundet.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Implementera starka lösenordspolicyer</h4>
+              <p class="text-text-secondary text-sm">
+                Minst 12 tecken, komplexitetskrav och förbud mot vanliga lösenord. Ännu bättre: gå mot lösenordsfri autentisering där det är möjligt. Passkeys och hårdvarunycklar är säkrare än något lösenord.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Använd single sign-on (SSO) där det är möjligt</h4>
+              <p class="text-text-secondary text-sm">
+                SSO minskar antalet inloggningsuppgifter att hantera och låter dig tillämpa säkerhetspolicyer centralt. När någon slutar stänger du av ett konto och åtkomsten till allt försvinner.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Grundläggande nätverkssäkerhet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Ditt nätverk är det område angripare rör sig genom. Gör det så svårt som möjligt:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Segmentera ditt nätverk</h4>
+                <p class="text-text-secondary">
+                  Lägg inte allt på ett platt nätverk. Separera produktion från utveckling, internt från externt, känsligt från allmänt. Om en angripare komprometterar ett segment ska de inte automatiskt komma åt allt annat.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Konfigurera brandväggar korrekt</h4>
+                <p class="text-text-secondary">
+                  Neka som standard, tillåt explicit. Öppna bara de portar som faktiskt behövs. Granska brandväggsregler kvartalsvis och ta bort allt som inte längre är nödvändigt. Dokumentera varför varje regel finns.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Kryptera trafik</h4>
+                <p class="text-text-secondary">
+                  TLS överallt. Interna tjänster, externa tjänster, databasanslutningar. Prestandakostnaden är försumbar på modern hårdvara, och det förhindrar avlyssning och man-in-the-middle-attacker.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Använd VPN för fjärråtkomst</h4>
+                <p class="text-text-secondary">
+                  Interna tjänster ska inte exponeras direkt mot internet. Kräv VPN-anslutningar med stark autentisering. Överväg zero trust-strategier där varje åtkomstförfrågan verifieras oavsett nätverksplats.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Server- och applikationssäkerhet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Varje server och applikation är ett potentiellt mål. Härda dem ordentligt:
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-3">Patchhantering</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li>• Upprätta ett regelbundet patchschema</li>
+                <li>• Prioritera kritiska säkerhetsuppdateringar</li>
+                <li>• Testa patchar i staging före produktion</li>
+                <li>• Automatisera där det är möjligt</li>
+                <li>• Spåra patchstatus över alla system</li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-3">Minimera attackytan</h4>
+              <ul class="space-y-2 text-text-secondary text-sm">
+                <li>• Ta bort onödiga tjänster och programvaror</li>
+                <li>• Inaktivera oanvända funktioner och moduler</li>
+                <li>• Stäng oanvända portar</li>
+                <li>• Ta bort standard-/exempelinnehåll</li>
+                <li>• Håll installationer minimala</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h4 class="font-semibold text-text-primary mb-3">Applikationsspecifik härdning</h4>
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Webbservrar:</strong> Inaktivera kataloglistning, dölj versionsinformation, konfigurera säkra headers (HSTS, CSP, X-Frame-Options).</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Databaser:</strong> Inaktivera fjärr-rootåtkomst, använd krypterade anslutningar, implementera användare med minsta möjliga behörighet för applikationer.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Containrar:</strong> Kör inte som root, använd skrivskyddade filsystem där det är möjligt, skanna avbildningar efter sårbarheter.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Åtkomstkontroll och behörigheter
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Principen om minsta behörighet bör styra varje åtkomstbeslut:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-gold/30 p-6 mb-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Ge minsta nödvändiga åtkomst:</strong> Användare ska ha exakt de behörigheter de behöver för att göra sitt jobb, inget mer. Granska och återkalla behörigheter regelbundet.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Separera administrativa konton:</strong> Administratörer bör använda vanliga konton för dagligt arbete och förhöjda konton bara när det behövs. Det begränsar skadan vid komprometterade inloggningsuppgifter.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Implementera rollbaserad åtkomst:</strong> Definiera roller med specifika behörigheter, tilldela användare till roller. Det är enklare att granska och underhålla än individuella behörigheter.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">•</span>
+                <span><strong class="text-text-primary">Granska åtkomst regelbundet:</strong> Gå igenom vem som har åtkomst till vad minst kvartalsvis. Ta bort åtkomst för personer som inte längre behöver den. Var extra uppmärksam på privilegierad åtkomst.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Loggning och övervakning
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Du kan inte skydda det du inte ser. Omfattande loggning och övervakning hjälper dig att upptäcka problem tidigt:
+          </p>
+
+          <div class="space-y-4">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Logga allt säkerhetsrelevant</h4>
+              <p class="text-text-secondary text-sm">
+                Autentiseringsförsök (lyckade och misslyckade), behörighetsändringar, administrativa åtgärder, åtkomst till känslig data, nätverksanslutningar. Du behöver denna data för incidentutredning och compliance.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Centralisera dina loggar</h4>
+              <p class="text-text-secondary text-sm">
+                Loggar utspridda över system är svåra att korrelera och lätta för angripare att manipulera. Skicka loggar till en central, säker plats där de kan analyseras tillsammans.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Konfigurera larm</h4>
+              <p class="text-text-secondary text-sm">
+                Samla inte bara loggar. Övervaka misstänkta mönster: flera misslyckade inloggningar, ovanliga åtkomsttider, försök till privilegieeskalering, stora dataöverföringar. Larma vid avvikelser, inte bara kända attacker.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Bevara loggar korrekt</h4>
+              <p class="text-text-secondary text-sm">
+                Behåll loggar tillräckligt länge för incidentutredning och compliance (normalt 1-2 år). Se till att de är manipuleringsskyddade. Angripare försöker ofta radera loggar för att dölja sina spår.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Backup och återställning
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Säkerhet handlar inte bara om att förebygga attacker. Det handlar om att återhämta sig när de inträffar:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Följ 3-2-1-regeln:</strong> Tre kopior av data, på två olika medietyper, med en kopia på annan plats.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Kryptera backuper:</strong> En stulen backup är ett dataintrång. Skydda backuper med stark kryptering och säker nyckelhantering.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Testa återställning regelbundet:</strong> En backup du inte kan återställa är värdelös. Testa hela återställningsprocessen kvartalsvis, inklusive återställning till en annan miljö.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Skydda backupåtkomst:</strong> Backupsystem är högt värderade mål. Begränsa åtkomsten, använd separata inloggningsuppgifter och övervaka obehörig åtkomst.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">✓</span>
+                <span><strong class="text-text-primary">Behåll offlinekopior:</strong> Ransomware kan kryptera nätverksanslutna backuper. Underhåll air-gappade kopior som inte kan nås via ditt nätverk.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Att göra det hållbart
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Säkerhetskonfiguration är inte ett engångsprojekt. Det kräver löpande uppmärksamhet:
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Dokumentera dina konfigurationer. Använd infrastruktur som kod där det är möjligt. Automatisera säkerhetskontroller. Schemalägg regelbundna revisioner. När konfigurationer avviker från dina standarder behöver du upptäcka och korrigera det.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Börja med grunderna som beskrivs här. När de sitter kan du lägga till mer sofistikerade kontroller. Men kom ihåg: den bästa säkerhetsinvesteringen är oftast att få fundamenten rätt, inte att köpa avancerade verktyg.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du en säkerhetsgranskning?</strong> Vi hjälper företag att bedöma och förbättra sina säkerhetskonfigurationer. Från infrastrukturhärdning till compliancegranskningar kan vi hjälpa dig identifiera luckor och implementera lösningar.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Begär en bedömning →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/security-configuration-essentials`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/container-security-basics" class="text-gold hover:text-gold-light transition-colors text-sm">Grunderna i containersäkerhet</a></li>
+            <li><a href="/sv/insights/vpn-vs-zero-trust" class="text-gold hover:text-gold-light transition-colors text-sm">VPN vs Zero Trust</a></li>
+            <li><a href="/sv/insights/sso-small-teams" class="text-gold hover:text-gold-light transition-colors text-sm">Konfigurera SSO för små team</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

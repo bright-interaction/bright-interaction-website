@@ -1,0 +1,74 @@
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bright-interaction-website
+    restart: unless-stopped
+    ports:
+      - "3333:80"
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    # Security hardening
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:mode=1777,size=10M
+      - /var/run/openresty:mode=755,size=1M
+      - /usr/local/openresty/nginx/client_body_temp:mode=755,size=10M
+      - /usr/local/openresty/nginx/proxy_temp:mode=755,size=10M
+      - /usr/local/openresty/nginx/fastcgi_temp:mode=755,size=10M
+      - /usr/local/openresty/nginx/uwsgi_temp:mode=755,size=10M
+      - /usr/local/openresty/nginx/scgi_temp:mode=755,size=10M
+    networks:
+      - proxy
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+
+networks:
+  proxy:
+    external: true
+
+  # Optional: Umami analytics (self-hosted)
+  # Uncomment to deploy Umami alongside the website
+  # umami:
+  #   image: ghcr.io/umami-software/umami:postgresql-latest
+  #   container_name: umami
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3001:3000"
+  #   environment:
+  #     DATABASE_URL: postgresql://umami:umami@umami-db:5432/umami
+  #     DATABASE_TYPE: postgresql
+  #     APP_SECRET: ${UMAMI_APP_SECRET:-replace-me-with-random-string}
+  #   depends_on:
+  #     umami-db:
+  #       condition: service_healthy
+
+  # umami-db:
+  #   image: postgres:15-alpine
+  #   container_name: umami-db
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_DB: umami
+  #     POSTGRES_USER: umami
+  #     POSTGRES_PASSWORD: umami
+  #   volumes:
+  #     - umami-db-data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U umami"]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 5
+
+# volumes:
+#   umami-db-data:

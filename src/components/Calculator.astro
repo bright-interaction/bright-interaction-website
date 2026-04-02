@@ -1,0 +1,35 @@
+---
+import { t } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+---
+
+<section id="calculator" class="py-20 md:py-28 bg-dark-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-dark-elevated border border-gold/30 text-gold rounded-full text-sm font-medium mb-4">
+        {t(lang, 'calculator.badge')}
+      </div>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+        {t(lang, 'calculator.title')}
+      </h2>
+      <p class="text-lg text-text-secondary">
+        {t(lang, 'calculator.description')}
+      </p>
+    </div>
+
+    <!-- Calculator iframe -->
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-dark-bg rounded-2xl border border-dark-elevated overflow-hidden">
+        <iframe
+          src="https://bot.brightinteraction.com/revops-calculator"
+          class="w-full border-0"
+          style="height: 600px;"
+          title="RevOps Opportunity Cost Calculator"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>

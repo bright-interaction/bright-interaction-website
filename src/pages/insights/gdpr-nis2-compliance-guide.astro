@@ -1,0 +1,419 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'GDPR & NIS2 Compliance: A Practical Guide for SMBs';
+const description = 'Understanding EU data protection and cybersecurity regulations doesn\'t have to be overwhelming. Learn how to navigate GDPR and NIS2 with clear, actionable strategies.';
+
+// Article structured data
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/gdpr-nis2-compliance-guide"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is GDPR and what does it require?",
+      "acceptedAnswer": { "@type": "Answer", "text": "GDPR is a data protection regulation that requires you to only collect necessary data, protect it properly, and allow data owners to request deletion at any time. It applies to any business that handles personal data of EU residents." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is NIS2 and who does it apply to?",
+      "acceptedAnswer": { "@type": "Answer", "text": "NIS2 is a cybersecurity directive requiring proper security infrastructure like encryption and access controls. As of 2024, it applies to a broader range of businesses including many SMBs in essential sectors like healthcare, energy, transport, and digital services." }
+    },
+    {
+      "@type": "Question",
+      "name": "Where should I store European customer data to stay GDPR compliant?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use cloud providers with EU data centers or self-host your infrastructure within the EU. Using US-based cloud providers for European customer data creates a compliance grey area and potential jurisdiction conflicts under the CLOUD Act." }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Compliance
+          </span>
+          <span class="text-text-muted text-sm">8 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            If you run a business in Europe, or handle data from European customers, you've probably heard of GDPR and NIS2. These regulations can seem like a maze of legal jargon and technical requirements. But here's the thing: they exist to protect your business and your customers.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Let's break them down into plain language and practical steps you can actually implement.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Building Blocks: Understanding the Regulations
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">GDPR: The Data Privacy Guardian</h3>
+            <p class="text-text-secondary mb-4">
+              Think of GDPR as the rules for being a responsible landlord of someone's personal information. When customers give you their data (names, emails, purchase history), they're essentially trusting you with the keys to part of their digital life.
+            </p>
+            <p class="text-text-secondary">
+              <strong class="text-text-primary">The core principle:</strong> You can only collect data you actually need, you must protect it properly, and the owner can ask you to delete it at any time. Simple, right? One of the most scrutinized areas is <a href="/insights/cookie-consent-requirements-sweden-2026" class="text-gold-dark hover:underline">cookie consent</a>, where Swedish enforcement has intensified significantly in 2026.
+            </p>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">NIS2: The Security Watchdog</h3>
+            <p class="text-text-secondary mb-4">
+              If GDPR is about data privacy, NIS2 is about data security. It's like having a building code for your digital infrastructure. The directive requires businesses to have proper "locks on the doors, smoke detectors, and escape routes" for their IT systems.
+            </p>
+            <p class="text-text-secondary">
+              <strong class="text-text-primary">Who does it affect?</strong> As of 2024, NIS2 applies to a broader range of businesses than its predecessor, including many SMBs in essential and important sectors like healthcare, energy, transport, and digital services.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Reality Check: Why This Matters for Your Business
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Let's be honest: compliance isn't just about avoiding fines (though GDPR fines can reach €20 million or 4% of global revenue). It's about three practical benefits:
+          </p>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Trust</h4>
+              <p class="text-text-secondary text-sm">
+                Customers increasingly choose businesses that take their privacy seriously.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">B2B Opportunities</h4>
+              <p class="text-text-secondary text-sm">
+                Enterprise clients often require compliance proof before signing contracts.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Risk Reduction</h4>
+              <p class="text-text-secondary text-sm">
+                Proper security practices protect you from breaches, ransomware, and data loss.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Data Sovereignty Question
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Here's where it gets interesting. Many businesses use cloud services without thinking about where their data actually lives. Using a US-based cloud provider for European customer data? That's a compliance grey area at best.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-3">The Mailbox Analogy</h4>
+            <p class="text-text-secondary">
+              Imagine storing your company's confidential mail in a neighbor's house—a neighbor who lives in a different country with different laws about mail privacy. That's essentially what happens when you use cloud services without considering data residency. The solution? Either use providers with EU data centers, or host your own infrastructure within the EU.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Practical Steps to Compliance
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Let's move from theory to action. Here's a practical roadmap for achieving compliance:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Map Your Data Flow</h4>
+                <p class="text-text-secondary">
+                  Document what personal data you collect, where it's stored, who has access, and how long you keep it. You can't protect what you don't know exists. Start with a simple spreadsheet listing each data type, its source, storage location, and retention period.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Secure Your Infrastructure</h4>
+                <p class="text-text-secondary">
+                  Implement encryption (both in transit and at rest), use strong authentication, and segment your network. Think of it as installing locks on all doors, not just the front one. Consider self-hosted solutions for sensitive data to maintain full control.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Prepare for Incidents</h4>
+                <p class="text-text-secondary">
+                  NIS2 requires incident reporting within 24 hours. Have a plan ready before you need it. Know who to contact, what to document, and how to notify affected parties. Practice your response with tabletop exercises.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Document Everything</h4>
+                <p class="text-text-secondary">
+                  Compliance is about proving what you do, not just doing it. Maintain records of your security measures, data processing activities, and any incidents. When auditors come knocking, documentation is your best friend.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Regular Security Audits</h4>
+                <p class="text-text-secondary">
+                  Compliance isn't a one-time achievement. It's an ongoing process. Schedule regular vulnerability scans, review access controls quarterly, and update your policies as regulations evolve. Automated monitoring tools can help maintain continuous compliance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Common Pitfalls to Avoid
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-red-900/30 p-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Assuming "cloud" means "secure":</strong> Your cloud provider's security doesn't automatically extend to your data. You're responsible for how you configure and use their services.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Ignoring supply chain risks:</strong> Under NIS2, you're responsible for the security of your vendors and partners too. Assess their security practices.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Over-collecting data:</strong> If you don't need it, don't collect it. Every piece of data you store is a liability you must protect.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Treating compliance as IT-only:</strong> GDPR and NIS2 touch every part of your organization: HR, marketing, sales, operations. Make it a company-wide initiative.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Self-Hosting Advantage
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            One increasingly popular approach to compliance is self-hosting critical systems. When you control your own infrastructure, you know exactly where your data lives, who has access, and how it's protected.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            This doesn't mean building everything from scratch. Modern tools like Docker and Kubernetes make it practical to run your own secure infrastructure. You can deploy email servers, CRM systems, workflow automation, and databases on servers you control—whether in your office or in EU-based data centers.
+          </p>
+
+          <p class="text-text-secondary">
+            The key is choosing the right balance between convenience and control. Some data might be fine in third-party SaaS tools; sensitive customer information might warrant self-hosted alternatives.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Moving Forward
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Compliance doesn't have to be a burden. It can be a competitive advantage. Businesses that handle data responsibly and maintain secure infrastructure build trust with customers, unlock enterprise partnerships, and reduce their risk exposure.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Start small: map your data, identify your biggest risks, and address them one by one. Perfect compliance isn't achieved overnight, but consistent progress is what regulators and customers want to see. For a concrete action plan on the NIS2 side, see our <a href="/insights/nis2-compliance-checklist" class="text-gold-dark hover:underline">12-step NIS2 compliance checklist</a>.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help?</strong> We specialize in helping SMBs achieve compliance through practical infrastructure solutions. From secure self-hosted systems to automated security monitoring, we can help you build a compliance-ready foundation.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Get in touch →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/gdpr-nis2-compliance-guide`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">How We Score 92.3/100 on GDPR Compliance</a></li>
+            <li><a href="/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Data Sovereignty in the Cloud Era</a></li>
+            <li><a href="/insights/healthcare-data-compliance" class="text-gold hover:text-gold-light transition-colors text-sm">Healthcare Data Compliance</a></li>
+            <li><a href="/insights/cookie-consent-requirements-sweden-2026" class="text-gold hover:text-gold-light transition-colors text-sm">Cookie Consent Requirements in Sweden 2026</a></li>
+            <li><a href="/insights/nis2-compliance-checklist" class="text-gold hover:text-gold-light transition-colors text-sm">NIS2 Compliance Checklist: 12 Steps</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

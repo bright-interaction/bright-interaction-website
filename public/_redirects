@@ -1,0 +1,14 @@
+# Old Webflow blog posts -> insights
+/se/blogg/*  /sv/insights  301
+/en/blogg/*  /insights  301
+/blogg/*  /insights  301
+
+# Old Webflow services
+/se/services/*  /sv  301
+/en/services/*  /  301
+/services/*  /  301
+
+# Pagination params (Webflow)
+/blogg?*  /insights  301
+/se/blogg?*  /sv/insights  301
+/en/blogg?*  /insights  301

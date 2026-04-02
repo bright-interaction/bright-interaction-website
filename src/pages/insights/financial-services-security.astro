@@ -1,0 +1,651 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Financial Services Security: DORA, NIS2, and Building Resilient Infrastructure';
+const description = 'A practical guide to cybersecurity requirements for financial services firms in the EU. Understand DORA, NIS2, and PSD2 obligations with implementation strategies.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/financial-services-security"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Article Header -->
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Financial Services
+          </span>
+          <span class="text-text-muted text-sm">13 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Article Content -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Key Takeaways</h3>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>DORA (Digital Operational Resilience Act) creates comprehensive ICT risk requirements for financial entities</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Third-party concentration risk is now a regulatory concern, pushing toward diversification</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Incident reporting timelines are strict, requiring prepared response procedures</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Regular resilience testing, including threat-led penetration testing, is mandatory</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Regulatory Framework
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Financial services firms in the EU face an increasingly complex regulatory environment for
+            technology and cybersecurity. Understanding how different regulations interact is essential
+            for building compliant infrastructure.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">DORA: Digital Operational Resilience Act</h3>
+            <p class="text-text-secondary mb-4">
+              DORA, applicable from January 2025, is the most significant cybersecurity regulation specifically
+              targeting financial services. It applies to:
+            </p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Credit institutions (banks)</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Payment institutions and electronic money institutions</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Investment firms and fund managers</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Insurance and reinsurance undertakings</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Credit rating agencies and crypto-asset service providers</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Critical ICT third-party service providers</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            The scope is broad, covering entities from major banks to smaller fintechs. The proportionality
+            principle applies, with requirements scaled to entity size and complexity, but core obligations
+            apply to all. Financial services firms subject to NIS2 should also review our <a href="/insights/nis2-compliance-checklist" class="text-gold-dark hover:underline">step-by-step NIS2 compliance checklist</a> for concrete implementation actions.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-8">
+            <h4 class="font-semibold text-gold mb-3">Five Pillars of DORA</h4>
+            <ol class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">1.</span>
+                <span><strong class="text-text-primary">ICT Risk Management:</strong> Comprehensive framework for identifying, protecting, detecting, responding, and recovering from ICT risks</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">2.</span>
+                <span><strong class="text-text-primary">Incident Reporting:</strong> Classification and notification of ICT-related incidents to competent authorities</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">3.</span>
+                <span><strong class="text-text-primary">Resilience Testing:</strong> Regular testing including threat-led penetration testing (TLPT) for significant entities</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">4.</span>
+                <span><strong class="text-text-primary">Third-Party Risk:</strong> Due diligence, contractual requirements, and monitoring of ICT service providers</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold font-bold">5.</span>
+                <span><strong class="text-text-primary">Information Sharing:</strong> Participation in threat intelligence sharing arrangements</span>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            ICT Risk Management Framework
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Governance</h3>
+
+          <p class="text-text-secondary mb-6">
+            DORA places ICT risk firmly in the boardroom. Management bodies must:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Define and approve the ICT risk management framework</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Set and oversee implementation of digital operational resilience strategy</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Approve and periodically review ICT policies</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Allocate sufficient budget and resources for ICT</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Maintain appropriate knowledge and skills on ICT matters</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            This isn't checkbox compliance. Regulators expect genuine board engagement with technology
+            risk, demonstrated through informed decision-making and appropriate challenge.
+          </p>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Risk Identification and Protection</h3>
+
+          <p class="text-text-secondary mb-6">
+            The framework must address:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Asset management:</strong> Complete inventory of ICT assets, including dependencies</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Risk assessment:</strong> Regular identification and evaluation of ICT risks</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Protection measures:</strong> Controls proportionate to identified risks</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Change management:</strong> Controlled processes for system changes</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Business continuity:</strong> Plans and capabilities for maintaining operations</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Incident Reporting Requirements
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            DORA defines criteria for classifying incidents, including number of clients affected,
+            duration, geographic spread, economic impact, data losses, and critical services affected.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h4 class="font-display text-lg font-bold text-gold mb-4">Incident Notification Timeline</h4>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Initial notification:</strong> Within 4 hours of classification as major incident, or 24 hours from detection</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Intermediate report:</strong> Within 72 hours, with updates on handling and impact</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Final report:</strong> Within one month, with root cause analysis and remediation measures</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            These timelines are demanding. You cannot meet them without prepared templates, clear
+            escalation paths, and practiced procedures.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Third-Party Risk Management
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Due Diligence Requirements</h3>
+
+          <p class="text-text-secondary mb-6">
+            Before engaging ICT service providers, entities must:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Assess the provider's ability to comply with applicable requirements</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Evaluate concentration risk and substitutability</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Review the provider's sub-contractor arrangements</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Consider the geographic location of service provision and data storage</span>
+            </li>
+          </ul>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Concentration Risk</h3>
+
+          <p class="text-text-secondary mb-6">
+            DORA explicitly addresses concentration risk from over-reliance on single providers. Entities must:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Identify critical or important functions outsourced to third parties</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Assess dependencies and potential failure points</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Develop exit strategies for critical providers</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Consider multi-provider or hybrid approaches</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            This creates a strong case for diversifying infrastructure and avoiding lock-in to single
+            cloud providers or technology platforms.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Digital Operational Resilience Testing
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            All covered entities must conduct regular testing, including vulnerability assessments,
+            network security assessments, gap analyses, physical security reviews, source code reviews,
+            scenario-based testing, and performance testing.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h4 class="font-display text-lg font-bold text-gold mb-4">Threat-Led Penetration Testing (TLPT)</h4>
+            <p class="text-text-secondary mb-4">
+              Significant entities must conduct TLPT at least every three years:
+            </p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Testing based on realistic threat scenarios</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Coverage of critical and important functions</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Use of qualified external testers</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Coordination with competent authorities</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            TLPT is based on the TIBER-EU framework, requiring sophisticated red team exercises that
+            simulate real adversaries.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Infrastructure Recommendations
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Architecture Principles</h3>
+
+          <p class="text-text-secondary mb-6">
+            For financial services, infrastructure should prioritize:
+          </p>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Self-Hosted Benefits</h4>
+              <ul class="text-text-secondary text-sm space-y-1">
+                <li>Complete control over data location</li>
+                <li>Reduced concentration risk</li>
+                <li>Simplified regulatory audits</li>
+                <li>No cloud provider exit challenges</li>
+                <li>Clear accountability chain</li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Cloud Considerations</h4>
+              <ul class="text-text-secondary text-sm space-y-1">
+                <li>Major providers may become "critical" under DORA</li>
+                <li>Exit strategies required in contracts</li>
+                <li>Sub-processor chains to manage</li>
+                <li>Audit rights often limited</li>
+                <li>Cross-border data concerns</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Many financial entities are adopting hybrid approaches: critical processing on controlled
+            infrastructure with cloud for less sensitive workloads, ensuring provider diversification
+            and maintaining exit options.
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h4 class="font-display text-lg font-bold text-gold mb-4">Recommended Technology Stack</h4>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Identity & Access:</strong> Authentik or Keycloak with hardware token support</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Secrets Management:</strong> HashiCorp Vault for credential storage</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Monitoring:</strong> Prometheus/Grafana for metrics, centralized logging with retention</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Automation:</strong> n8n for workflow automation with full audit trails</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Communication:</strong> Mattermost with compliance features enabled</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Implementation Roadmap
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Assessment</h4>
+                <p class="text-text-secondary">
+                  Gap analysis against DORA requirements, third-party provider inventory and risk assessment,
+                  current state documentation of ICT systems and dependencies, governance structure review.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Framework Development</h4>
+                <p class="text-text-secondary">
+                  ICT risk management policy and procedures, incident classification and reporting procedures,
+                  third-party risk management framework, testing strategy and schedule.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Implementation</h4>
+                <p class="text-text-secondary">
+                  Technical controls deployment, monitoring and detection capabilities, business continuity
+                  and disaster recovery, training and awareness programs.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Validation</h4>
+                <p class="text-text-secondary">
+                  Internal testing and exercises, independent assessments, remediation of identified gaps,
+                  regulatory engagement as needed.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Common Compliance Gaps
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            In working with financial services clients, we frequently encounter:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-red-900/30 p-6 mb-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Incomplete asset inventories:</strong> Unknown systems and dependencies</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Inadequate third-party oversight:</strong> Contracts without required provisions</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Untested recovery:</strong> Backup systems that have never been validated</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Missing detection capabilities:</strong> No visibility into security events</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Informal incident response:</strong> No documented, practiced procedures</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Board disconnect:</strong> Governance without genuine oversight</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help?</strong> We help financial services firms implement infrastructure
+              that meets DORA, NIS2, and PSD2 requirements while enabling efficient operations.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Get in touch →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Article Footer -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/financial-services-security`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR & NIS2 Compliance: A Practical Guide</a></li>
+            <li><a href="/insights/healthcare-data-compliance" class="text-gold hover:text-gold-light transition-colors text-sm">Healthcare Data Compliance</a></li>
+            <li><a href="/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Security Configuration Essentials</a></li>
+            <li><a href="/insights/nis2-compliance-checklist" class="text-gold hover:text-gold-light transition-colors text-sm">NIS2 Compliance Checklist: 12 Steps</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul, .prose ol {
+    list-style: none;
+    padding: 0;
+  }
+</style>

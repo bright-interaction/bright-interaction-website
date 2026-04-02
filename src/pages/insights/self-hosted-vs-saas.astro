@@ -1,0 +1,476 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-01-28';
+const title = 'Self-Hosted vs SaaS: Making the Right Choice for Your Business';
+const description = 'When should you self-host and when should you use SaaS? A practical framework for evaluating control, cost, and compliance trade-offs.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/self-hosted-vs-saas"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I self-host or use SaaS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your data sensitivity, compliance requirements, and available expertise. Self-hosting is better for customer data, regulated industries, and long-term cost optimization. SaaS is better for commodity functions, rapid scaling, and teams with limited IT resources."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is self-hosting cheaper than SaaS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Self-hosting has higher upfront costs but more predictable long-term economics. SaaS pricing often grows faster than your usage — a tool that costs €50/month for 10 users might cost €500/month for 100 users. For mature, stable systems, self-hosting frequently wins on cost over a 5-year horizon."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the hidden costs of self-hosting?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The main hidden costs of self-hosting are maintenance time for updates and patches, full security responsibility, backup management, scaling complexity, and the need for in-house expertise. You need people who know the systems, and you own the entire security stack."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use both self-hosted and SaaS solutions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, most businesses use a hybrid approach. A common pattern is using SaaS for email and productivity tools while self-hosting CRM, customer databases, workflow automation, and file storage with sensitive data. The key is being intentional about which category each system falls into."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Infrastructure
+          </span>
+          <span class="text-text-muted text-sm">7 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            "Should we self-host or use a SaaS solution?" It's one of the most common questions businesses face when building their digital infrastructure. The answer isn't always obvious, and getting it wrong can cost you in unexpected ways.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Let's cut through the marketing noise and look at the real trade-offs.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Renting vs Owning Analogy
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Think of SaaS like renting an apartment. Someone else handles maintenance, fixes the plumbing, and updates the security system. You pay monthly, move in quickly, and can leave relatively easily. But you can't knock down walls, the landlord can raise rent, and you're trusting them with your belongings.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Self-hosting is like owning your home. You control everything: the layout, the locks, who gets a key. But you're also responsible for everything: repairs, upgrades, and making sure the roof doesn't leak. The upfront investment is higher, but you build equity and answer to no one.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">The key insight:</strong> Neither is universally better. The right choice depends on what you're storing, how critical it is, and what resources you have to manage it.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            When SaaS Makes Sense
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SaaS solutions shine in specific situations. Here's when to lean toward them:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Commodity functions</h4>
+              <p class="text-text-secondary text-sm">
+                Email, calendars, basic project management. These tools work the same for most businesses. There's little competitive advantage in running your own email server, and the security burden often isn't worth it.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Rapid scaling needs</h4>
+              <p class="text-text-secondary text-sm">
+                If your usage fluctuates wildly or you're growing fast, SaaS handles scaling automatically. Building infrastructure for peak demand that sits idle 90% of the time is wasteful.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Limited IT resources</h4>
+              <p class="text-text-secondary text-sm">
+                A five-person startup probably shouldn't be managing servers. Focus your limited engineering time on your core product, not infrastructure maintenance.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Non-sensitive data</h4>
+              <p class="text-text-secondary text-sm">
+                Marketing analytics, public content, internal documentation. When the data isn't sensitive, the convenience of SaaS often outweighs the control benefits of self-hosting.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            When Self-Hosting Makes Sense
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Self-hosting becomes the better choice when control and compliance outweigh convenience:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Customer data and PII</h4>
+              <p class="text-text-secondary text-sm">
+                When you're storing personal information, knowing exactly where it lives and who can access it matters. Self-hosting gives you that certainty, which simplifies GDPR compliance and builds customer trust.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Regulated industries</h4>
+              <p class="text-text-secondary text-sm">
+                Healthcare, finance, legal. When auditors ask where your data is stored, "somewhere in AWS us-east-1" isn't a satisfying answer. Self-hosting on known infrastructure in specific jurisdictions simplifies compliance.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Core business systems</h4>
+              <p class="text-text-secondary text-sm">
+                Your CRM, your customer database, your workflow automation. These are the systems that run your business. Depending on a third party means their outage becomes your outage, their price increase becomes your cost increase.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Long-term cost optimization</h4>
+              <p class="text-text-secondary text-sm">
+                SaaS pricing often grows faster than your usage. A tool that costs €50/month for 10 users might cost €500/month for 100 users. Self-hosting has higher upfront costs but more predictable long-term economics.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Hidden Costs of Each Approach
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-bold text-text-primary mb-4">SaaS Hidden Costs</h3>
+              <ul class="space-y-3 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Vendor lock-in:</strong> Migrating away can be expensive and time-consuming</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Price increases:</strong> You're at the mercy of the vendor's business model</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Feature removal:</strong> Features you depend on can disappear</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Data portability:</strong> Getting your data out isn't always easy</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Compliance complexity:</strong> You inherit the vendor's compliance posture</span>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-bold text-text-primary mb-4">Self-Hosting Hidden Costs</h3>
+              <ul class="space-y-3 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Maintenance time:</strong> Updates, patches, and troubleshooting</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Security responsibility:</strong> You own the entire security stack</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Backup management:</strong> Data protection is your job</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Scaling complexity:</strong> Growth requires planning and investment</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Expertise requirements:</strong> You need people who know the systems</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            A Practical Decision Framework
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            When evaluating a new tool or system, ask these questions:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">How sensitive is the data?</h4>
+                <p class="text-text-secondary">
+                  Customer PII, financial records, health data? Lean toward self-hosting. Marketing metrics, public content? SaaS is probably fine.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">What are the compliance requirements?</h4>
+                <p class="text-text-secondary">
+                  GDPR, NIS2, HIPAA, SOC 2? Self-hosting often simplifies audits and gives you clearer documentation. Less regulated? SaaS compliance certifications may suffice.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">How critical is this system?</h4>
+                <p class="text-text-secondary">
+                  If this tool goes down, does your business stop? Core systems deserve the control self-hosting provides. Nice-to-have tools? SaaS convenience wins.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">What's the 5-year cost picture?</h4>
+                <p class="text-text-secondary">
+                  Project SaaS costs with realistic growth. Compare to infrastructure and maintenance costs for self-hosting. Often, self-hosting wins for mature, stable systems.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Do you have the expertise?</h4>
+                <p class="text-text-secondary">
+                  Self-hosting requires knowledge or the ability to hire it. If you lack both, SaaS might be safer until you build that capability, or partner with someone who has it.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Hybrid Approach
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Most businesses end up with a mix. Here's a common pattern that works well:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-bold">SaaS:</span>
+                <span class="text-text-secondary">Email (Google Workspace, Microsoft 365), video conferencing, generic productivity tools</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-bold">Self-hosted:</span>
+                <span class="text-text-secondary">CRM, customer databases, workflow automation, file storage with sensitive data, internal applications</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            This approach keeps commodity functions simple while maintaining control over what matters most. The key is being intentional about which category each system falls into.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Making the Transition
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            If you're considering moving from SaaS to self-hosted (or vice versa), start with one system. Learn what's involved before committing to a larger migration. Modern containerization tools like Docker make self-hosting more accessible than ever, and many open-source alternatives to popular SaaS tools have matured significantly.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            The goal isn't to self-host everything or avoid it entirely. It's to make informed decisions about where your data lives and who controls your critical systems.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need guidance?</strong> We help businesses evaluate their infrastructure needs and implement the right mix of self-hosted and SaaS solutions. Whether you're looking to gain more control or simplify operations, we can help you find the right balance.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Let's talk →</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/self-hosted-vs-saas`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/self-hosted-alternatives-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted Alternatives to SaaS Tools</a></li>
+            <li><a href="/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Data Sovereignty in the Cloud Era</a></li>
+            <li><a href="/insights/n8n-vs-zapier" class="text-gold hover:text-gold-light transition-colors text-sm">n8n vs Zapier: When Self-Hosted Makes Sense</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

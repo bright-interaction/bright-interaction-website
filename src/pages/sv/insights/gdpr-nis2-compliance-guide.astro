@@ -1,0 +1,419 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'GDPR & NIS2-compliance: Praktisk guide för SMF';
+const description = 'EU:s dataskydds- och cybersäkerhetsregler behöver inte vara överväldigande. Lär dig navigera GDPR och NIS2 med tydliga, konkreta strategier.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/gdpr-nis2-compliance-guide"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Vad är GDPR och vad kräver det?",
+      "acceptedAnswer": { "@type": "Answer", "text": "GDPR är en dataskyddsförordning som kräver att du bara samlar in nödvändig data, skyddar den ordentligt och låter dataägare begära radering när som helst. Det gäller alla företag som hanterar personuppgifter från EU-invånare." }
+    },
+    {
+      "@type": "Question",
+      "name": "Vad är NIS2 och vilka berörs?",
+      "acceptedAnswer": { "@type": "Answer", "text": "NIS2 är ett cybersäkerhetsdirektiv som kräver ordentlig säkerhetsinfrastruktur som kryptering och åtkomstkontroller. Sedan 2024 gäller det en bredare krets av företag, inklusive många SMF inom samhällskritiska sektorer som hälso- och sjukvård, energi, transport och digitala tjänster." }
+    },
+    {
+      "@type": "Question",
+      "name": "Var bör jag lagra europeisk kunddata för att följa GDPR?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Använd molnleverantörer med EU-datacenter eller egenhosta din infrastruktur inom EU. Att använda amerikanska molnleverantörer för europeisk kunddata skapar en compliancegråzon och potentiella jurisdiktionskonflikter enligt CLOUD Act." }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Artikelhuvud -->
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Compliance
+          </span>
+          <span class="text-text-muted text-sm">8 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Artikelinnehåll -->
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Driver du ett företag i Europa, eller hanterar data från europeiska kunder, har du säkert hört talas om GDPR och NIS2. Dessa regelverk kan verka som en labyrint av juridisk jargong och tekniska krav. Men sanningen är att de finns till för att skydda ditt företag och dina kunder.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Låt oss bryta ner dem i klarspråk och praktiska steg du faktiskt kan genomföra.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Grunderna: Förstå regelverken
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">GDPR: Dataskyddsförordningen</h3>
+            <p class="text-text-secondary mb-4">
+              Tänk på GDPR som reglerna för att vara en ansvarsfull förvaltare av någons personuppgifter. När kunder ger dig sin data (namn, e-post, köphistorik) litar de på dig med en del av sitt digitala liv.
+            </p>
+            <p class="text-text-secondary">
+              <strong class="text-text-primary">Grundprincipen:</strong> Du får bara samla in data du faktiskt behöver, du måste skydda den ordentligt, och ägaren kan be dig radera den när som helst. Enkelt, eller hur?
+            </p>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">NIS2: Cybersäkerhetsdirektivet</h3>
+            <p class="text-text-secondary mb-4">
+              Om GDPR handlar om dataskydd, handlar NIS2 om datasäkerhet. Det är som att ha en byggstandard för din digitala infrastruktur. Direktivet kräver att företag har ordentliga "lås på dörrarna, brandvarnare och utrymningsvägar" för sina IT-system.
+            </p>
+            <p class="text-text-secondary">
+              <strong class="text-text-primary">Vilka berörs?</strong> Sedan 2024 gäller NIS2 en bredare krets av företag än föregångaren, inklusive många SMF inom samhällskritiska sektorer som hälso- och sjukvård, energi, transport och digitala tjänster.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Verklighetskollen: Varför detta spelar roll
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Låt oss vara ärliga: compliance handlar inte bara om att undvika böter (även om GDPR-böter kan nå 20 miljoner EUR eller 4 % av den globala omsättningen). Det handlar om tre praktiska fördelar:
+          </p>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Förtroende</h4>
+              <p class="text-text-secondary text-sm">
+                Kunder väljer i allt högre grad företag som tar deras integritet på allvar.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">B2B-möjligheter</h4>
+              <p class="text-text-secondary text-sm">
+                Större kunder kräver ofta compliancebevis innan de skriver avtal.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Riskreducering</h4>
+              <p class="text-text-secondary text-sm">
+                Ordentliga säkerhetsrutiner skyddar dig mot intrång, ransomware och dataförlust.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Frågan om datasuveränitet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Här blir det intressant. Många företag använder molntjänster utan att tänka på var deras data faktiskt lagras. Använder du en amerikansk molnleverantör för europeisk kunddata? Det är i bästa fall en compliancegråzon.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <h4 class="font-semibold text-gold mb-3">Brevlådeanaalogin</h4>
+            <p class="text-text-secondary">
+              Tänk dig att du förvarar ditt företags konfidentiella post i en grannes hus. En granne som bor i ett annat land med andra lagar om posthemlighet. Det är i princip vad som händer när du använder molntjänster utan att tänka på datalagring. Lösningen? Antingen väljer du leverantörer med EU-datacenter, eller så hostar du din egen infrastruktur inom EU.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Praktiska steg till compliance
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Nu går vi från teori till handling. Här är en praktisk färdplan för att uppnå compliance:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Kartlägg dina dataflöden</h4>
+                <p class="text-text-secondary">
+                  Dokumentera vilka personuppgifter du samlar in, var de lagras, vem som har åtkomst och hur länge du behåller dem. Du kan inte skydda det du inte vet finns. Börja med ett enkelt kalkylblad som listar varje datatyp, dess källa, lagringsplats och lagringstid.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Säkra din infrastruktur</h4>
+                <p class="text-text-secondary">
+                  Implementera kryptering (både under överföring och i vila), använd stark autentisering och segmentera ditt nätverk. Tänk på det som att sätta lås på alla dörrar, inte bara ytterdörren. Överväg egenhostade lösningar för känslig data så att du behåller full kontroll.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Förbered dig för incidenter</h4>
+                <p class="text-text-secondary">
+                  NIS2 kräver incidentrapportering inom 24 timmar. Ha en plan redo innan du behöver den. Veta vem du ska kontakta, vad du ska dokumentera och hur du meddelar berörda parter. Öva er respons med skrivbordsövningar.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Dokumentera allt</h4>
+                <p class="text-text-secondary">
+                  Compliance handlar om att bevisa vad du gör, inte bara att göra det. Upprätthåll register över dina säkerhetsåtgärder, databehandlingsaktiviteter och eventuella incidenter. När granskare kommer på besök är dokumentation din bästa vän.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Regelbundna säkerhetsgranskningar</h4>
+                <p class="text-text-secondary">
+                  Compliance är inte en engångsinsats. Det är en pågående process. Planera regelbundna sårbarhetsanalyser, granska åtkomstkontroller kvartalsvis och uppdatera dina policyer i takt med att regelverken utvecklas. Automatiserade övervakningsverktyg kan hjälpa dig upprätthålla kontinuerlig compliance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vanliga misstag att undvika
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-red-900/30 p-6">
+            <ul class="space-y-4 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Anta att "moln" betyder "säkert":</strong> Din molnleverantörs säkerhet sträcker sig inte automatiskt till din data. Du ansvarar för hur du konfigurerar och använder deras tjänster.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Ignorera leverantörskedjans risker:</strong> Enligt NIS2 ansvarar du även för säkerheten hos dina leverantörer och partners. Utvärdera deras säkerhetsrutiner.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Samla in för mycket data:</strong> Om du inte behöver den, samla inte in den. Varje datapunkt du lagrar är ett ansvar du måste skydda.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-red-400 font-bold">✕</span>
+                <span><strong class="text-text-primary">Behandla compliance som enbart en IT-fråga:</strong> GDPR och NIS2 berör varje del av din organisation: HR, marknadsföring, försäljning, drift. Gör det till ett företagsövergripande initiativ.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Fördelen med egenhosting
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            En allt populärare strategi för compliance är att egenhosta kritiska system. När du kontrollerar din egen infrastruktur vet du exakt var din data lagras, vem som har åtkomst och hur den skyddas.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Det betyder inte att du behöver bygga allt från grunden. Moderna verktyg som Docker och Kubernetes gör det praktiskt att köra sin egen säkra infrastruktur. Du kan driftsätta e-postservrar, CRM-system, arbetsflödesautomation och databaser på servrar du kontrollerar, oavsett om de står på kontoret eller i EU-baserade datacenter.
+          </p>
+
+          <p class="text-text-secondary">
+            Nyckeln är att hitta rätt balans mellan bekvämlighet och kontroll. Viss data kan vara okej i SaaS-verktyg från tredje part. Känsliga kunduppgifter kan motivera egenhostade alternativ.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Vägen framåt
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Compliance behöver inte vara en börda. Det kan vara en konkurrensfördel. Företag som hanterar data ansvarsfullt och upprätthåller säker infrastruktur bygger förtroende hos kunder, låser upp större affärsmöjligheter och minskar sin riskexponering.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Börja smått: kartlägg din data, identifiera dina största risker och åtgärda dem en i taget. Perfekt compliance uppnås inte över en natt, men konstanta framsteg är vad tillsynsmyndigheter och kunder vill se.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du hjälp?</strong> Vi specialiserar oss på att hjälpa SMF uppnå compliance genom praktiska infrastrukturlösningar. Från säkra egenhostade system till automatiserad säkerhetsövervakning kan vi hjälpa dig bygga en complianceredo grund.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Kontakta oss →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Artikelfot -->
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/gdpr-nis2-compliance-guide`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gdpr-compliance-case-study" class="text-gold hover:text-gold-light transition-colors text-sm">Vi skannade vår GDPR-compliance och en konkurrents</a></li>
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveränitet i molnet</a></li>
+            <li><a href="/sv/insights/healthcare-data-compliance" class="text-gold hover:text-gold-light transition-colors text-sm">Compliance för hälsodata</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

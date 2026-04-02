@@ -1,0 +1,480 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'n8n vs Zapier: När egenhostad automation lönar sig';
+const description = 'En praktisk jämförelse av n8n och Zapier för företagsautomation. Lär dig när egenhostad automation presterar bättre än molnbaserade lösningar, och när den inte gör det.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/n8n-vs-zapier"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Jämförelse
+          </span>
+          <span class="text-text-muted text-sm">8 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Zapier är standardvalet för företagsautomation. Det är enkelt att använda, välkänt och integrerar med tusentals appar. Men allt eftersom dina automationsbehov växer kan du börja märka begränsningar: prissättning som skalar snabbare än din budget, data som flödar genom tredjepartsservrar, och begränsningar i vad du faktiskt kan bygga.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            n8n erbjuder en annan ansats: open source, möjligt att egenhosta och betydligt mer flexibelt. Men passar det ditt företag? Låt oss bryta ner de verkliga skillnaderna.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Snabbjämförelsen
+          </h2>
+
+          <div class="overflow-x-auto mb-8">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-4 px-4 text-text-primary font-semibold">Funktion</th>
+                  <th class="text-left py-4 px-4 text-gold font-semibold">n8n</th>
+                  <th class="text-left py-4 px-4 text-text-secondary font-semibold">Zapier</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Hosting</td>
+                  <td class="py-4 px-4">Egenhostat eller moln</td>
+                  <td class="py-4 px-4">Enbart moln</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Prismodell</td>
+                  <td class="py-4 px-4">Gratis (egenhostat) eller per arbetsflöde</td>
+                  <td class="py-4 px-4">Pris per uppgift</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Dataresidency</td>
+                  <td class="py-4 px-4">Ditt val</td>
+                  <td class="py-4 px-4">Amerikanska servrar</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Egen kod</td>
+                  <td class="py-4 px-4">Fullständig JavaScript/Python</td>
+                  <td class="py-4 px-4">Begränsat (Code by Zapier)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Förgreningar/loopar</td>
+                  <td class="py-4 px-4">Inbyggt stöd</td>
+                  <td class="py-4 px-4">Paths (begränsat)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Felhantering</td>
+                  <td class="py-4 px-4">Detaljerad kontroll</td>
+                  <td class="py-4 px-4">Grundläggande retry</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Integrationer</td>
+                  <td class="py-4 px-4">400+ (växande)</td>
+                  <td class="py-4 px-4">6 000+</td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-4">Användarvänlighet</td>
+                  <td class="py-4 px-4">Måttlig inlärningskurva</td>
+                  <td class="py-4 px-4">Mycket enkelt</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            När Zapier är det bättre valet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Låt oss vara rättvisa: Zapier utmärker sig i specifika scenarier. Om dessa beskriver din situation kan det vara rätt verktyg:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Enkla, linjära arbetsflöden</h4>
+              <p class="text-text-secondary text-sm">
+                Om din automation är "när X händer, gör Y" hanterar Zapier det utmärkt. Gränssnittet är intuitivt, konfigurationen tar minuter och det bara fungerar.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Inga tekniska resurser</h4>
+              <p class="text-text-secondary text-sm">
+                Om ingen i ditt team kan hantera servrar eller felsöka tekniska problem eliminerar Zapiers fullt hanterade ansats den bördan helt.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Nischade appintegrationer</h4>
+              <p class="text-text-secondary text-sm">
+                Zapiers 6 000+ integrationer innebär att ovanliga appar ofta redan stöds. n8n:s mindre bibliotek kanske inte inkluderar just det specifika verktyget du behöver.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Låg volym, komma igång</h4>
+              <p class="text-text-secondary text-sm">
+                Zapiers gratisplan (100 uppgifter/månad) är genuint användbar för att testa idéer. Om du bara utforskar automation, börja där.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            När n8n är det bättre valet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            n8n blir intressant när du växer ur Zapiers begränsningar:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Arbetsflöden med hög volym</h4>
+              <p class="text-text-secondary text-sm">
+                Zapier tar betalt per uppgift. Ett arbetsflöde som körs 10 000 gånger i månaden kostar rejält. Egenhostat n8n har ingen kostnad per körning. Besparingarna ackumuleras snabbt.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Krav på dataintegritet</h4>
+              <p class="text-text-secondary text-sm">
+                Med Zapier flödar din data genom deras amerikanska servrar. Med egenhostat n8n lämnar data aldrig din infrastruktur. För GDPR-compliance eller känslig data spelar detta stor roll.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Komplex logik och förgreningar</h4>
+              <p class="text-text-secondary text-sm">
+                n8n hanterar villkorlig logik, loopar, sammanslagningar och parallell exekvering inbyggt. Att bygga samma sak i Zapier kräver ofta krångliga omvägar eller flera separata zaps.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Behov av egen kod</h4>
+              <p class="text-text-secondary text-sm">
+                n8n låter dig skriva JavaScript eller Python var som helst i ditt arbetsflöde. Parsa komplex data, anropa API:er direkt, implementera egen logik. Zapiers kodsteg är mer begränsade.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Egenhostade integrationer</h4>
+              <p class="text-text-secondary text-sm">
+                Att ansluta till interna databaser, on-premise-system eller tjänster bakom brandväggar är enkelt med egenhostat n8n. Zapier kräver att du exponerar dessa mot internet.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Kostnadsverkligheten
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Prissättning är ofta den avgörande faktorn. Låt oss titta på realistiska scenarier:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-4">Scenario: 50 000 uppgifter/månad</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Zapier Professional (50K uppgifter):</span>
+                <span class="text-text-primary font-semibold">~$250/månad</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>n8n Cloud (obegränsat):</span>
+                <span class="text-text-primary font-semibold">~$50/månad</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Egenhostat n8n (VPS):</span>
+                <span class="text-text-primary font-semibold">~$20/månad</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary border-t border-dark-elevated pt-3">
+                <span>Årlig besparing (vs Zapier):</span>
+                <span class="text-gold font-bold">$2 400 - $2 760</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Skillnaden växer dramatiskt vid skala. Vid 500 000 uppgifter/månad slår Zapiers enterprise-prissättning in medan egenhostat n8n fortfarande kostar samma $20 för VPS.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Den dolda kostnaden:</strong> Egenhosting kräver någon som hanterar det. Om du betalar en konsult $100/timme och lägger 2 timmar per månad på underhåll blir det $200. Räkna med detta i dina kalkyler. Ofta fortfarande billigare, men inte gratis.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Datasuveränitetsperspektivet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            För europeiska företag kan detta vara den avgörande faktorn oavsett kostnad:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">GDPR-compliance:</strong> Med egenhostat n8n lämnar kunddata aldrig din EU-infrastruktur. Inga avtal om dataöverföring behövs, inga Schrems II-frågetecken.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">NIS2-krav:</strong> Du har full insyn och kontroll över systemet som behandlar din data. Enklare att granska, enklare att dokumentera.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Kundkrav:</strong> Företagskunder frågar i allt högre grad var deras data behandlas. "På våra egna EU-servrar" är ett starkare svar än "Zapiers amerikanska infrastruktur."</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Verkliga användningsfall
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Här är scenarier där vi har sett n8n prestera bättre än Zapier:
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-2">Pipeline för leadhantering</h4>
+              <p class="text-text-secondary text-sm mb-3">
+                Inkommande leads behöver berikas från flera API:er, poängsättas baserat på egen logik, dirigeras till olika CRM-system baserat på territorium, och Slack-notifieringar. I Zapier kräver detta 4-5 separata zaps. I n8n är det ett arbetsflöde med förgreningar.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-2">Fakturaautomation</h4>
+              <p class="text-text-secondary text-sm mb-3">
+                Hämta data från flera källor, beräkna moms baserat på jurisdiktion, generera PDF:er, skicka via e-post och logga till bokföringssystemet. Enbart behoven av egen kod gör att Zapier får det svårt.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-gold mb-2">Datasynkronisering</h4>
+              <p class="text-text-secondary text-sm">
+                Hålla lager synkat mellan e-handelsplattformar, lagersystem och bokföring. Hög volym, dubbelriktat, kräver konflikthantering. n8n:s flexibilitet och kostnadsstruktur gör detta möjligt; Zapiers pris per uppgift gör det dyrt.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Att göra bytet
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Om du överväger att gå från Zapier till n8n, här är en praktisk strategi:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Börja med nya arbetsflöden</h4>
+                <p class="text-text-secondary">
+                  Migrera inte allt på en gång. Bygg nya automationer i n8n medan du låter befintliga Zapier-arbetsflöden fortsätta köra. Lär dig plattformen utan press.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Migrera högvolymarbetsflöden först</h4>
+                <p class="text-text-secondary">
+                  Dessa ger störst kostnadsbesparingar. Ett arbetsflöde som körs 10 000 gånger i månaden och flyttas från Zapier till egenhostat n8n betalar sig omedelbart.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Behåll enkla zaps på Zapier</h4>
+                <p class="text-text-secondary">
+                  Om ett arbetsflöde är enkelt, har låg volym och fungerar bra finns det ingen brådska att migrera. Använd rätt verktyg för varje uppgift.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Slutsatsen
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Zapier är utmärkt för enkel automation och att komma igång snabbt. n8n är bättre för komplexa arbetsflöden, hög volym, krav på dataintegritet och långsiktig kostnadsoptimering.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Valet behöver inte vara binärt. Många företag använder båda: Zapier för snabba, enkla integrationer och n8n för komplexa, högvolym- eller datakänsliga arbetsflöden.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du hjälp att bestämma?</strong> Vi implementerar både Zapier- och n8n-lösningar beroende på kundens behov. Om du utvärderar automationsplattformar eller överväger en migrering kan vi hjälpa dig bedöma vilken ansats som passar dina specifika krav.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Låt oss diskutera dina automationsbehov →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/n8n-vs-zapier`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/workflow-automation-best-practices" class="text-gold hover:text-gold-light transition-colors text-sm">Best practices för arbetsflödesautomation</a></li>
+            <li><a href="/sv/insights/hidden-cost-of-manual-processes" class="text-gold hover:text-gold-light transition-colors text-sm">Den dolda kostnaden för manuella processer</a></li>
+            <li><a href="/sv/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Egenhostat vs SaaS: Rätt val för ditt företag</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

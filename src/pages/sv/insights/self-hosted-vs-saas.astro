@@ -1,0 +1,440 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'Egenhostat vs SaaS: Rätt val för ditt företag';
+const description = 'När bör du egenhosta och när passar SaaS bättre? En praktisk modell för att utvärdera kontroll, kostnad och compliance.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/self-hosted-vs-saas"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Infrastruktur
+          </span>
+          <span class="text-text-muted text-sm">7 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            "Ska vi egenhosta eller använda en SaaS-lösning?" Det är en av de vanligaste frågorna företag ställs inför när de bygger sin digitala infrastruktur. Svaret är inte alltid självklart, och att välja fel kan kosta dig på oväntade sätt.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            Låt oss skära igenom marknadsföringsbruset och titta på de verkliga avvägningarna.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Hyra kontra äga
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Tänk på SaaS som att hyra en lägenhet. Någon annan sköter underhållet, fixar VVS och uppdaterar säkerhetssystemet. Du betalar månadsvis, flyttar in snabbt och kan lämna relativt enkelt. Men du kan inte riva väggar, hyresvärden kan höja hyran, och du litar på att de tar hand om dina tillhörigheter.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Egenhosting är som att äga sin bostad. Du kontrollerar allt: planlösningen, låsen, vem som får en nyckel. Men du ansvarar också för allt: reparationer, uppgraderingar och att se till att taket inte läcker. Investeringen är högre i början, men du bygger eget kapital och svarar inte inför någon.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Kärnan:</strong> Inget alternativ är universellt bättre. Rätt val beror på vad du lagrar, hur kritiskt det är och vilka resurser du har för att hantera det.
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            När SaaS är rätt val
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            SaaS-lösningar fungerar bäst i specifika situationer. Här är när du bör luta åt det hållet:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Standardfunktioner</h4>
+              <p class="text-text-secondary text-sm">
+                E-post, kalendrar, enkel projekthantering. Dessa verktyg fungerar likadant för de flesta företag. Det finns sällan en konkurrensfördel i att köra en egen e-postserver, och säkerhetsbördan är ofta inte värd det.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Snabb skalning</h4>
+              <p class="text-text-secondary text-sm">
+                Om din användning varierar kraftigt eller om du växer snabbt hanterar SaaS skalning automatiskt. Att bygga infrastruktur för toppbelastning som står oanvänd 90 % av tiden är slöseri.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Begränsade IT-resurser</h4>
+              <p class="text-text-secondary text-sm">
+                En startup med fem personer bör förmodligen inte hantera servrar. Fokusera din begränsade utvecklartid på kärnprodukten, inte infrastrukturunderhåll.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Icke-känslig data</h4>
+              <p class="text-text-secondary text-sm">
+                Marknadsföringsanalys, publikt innehåll, intern dokumentation. När datan inte är känslig väger bekvämligheten med SaaS ofta tyngre än kontrollfördelarna med egenhosting.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            När egenhosting är rätt val
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Egenhosting blir det bättre valet när kontroll och compliance väger tyngre än bekvämlighet:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Kunddata och personuppgifter</h4>
+              <p class="text-text-secondary text-sm">
+                När du lagrar personlig information spelar det roll att veta exakt var den finns och vem som har åtkomst. Egenhosting ger dig den säkerheten, vilket förenklar GDPR-compliance och bygger kundförtroende.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Reglerade branscher</h4>
+              <p class="text-text-secondary text-sm">
+                Sjukvård, finans, juridik. När granskare frågar var din data lagras är "någonstans i AWS us-east-1" inte ett tillfredsställande svar. Egenhosting på känd infrastruktur i specifika jurisdiktioner förenklar compliance.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Affärskritiska system</h4>
+              <p class="text-text-secondary text-sm">
+                Ditt CRM, din kunddatabas, din arbetsflödesautomation. Det är systemen som driver din verksamhet. Att förlita sig på en tredje part innebär att deras driftstopp blir ditt driftstopp, deras prishöjning blir din kostnadsökning.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Långsiktig kostnadsoptimering</h4>
+              <p class="text-text-secondary text-sm">
+                SaaS-priser växer ofta snabbare än din användning. Ett verktyg som kostar 50 EUR/månad för 10 användare kan kosta 500 EUR/månad för 100 användare. Egenhosting har högre initialkostnader men mer förutsägbar långsiktig ekonomi.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            De dolda kostnaderna med varje alternativ
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-bold text-text-primary mb-4">Dolda SaaS-kostnader</h3>
+              <ul class="space-y-3 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Leverantörsinlåsning:</strong> Att migrera bort kan bli dyrt och tidskrävande</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Prishöjningar:</strong> Du är beroende av leverantörens affärsmodell</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Borttagna funktioner:</strong> Funktioner du förlitar dig på kan försvinna</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Dataportabilitet:</strong> Att få ut din data är inte alltid enkelt</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Compliancekomplexitet:</strong> Du ärver leverantörens compliancestatus</span>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h3 class="font-display text-lg font-bold text-text-primary mb-4">Dolda egenhosting-kostnader</h3>
+              <ul class="space-y-3 text-text-secondary text-sm">
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Underhållstid:</strong> Uppdateringar, patchar och felsökning</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Säkerhetsansvar:</strong> Du äger hela säkerhetsstacken</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Backup-hantering:</strong> Dataskydd är ditt ansvar</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Skalningskomplexitet:</strong> Tillväxt kräver planering och investering</span>
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-gold">•</span>
+                  <span><strong class="text-text-primary">Kompetenskrav:</strong> Du behöver folk som kan systemen</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            En praktisk beslutsmodell
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            När du utvärderar ett nytt verktyg eller system, ställ dessa frågor:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Hur känslig är datan?</h4>
+                <p class="text-text-secondary">
+                  Kunduppgifter, ekonomiska poster, hälsodata? Luta mot egenhosting. Marknadsföringsmätningar, publikt innehåll? SaaS fungerar troligtvis bra.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Vilka compliancekrav finns?</h4>
+                <p class="text-text-secondary">
+                  GDPR, NIS2, HIPAA, SOC 2? Egenhosting förenklar ofta granskningar och ger tydligare dokumentation. Mindre reglerat? SaaS-certifieringar kan räcka.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Hur kritiskt är systemet?</h4>
+                <p class="text-text-secondary">
+                  Om verktyget går ner, stannar din verksamhet? Affärskritiska system förtjänar den kontroll egenhosting ger. Trevligt att ha-verktyg? SaaS-bekvämligheten vinner.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Hur ser 5-årskostnaden ut?</h4>
+                <p class="text-text-secondary">
+                  Projicera SaaS-kostnader med realistisk tillväxt. Jämför med infrastruktur- och underhållskostnader för egenhosting. Ofta vinner egenhosting för mogna, stabila system.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Har du kompetensen?</h4>
+                <p class="text-text-secondary">
+                  Egenhosting kräver kunskap eller möjlighet att anlita den. Om du saknar båda kan SaaS vara säkrare tills du bygger upp den förmågan, eller samarbetar med någon som har den.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Hybridstrategin
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            De flesta företag hamnar med en mix. Här är ett vanligt mönster som fungerar bra:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-bold">SaaS:</span>
+                <span class="text-text-secondary">E-post (Google Workspace, Microsoft 365), videokonferenser, generella produktivitetsverktyg</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="text-gold font-bold">Egenhostat:</span>
+                <span class="text-text-secondary">CRM, kunddatabaser, arbetsflödesautomation, fillagring med känslig data, interna applikationer</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            Den här strategin håller standardfunktioner enkla samtidigt som du behåller kontrollen över det som spelar störst roll. Nyckeln är att vara medveten om vilken kategori varje system tillhör.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Att ta steget
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Om du funderar på att flytta från SaaS till egenhostat (eller tvärtom), börja med ett system. Lär dig vad som krävs innan du förbinder dig till en större migration. Moderna containerverktyg som Docker gör egenhosting mer tillgängligt än någonsin, och många open source-alternativ till populära SaaS-verktyg har mognat rejält.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Målet är inte att egenhosta allt eller undvika det helt. Det handlar om att fatta informerade beslut om var din data lagras och vem som kontrollerar dina kritiska system.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du vägledning?</strong> Vi hjälper företag utvärdera sina infrastrukturbehov och implementera rätt mix av egenhostade och SaaS-lösningar. Oavsett om du vill få mer kontroll eller förenkla driften kan vi hjälpa dig hitta rätt balans.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Kontakta oss →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/self-hosted-vs-saas`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/self-hosted-alternatives-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Egenhostade alternativ till SaaS-verktyg</a></li>
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveränitet i molnet</a></li>
+            <li><a href="/sv/insights/n8n-vs-zapier" class="text-gold hover:text-gold-light transition-colors text-sm">n8n vs Zapier: När egenhostat lönar sig</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

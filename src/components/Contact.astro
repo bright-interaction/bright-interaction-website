@@ -1,0 +1,55 @@
+---
+import { t } from '../i18n';
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+---
+
+<section id="contact" class="py-20 md:py-28 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="text-xs font-mono font-bold text-gold-dark mb-4 tracking-widest uppercase">{t(lang, 'contact.light.badge')}</p>
+
+      <h2 class="text-3xl sm:text-4xl font-heading font-bold text-text-primary tracking-tight mb-6">
+        {t(lang, 'contact.light.title')}
+      </h2>
+
+      <p class="text-lg text-text-secondary mb-8 max-w-xl mx-auto">
+        {t(lang, 'contact.light.description')}
+      </p>
+
+      <!-- Direct contact first -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-sm text-text-secondary mb-8">
+        <span class="text-text-secondary">{t(lang, 'contact.light.orReach')}</span>
+        <a data-contact-email class="hover:text-gold transition-colors font-medium cursor-pointer">
+          <span data-contact-email-text></span>
+        </a>
+        <a href="tel:+46762978035" class="hover:text-gold transition-colors font-medium">
+          +46 76 297 80 35
+        </a>
+      </div>
+
+      <!-- CTA button -->
+      <button
+        data-cal-trigger
+        class="inline-flex items-center justify-center gap-2 px-10 py-5 bg-gold hover:bg-gold-dark text-text-primary font-semibold text-lg rounded-xl transition-colors cursor-pointer"
+      >
+        {t(lang, 'contact.light.cta')}
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const u = 'contact';
+  const d = 'brightinteraction.com';
+  const el = document.querySelector('[data-contact-email]');
+  const txt = document.querySelector('[data-contact-email-text]');
+  if (el && txt) {
+    const addr = u + '@' + d;
+    el.setAttribute('href', 'mailto:' + addr);
+    txt.textContent = addr;
+  }
+</script>

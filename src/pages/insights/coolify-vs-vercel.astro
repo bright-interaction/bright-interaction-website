@@ -1,0 +1,608 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const publishDate = '2026-02-26';
+const title = 'Coolify vs Vercel: How We Cut Deployment Costs by 98%';
+const description = 'Real cost comparison between Coolify and Vercel from our own infrastructure. We went from $850/mo to $14/mo. Here is exactly how.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/insights/coolify-vs-vercel"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://brightinteraction.com" },
+    { "@type": "ListItem", "position": 2, "name": "Insights", "item": "https://brightinteraction.com/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Coolify a good alternative to Vercel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, especially if you care about cost control and GDPR compliance. Coolify gives you the same core deployment features (git push deploys, SSL, previews) on your own server. You lose some developer experience polish and edge network features, but for most teams the tradeoff is worth it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does Vercel cost per month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vercel's free tier is limited to hobby use. Pro starts at $20 per user per month, but the real cost comes from overages on bandwidth, serverless function executions, and build minutes. Mid-size projects commonly see bills of $300 to $850 per month once traffic scales."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can Coolify deploy Next.js and Astro?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Coolify supports Docker, Nixpacks, and static site deployments. It can run Next.js, Astro, SvelteKit, Remix, and any other framework that builds to a Docker container or static files."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Coolify hard to set up?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Basic setup takes about 30 minutes: provision a server, run the install script, connect your Git repo. A full production configuration with SSL certificates, automated backups, and monitoring takes about half a day."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            &larr; Back to Insights
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Infrastructure
+          </span>
+          <span class="text-text-muted text-sm">8 min read</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <p class="text-lg text-text-secondary leading-relaxed mb-6">
+            Vercel is the default deployment platform for modern web projects. Push your code, get a URL. It works brilliantly. Then you look at your invoice and realize you are paying $850 a month to host three websites.
+          </p>
+          <p class="text-lg text-text-secondary leading-relaxed">
+            We made the switch to Coolify on a Hetzner server. Same capabilities. Total cost: roughly $14 per month. That is a 98% reduction. Here is the full breakdown, including what we gained, what we gave up, and whether it makes sense for your team.
+          </p>
+        </section>
+
+        <!-- What is Vercel? -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What Is Vercel?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Vercel is a managed deployment platform built around frontend frameworks, especially Next.js (which they created). You connect your Git repo, push code, and Vercel builds and deploys it to their global edge network. Preview deployments, automatic SSL, serverless functions, analytics. The developer experience is genuinely excellent.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            The problem is pricing. Vercel's free tier is restricted to hobby use. Pro costs $20 per team member per month as a base, but the real cost comes from overages: bandwidth, serverless function invocations, build minutes, and image optimization all have usage limits that trigger extra charges. For a mid-size project with real traffic, monthly bills between $300 and $850 are common. Some teams report bills exceeding $1,000 after a traffic spike.
+          </p>
+        </section>
+
+        <!-- What is Coolify? -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            What Is Coolify?
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Coolify is an open-source, self-hosted deployment platform. Think of it as your own private Vercel running on a server you control. It supports git-based deployments, automatic SSL via Let's Encrypt, Docker and Nixpacks builds, preview deployments, and a web-based dashboard for managing everything.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            You install it on any VPS or bare metal server. The software itself is free. Your only cost is the server. A Hetzner CX31 with 4 vCPUs, 8 GB RAM, and 80 GB SSD costs about 14 EUR per month and can comfortably run a dozen projects.
+          </p>
+        </section>
+
+        <!-- The Real Cost Comparison -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Real Cost Comparison
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Numbers do not lie. Here is a side-by-side comparison for a realistic scenario: 3 websites, 500,000 pageviews per month, 2 team members.
+          </p>
+
+          <div class="overflow-x-auto mb-8">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-dark-elevated">
+                  <th class="text-left py-4 px-4 text-text-primary font-semibold">Cost Item</th>
+                  <th class="text-left py-4 px-4 text-text-secondary font-semibold">Vercel Pro</th>
+                  <th class="text-left py-4 px-4 text-gold font-semibold">Coolify + Hetzner</th>
+                </tr>
+              </thead>
+              <tbody class="text-text-secondary">
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Hosting / Platform fee</td>
+                  <td class="py-4 px-4">$40/mo (2 seats x $20)</td>
+                  <td class="py-4 px-4">~$14/mo (CX31 server)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Bandwidth (500K views)</td>
+                  <td class="py-4 px-4">$100-300/mo overages</td>
+                  <td class="py-4 px-4">Included (20 TB free)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Serverless functions</td>
+                  <td class="py-4 px-4">$50-200/mo overages</td>
+                  <td class="py-4 px-4">Included (your CPU)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Custom domains</td>
+                  <td class="py-4 px-4">Included</td>
+                  <td class="py-4 px-4">Included (auto SSL)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Team seats</td>
+                  <td class="py-4 px-4">$20/seat/mo</td>
+                  <td class="py-4 px-4">Unlimited (free)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Analytics</td>
+                  <td class="py-4 px-4">$10/mo addon</td>
+                  <td class="py-4 px-4">Self-host Umami (free)</td>
+                </tr>
+                <tr class="border-b border-dark-elevated">
+                  <td class="py-4 px-4">Build minutes</td>
+                  <td class="py-4 px-4">$50+/mo if exceeded</td>
+                  <td class="py-4 px-4">Included (your CPU)</td>
+                </tr>
+                <tr class="bg-dark-surface">
+                  <td class="py-4 px-4 font-semibold text-text-primary">Estimated total</td>
+                  <td class="py-4 px-4 font-semibold text-text-primary">$250 - $850/mo</td>
+                  <td class="py-4 px-4 font-bold text-gold">~$14/mo</td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-4 font-semibold text-text-primary">Annual cost</td>
+                  <td class="py-4 px-4 font-semibold text-text-primary">$3,000 - $10,200</td>
+                  <td class="py-4 px-4 font-bold text-gold">~$168</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <p class="text-text-secondary">
+              <strong class="text-text-primary">The honest caveat:</strong> Coolify requires someone who can manage a Linux server. If you need to hire a DevOps consultant at $100/hour for 2 hours per month, add $200. Even at $214/month total, you are still saving 75% or more compared to Vercel at scale.
+            </p>
+          </div>
+        </section>
+
+        <!-- When Vercel Makes Sense -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            When Vercel Makes Sense
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Vercel is not a bad product. It is a premium product. There are legitimate reasons to use it:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Small projects and MVPs</h4>
+              <p class="text-text-secondary text-sm">
+                If you are shipping a prototype or a low-traffic side project, Vercel's free tier or low Pro cost is fine. The speed of deployment outweighs the cost concern.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Zero DevOps capacity</h4>
+              <p class="text-text-secondary text-sm">
+                If nobody on your team can SSH into a server or debug a Docker build, Vercel removes that entire burden. You pay for convenience, and that is a valid tradeoff.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Edge network requirements</h4>
+              <p class="text-text-secondary text-sm">
+                If you genuinely need sub-50ms response times globally, Vercel's edge network is hard to replicate on a single server. Most businesses do not need this, but if you do, it matters.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-5">
+              <h4 class="font-semibold text-text-primary mb-2">Next.js-specific features</h4>
+              <p class="text-text-secondary text-sm">
+                Vercel builds Next.js. Some advanced features like ISR and middleware work most seamlessly on their platform. If your entire stack is Next.js and you rely on cutting-edge features, there is a tighter integration.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- When Coolify Wins -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            When Coolify Wins
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            For the majority of teams running production workloads, Coolify is the better choice:
+          </p>
+
+          <div class="space-y-4 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Multiple projects</h4>
+              <p class="text-text-secondary text-sm">
+                Vercel charges per seat and per project overages. With Coolify, your 14 EUR server can run 10+ sites. The marginal cost of adding another project is zero.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">GDPR and EU data residency</h4>
+              <p class="text-text-secondary text-sm">
+                Vercel routes traffic through US infrastructure. If you need data to stay in the EU, a Hetzner server in Falkenstein or Helsinki gives you that guarantee. No data processing agreements with US companies, no Schrems II concerns.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Predictable costs</h4>
+              <p class="text-text-secondary text-sm">
+                A traffic spike on Vercel can double your bill overnight. On Hetzner, your server costs the same whether you get 10 visitors or 100,000. No surprises, no overage anxiety.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Mixed workloads</h4>
+              <p class="text-text-secondary text-sm">
+                Vercel is built for frontend. If you also need Go APIs, databases, background workers, or Docker containers, you need separate infrastructure anyway. Coolify handles all of it in one place.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-gold/30 p-5">
+              <h4 class="font-semibold text-gold mb-2">Full control</h4>
+              <p class="text-text-secondary text-sm">
+                You own the server. You can inspect logs, tune performance, add custom middleware, and debug issues directly. No black-box serverless functions, no waiting on support tickets.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Our Setup -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Our Setup at Bright Interaction
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            We run Coolify on a single Hetzner CX31 server in Falkenstein, Germany. Here is what that one server handles:
+          </p>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <ul class="space-y-3 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">&#8226;</span>
+                <span><strong class="text-text-primary">Astro marketing site</strong> (this website) with automatic builds on git push</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">&#8226;</span>
+                <span><strong class="text-text-primary">Go API services</strong> including our CRM, scanner dashboard, and internal tools</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">&#8226;</span>
+                <span><strong class="text-text-primary">Docker containers</strong> for databases (Postgres, Redis), n8n workflows, Zitadel SSO, and monitoring</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">&#8226;</span>
+                <span><strong class="text-text-primary">Automatic SSL</strong> via Let's Encrypt for every domain</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">&#8226;</span>
+                <span><strong class="text-text-primary">Git-push deployments</strong> through webhooks, just like Vercel</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-6">
+            <h4 class="font-semibold text-text-primary mb-4">Server specs and cost</h4>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Hetzner CX31 (4 vCPU, 8 GB RAM, 80 GB SSD):</span>
+                <span class="text-text-primary font-semibold">~14 EUR/mo</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Bandwidth included:</span>
+                <span class="text-text-primary font-semibold">20 TB/mo</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary">
+                <span>Coolify license:</span>
+                <span class="text-text-primary font-semibold">Free (open source)</span>
+              </div>
+              <div class="flex justify-between items-center text-text-secondary border-t border-dark-elevated pt-3">
+                <span>Total monthly cost:</span>
+                <span class="text-gold font-bold">~14 EUR (~$15 USD)</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-text-secondary">
+            That server has been running for over a year with zero unplanned downtime. Coolify handles SSL renewals, container restarts, and deployment rollbacks automatically. Maintenance takes maybe 30 minutes per month for OS updates.
+          </p>
+        </section>
+
+        <!-- Migration Guide -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Migration Guide: Vercel to Coolify in a Weekend
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Moving off Vercel is less painful than you might expect. Here is the process:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Provision a server (15 minutes)</h4>
+                <p class="text-text-secondary">
+                  Sign up for Hetzner Cloud, create a CX31 (or CX21 if your workload is light), and pick a datacenter in your preferred region. Falkenstein or Helsinki for EU data residency.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Install Coolify (10 minutes)</h4>
+                <p class="text-text-secondary">
+                  SSH into your server and run the one-line installer. Coolify sets up Docker, Traefik (reverse proxy), and its own management dashboard. You get a URL to access the admin panel.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Connect your Git repos (10 minutes)</h4>
+                <p class="text-text-secondary">
+                  Link your GitHub or Gitea account. Select the repos you want to deploy. Coolify auto-detects the framework and configures the build. For Astro, Next.js, and most frameworks, it just works.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Configure domains and SSL (10 minutes)</h4>
+                <p class="text-text-secondary">
+                  Point your DNS records to the new server IP. In Coolify, add the domain to your project. SSL certificates are issued automatically via Let's Encrypt within minutes.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                5
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Set up backups and monitoring (2-3 hours)</h4>
+                <p class="text-text-secondary">
+                  Configure automated backups to S3 or a secondary server. Set up uptime monitoring (we use Uptime Kuma, also self-hosted on the same server). Add a firewall with UFW. This is the part that takes the most time but only needs to be done once.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                6
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Switch DNS and cancel Vercel (5 minutes)</h4>
+                <p class="text-text-secondary">
+                  Once everything is tested and running, update your DNS to the Coolify server. Verify SSL is working. Cancel your Vercel subscription. Done.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Frequently Asked Questions
+          </h2>
+
+          <div class="space-y-6">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-3">Is Coolify a good alternative to Vercel?</h4>
+              <p class="text-text-secondary text-sm">
+                Yes, especially if cost control and GDPR compliance matter to you. Coolify gives you the same core deployment features on your own server: git push deploys, automatic SSL, preview deployments, and a management dashboard. You lose Vercel's edge network and some DX polish, but for most projects that tradeoff saves thousands per year.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-3">How much does Vercel cost per month?</h4>
+              <p class="text-text-secondary text-sm">
+                The free tier works for hobby projects. Pro starts at $20 per user per month, but the base fee is just the beginning. Bandwidth overages, serverless function executions, and build minutes all carry extra charges. We have seen bills from $250 to $850 per month for projects with moderate traffic. A viral blog post or unexpected traffic spike can push that even higher.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-3">Can Coolify deploy Next.js and Astro?</h4>
+              <p class="text-text-secondary text-sm">
+                Yes. Coolify supports Docker deployments, Nixpacks (automatic buildpacks), and static site hosting. It can deploy Next.js, Astro, SvelteKit, Remix, Nuxt, and essentially any framework that either builds to static files or runs in a container. We deploy Astro sites and Go services through Coolify daily.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <h4 class="font-semibold text-text-primary mb-3">Is Coolify hard to set up?</h4>
+              <p class="text-text-secondary text-sm">
+                The basic installation takes about 30 minutes. Provision a server, run the install script, connect your Git repo, and deploy. A full production setup with SSL, automated backups, firewall rules, and monitoring takes about half a day. After that, day-to-day maintenance is minimal. We spend roughly 30 minutes per month on server updates.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bottom Line -->
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            The Bottom Line
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Vercel is a great product if money is not a constraint and you want zero infrastructure management. For everyone else, Coolify on a European server delivers the same deployment experience at a fraction of the cost, with the added benefit of full data control and GDPR compliance by default.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            We have been running this setup for over a year. Three websites, multiple Go services, databases, and automation tools. All on one $14 server. No regrets.
+          </p>
+        </section>
+
+        <!-- CTA -->
+        <section>
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6 mb-6">
+            <p class="text-text-secondary mb-4">
+              <strong class="text-gold">Want to see what you could save?</strong> Use our calculator to compare your current SaaS spend against self-hosted alternatives.
+              <a href="/#real-cost" class="text-gold hover:underline ml-1">Try the SaaS cost calculator &rarr;</a>
+            </p>
+          </div>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Need help migrating off Vercel?</strong> We have done it multiple times and can handle the full migration for you: server setup, Coolify configuration, DNS switchover, and monitoring. Takes a weekend, saves you thousands per year.
+              <a href="/#contact" class="text-gold hover:underline ml-1">Book a free call &rarr;</a>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Insights
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Share this article:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/insights/coolify-vs-vercel`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Share on LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Related Reading -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Related Reading</h3>
+          <ul class="space-y-3">
+            <li><a href="/insights/self-hosted-vs-saas" class="text-gold hover:text-gold-light transition-colors text-sm">Self-Hosted vs SaaS: Making the Right Choice</a></li>
+            <li><a href="/insights/saas-cost-per-employee" class="text-gold hover:text-gold-light transition-colors text-sm">What SaaS Really Costs Per Employee in 2026</a></li>
+            <li><a href="/insights/container-security-basics" class="text-gold hover:text-gold-light transition-colors text-sm">Container Security Basics</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema, faqSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+</style>

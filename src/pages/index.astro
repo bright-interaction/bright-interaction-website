@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import RealCost from '../components/RealCost.astro';
+import Services from '../components/Services.astro';
+import Process from '../components/Process.astro';
+import BorderTracer from '../components/BorderTracer.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does SaaS cost per employee?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The average company spends around $10,800 per employee per year on SaaS tools in 2026. This includes CRM, email, chat, project management, automation, and authentication. Open source self-hosted alternatives can reduce this cost by 60-70% while giving you full control over your data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are GDPR-compliant alternatives to Google Workspace?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Proton (Swiss, zero-knowledge encryption) is the most direct replacement for Google Workspace. Other options include Nextcloud with OnlyOffice for self-hosted document collaboration, and Infomaniak kSuite for managed EU hosting. All store data exclusively in European jurisdictions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is self-hosting cheaper than SaaS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For teams of 10 or more, self-hosting is typically 60-70% cheaper than equivalent SaaS subscriptions. A full open source stack (email, CRM, chat, docs, automation, SSO) on a Hetzner server costs around 14 EUR/month in hosting. The main cost is setup and ongoing maintenance, not the software itself."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the CLOUD Act affect European businesses using US cloud providers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The US CLOUD Act (2018) gives American authorities the right to demand data from US-headquartered companies regardless of where the data is physically stored. This means using AWS, Google Cloud, Azure, or any US-based SaaS provider creates a compliance risk under GDPR, even if your data is in an EU data center."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to migrate from SaaS to self-hosted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most individual tool migrations take 2-6 weeks. Email migration typically takes 1-2 weeks, CRM 2-4 weeks, and chat/docs 1 week each. A full stack replacement for a team of 25 can be completed in 4-8 weeks with minimal disruption to daily operations."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is NIS2 and does it apply to my business?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "NIS2 is the EU's updated cybersecurity directive, enacted as Swedish law (Cybersäkerhetslagen) on January 15, 2026. It applies to essential and important entities including energy, transport, health, digital infrastructure, and their supply chains. Penalties can reach 10 million EUR or 2% of global revenue."
+      }
+    }
+  ]
+};
+---
+
+<Layout
+  title="Replace SaaS with Open Source You Own | Bright Interaction"
+  description="Self-hosted open source alternatives to Google Workspace, Slack, Zapier, and more. GDPR compliant, hosted in Europe, no vendor lock-in."
+>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <RealCost />
+    <Services />
+    <Process />
+    <BorderTracer />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</Layout>

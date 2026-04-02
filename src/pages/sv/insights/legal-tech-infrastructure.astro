@@ -1,0 +1,559 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+
+const lang = 'sv';
+const publishDate = '2026-01-28';
+const title = 'Legal tech-infrastruktur: Bygga säkra system för advokatbyråer';
+const description = 'Hur advokatbyråer kan bygga teknikinfrastruktur som skyddar klientkonfidentialitet, uppfyller yrkesmässiga skyldigheter och möjliggör effektiv verksamhetsstyrning.';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": publishDate,
+  "dateModified": publishDate,
+  "inLanguage": "sv",
+  "author": {
+    "@type": "Person",
+    "name": "Tom Isgren",
+    "url": "https://www.linkedin.com/in/tom-isgren/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bright Interaction",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://brightinteraction.com/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://brightinteraction.com/sv/insights/legal-tech-infrastructure"
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Hem", "item": "https://brightinteraction.com/sv" },
+    { "@type": "ListItem", "position": 2, "name": "Insikter", "item": "https://brightinteraction.com/sv/insights" },
+    { "@type": "ListItem", "position": 3, "name": title }
+  ]
+};
+---
+
+<Layout
+  title={`${title} - Bright Interaction`}
+  description={description}
+  type="article"
+  lang={lang}
+>
+  <Header lang={lang} />
+  <main id="main-content" class="pt-24 pb-16 bg-dark-bg min-h-screen">
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header class="mb-12">
+        <Breadcrumb lang="sv" title={title} />
+        <div class="flex items-center gap-3 mb-6">
+          <a href="/sv/insights" class="text-gold hover:text-gold-light transition-colors text-sm">
+            ← Tillbaka till Insikter
+          </a>
+        </div>
+
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 bg-gold/10 text-gold text-sm font-medium rounded-full">
+            Juridik
+          </span>
+          <span class="text-text-muted text-sm">11 min läsning</span>
+        </div>
+
+        <h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-tight">
+          {title}
+        </h1>
+
+        <p class="text-xl text-text-secondary mb-8">
+          {description}
+        </p>
+
+        <div class="flex items-center gap-4 pb-8 border-b border-dark-elevated">
+          <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center">
+            <span class="text-dark-bg font-display font-bold text-lg">TI</span>
+          </div>
+          <div>
+            <p class="font-semibold text-text-primary">Tom Isgren</p>
+            <p class="text-text-muted text-sm">
+              <time datetime={publishDate}>
+                {new Date(publishDate).toLocaleDateString('sv-SE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-12">
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Viktiga slutsatser</h3>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Advokatsekretessen skapar unika infrastrukturkrav utöver vanligt dataskydd</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Dokumenthantering, kommunikation och faktureringssystem kräver var och ett specifika säkerhetskontroller</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Egenhostade lösningar eliminerar tredjepartsåtkomstrisker som kan äventyra sekretessen</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span>Advokatsamfundens etiska regler adresserar i ökande grad teknik- och cybersäkerhetsskyldigheter</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Den unika positionen för juridisk teknik
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Advokatbyråer intar en unik position i dataskyddslandskapet. Utöver GDPR:s generella krav måste de skydda advokatsekretessen, en hörnsten i juridisk praxis. Ett intrång utlöser inte bara regulatoriska sanktioner. Det kan äventyra sekretessen, skada klienter och avsluta karriärer.
+          </p>
+
+          <p class="text-text-secondary mb-6">
+            Detta skapar infrastrukturkrav som går bortom vad de flesta företag står inför. Frågan är inte bara "är denna data skyddad?" utan "kan någon, inklusive teknikleverantören, få tillgång till denna sekretessbelagda kommunikation?"
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Yrkesmässiga skyldigheter
+          </h2>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h3 class="font-display text-xl font-bold text-text-primary mb-4">Advokatsamfundens etiska regler</h3>
+            <p class="text-text-secondary mb-4">
+              De flesta europeiska advokatsamfund har uppdaterat sina etiska regler för att adressera teknik. Vanliga krav inkluderar:
+            </p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Kompetens:</strong> Advokater måste förstå den teknik de använder och dess säkerhetskonsekvenser</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Konfidentialitet:</strong> Rimliga åtgärder måste vidtas för att förhindra obehörig åtkomst till klientinformation</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Tillsyn:</strong> Advokater ansvarar för att personal och leverantörer upprätthåller konfidentialiteten</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Kommunikation:</strong> Klienter bör informeras om hur deras information skyddas</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="text-text-secondary mb-6">
+            Sveriges Advokatsamfund adresserar exempelvis uttryckligen molntjänster och kräver att advokater bedömer leverantörens säkerhet och behåller kontroll över klientdata. Liknande vägledning finns från advokatsamfund över hela Europa.
+          </p>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">GDPR-överväganden för advokatbyråer</h3>
+
+          <p class="text-text-secondary mb-6">
+            Advokatbyråer behandlar ofta känsliga data över flera kategorier:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Klientpersonuppgifter:</strong> Namn, kontaktuppgifter, identitetshandlingar</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Ärenderelaterad data:</strong> Inkluderar ofta särskilda kategorier som hälsouppgifter eller brottshistorik</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Motpartsdata:</strong> Information om personer som inte samtyckt till behandling</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Vittnesdata:</strong> Vittnesmål och kontaktuppgifter</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            Den rättsliga grunden för behandling varierar beroende på sammanhanget. Klientdata kan stödja sig på avtalsmässig nödvändighet, medan motpartsdata ofta faller under berättigat intresse. Advokatbyråer behöver tydliga riktlinjer för varje scenario.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Grundläggande infrastrukturkrav
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Dokumenthanteringssystem</h3>
+
+          <p class="text-text-secondary mb-6">
+            Dokument är livsnerven i juridisk praxis. Ett kompatibelt dokumenthanteringssystem måste tillhandahålla:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Ärendebaserad åtkomstkontroll:</strong> Personal får bara tillgång till dokument för ärenden de är tilldelade</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Versionshistorik:</strong> Fullständig granskningslogg för alla ändringar</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Jävskontroll:</strong> Möjlighet att söka efter potentiella jävssituationer innan nya klienter accepteras</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Bevarandehantering:</strong> Automatiserad hantering av bevarandetider och gallring</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Kryptering:</strong> Både i vila och under överföring, med byråkontrollerade nycklar</span>
+            </li>
+          </ul>
+
+          <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6 mb-8">
+            <h4 class="font-display text-lg font-bold text-gold mb-4">Egenhostade dokumentlösningar</h4>
+            <p class="text-text-secondary mb-4">Överväg dessa open source-alternativ till molnbaserad dokumenthantering:</p>
+            <ul class="space-y-2 text-text-secondary">
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Nextcloud:</strong> Fullfjädrad med inbyggd versionskontroll och kryptering</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">Paperless-ngx:</strong> Dokumentskanning och organisering med OCR</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="text-gold">•</span>
+                <span><strong class="text-text-primary">OnlyOffice:</strong> Kollaborativ dokumentredigering (egenhostad)</span>
+              </li>
+            </ul>
+          </div>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Klientkommunikation</h3>
+
+          <p class="text-text-secondary mb-6">
+            E-post förblir det primära verktyget, men det är i grunden osäkert. Advokatbyråer bör överväga:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">E-postkryptering:</strong> S/MIME eller PGP för känslig kommunikation, eller säkra klientportaler</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Säkra meddelanden:</strong> För intern kommunikation om klientärenden</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Klientportaler:</strong> Säkra utrymmen för dokumentdelning och kommunikation</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Videokonferens:</strong> Egenhostade alternativ som Jitsi för sekretessbelagda samtal</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            Grundprincipen: sekretessbelagd kommunikation bör aldrig passera genom system där leverantören kan få tillgång till innehållet. Detta utesluter de flesta konsumentinriktade e-post- och meddelandeplattformar.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Argumentet för egenhosting
+          </h2>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Bevarande av sekretessen</h3>
+
+          <p class="text-text-secondary mb-6">
+            Det starkaste argumentet för egenhostad juridisk infrastruktur är bevarandet av advokatsekretessen. När dokument lagras på tredjepartsservrar:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Leverantörens anställda kan teoretiskt få tillgång till dem</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Myndighetsbegäran kan riktas till leverantören istället för byrån</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Stämningar kan hävda att delning med en tredje part äventyrar sekretessen</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span>Incidentanmälan blir mer komplex när leverantörer är inblandade</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            Egenhosting eliminerar dessa problem. Om sekretessbelagda dokument aldrig lämnar din infrastruktur är spårbarhetskedjan tydlig och sekretesskyddet står starkare.
+          </p>
+
+          <h3 class="font-display text-xl font-semibold text-text-primary mb-4">Regulatorisk enkelhet</h3>
+
+          <p class="text-text-secondary mb-6">
+            Egenhosting förenklar också GDPR-compliance. Istället för att hantera personuppgiftsbiträdesavtal med flera leverantörer och spåra deras underbiträden kontrollerar du hela dataflödet. För byråer med internationella klienter är detta särskilt värdefullt. Du kan garantera att data förblir inom EU utan att förlita dig på leverantörens försäkringar eller komplicerade överföringsmekanismer.
+          </p>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Implementeringsstrategi
+          </h2>
+
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                1
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Utvärdering och planering</h4>
+                <p class="text-text-secondary">
+                  Börja med en omfattande utvärdering: Vilken klientdata finns, var lagras den, vem har tillgång? Vilken teknik används för närvarande och vilka är säkerhetsluckorna? Hur flödar dokument och kommunikation i praktiken?
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                2
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Infrastrukturdesign</h4>
+                <p class="text-text-secondary">
+                  Utforma infrastrukturen efter juridisk praxis krav: Nextcloud för dokumenthantering med kryptering, Mattermost för intern kommunikation, egenhostad e-post med S/MIME, Jitsi för videokonsultationer och Authentik för SSO och åtkomsthantering.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                3
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Åtkomstkontroller</h4>
+                <p class="text-text-secondary">
+                  Implementera granulära åtkomstkontroller: ärendebaserade behörigheter där användare bara får tillgång till material för sina tilldelade ärenden, rollseparation för delägare, biträden, jurister och administrativ personal, säker extern samverkan med klienter och motpartsombud.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-gold rounded-full flex items-center justify-center font-display font-bold text-dark-bg">
+                4
+              </div>
+              <div>
+                <h4 class="font-semibold text-text-primary mb-2">Granskning och loggning</h4>
+                <p class="text-text-secondary">
+                  Underhåll omfattande loggar: all dokumentåtkomst och ändringar, inloggningsförsök, behörighetsändringar och externa delningshändelser. Dessa loggar tjänar säkerhetsövervakning, sekretesskyddsdokumentation och compliancepåvisande.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Överväganden per verksamhetsområde
+          </h2>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Tvistemålshantering</h4>
+              <p class="text-text-secondary text-sm">
+                eDiscovery-stöd, rättsliga bevarandekrav, säker kommunikation med motpartsombud, integration med domstolsinlämning.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Bolagsrätt/M&A</h4>
+              <p class="text-text-secondary text-sm">
+                Virtuella datarum, vattenmärkning, tidsbegränsad åtkomst, flerpartssamarbete mellan byråer.
+              </p>
+            </div>
+            <div class="bg-dark-surface rounded-xl border border-dark-elevated p-6">
+              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h4 class="font-semibold text-text-primary mb-2">Brottmålsförsvar</h4>
+              <p class="text-text-secondary text-sm">
+                Maximal kryptering, säkra mobila enheter för häktesbesök, beviskedjans spårbarhet, hantering av åklagarbegäran.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-12">
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Personalutbildning
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Teknik är bara så säker som människorna som använder den. Väsentliga utbildningsområden:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Nätfiskemedvetenhet:</strong> Advokatbyråer är högvärdiga mål för social manipulation</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Lösenordshygien:</strong> Starka, unika lösenord och lösenordshanterare</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Enhetssäkerhet:</strong> Skydda bärbara datorer, telefoner och andra enheter</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Incidentrapportering:</strong> Vad man ska göra om något verkar fel</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Klientkommunikation:</strong> Användning av säkra kanaler på rätt sätt</span>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-gold mb-6">
+            Incidenthantering
+          </h2>
+
+          <p class="text-text-secondary mb-6">
+            Trots bästa försök inträffar incidenter. Advokatbyråer behöver dokumenterade rutiner för:
+          </p>
+
+          <ul class="space-y-2 text-text-secondary mb-6">
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Upptäckt:</strong> Övervakning för tecken på obehörig tillgång</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Begränsning:</strong> Begränsa skadan när en incident upptäcks</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Utvärdering:</strong> Fastställa vilken data som påverkats och om sekretessen äventyrats</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Anmälan:</strong> Informera klienter, tillsynsmyndigheter och eventuellt motpartsombud</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="text-gold">•</span>
+              <span><strong class="text-text-primary">Åtgärdande:</strong> Förhindra upprepning</span>
+            </li>
+          </ul>
+
+          <p class="text-text-secondary mb-6">
+            Advokatsamfundet bör vanligtvis konsulteras vid betydande incidenter, och ansvarsförsäkringsbolag bör underrättas omgående.
+          </p>
+
+          <div class="bg-gold/5 border border-gold/20 rounded-xl p-6">
+            <p class="text-text-secondary">
+              <strong class="text-gold">Behöver du hjälp?</strong> Vi hjälper advokatbyråer att implementera infrastruktur som skyddar klientkonfidentialiteten och samtidigt möjliggör modern, effektiv verksamhet.
+              <button data-cal-trigger class="text-gold hover:underline ml-1 cursor-pointer">Kontakta oss →</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-dark-elevated">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+          <a href="/sv/insights" class="inline-flex items-center gap-2 text-gold hover:text-gold-light transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Tillbaka till Insikter
+          </a>
+
+          <div class="flex items-center gap-4">
+            <span class="text-text-muted text-sm">Dela denna artikel:</span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=https://brightinteraction.com/sv/insights/legal-tech-infrastructure`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-10 h-10 bg-dark-surface hover:bg-dark-elevated border border-dark-elevated rounded-lg flex items-center justify-center text-text-secondary hover:text-gold transition-colors"
+              aria-label="Dela på LinkedIn"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Relaterad läsning -->
+        <div class="mt-8 pt-6 border-t border-dark-elevated/50">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-4">Relaterad läsning</h3>
+          <ul class="space-y-3">
+            <li><a href="/sv/insights/gdpr-nis2-compliance-guide" class="text-gold hover:text-gold-light transition-colors text-sm">GDPR och NIS2 compliance: En praktisk guide</a></li>
+            <li><a href="/sv/insights/data-sovereignty-cloud-era" class="text-gold hover:text-gold-light transition-colors text-sm">Datasuveränitet i molnet</a></li>
+            <li><a href="/sv/insights/security-configuration-essentials" class="text-gold hover:text-gold-light transition-colors text-sm">Grundläggande säkerhetskonfiguration</a></li>
+          </ul>
+        </div>
+      </footer>
+    </article>
+  </main>
+  <Footer lang={lang} />
+
+  <script type="application/ld+json" set:html={JSON.stringify([articleSchema, breadcrumbSchema])} />
+</Layout>
+
+<style>
+  .prose h2 {
+    margin-top: 2rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style: none;
+    padding: 0;
+  }
+</style>

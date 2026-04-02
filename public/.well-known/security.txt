@@ -1,0 +1,26 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+Contact: mailto:security@brightinteraction.com
+Contact: mailto:contact@brightinteraction.com
+Expires: 2027-01-23T00:00:00.000Z
+Preferred-Languages: en, sv
+Canonical: https://brightinteraction.com/.well-known/security.txt
+Policy: https://brightinteraction.com/privacy
+Encryption: https://brightinteraction.com/.well-known/pgp-key.txt
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEfd7cQqi8/oSDGrZ4Yr3lh31SPT0FAmmOWE0ACgkQYr3lh31S
+PT2cLw/+P8j0Y7eCMp9C/nuro/AJ5flUL6prUNXRmPzywV+cRiJ5IAylEVdSCd7g
+WlSe6nK0qzxAheeQthrqr1eLcoo3cvUF4h7q3Bd0ovGaip8hZxweIGbJ5T73RqH1
+Vh9rariATLKKK9331PHvbzEhOPHPMQTnxSLGq9HXlEinvr68jUobimo5onu2zbhk
+7ihBKsLTPySaJrE16Qc3m/5gM93C3ByT4c1/VkunvkQyxoMsTKCl+IUkibxrQTig
+kUoWc6VeaGo7JzeZiE/kZfyF8y+5BsiFTF904dLvQZaaVPYdYW0f/H4u8HuXuKHU
+SaGZglCFAfJxTWp/OFmwHoZ8Y3zU/V88yuQAeiou8iDjmAKZhuyAP/oNBVAKhb9P
+Zrm1c1xuu1Yo3rBvfw+4l/wPryZwxVnVlz8IbnqHz4xlfxf2XkH5BppMKPD48Zwa
+U8bVNYF2RJGasjbffeWdNAc3TrIrq9DcfM3eVEKdz6FDIC1J9AJIHL+nxMoNtZm/
+jgEtcgWeORHoxhMiudsUK2lN07+f5yKp/HnMymYWyo1NUS6hqz2O/abFTLyn/Hu/
+iink4o0zn+27DE0lC2f1tNYdHZwUyGus6Yi74K++A2nk76knZdlUAkEdOeM2gMSx
+0bhqs+QXUAsRT+fSNnP4ykXnUpuL1Xf/k4vCzUkY3g7PnbGDHX4=
+=w5OM
+-----END PGP SIGNATURE-----

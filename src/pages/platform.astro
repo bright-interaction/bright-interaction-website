@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const tools = [
+  {
+    name: 'Site Inspector',
+    status: 'Free',
+    type: 'Chrome Extension',
+    description: 'One-click website audit covering security, performance, SEO, privacy, and accessibility. 80+ checks with A+ to F grading, PDF reports, CSV export, and outreach email generation.',
+    features: ['Security headers & CSP quality', 'Core Web Vitals & image optimization', 'On-page & technical SEO', 'GDPR consent & pre-consent tracking', 'WCAG AA color contrast', 'Keyword density analysis'],
+    cta: { label: 'Add to Chrome', href: '#' },
+    accent: 'teal',
+  },
+  {
+    name: 'CookieProof',
+    status: 'Live',
+    type: 'Consent Management',
+    description: 'Cookie consent banner that actually blocks tracking until opt-in. Multi-tenant, agency-ready, with PDF compliance reports and real-time health scores.',
+    features: ['GDPR & ePrivacy compliant', 'Consent-gated script blocking', 'Multi-tenant with agency accounts', 'PDF compliance reports', 'Health scores & scheduled alerts', 'Custom SMTP & branding'],
+    cta: { label: 'Learn more', href: 'https://consent.brightinteraction.com' },
+    accent: 'amber',
+  },
+  {
+    name: 'S.V.A.R.',
+    status: 'Live',
+    type: 'Security Scanner Platform',
+    description: 'The engine behind everything. S.V.A.R. is our core vulnerability scanning platform that powers A.T.L.A.S. reports and Deep Pulse monitoring. API-first, built for scale.',
+    features: ['Core scanning engine', 'REST API for integrations', 'Scan queue with priority system', 'Powers A.T.L.A.S. & Deep Pulse', 'Custom scan profiles', 'White-label ready'],
+    cta: { label: 'Get started', href: 'https://scan.brightinteraction.com' },
+    accent: 'red',
+    subtools: [
+      {
+        name: 'A.T.L.A.S.',
+        description: 'Automated reports. Run a scan, get a branded PDF with findings, risk scores, and remediation steps. Send it to clients or use it for sales.',
+      },
+      {
+        name: 'Deep Pulse',
+        description: 'Continuous monitoring. Scheduled scans that track changes over time, alert on new vulnerabilities, and detect compliance drift.',
+      },
+    ],
+  },
+];
+
+const accentColors = {
+  teal: { bg: 'bg-teal-50', border: 'border-teal-200', text: 'text-teal-700', badge: 'bg-teal-100 text-teal-800', dot: 'bg-teal-500' },
+  amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', badge: 'bg-amber-100 text-amber-800', dot: 'bg-amber-500' },
+  red: { bg: 'bg-red-50', border: 'border-red-200', text: 'text-red-700', badge: 'bg-red-100 text-red-800', dot: 'bg-red-500' },
+  purple: { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-700', badge: 'bg-purple-100 text-purple-800', dot: 'bg-purple-500' },
+};
+---
+
+<Layout
+  title="Platform - Security & Compliance Tools | Bright Interaction"
+  description="Free and open tools for website security, consent management, vulnerability scanning, and continuous monitoring. Built for Swedish businesses."
+>
+  <Header />
+  <main id="main-content" class="pt-24 pb-20 bg-white min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Hero -->
+      <div class="text-center mb-16">
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-text-primary mb-4">
+          The Bright Platform
+        </h1>
+        <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+          Everything you need to secure, audit, and prove compliance for your digital infrastructure. Built by us, free to use.
+        </p>
+      </div>
+
+      <!-- Tool cards -->
+      <div class="space-y-8">
+        {tools.map((tool) => {
+          const colors = accentColors[tool.accent];
+          return (
+            <div class={`rounded-xl border ${colors.border} ${colors.bg} p-6 sm:p-8`}>
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+                <div>
+                  <div class="flex items-center gap-3 mb-2">
+                    <h2 class="font-display text-2xl font-bold text-text-primary">{tool.name}</h2>
+                    <span class={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${colors.badge}`}>
+                      {tool.status}
+                    </span>
+                  </div>
+                  <p class={`text-sm font-mono ${colors.text}`}>{tool.type}</p>
+                </div>
+                {tool.cta && (
+                  <a
+                    href={tool.cta.href}
+                    class="inline-flex items-center gap-2 px-5 py-2.5 bg-text-primary text-white text-sm font-semibold rounded-lg hover:bg-zinc-800 transition-colors shrink-0"
+                  >
+                    {tool.cta.label}
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                )}
+              </div>
+
+              <p class="text-text-secondary mb-5 max-w-3xl">{tool.description}</p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                {tool.features.map((feature) => (
+                  <div class="flex items-center gap-2 text-sm text-text-secondary">
+                    <div class={`w-1.5 h-1.5 rounded-full ${colors.dot} shrink-0`} />
+                    {feature}
+                  </div>
+                ))}
+              </div>
+
+              {tool.subtools && (
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {tool.subtools.map((sub) => (
+                    <div class="bg-white/60 rounded-lg border border-white p-4">
+                      <h3 class="font-display font-bold text-text-primary mb-1">{sub.name}</h3>
+                      <p class="text-sm text-text-secondary">{sub.description}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="mt-16 text-center">
+        <div class="inline-block bg-dark-surface border border-border rounded-xl p-8 max-w-xl">
+          <h3 class="font-display text-xl font-bold text-text-primary mb-2">
+            Need the full picture?
+          </h3>
+          <p class="text-text-secondary mb-5 text-sm">
+            We'll audit your infrastructure, set up consent management, and run vulnerability scans &mdash; all in one engagement.
+          </p>
+          <a
+            href="/#contact"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-text-primary text-white text-sm font-semibold rounded-lg hover:bg-zinc-800 transition-colors"
+            data-cal-trigger
+          >
+            Book a discovery call
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Layout>
